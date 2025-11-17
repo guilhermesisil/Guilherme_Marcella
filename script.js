@@ -1,8 +1,8 @@
 /* ================= CONFIG — SUBSTITUA ESTES VALORES ================= */
-const SHEET_URL = "YOUR_APPS_SCRIPT_URL_HERE"; // <-- Apps Script deploy URL (doGet/doPost)
-const PIX_KEY = "seu-pix@exemplo.com";              // <-- chave Pix (e-mail/telefone/CPF/CNPJ/EVP)
-const PIX_NOME = "Guilherme & Marcella";            // <-- nome beneficiário (max 25)
-const PIX_CIDADE = "SAO PAULO";                     // <-- cidade
+const SHEET_URL = https://script.google.com/macros/s/AKfycbxaUSghFm-nqbAvaP7-RUNxU7sh4AJPjQ8VeAsHaTmnKWEVkn5NiTdBNvWxkVcrUyjcAw/exec; // <-- Apps Script deploy URL (doGet/doPost)
+const PIX_KEY = 97427455-6f14-4aba-aa09-d1cb15de34d4;              // <-- chave Pix (e-mail/telefone/CPF/CNPJ/EVP)
+const PIX_NOME = "Guilherme Silveira";            // <-- nome beneficiário (max 25)
+const PIX_CIDADE = "PASSOS - MG";                     // <-- cidade
 const PIX_TXID = "";                                // <-- opcional, pode ficar vazio
 /* =================================================================== */
 
