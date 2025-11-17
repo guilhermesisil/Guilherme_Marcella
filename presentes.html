@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Presentes – Guilherme & Marcella</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="logo-container">
+    <img src="img/logo-nomes.png" alt="Guilherme e Marcella" class="logo">
+  </div>
+
+  <!-- MENU (já integrado como nas outras páginas) -->
+  <nav class="menu">
+    <div class="menu-container">
+      <button class="hamburger" id="hamburgerBtn">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="menu-links" id="menuLinks">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="padrinhos.html">Padrinhos</a></li>
+        <li><a href="cronograma.html">Cronograma</a></li>
+        <li><a href="rsvp.html">RSVP</a></li>
+        <li><a href="presentes.html" class="active">Presentes</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="secao presentes">
+    <h1>Lista de Presentes</h1>
+    <p>Escolha com carinho — cada gesto significa muito para nós.</p>
+
+    <div id="listaPresentes" class="grid-presentes"></div>
+  </main>
+
+  <!-- MODAL PARA CONFIRMAÇÃO + PIX -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close" id="closeModal">×</button>
+      <h2 id="modalTitulo"></h2>
+
+      <form id="formPresente">
+        <label>Seu nome</label>
+        <input type="text" id="nome" required />
+
+        <div id="campoValor"></div>
+
+        <label>Mensagem (opcional)</label>
+        <textarea id="mensagem"></textarea>
+
+        <div id="pixArea" style="display:none; text-align:center; margin-top:10px;">
+          <p>Pagamento via PIX</p>
+          <img id="pixQr" src="" alt="QR Code PIX" style="max-width:240px; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.12);" />
+          <p id="pixInstruc" style="font-size:0.9rem;color:#6b5a3a; margin-top:8px;"></p>
+          <p style="font-size:0.9rem;color:#7d6b42;">Depois de pagar, clique em "Confirmar" para registrarmos sua contribuição.</p>
+        </div>
+
+        <button type="submit" class="btn-enviar">Confirmar contribuição</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
