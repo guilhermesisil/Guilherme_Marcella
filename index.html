@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+emailjs.init("SUA_PUBLIC_KEY_AQUI");
+</script>
+
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Guilherme + Marcella</title>
@@ -566,6 +572,32 @@ function startCountdown(){
 }
 startCountdown();
 
+/* ============== ENVIO DO RSVP PARA O E-MAIL =================*/
+  
+document.getElementById("rsvpForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const telefone = document.getElementById("telefone").value;
+    const nomes = document.getElementById("nomes").value;
+    const presenca = document.getElementById("presenca").value;
+
+    const data = {
+        telefone: telefone,
+        nomes: nomes,
+        presenca: presenca
+    };
+
+    emailjs.send(service_bh48d3o, template_t5l6fd2, data)
+    .then(() => {
+        alert("RSVP enviado com sucesso!");
+        fecharModal();
+    })
+    .catch(err => {
+        alert("Erro ao enviar RSVP.");
+        console.error(err);
+    });
+});
+  
 /* ================== SALVAMENTO NO GITHUB (OPCIONAL) ================== */
 /* 
   Para salvar em arquivo (rsvps.json / contribuicoes.json) no GitHub via API:
@@ -622,3 +654,5 @@ window.addEventListener("scroll", ()=>{
 
 </body>
 </html>
+
+
