@@ -254,32 +254,59 @@ const GITHUB_BRANCH = "main";
 
 const DATE_TARGET = new Date("2026-05-09T00:00:00").getTime();
 
-/* DADOS INICIAIS */
-let presentes = [
-  { id:"p01", nome:"Adega 28 Garrafas", descricao:"Adega climatizada, ideal para guardar nossos vinhos.", imagem:"img/presente1.jpg", link:"https://example.com/adega", endereco:"Rua Exemplo, 123 — São Paulo/SP", status:"disponivel", valor:1500.00 },
-  { id:"p02", nome:"Aparelho de Jantar 20 peças", descricao:"Conjunto elegante para receber família e amigos.", imagem:"img/presente2.jpg", link:"https://example.com/jantar", endereco:"Rua Exemplo, 123 — São Paulo/SP", status:"disponivel", valor:350.00 },
-  { id:"p03", nome:"Contribuição livre (Fundo Lua-de-mel)", descricao:"Ajude-nos a tornar a lua-de-mel inesquecível.", imagem:"img/presente3.jpg", link:"#", endereco:"", status:"disponivel", valor:null }
+/* ===== LISTA DE PRESENTES ===== */
+
+const presentes = [
+  {
+    nome: "Jantar Romântico",
+    descricao: "Ajude os noivos a terem um jantar especial na lua de mel.",
+    img: "img/presente1.jpg",
+    link: "https://google.com",
+    endereco: "Rua Exemplo 123, Cidade"
+  },
+  {
+    nome: "Enxoval do Lar",
+    descricao: "Um item essencial para começar a nova vida juntos.",
+    img: "img/presente2.jpg",
+    link: "https://google.com",
+    endereco: "Rua Exemplo 123, Cidade"
+  },
+  {
+    nome: "Cota Lua de Mel",
+    descricao: "Qualquer valor contribui com a viagem dos noivos.",
+    img: "img/presente3.jpg",
+    link: "https://google.com",
+    endereco: "Rua Exemplo 123, Cidade"
+  }
 ];
-const savedPresentesStatus = JSON.parse(localStorage.getItem("presentesStatus")||"{}");
-presentes = presentes.map(p=> ({...p, status: savedPresentesStatus[p.id] || p.status}) );
-let rsvps = JSON.parse(localStorage.getItem("rsvps")||"[]");
-let contribuicoes = JSON.parse(localStorage.getItem("contribuicoes")||"[]");
 
-/* RENDER */
-function renderPresentes(){ const el = document.getElementById("listaPresentes"); if(!el) return; el.innerHTML = ""; presentes.forEach(p=>{ const div = document.createElement("div"); div.className = "item"; div.innerHTML = `
-      <img src="${p.imagem}" alt="${p.nome}">
-      <h3>${p.nome}</h3>
-      <p>${p.descricao}</p>
-      <small>Entrega: ${p.endereco || "Endereço a combinar"}</small>
-      <div style="display:flex; gap:10px; margin-top:8px;">
-        <a class="btn-ghost" href="${p.link}" target="_blank">Ver</a>
-        <button class="btn" ${p.status!=="disponivel"? "disabled": ""} onclick="abrirModalPresente('${p.id}')">
-          ${p.status==="disponivel" ? "Presentear" : "Já presenteado"}
-        </button>
+function carregarPresentes() {
+  const container = document.getElementById("listaPresentes");
+  container.innerHTML = "";
+
+  presentes.forEach((p, i) => {
+    container.innerHTML += `
+      <div class="item">
+        <img src="${p.img}">
+        <h4>${p.nome}</h4>
+        <p style="font-weight:300;">${p.descricao}</p>
+        <button onclick="abrirModalPresente(${i})">Presentear</button>
       </div>
-    `; el.appendChild(div); }); }
-renderPresentes();
+    `;
+  });
+}
 
+document.addEventListener("DOMContentLoaded", carregarPresentes);
+
+/* ===== MODAL RSVP ===== */
+function abrirModalRSVP() {
+  document.getElementById("modalRSVP").style.display = "flex";
+}
+
+function fecharModalRSVP() {
+  document.getElementById("modalRSVP").style.display = "none";
+}
+  
 /* BR Code functions (same as before) */
 function formatField(id, value){ const len = String(value).length.toString().padStart(2,'0'); return id + len + value; }
 function crc16(str){ let crc = 0xFFFF; for(let i=0;i<str.length;i++){ crc ^= str.charCodeAt(i) << 8; for(let j=0;j<8;j++){ crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1); crc &= 0xFFFF; } } return crc.toString(16).toUpperCase().padStart(4,'0'); }
@@ -373,9 +400,38 @@ function reenviaContribuicaoSelecionada(){ const primeira = contribuicoes.slice(
 function exportCSV(){ const rows = [["Tipo","Nome","Telefone","Detalhes","Valor","Data"]]; rsvps.forEach(r=> rows.push(["RSVP", r.nomeResponsavel, r.telefone, (r.acompanhantes||[]).join("; "), "", r.data])); contribuicoes.forEach(c=> rows.push(["CONTRIB", c.nome, c.telefone, c.presenteNome, c.valor, c.data])); const csv = rows.map(r=> r.map(v=> `"${String(v).replace(/"/g,'""')}"`).join(",")).join("
 "); const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"}); const url = URL.createObjectURL(blob); const a = document.createElement("a"); a.href = url; a.download = "rsvps_presentes.csv"; a.click(); URL.revokeObjectURL(url); }
 
-/* COUNTDOWN */
-function startCountdown(){ function tick(){ const now = Date.now(); const diff = DATE_TARGET - now; if(diff<=0){ document.getElementById("dias").innerText = "0"; document.getElementById("horas").innerText = "00"; document.getElementById("minutos").innerText = "00"; document.getElementById("segundos").innerText = "00"; return; } const dias = Math.floor(diff / (1000*60*60*24)); const horas = Math.floor((diff / (1000*60*60)) % 24); const minutos = Math.floor((diff / (1000*60)) % 60); const segundos = Math.floor((diff / 1000) % 60); document.getElementById("dias").innerText = dias; document.getElementById("horas").innerText = String(horas).padStart(2,"0"); document.getElementById("minutos").innerText = String(minutos).padStart(2,"0"); document.getElementById("segundos").innerText = String(segundos).padStart(2,"0"); } tick(); setInterval(tick,1000); }
-startCountdown();
+/* ===== CONTAGEM REGRESSIVA CORRIGIDA ===== */
+function iniciarCountdown() {
+  const target = new Date("2026-05-09T00:00:00").getTime();
+
+  function updateCountdown() {
+    const now = Date.now();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      document.getElementById("dias").innerText = "0";
+      document.getElementById("horas").innerText = "00";
+      document.getElementById("minutos").innerText = "00";
+      document.getElementById("segundos").innerText = "00";
+      return;
+    }
+
+    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutos = Math.floor((diff / (1000 * 60)) % 60);
+    const segundos = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("dias").innerText = dias;
+    document.getElementById("horas").innerText = horas.toString().padStart(2, "0");
+    document.getElementById("minutos").innerText = minutos.toString().padStart(2, "0");
+    document.getElementById("segundos").innerText = segundos.toString().padStart(2, "0");
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+}
+
+document.addEventListener("DOMContentLoaded", iniciarCountdown);
 
 /* GITHUB save scaffold */
 async function salvarDadosNoGitHub(){ if(!GITHUB_TOKEN || !GITHUB_USER || !GITHUB_REPO) return; try{ const pathR = "data/rsvps.json"; const pathC = "data/contribuicoes.json"; await githubUpsertFile(pathR, JSON.stringify(rsvps, null, 2)); await githubUpsertFile(pathC, JSON.stringify(contribuicoes, null, 2)); }catch(e){ console.warn("GitHub save failed", e); } }
