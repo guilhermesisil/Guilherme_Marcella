@@ -4,14 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guilherme + Marcella</title>
+
+    <!-- Fonte elegante -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+
     <style>
-/* ===== TEMA PRETO E BRANCO CORRIGIDO ===== */
+/* ===== TEMA PRETO E BRANCO ===== */
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     background: #fff;
     color: #111;
 }
+
+/* HEADER */
 header {
     position: fixed;
     top: 0;
@@ -25,20 +31,24 @@ header {
 nav a {
     margin: 0 20px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 300;
     color: #000;
     letter-spacing: 1px;
+    font-size: 15px;
 }
+
+/* HERO */
 .hero {
-    padding-top: 120px;
+    padding-top: 130px;
     text-align: center;
 }
 .hero h1 {
     font-size: 52px;
     letter-spacing: 10px;
-    font-weight: 300;
+    font-weight: 200;
 }
-/* ===== GALERIA SEM CARROSSEL (CENTRALIZADA) ===== */
+
+/* GALERIA */
 .galeria {
     display: flex;
     justify-content: center;
@@ -49,28 +59,39 @@ nav a {
 .galeria img {
     width: 28%;
     max-width: 300px;
-    border-radius: 10px;
+    border-radius: 12px;
     filter: grayscale(100%);
 }
-/* ===== CONTAGEM REGRESSIVA CORRIGIDA ===== */
+
+/* ===== CONTAGEM REGRESSIVA ===== */
 .countdown-section {
     background: #000;
     color: #fff;
     padding: 50px 0;
     margin-top: 40px;
     text-align: center;
+    border-radius: 25px; /* <<< cantos arredondados do bloco preto */
+    width: 92%;
+    margin-left: auto;
+    margin-right: auto;
 }
+.countdown-section h3 {
+    font-size: 28px;
+    letter-spacing: 5px;
+    font-weight: 200;
+}
+
 #countdown {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 22px;
     margin-top: 20px;
 }
 #countdown div {
     background: #fff;
     color: #000;
     padding: 25px 30px;
-    border-radius: 20px; /* bordas mais suaves */
+    border-radius: 18px;
     font-size: 18px;
     min-width: 110px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.12);
@@ -83,19 +104,19 @@ nav a {
     margin-bottom: 5px;
 }
 
-/* ===== SEÇÕES ===== */
+/* SEÇÕES */
 section {
     padding: 60px 20px;
     max-width: 900px;
     margin: auto;
 }
 
+/* PRESENTES – em aba separada */
 .grid-presentes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 30px;
 }
-
 .item img {
     width: 100%;
     border-radius: 8px;
@@ -106,6 +127,7 @@ section {
     border: none;
     padding: 12px;
     width: 100%;
+    border-radius: 8px;
 }
 
 /* RSVP */
@@ -119,12 +141,14 @@ section {
 .rsvp input, .rsvp textarea, .rsvp select {
     padding: 12px;
     border: 1px solid #000;
+    border-radius: 8px;
 }
 .rsvp button {
     background: #000;
     color: #fff;
     border: none;
     padding: 14px;
+    border-radius: 8px;
 }
 
 /* ADMIN */
@@ -140,6 +164,7 @@ section {
 </head>
 <body>
 
+<!-- ===== MENU ===== -->
 <header>
     <nav>
         <a href="#rsvp">RSVP</a>
@@ -149,6 +174,7 @@ section {
     </nav>
 </header>
 
+<!-- ===== HERO ===== -->
 <section class="hero">
     <h1>GUILHERME + MARCELLA</h1>
 
@@ -158,11 +184,12 @@ section {
         <img src="img/foto3.jpg">
     </div>
 
-    <h2>09.05.2026</h2>
+    <h2 style="font-weight:300;">09.05.2026</h2>
 </section>
 
+<!-- ===== CONTAGEM REGRESSIVA ===== -->
 <section class="countdown-section">
-    <h3 style="font-size: 26px; letter-spacing: 4px; font-weight: 300; margin-top: 0;">CONTAGEM REGRESSIVA</h3>
+    <h3>CONTAGEM REGRESSIVA</h3>
     <div id="countdown">
         <div><span id="dias">0</span>Dias</div>
         <div><span id="horas">00</span>Horas</div>
@@ -171,122 +198,37 @@ section {
     </div>
 </section>
 
-<section id="casal" class="casal">
+<!-- ===== O CASAL ===== -->
+<section id="casal">
     <h2>O CASAL</h2>
-    <p>História do casal...</p>
+    <p style="font-weight:300;">História do casal...</p>
 </section>
 
-<section id="cerimonia" class="cerimonia">
+<!-- ===== CERIMÔNIA ===== -->
+<section id="cerimonia">
     <h2>CERIMÔNIA</h2>
-    <p>Local, horário, etc</p>
+    <p style="font-weight:300;">Local, horário, traje, etc.</p>
+
+    <p style="margin-top:20px;">
+        <a href="https://share.google/AZL6NdDJeVWnTvvJP" target="_blank" 
+           style="font-weight:300; text-decoration:underline; font-size:17px;">
+            👉 Ver localização no Google Maps
+        </a>
+    </p>
 </section>
 
-<section id="presentes" class="presentes fade-in">
+<!-- ===== LISTA DE PRESENTES EM ABA SEPARADA ===== -->
+<section id="presentes">
     <h2>LISTA DE PRESENTES</h2>
 
     <p style="text-align:center; max-width:700px; margin:auto; margin-bottom:30px; font-weight:300;">
-        Aqui você pode presentear com itens especiais escolhidos por nós. Cada item tem foto, descrição,
-        link de compra e endereço para entrega.
+        Aqui você encontra nossa lista completa de presentes.
     </p>
 
     <div class="grid-presentes" id="listaPresentes"></div>
 </section>
 
-<script>
-// ===== PRESENTES COM MODAL + STATUS =====
-let presentes = [
-    {
-        id: 1,
-        foto: "img/presente1.jpg",
-        nome: "Adega 28 Garrafas",
-        descricao: "Adega climatizada para manter nossos vinhos na temperatura perfeita.",
-        link: "https://exemplo.com/adega",
-        endereco: "Rua Exemplo, 123 — São Paulo/SP",
-        status: "disponivel"
-    },
-    {
-        id: 2,
-        foto: "img/presente2.jpg",
-        nome: "Aparelho de Jantar",
-        descricao: "Conjunto elegante para receber convidados.",
-        link: "https://exemplo.com/jantar",
-        endereco: "Rua Exemplo, 123 — São Paulo/SP",
-        status: "disponivel"
-    }
-];
-
-// Carregar status salvo
-const saved = JSON.parse(localStorage.getItem('presentesStatus') || '{}');
-presentes = presentes.map(p => ({ ...p, status: saved[p.id] || p.status }));
-
-const container = document.getElementById('listaPresentes');
-
-function renderPresentes() {
-    container.innerHTML = "";
-    presentes.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'item';
-        card.innerHTML = `
-            <img src="${p.foto}" alt="${p.nome}">
-            <h3 style="font-weight:400;">${p.nome}</h3>
-            <p style="font-weight:300;">${p.descricao}</p>
-            <span style="display:block; margin-bottom:10px; font-size:14px; color:${p.status==='disponivel'?'green':p.status==='comprado'?'red':'orange'};">
-                ${p.status === 'disponivel' ? 'Disponível' : p.status === 'reservado' ? 'Reservado' : 'Já presenteado'}
-            </span>
-            <button onclick="abrirModal(${p.id})">Presentear</button>
-        `;
-        container.appendChild(card);
-    });
-}
-renderPresentes();
-
-// ===== MODAL =====
-function abrirModal(id) {
-    const p = presentes.find(x => x.id === id);
-    const modal = document.createElement('div');
-    modal.id = "modalPresente";
-    modal.style = `position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.6); display:flex; align-items:center; justify-content:center; z-index:1000;`;
-
-    modal.innerHTML = `
-        <div style="background:#fff; padding:30px; width:90%; max-width:400px; border-radius:15px; text-align:center;">
-            <img src="${p.foto}" style="width:100%; border-radius:10px; margin-bottom:15px;">
-            <h2 style="font-weight:400;">${p.nome}</h2>
-            <p style="font-weight:300;">${p.descricao}</p>
-
-            <p style="margin-top:20px; font-size:14px;">Entrega: ${p.endereco}</p>
-
-            <a href="${p.link}" target="_blank" style="display:block; margin:15px auto;">Ver link sugerido</a>
-
-            <button style="width:100%; padding:12px; margin-top:10px; background:black; color:white; border:none; border-radius:8px;" onclick="confirmarPresente(${p.id})">Confirmar presente</button>
-            <button style="width:100%; padding:12px; margin-top:10px; background:#999; color:white; border:none; border-radius:8px;" onclick="fecharModal()">Fechar</button>
-        </div>
-    `;
-    document.body.appendChild(modal);
-}
-
-function fecharModal() {
-    const modal = document.getElementById('modalPresente');
-    if (modal) modal.remove();
-}
-
-function confirmarPresente(id) {
-    const confirmacao = confirm("Confirmar este presente como comprado?");
-    if (!confirmacao) return;
-
-    presentes = presentes.map(p => p.id === id ? { ...p, status: 'comprado' } : p);
-
-    const status = {};
-    presentes.forEach(p => status[p.id] = p.status);
-    localStorage.setItem('presentesStatus', JSON.stringify(status));
-
-    fecharModal();
-    renderPresentes();
-    alert("Obrigado pelo presente!");
-}
-</script>(card);
-});
-</script>
-
+<!-- ===== RSVP ===== -->
 <section id="rsvp" class="rsvp">
     <h2>Confirmar presença</h2>
     <form id="rsvpForm">
@@ -301,18 +243,8 @@ function confirmarPresente(id) {
     </form>
 </section>
 
-<section id="painel-admin" style="display:none;">
-    <h2>Painel</h2>
-    <table id="tabela-rsvps">
-        <thead>
-            <tr><th>Nomes</th><th>Telefone</th><th>Presença</th></tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-</section>
-
+<!-- ===== CONTAGEM REGRESSIVA SCRIPT ===== -->
 <script>
-// ===== CONTAGEM REGRESSIVA CORRIGIDA =====
 const target = new Date('2026-05-09T00:00:00').getTime();
 setInterval(() => {
     const now = Date.now();
