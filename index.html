@@ -181,22 +181,7 @@ th, td{ border:1px solid #eee; padding:8px; text-align:left; }
       <button class="btn-ghost" onclick="exportCSV()">Exportar CSV</button>
       <button class="btn" onclick="document.getElementById('adminPanel').style.display='none'">Fechar</button>
     </div>
-    <!-- ===== Upload de imagens no Admin (cole dentro de #adminPanel) ===== -->
-<div style="margin-top:12px; border-top:1px dashed #eee; padding-top:12px;">
-  <h4>Upload de Imagem (painel)</h4>
-  <input type="file" id="adminFileInput" accept="image/*">
-  <div id="uploadPreview" style="margin-top:10px;"></div>
-  <div style="display:flex; gap:8px; margin-top:8px;">
-    <button class="btn" id="btnUploadImage">Enviar para o GitHub</button>
-    <button class="btn-ghost" id="btnClearPreview">Limpar</button>
   </div>
-  <p style="font-size:13px; color:#666; margin-top:8px;">
-    Após upload, será gerado o arquivo em <code>img/</code> do repositório e o link público ficará disponível para uso.
-  </p>
-</div>
-  </div>
-
-  
 
   <h4 style="margin-top:10px;">RSVPs</h4>
   <table id="tabelaRsvps"><thead><tr><th>Responsável</th><th>Telefone</th><th>Acompanhantes</th><th>Presença</th><th>Data</th></tr></thead><tbody></tbody></table>
@@ -251,23 +236,20 @@ const SERVICE_ID = "service_bh48d3o"; // fornecido
 const TEMPLATE_RSVP = "template_t5l6fd2"; // fornecido
 const TEMPLATE_PRESENTE_CONF = "template_v469su3"; // fornecido
 const PUBLIC_KEY = "O-dFEDfrDwxNfMC_M"; // já inicializado com emailjs.init
-const GITHUB_USER = "guilhermesisil";     // seu usuário GitHub
-const GITHUB_REPO = "Guilherme_Marcella"; // seu repositório
-const GITHUB_BRANCH = "main";             // branch padrão
-  
+
 /* PIX */
 const PIX_KEY = "97427455-6f14-4aba-aa09-d1cb15de34d4";
 const PIX_NOME = "Guilherme de Siqueira Silveira";
-const PIX_CIDADE = "Jacareí";
+const PIX_CIDADE = "Sao Paulo";
 
 /* ADMIN / EMAIL */
-const ADMIN_PASSWORD = "20011996";
-let adminEmail = "guilhermesisil@hotmail.com"; // troque para seu e-mail real
+const ADMIN_PASSWORD = "26052026";
+let adminEmail = "seu-email@exemplo.com"; // troque para seu e-mail real
 
 /* GITHUB (opcional) */
-const GITHUB_TOKEN = "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";
-const GITHUB_USER = "guilhermesisil";
-const GITHUB_REPO = "Guilherme_Marcella";
+const GITHUB_TOKEN = "";
+const GITHUB_USER = "";
+const GITHUB_REPO = "";
 const GITHUB_BRANCH = "main";
 
 const DATE_TARGET = new Date("2026-05-09T00:00:00").getTime();
@@ -550,116 +532,6 @@ function atualizarTabelaAdmin(){
     tp.appendChild(tr);
   });
 }
-  /* ===== HELPERS para upload ===== */
-function readFileAsDataURL(file){
-  return new Promise((res, rej) => {
-    const fr = new FileReader();
-    fr.onload = () => res(fr.result);
-    fr.onerror = rej;
-    fr.readAsDataURL(file);
-  });
-}
-
-function basenameFromFile(file){
-  const name = file.name.replace(/\s+/g,'_').replace(/[^\w\-.]/g,'');
-  const ts = Date.now();
-  return `${ts}_${name}`;
-}
-
-/* chama GitHub REST API para criar/atualizar um arquivo */
-async function githubUploadFile(path, base64content, message, token){
-  const api = `https://api.github.com/repos/${encodeURIComponent(GITHUB_USER)}/${encodeURIComponent(GITHUB_REPO)}/contents/${encodeURIComponent(path)}`;
-  // primeiro checa se o arquivo existe (para pegar sha)
-  const check = await fetch(api + `?ref=${encodeURIComponent(GITHUB_BRANCH)}`, {
-    headers: { Authorization: `token ${token}` }
-  });
-  let sha = null;
-  if(check.ok){
-    const info = await check.json();
-    sha = info.sha;
-  }
-  const body = { message, content: base64content.replace(/^data:[^;]+;base64,/,''), branch: GITHUB_BRANCH };
-  if(sha) body.sha = sha;
-  const put = await fetch(api, {
-    method: 'PUT',
-    headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
-  });
-  if(!put.ok){
-    const txt = await put.text();
-    throw new Error('GitHub API error: ' + put.status + ' — ' + txt);
-  }
-  return await put.json();
-}
-
-/* ===== UI handlers ===== */
-const inputFile = document.getElementById('adminFileInput');
-const preview = document.getElementById('uploadPreview');
-const btnUpload = document.getElementById('btnUploadImage');
-const btnClear = document.getElementById('btnClearPreview');
-let selectedFile = null;
-
-inputFile.addEventListener('change', e=>{
-  const f = e.target.files[0];
-  selectedFile = f || null;
-  preview.innerHTML = '';
-  if(!f) return;
-  const url = URL.createObjectURL(f);
-  const img = document.createElement('img');
-  img.src = url;
-  img.style.maxWidth = '220px';
-  img.style.borderRadius = '8px';
-  img.alt = f.name;
-  preview.appendChild(img);
-});
-
-btnClear.addEventListener('click', ()=>{
-  selectedFile = null;
-  inputFile.value = "";
-  preview.innerHTML = "";
-});
-
-/* Ao clicar em enviar: pede token por prompt (para não deixar token no código), converte e envia */
-btnUpload.addEventListener('click', async ()=>{
-  if(!selectedFile){ alert('Escolha um arquivo antes'); return; }
-
-  // pedir token ao usuário no momento do upload (mais seguro do que deixar hardcoded)
-  const token = prompt('Cole seu GitHub Personal Access Token (com scope repo ou public_repo):');
-  if(!token){ alert('Upload cancelado — token não fornecido'); return; }
-
-  try{
-    btnUpload.disabled = true;
-    btnUpload.innerText = 'Enviando...';
-
-    // gera nome seguro
-    const filename = basenameFromFile(selectedFile);
-    const path = `img/${filename}`;
-
-    // ler em base64
-    const dataUrl = await readFileAsDataURL(selectedFile);
-    // enviar para GitHub
-    const resp = await githubUploadFile(path, dataUrl, `Adiciona imagem ${filename}`, token);
-
-    // URL pública no GitHub Pages (se site estiver em https://<user>.github.io/<repo>/)
-    const publicUrl = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/img/${encodeURIComponent(filename)}`;
-
-    preview.innerHTML += `<div style="margin-top:8px; font-size:14px;">Upload concluído! Caminho: <code>img/${filename}</code><br>URL: <a href="${publicUrl}" target="_blank">${publicUrl}</a></div>`;
-
-    // opcional: copia pro clipboard
-    try{ await navigator.clipboard.writeText(publicUrl); }catch(e){}
-
-    // você pode agora usar esse URL ao adicionar um presente:
-    // ex: img: "img/${filename}"
-
-  }catch(err){
-    console.error(err);
-    alert('Erro durante upload: ' + err.message);
-  }finally{
-    btnUpload.disabled = false;
-    btnUpload.innerText = 'Enviar para o GitHub';
-  }
-});
-</script>
 
 /* reenvio manual (admin) */
 function reenviaRSVPSelecionado(){
