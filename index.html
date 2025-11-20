@@ -9,37 +9,64 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 
     <style>
-/* ===== TEMA PRETO E BRANCO ===== */
+
+/* ==================== ESTILOS GERAIS ==================== */
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     background: #fff;
     color: #111;
+    scroll-behavior: smooth;
 }
 
-/* HEADER */
+section {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeIn 0.9s ease forwards;
+}
+
+/* Suave fade-in */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== MENU ELEGANTE ==================== */
 header {
     position: fixed;
     top: 0;
     width: 100%;
-    background: #fff;
-    border-bottom: 1px solid #000;
-    padding: 15px 0;
+    padding: 18px 0;
     text-align: center;
-    z-index: 10;
+    z-index: 20;
+    transition: 0.3s;
+    backdrop-filter: blur(6px);
 }
+
+header.scrolled {
+    background: rgba(255,255,255,0.95);
+    border-bottom: 1px solid #000;
+}
+
 nav a {
-    margin: 0 20px;
+    margin: 0 22px;
     text-decoration: none;
     font-weight: 300;
     color: #000;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     font-size: 15px;
+    transition: 0.3s;
 }
 
-/* HERO */
+nav a:hover {
+    opacity: 0.6;
+}
+
+/* ==================== HERO ==================== */
 .hero {
-    padding-top: 130px;
+    padding-top: 140px;
     text-align: center;
 }
 .hero h1 {
@@ -48,39 +75,40 @@ nav a {
     font-weight: 200;
 }
 
-/* GALERIA */
+/* ==================== GALERIA ==================== */
 .galeria {
     display: flex;
     justify-content: center;
     gap: 20px;
-    width: 100%;
-    margin: 30px auto;
+    margin-top: 25px;
 }
 .galeria img {
     width: 28%;
     max-width: 300px;
     border-radius: 12px;
     filter: grayscale(100%);
+    transition: 0.4s;
+}
+.galeria img:hover {
+    transform: scale(1.03);
+    filter: grayscale(0%);
 }
 
-/* ===== CONTAGEM REGRESSIVA ===== */
+/* ==================== CONTAGEM REGRESSIVA ==================== */
 .countdown-section {
     background: #000;
     color: #fff;
     padding: 50px 0;
-    margin-top: 40px;
     text-align: center;
-    border-radius: 25px; /* <<< cantos arredondados do bloco preto */
+    border-radius: 24px;
     width: 92%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 50px auto 0;
 }
 .countdown-section h3 {
     font-size: 28px;
     letter-spacing: 5px;
     font-weight: 200;
 }
-
 #countdown {
     display: flex;
     justify-content: center;
@@ -104,18 +132,12 @@ nav a {
     margin-bottom: 5px;
 }
 
-/* SEÇÕES */
-section {
-    padding: 60px 20px;
-    max-width: 900px;
-    margin: auto;
-}
-
-/* PRESENTES – em aba separada */
+/* ==================== PRESENTES ==================== */
 .grid-presentes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 30px;
+    margin-top: 30px;
 }
 .item img {
     width: 100%;
@@ -130,42 +152,90 @@ section {
     border-radius: 8px;
 }
 
-/* RSVP */
-.rsvp form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 400px;
-    margin: auto;
+/* ==================== MAPA ==================== */
+.mapa {
+    width: 100%;
+    height: 350px;
+    border-radius: 20px;
+    border: none;
+    margin-top: 25px;
 }
-.rsvp input, .rsvp textarea, .rsvp select {
+
+/* ==================== BOTÃO CONFIRMAR PRESENÇA ==================== */
+.botao-rsvp {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 14px 35px;
+    border-radius: 8px;
+    font-weight: 300;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: inline-block;
+    margin-top: 20px;
+}
+.botao-rsvp:hover {
+    opacity: 0.7;
+}
+
+/* ==================== MODAL ==================== */
+.modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.65);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 30;
+}
+.modal {
+    background: #fff;
+    padding: 30px;
+    width: 90%;
+    max-width: 420px;
+    border-radius: 18px;
+    animation: fadeIn 0.4s ease;
+}
+
+/* Formulário dentro do modal */
+.modal input,
+.modal textarea,
+.modal select {
+    width: 100%;
     padding: 12px;
     border: 1px solid #000;
     border-radius: 8px;
+    font-family: 'Montserrat';
+    margin-top: 10px;
 }
-.rsvp button {
+.modal button {
+    margin-top: 15px;
     background: #000;
     color: #fff;
     border: none;
     padding: 14px;
+    width: 100%;
     border-radius: 8px;
 }
 
-/* ADMIN */
-#painel-admin table {
-    width: 100%;
-    border-collapse: collapse;
+/* Fechar modal */
+.fechar-modal {
+    float: right;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
 }
-#painel-admin td, #painel-admin th {
-    border: 1px solid #000;
-    padding: 10px;
-}
+
     </style>
 </head>
 <body>
 
-<!-- ===== MENU ===== -->
-<header>
+<!-- ==================== MENU ==================== -->
+<header id="topo">
     <nav>
         <a href="#rsvp">RSVP</a>
         <a href="#casal">O Casal</a>
@@ -174,7 +244,7 @@ section {
     </nav>
 </header>
 
-<!-- ===== HERO ===== -->
+<!-- ==================== INÍCIO ==================== -->
 <section class="hero">
     <h1>GUILHERME + MARCELLA</h1>
 
@@ -187,7 +257,7 @@ section {
     <h2 style="font-weight:300;">09.05.2026</h2>
 </section>
 
-<!-- ===== CONTAGEM REGRESSIVA ===== -->
+<!-- ==================== CONTAGEM REGRESSIVA ==================== -->
 <section class="countdown-section">
     <h3>CONTAGEM REGRESSIVA</h3>
     <div id="countdown">
@@ -198,53 +268,73 @@ section {
     </div>
 </section>
 
-<!-- ===== O CASAL ===== -->
+<!-- ==================== O CASAL ==================== -->
 <section id="casal">
     <h2>O CASAL</h2>
     <p style="font-weight:300;">História do casal...</p>
 </section>
 
-<!-- ===== CERIMÔNIA ===== -->
+<!-- ==================== CERIMÔNIA + MAPA ==================== -->
 <section id="cerimonia">
     <h2>CERIMÔNIA</h2>
-    <p style="font-weight:300;">Local, horário, traje, etc.</p>
+    <p style="font-weight:300;">Local, horário, traje...</p>
 
-    <p style="margin-top:20px;">
-        <a href="https://share.google/AZL6NdDJeVWnTvvJP" target="_blank" 
-           style="font-weight:300; text-decoration:underline; font-size:17px;">
-            👉 Ver localização no Google Maps
-        </a>
-    </p>
+    <!-- Mapa incorporado -->
+    <iframe class="mapa"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.392969..."
+        loading="lazy"></iframe>
 </section>
 
-<!-- ===== LISTA DE PRESENTES EM ABA SEPARADA ===== -->
+<!-- ==================== PRESENTES ==================== -->
 <section id="presentes">
     <h2>LISTA DE PRESENTES</h2>
-
-    <p style="text-align:center; max-width:700px; margin:auto; margin-bottom:30px; font-weight:300;">
-        Aqui você encontra nossa lista completa de presentes.
-    </p>
-
     <div class="grid-presentes" id="listaPresentes"></div>
 </section>
 
-<!-- ===== RSVP ===== -->
-<section id="rsvp" class="rsvp">
-    <h2>Confirmar presença</h2>
-    <form id="rsvpForm">
-        <input type="text" id="telefone" placeholder="Telefone" required>
-        <textarea id="nomes" placeholder="Nomes (1 por linha)" required></textarea>
-        <select id="presenca" required>
-            <option value="">Você irá?</option>
-            <option value="sim">Sim</option>
-            <option value="nao">Não</option>
-        </select>
-        <button type="submit">Enviar</button>
-    </form>
+<!-- ==================== BOTÃO PARA ABRIR MODAL RSVP ==================== -->
+<section id="rsvp" style="text-align:center;">
+    <h2>Confirmar Presença</h2>
+    <button class="botao-rsvp" onclick="abrirModal()">CONFIRMAR</button>
 </section>
 
-<!-- ===== CONTAGEM REGRESSIVA SCRIPT ===== -->
+<!-- ==================== MODAL DE RSVP ==================== -->
+<div class="modal-bg" id="modalRSVP">
+    <div class="modal">
+        <span class="fechar-modal" onclick="fecharModal()">×</span>
+        <h3 style="font-weight:300; margin-bottom:10px;">Confirmar presença</h3>
+
+        <form id="rsvpForm">
+            <input type="text" id="telefone" placeholder="Telefone" required>
+            <textarea id="nomes" placeholder="Nomes (1 por linha)" required></textarea>
+            <select id="presenca" required>
+                <option value="">Você irá?</option>
+                <option value="sim">Sim</option>
+                <option value="nao">Não</option>
+            </select>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</div>
+
+<!-- ==================== SCRIPT ==================== -->
 <script>
+
+/* ===== MENU ANIMADO AO ROLAR ===== */
+window.addEventListener("scroll", () => {
+    const header = document.getElementById("topo");
+    if (window.scrollY > 80) header.classList.add("scrolled");
+    else header.classList.remove("scrolled");
+});
+
+/* ===== MODAL ===== */
+function abrirModal() {
+    document.getElementById("modalRSVP").style.display = "flex";
+}
+function fecharModal() {
+    document.getElementById("modalRSVP").style.display = "none";
+}
+
+/* ===== CONTAGEM REGRESSIVA ===== */
 const target = new Date('2026-05-09T00:00:00').getTime();
 setInterval(() => {
     const now = Date.now();
@@ -261,6 +351,7 @@ setInterval(() => {
     document.getElementById('minutos').innerText = minutos.toString().padStart(2,'0');
     document.getElementById('segundos').innerText = segundos.toString().padStart(2,'0');
 }, 1000);
+
 </script>
 
 </body>
