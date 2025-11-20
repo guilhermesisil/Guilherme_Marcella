@@ -156,6 +156,7 @@ th, td{ border:1px solid #eee; padding:8px; text-align:left; }
       <input type="text" id="telefone" placeholder="Telefone (WhatsApp preferencial)" required>
       <textarea id="nomes" placeholder="Nomes dos acompanhantes (1 por linha)" rows="4" required></textarea>
       <select id="presenca" required>
+        <textarea id="presenca" placeholder="Vocês irão?" required></textarea>
         <option value="">Vocês irão?</option>
         <option value="sim">Sim — iremos</option>
         <option value="nao">Não — não iremos</option>
@@ -371,7 +372,7 @@ function abrirModalPresente(id) {
 
     <h3 style="margin:0 0 8px;">${p.nome}</h3>
     <p style="margin:0 0 8px; font-weight:300;">${p.descricao}</p>
-    <p><small>Entrega: ${p.endereco || "Endereço a combinar"}</small></p>
+    <p><small>Entrega: ${p.endereco || "Rua Araxá, 316, Passos - MG 37900-002"}</small></p>
 
     <label style="font-weight:300; font-size:14px;">Valor (R$)</label>
     <input id="valorPresente" type="text" placeholder="Ex: 150.00" value="${p.valor ? Number(p.valor).toFixed(2) : ''}">
