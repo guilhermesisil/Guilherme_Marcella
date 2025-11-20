@@ -4,7 +4,115 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guilherme + Marcella</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+/* ===== TEMA PRETO E BRANCO ELEGANTE ===== */
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: #ffffff;
+    color: #111;
+}
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #fff;
+    border-bottom: 1px solid #000;
+    padding: 15px 0;
+    text-align: center;
+    z-index: 10;
+}
+nav a {
+    margin: 0 20px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #000;
+    letter-spacing: 1px;
+}
+.hero {
+    padding-top: 120px;
+    text-align: center;
+}
+.hero h1 {
+    font-size: 42px;
+    letter-spacing: 4px;
+}
+.galeria {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0;
+}
+.galeria img {
+    width: 28%;
+    border-radius: 8px;
+    filter: grayscale(100%);
+}
+.countdown-section {
+    text-align: center;
+    margin: 40px 0;
+}
+#countdown {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    font-size: 22px;
+}
+section {
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: auto;
+}
+.grid-presentes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+.item img {
+    width: 100%;
+    border-radius: 8px;
+}
+.item button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px 0;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+/* ===== RSVP FORM ===== */
+.rsvp form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+    margin: auto;
+}
+.rsvp input, .rsvp select {
+    padding: 12px;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+.rsvp button {
+    padding: 14px;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+}
+/* ===== PAINEL ADMIN ===== */
+#painel-admin table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+#painel-admin th, #painel-admin td {
+    border: 1px solid #000;
+    padding: 10px;
+}
+</style>
 </head>
 
 <body>
@@ -72,7 +180,86 @@
     </div>
 </section>
 
-<script src="script.js"></script>
+<script>
+/* ===== CONTAGEM REGRESSIVA ===== */
+const target = new Date('2026-05-09T00:00:00');
+setInterval(() => {
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) return;
+    document.getElementById('dias').innerText = Math.floor(diff / (1000*60*60*24));
+    document.getElementById('horas').innerText = Math.floor(diff / (1000*60*60) % 24);
+    document.getElementById('minutos').innerText = Math.floor(diff / (1000*60) % 60);
+    document.getElementById('segundos').innerText = Math.floor(diff / 1000 % 60);
+}, 1000);
+
+/* ===== SALVAR RSVP ===== */
+const form = document.getElementById('rsvpForm');
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    const nome = document.getElementById('nome').value;
+    const email = document.getElementById('email').value;
+    const presenca = document.getElementById('presenca').value;
+
+    const novo = { nome, email, presenca };
+    const lista = JSON.parse(localStorage.getItem('rsvps') || '[]');
+    lista.push(novo);
+    localStorage.setItem('rsvps', JSON.stringify(lista));
+
+    alert('Obrigado por confirmar!');
+    form.reset();
+});
+
+/* ===== PAINEL ADMIN ===== */
+function abrirPainel() {
+    const senha = prompt('Senha do painel:');
+    if (senha !== '26052026') return alert('Senha incorreta');
+
+    document.getElementById('painel-admin').style.display = 'block';
+    const tbody = document.querySelector('#tabela-rsvps tbody');
+    tbody.innerHTML = '';
+
+    const lista = JSON.parse(localStorage.getItem('rsvps') || '[]');
+    lista.forEach(r => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${r.nome}</td><td>${r.email}</td><td>${r.presenca}</td>`;
+        tbody.appendChild(tr);
+    });
+}
+
+// Atalho: pressione "A" para abrir painel
+window.addEventListener('keydown', e => {
+    if (e.key.toLowerCase() === 'a') abrirPainel();
+});
+</script>
+
+<section id="rsvp" class="rsvp">
+    <h2>CONFIRMAR PRESENÇA</h2>
+    <form id="rsvpForm">
+        <input type="text" id="nome" placeholder="Seu nome" required>
+        <input type="email" id="email" placeholder="Seu e-mail" required>
+        <select id="presenca" required>
+            <option value="">Você irá?</option>
+            <option value="sim">Sim, estarei lá</option>
+            <option value="nao">Não poderei ir</option>
+        </select>
+        <button type="submit">Enviar</button>
+    </form>
+</section>
+
+<section id="painel-admin" class="painel-admin" style="display:none;">
+    <h2>Painel de RSVPs</h2>
+    <table id="tabela-rsvps">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Presença</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</section>
 
 </body>
 </html>
