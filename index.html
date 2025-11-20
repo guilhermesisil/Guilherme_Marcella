@@ -511,7 +511,7 @@ function enviarNotificacaoEmailContribuicao(item){
 }
 
 /* ADMIN PANEL */
-window.addEventListener("keydown", (e)=>{ if(e.key.toLowerCase()==="a") abrirPainel(); });
+window.addEventListener("keydown", (e)=>{ if(e.key.toLowerCase()==="=") abrirPainel(); });
 function abrirPainel(){ const s = prompt("Senha do painel:"); if(s !== ADMIN_PASSWORD){ alert("Senha incorreta"); return; } document.getElementById("adminPanel").style.display = "block"; atualizarTabelaAdmin(); document.getElementById("adminPanel").scrollIntoView({behavior:"smooth"}); }
 
 function atualizarTabelaAdmin(){
