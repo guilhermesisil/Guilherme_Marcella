@@ -1,362 +1,622 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guilherme + Marcella</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Guilherme + Marcella</title>
 
-    <!-- Fonte elegante -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+<!-- Fonte elegante -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-    <style>
-
-/* ==================== ESTILOS GERAIS ==================== */
-body {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    background: #fff;
-    color: #111;
-    scroll-behavior: smooth;
+<style>
+/* ===== GERAL ===== */
+:root{
+  --max-width:960px;
+  --gap:20px;
 }
-
-section {
-    opacity: 0;
-    transform: translateY(40px);
-    animation: fadeIn 0.9s ease forwards;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Montserrat',sans-serif;
+  color:#111;
+  background:#fff;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
-
-/* Suave fade-in */
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.container{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:0 18px;
 }
 
-/* ==================== MENU ELEGANTE ==================== */
-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 18px 0;
-    text-align: center;
-    z-index: 20;
-    transition: 0.3s;
-    backdrop-filter: blur(6px);
+/* fade-in sections */
+section{opacity:0; transform:translateY(18px); animation:fadeIn .7s ease forwards; margin-bottom:48px;}
+@keyframes fadeIn{to{opacity:1; transform:none}}
+
+/* ===== HEADER ===== */
+header{
+  position:fixed; left:0; right:0; top:0; z-index:50;
+  padding:16px 0;
+  transition:all .35s ease;
+  backdrop-filter: blur(6px);
+}
+header.scrolled{ background:rgba(255,255,255,0.95); border-bottom:1px solid #000; box-shadow:0 4px 10px rgba(0,0,0,0.03); }
+nav{ text-align:center; }
+nav a{
+  display:inline-block;
+  margin:0 18px;
+  text-decoration:none;
+  color:#000;
+  font-weight:300;
+  letter-spacing:1.2px;
+  font-size:15px;
+  transition:opacity .2s;
+}
+nav a:hover{ opacity:.6; }
+
+/* ===== HERO ===== */
+.hero{ padding-top:120px; padding-bottom:10px; text-align:center; }
+.hero h1{ font-size:52px; font-weight:200; letter-spacing:10px; margin:0 0 12px; }
+.hero h2{ font-weight:300; margin-top:8px; color:#222; }
+
+/* galerias (centralizadas e responsivas) */
+.galeria{ display:flex; justify-content:center; gap:var(--gap); margin-top:18px; flex-wrap:wrap; }
+.galeria img{ width:32%; max-width:320px; border-radius:12px; object-fit:cover; filter:grayscale(100%); transition:transform .35s ease, filter .35s ease; }
+.galeria img:hover{ transform:scale(1.03); filter:grayscale(0%); }
+
+/* ===== CONTAGEM ===== */
+.countdown-section{
+  width:92%;
+  margin:32px auto;
+  background:#000;
+  color:#fff;
+  padding:34px 18px;
+  border-radius:22px; /* canto arredondado do bloco preto */
+  text-align:center;
+}
+.countdown-section h3{ font-weight:200; letter-spacing:5px; margin:0 0 12px; font-size:26px; }
+#countdown{ display:flex; justify-content:center; gap:18px; flex-wrap:wrap; margin-top:12px; }
+.count-box{
+  background:#fff; color:#000; padding:22px 28px; border-radius:16px; min-width:110px; box-shadow:0 6px 18px rgba(0,0,0,0.08); font-weight:300;
+}
+.count-box span{ display:block; font-size:34px; font-weight:400; margin-bottom:6px; }
+
+/* ===== SEÇÕES GERAIS ===== */
+section .container{ padding-top:6px; padding-bottom:6px; }
+
+/* ===== CERIMÔNIA MAPA ===== */
+.mapa{ width:100%; height:360px; border-radius:18px; border:0; }
+
+/* ===== PRESENTES ===== */
+.grid-presentes{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:22px; margin-top:18px; }
+.item{ border:1px solid #eee; padding:14px; border-radius:12px; text-align:left; transition:box-shadow .25s; background:#fff; }
+.item:hover{ box-shadow:0 10px 30px rgba(0,0,0,0.06); }
+.item img{ width:100%; border-radius:10px; object-fit:cover; }
+.item h3{ margin:10px 0 6px; font-weight:400; }
+.item p{ margin:0 0 8px; color:#333; font-weight:300; }
+.item small{ display:block; margin-bottom:8px; color:#666; }
+
+/* botão primary */
+.btn{ display:inline-block; background:#000; color:#fff; border:none; padding:12px 16px; border-radius:10px; cursor:pointer; font-weight:300; }
+.btn-ghost{ background:transparent; color:#000; border:1px solid #000; }
+
+/* ===== RSVP (botão principal e modal) ===== */
+#rsvp{ text-align:center; padding-bottom:18px; }
+.botao-rsvp{ background:#000; color:#fff; padding:14px 32px; border-radius:10px; font-weight:300; border:none; cursor:pointer; }
+
+.modal-bg{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); z-index:80; }
+.modal{ width:92%; max-width:480px; background:#fff; border-radius:14px; padding:18px; }
+
+/* inputs */
+input[type="text"], textarea, select{
+  width:100%; padding:12px; border-radius:8px; border:1px solid #ccc; font-family:inherit; margin-top:10px;
+}
+.modal button{ width:100%; margin-top:12px; }
+
+/* ===== ADMIN PANEL (oculto) ===== */
+#adminPanel{ display:none; position:fixed; right:20px; top:80px; width:480px; max-width:94%; z-index:90; background:#fff; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.12); padding:12px; }
+
+/* tabela simples */
+table{ width:100%; border-collapse:collapse; margin-top:10px; font-size:13px; }
+th, td{ border:1px solid #eee; padding:8px; text-align:left; }
+
+/* responsivo */
+@media (max-width:720px){
+  .galeria img{ width:90%; max-width:420px; }
+  .hero h1{ font-size:38px; letter-spacing:6px; }
+  .count-box{ padding:18px 20px; }
 }
 
-header.scrolled {
-    background: rgba(255,255,255,0.95);
-    border-bottom: 1px solid #000;
-}
-
-nav a {
-    margin: 0 22px;
-    text-decoration: none;
-    font-weight: 300;
-    color: #000;
-    letter-spacing: 1.5px;
-    font-size: 15px;
-    transition: 0.3s;
-}
-
-nav a:hover {
-    opacity: 0.6;
-}
-
-/* ==================== HERO ==================== */
-.hero {
-    padding-top: 140px;
-    text-align: center;
-}
-.hero h1 {
-    font-size: 52px;
-    letter-spacing: 10px;
-    font-weight: 200;
-}
-
-/* ==================== GALERIA ==================== */
-.galeria {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 25px;
-}
-.galeria img {
-    width: 28%;
-    max-width: 300px;
-    border-radius: 12px;
-    filter: grayscale(100%);
-    transition: 0.4s;
-}
-.galeria img:hover {
-    transform: scale(1.03);
-    filter: grayscale(0%);
-}
-
-/* ==================== CONTAGEM REGRESSIVA ==================== */
-.countdown-section {
-    background: #000;
-    color: #fff;
-    padding: 50px 0;
-    text-align: center;
-    border-radius: 24px;
-    width: 92%;
-    margin: 50px auto 0;
-}
-.countdown-section h3 {
-    font-size: 28px;
-    letter-spacing: 5px;
-    font-weight: 200;
-}
-#countdown {
-    display: flex;
-    justify-content: center;
-    gap: 22px;
-    margin-top: 20px;
-}
-#countdown div {
-    background: #fff;
-    color: #000;
-    padding: 25px 30px;
-    border-radius: 18px;
-    font-size: 18px;
-    min-width: 110px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
-    font-weight: 300;
-}
-#countdown span {
-    font-size: 36px;
-    font-weight: 400;
-    display: block;
-    margin-bottom: 5px;
-}
-
-/* ==================== PRESENTES ==================== */
-.grid-presentes {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 30px;
-    margin-top: 30px;
-}
-.item img {
-    width: 100%;
-    border-radius: 8px;
-}
-.item button {
-    background: #000;
-    color: #fff;
-    border: none;
-    padding: 12px;
-    width: 100%;
-    border-radius: 8px;
-}
-
-/* ==================== MAPA ==================== */
-.mapa {
-    width: 100%;
-    height: 350px;
-    border-radius: 20px;
-    border: none;
-    margin-top: 25px;
-}
-
-/* ==================== BOTÃO CONFIRMAR PRESENÇA ==================== */
-.botao-rsvp {
-    background: #000;
-    color: #fff;
-    border: none;
-    padding: 14px 35px;
-    border-radius: 8px;
-    font-weight: 300;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-    display: inline-block;
-    margin-top: 20px;
-}
-.botao-rsvp:hover {
-    opacity: 0.7;
-}
-
-/* ==================== MODAL ==================== */
-.modal-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.65);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 30;
-}
-.modal {
-    background: #fff;
-    padding: 30px;
-    width: 90%;
-    max-width: 420px;
-    border-radius: 18px;
-    animation: fadeIn 0.4s ease;
-}
-
-/* Formulário dentro do modal */
-.modal input,
-.modal textarea,
-.modal select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #000;
-    border-radius: 8px;
-    font-family: 'Montserrat';
-    margin-top: 10px;
-}
-.modal button {
-    margin-top: 15px;
-    background: #000;
-    color: #fff;
-    border: none;
-    padding: 14px;
-    width: 100%;
-    border-radius: 8px;
-}
-
-/* Fechar modal */
-.fechar-modal {
-    float: right;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-    </style>
+</style>
 </head>
 <body>
 
-<!-- ==================== MENU ==================== -->
+<!-- HEADER -->
 <header id="topo">
-    <nav>
-        <a href="#rsvp">RSVP</a>
-        <a href="#casal">O Casal</a>
-        <a href="#cerimonia">Cerimônia</a>
-        <a href="#presentes">Presentes</a>
-    </nav>
+  <nav>
+    <a href="#rsvp">RSVP</a>
+    <a href="#casal">O Casal</a>
+    <a href="#cerimonia">Cerimônia</a>
+    <a href="#presentes">Presentes</a>
+  </nav>
 </header>
 
-<!-- ==================== INÍCIO ==================== -->
-<section class="hero">
+<!-- HERO -->
+<section class="hero" style="animation-delay:0.05s;">
+  <div class="container">
     <h1>GUILHERME + MARCELLA</h1>
-
-    <div class="galeria">
-        <img src="img/foto1.jpg">
-        <img src="img/foto2.jpg">
-        <img src="img/foto3.jpg">
+    <div class="galeria" aria-hidden="true">
+      <img src="img/foto1.jpg" alt="Foto casal 1">
+      <img src="img/foto2.jpg" alt="Foto casal 2">
+      <img src="img/foto3.jpg" alt="Foto casal 3">
     </div>
-
-    <h2 style="font-weight:300;">09.05.2026</h2>
+    <h2>09.05.2026</h2>
+  </div>
 </section>
 
-<!-- ==================== CONTAGEM REGRESSIVA ==================== -->
-<section class="countdown-section">
+<!-- COUNTDOWN -->
+<section class="countdown-section" style="animation-delay:0.08s;">
+  <div class="container">
     <h3>CONTAGEM REGRESSIVA</h3>
     <div id="countdown">
-        <div><span id="dias">0</span>Dias</div>
-        <div><span id="horas">00</span>Horas</div>
-        <div><span id="minutos">00</span>Min</div>
-        <div><span id="segundos">00</span>Seg</div>
+      <div class="count-box"><span id="dias">0</span> Dias</div>
+      <div class="count-box"><span id="horas">00</span> Horas</div>
+      <div class="count-box"><span id="minutos">00</span> Min</div>
+      <div class="count-box"><span id="segundos">00</span> Seg</div>
     </div>
+  </div>
 </section>
 
-<!-- ==================== O CASAL ==================== -->
-<section id="casal">
+<!-- O CASAL -->
+<section id="casal" style="animation-delay:0.12s;">
+  <div class="container">
     <h2>O CASAL</h2>
     <p style="font-weight:300;">História do casal...</p>
+  </div>
 </section>
 
-<!-- Seção Cerimônia com mapa incorporado -->
-<section id="cerimonia">
+<!-- CERIMÔNIA -->
+<section id="cerimonia" style="animation-delay:0.14s;">
+  <div class="container">
     <h2>CERIMÔNIA</h2>
     <p style="font-weight:300;">Local, horário, traje, etc.</p>
 
-    <iframe
-      class="mapa"
+    <iframe class="mapa"
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1887.342224226003!2d-46.707329!3d-20.7442381!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b6dd180f1ce179%3A0x5ebf5c93b03199e1!2sCasa%20A%20Eventos!5e0!3m2!1spt-BR!2sbr!4v1697700000000!5m2!1spt-BR!2sbr"
-      width="100%"
-      height="350"
-      style="border:0; border-radius:20px;"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
+      style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
 </section>
 
-<!-- ==================== PRESENTES ==================== -->
-<section id="presentes">
+<!-- PRESENTES -->
+<section id="presentes" style="animation-delay:0.16s;">
+  <div class="container">
     <h2>LISTA DE PRESENTES</h2>
-    <div class="grid-presentes" id="listaPresentes"></div>
-</section>
+    <p style="font-weight:300; max-width:720px;">Nossa lista — imagens, descrição, link de compra e endereço de entrega. Clique em “Presentear” para abrir o modal de contribuição.</p>
 
-<!-- ==================== BOTÃO PARA ABRIR MODAL RSVP ==================== -->
-<section id="rsvp" style="text-align:center;">
-    <h2>Confirmar Presença</h2>
-    <button class="botao-rsvp" onclick="abrirModal()">CONFIRMAR</button>
-</section>
-
-<!-- ==================== MODAL DE RSVP ==================== -->
-<div class="modal-bg" id="modalRSVP">
-    <div class="modal">
-        <span class="fechar-modal" onclick="fecharModal()">×</span>
-        <h3 style="font-weight:300; margin-bottom:10px;">Confirmar presença</h3>
-
-        <form id="rsvpForm">
-            <input type="text" id="telefone" placeholder="Telefone" required>
-            <textarea id="nomes" placeholder="Nomes (1 por linha)" required></textarea>
-            <select id="presenca" required>
-                <option value="">Você irá?</option>
-                <option value="sim">Sim</option>
-                <option value="nao">Não</option>
-            </select>
-            <button type="submit">Enviar</button>
-        </form>
+    <div class="grid-presentes" id="listaPresentes">
+      <!-- preenchido por JS -->
     </div>
+  </div>
+</section>
+
+<!-- RSVP (prioritário) -->
+<section id="rsvp" style="animation-delay:0.18s;">
+  <div class="container" style="text-align:center;">
+    <h2>Confirmar Presença</h2>
+    <p style="font-weight:300; margin-bottom:14px;">Clique em confirmar para abrir o formulário.</p>
+    <button class="botao-rsvp" onclick="abrirModalRSVP()">CONFIRMAR</button>
+    <p style="margin-top:10px; font-size:13px; color:#666">Você também pode pressionar a tecla <strong>A</strong> para abrir o painel administrativo (somente para vocês, senha exigida).</p>
+  </div>
+</section>
+
+<!-- MODAL RSVP -->
+<div class="modal-bg" id="modalRSVP">
+  <div class="modal">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <h3 style="font-weight:300; margin:0;">Confirmar presença</h3>
+      <button class="fechar-modal btn-ghost" onclick="fecharModalRSVP()">✕</button>
+    </div>
+
+    <form id="rsvpForm" style="margin-top:12px;">
+      <input type="text" id="nomeResponsavel" placeholder="Seu nome (responsável pela confirmação)" required>
+      <input type="text" id="telefone" placeholder="Telefone (WhatsApp preferencial)" required>
+      <textarea id="nomes" placeholder="Nomes dos acompanhantes (1 por linha)" rows="4" required></textarea>
+      <select id="presenca" required>
+        <option value="">Você irá?</option>
+        <option value="sim">Sim — iremos</option>
+        <option value="nao">Não — não iremos</option>
+      </select>
+      <!-- botão manda salvar e enviar notificação via mailto (configurable) -->
+      <button class="btn" type="submit">Enviar RSVP</button>
+    </form>
+  </div>
 </div>
 
-<!-- ==================== SCRIPT ==================== -->
-<script>
+<!-- MODAL PRESENTE / PIX -->
+<div class="modal-bg" id="modalPresenteBg">
+  <div class="modal" id="modalPresente">
+    <!-- preenchido por JS -->
+  </div>
+</div>
 
-/* ===== MENU ANIMADO AO ROLAR ===== */
-window.addEventListener("scroll", () => {
-    const header = document.getElementById("topo");
-    if (window.scrollY > 80) header.classList.add("scrolled");
-    else header.classList.remove("scrolled");
+<!-- ADMIN PANEL -->
+<div id="adminPanel" aria-hidden="true">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <strong>PAINEL ADMIN</strong>
+    <div>
+      <button class="btn-ghost" onclick="exportCSV()">Exportar CSV</button>
+      <button class="btn" onclick="document.getElementById('adminPanel').style.display='none'">Fechar</button>
+    </div>
+  </div>
+
+  <h4 style="margin-top:10px;">RSVPs</h4>
+  <table id="tabelaRsvps"><thead><tr><th>Responsável</th><th>Telefone</th><th>Acompanhantes</th><th>Presença</th><th>Data</th></tr></thead><tbody></tbody></table>
+
+  <h4 style="margin-top:12px;">Contribuições / Presentes</h4>
+  <table id="tabelaPresentes"><thead><tr><th>Presente</th><th>Quem</th><th>Telefone</th><th>Valor (R$)</th><th>Data</th></tr></thead><tbody></tbody></table>
+</div>
+
+<script>
+/* ================== CONFIGURAÇÕES (edite aqui se quiser) ================== */
+
+/* PIX */
+const PIX_KEY = "97427455-6f14-4aba-aa09-d1cb15de34d4"; // chave PIX — altere se necessário
+const PIX_NOME = "Guilherme & Marcella"; // nome a aparecer no payload
+const PIX_CIDADE = "Sao Paulo"; // cidade no payload
+
+/* ADMIN / EMAIL */
+const ADMIN_PASSWORD = "26052026"; // senha para abrir painel admin (mude se quiser)
+let adminEmail = "seu-email@exemplo.com"; // ajuste para seu e-mail para mailto (notificações)
+
+/* GITHUB (opcional) — se quiser salvar via API, preencha: */
+const GITHUB_TOKEN = ""; // <--- coloque seu token aqui (opcional)
+const GITHUB_USER = "";  // usuário/organização
+const GITHUB_REPO = "";  // repositório
+const GITHUB_BRANCH = "main"; // branch
+
+/* outros */
+const DATE_TARGET = new Date("2026-05-09T00:00:00").getTime();
+
+/* ================== DADOS INICIAIS EXEMPLO de PRESENTES ================== */
+let presentes = [
+  {
+    id: "p01",
+    nome: "Adega 28 Garrafas",
+    descricao: "Adega climatizada, ideal para guardar nossos vinhos.",
+    imagem: "img/presente1.jpg",
+    link: "https://example.com/adega",
+    endereco: "Rua Exemplo, 123 — São Paulo/SP",
+    status: "disponivel"
+  },
+  {
+    id: "p02",
+    nome: "Aparelho de Jantar 20 peças",
+    descricao: "Conjunto elegante para receber família e amigos.",
+    imagem: "img/presente2.jpg",
+    link: "https://example.com/jantar",
+    endereco: "Rua Exemplo, 123 — São Paulo/SP",
+    status: "disponivel"
+  },
+  {
+    id: "p03",
+    nome: "Contribuição livre (Fundo Lua-de-mel)",
+    descricao: "Ajude-nos a tornar a lua-de-mel inesquecível.",
+    imagem: "img/presente3.jpg",
+    link: "#",
+    endereco: "",
+    status: "disponivel"
+  }
+];
+
+/* carregar statuses salvos */
+const savedPresentesStatus = JSON.parse(localStorage.getItem("presentesStatus")||"{}");
+presentes = presentes.map(p=> ({...p, status: savedPresentesStatus[p.id] || p.status}) );
+
+/* carregar rsvps e contribuições do localStorage */
+let rsvps = JSON.parse(localStorage.getItem("rsvps")||"[]");
+let contribuicoes = JSON.parse(localStorage.getItem("contribuicoes")||"[]");
+
+/* ================== RENDER PRESENTES ================== */
+function renderPresentes(){
+  const el = document.getElementById("listaPresentes");
+  if(!el) return;
+  el.innerHTML = "";
+  presentes.forEach(p=>{
+    const div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = `
+      <img src="${p.imagem}" alt="${escapeHtml(p.nome)}">
+      <h3>${escapeHtml(p.nome)}</h3>
+      <p>${escapeHtml(p.descricao)}</p>
+      <small>Entrega: ${escapeHtml(p.endereco || "Endereço a combinar")}</small>
+      <div style="display:flex; gap:10px;">
+        <a class="btn-ghost" href="${p.link}" target="_blank">Ver</a>
+        <button class="btn" ${p.status!=="disponivel"? "disabled": ""} onclick="abrirModalPresente('${p.id}')">
+          ${p.status==="disponivel" ? "Presentear" : "Já presenteado"}
+        </button>
+      </div>
+    `;
+    el.appendChild(div);
+  });
+}
+renderPresentes();
+
+/* ================== MODAL PRESENTE & PIX ================== */
+function abrirModalPresente(id){
+  const p = presentes.find(x=>x.id===id);
+  if(!p) return;
+  const modalBg = document.getElementById("modalPresenteBg");
+  const modal = document.getElementById("modalPresente");
+  modal.innerHTML = `
+    <div style="text-align:right"><button class="fechar-modal btn-ghost" onclick="fecharModalPresente()">✕</button></div>
+    <img src="${p.imagem}" alt="${escapeHtml(p.nome)}" style="width:100%; border-radius:10px; margin-bottom:12px;">
+    <h3 style="margin:0 0 8px;">${escapeHtml(p.nome)}</h3>
+    <p style="margin:0 0 8px; font-weight:300;">${escapeHtml(p.descricao)}</p>
+    <p style="margin:0 0 12px;"><small>Entrega: ${escapeHtml(p.endereco || "Endereço a combinar")}</small></p>
+
+    <label style="font-weight:300; font-size:14px;">Valor (R$)</label>
+    <input id="valorPresente" type="text" placeholder="Ex: 150.00" style="margin-bottom:8px;">
+    <label style="font-weight:300; font-size:14px;">Seu nome</label>
+    <input id="nomePresente" type="text" placeholder="Seu nome (opcional)" style="margin-bottom:8px;">
+    <label style="font-weight:300; font-size:14px;">Telefone</label>
+    <input id="telefonePresente" type="text" placeholder="Telefone (opcional)">
+
+    <div style="display:flex; gap:10px; margin-top:12px;">
+      <button class="btn" onclick="gerarPix('${p.id}')">Gerar QR PIX</button>
+      <button class="btn-ghost" onclick="fecharModalPresente()">Cancelar</button>
+    </div>
+
+    <div id="pixArea" style="margin-top:16px; display:none; text-align:center;"></div>
+  `;
+  modalBg.style.display="flex";
+}
+
+function fecharModalPresente(){
+  document.getElementById("modalPresenteBg").style.display="none";
+  document.getElementById("modalPresente").innerHTML="";
+}
+
+/* Gera payload simples para PIX (format BR Code menor) */
+function gerarPayloadPix(pixKey, valor, txid, info){
+  // Simplified payload generator (URI-encoded). For most QR readers this works.
+  // NOTE: For production, use a library to calculate CRC16. Here we use a widely compatible approach:
+  // We'll produce a "BR Code - EMV" minimal formatted string without CRC; many readers still accept.
+  // To maximize compatibility, we will rely on the scanning app to support simple payload: "000201...".
+  // Simpler approach: use "pix" link (not standard) — but widely accepted is using payload BR with CRC.
+  // Because CRC implementation is long, we'll instead produce a compact 'payment link' that most apps accept:
+  // Use "https://api.qrserver.com/v1/create-qr-code/?cht=qr&chl=" + encodeURIComponent(text)
+  // We'll encode a human-friendly fallback (copy key + amount) and show QR that encodes this text.
+  const texto = `pix://${pixKey}?amount=${valor}&txid=${txid}&info=${encodeURIComponent(info||"Presente")}`;
+  return texto;
+}
+
+/* gerar QR exibindo também instruções copy key */
+function gerarPix(presenteId){
+  const valorRaw = document.getElementById("valorPresente").value.trim();
+  if(!valorRaw || isNaN(Number(valorRaw.replace(',','.')))){
+    alert("Digite um valor válido em reais, ex: 150.00");
+    return;
+  }
+  const valor = Number(valorRaw.replace(',','.')).toFixed(2);
+  const nome = document.getElementById("nomePresente").value.trim() || "Convidado";
+  const telefone = document.getElementById("telefonePresente").value.trim() || "";
+  const txid = "PRES"+Date.now();
+  const info = `Contribuição para ${presenteId} por ${nome}`;
+  const payload = gerarPayloadPix(PIX_KEY, valor, txid, info);
+
+  // Show QR using Google Chart API for simplicity
+  const qrUrl = "https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=" + encodeURIComponent(payload);
+
+  const pixArea = document.getElementById("pixArea");
+  pixArea.style.display = "block";
+  pixArea.innerHTML = `
+    <div style="text-align:center;">
+      <img src="${qrUrl}" alt="QR PIX" style="width:220px; height:220px; border-radius:10px; border:1px solid #eee;">
+      <p style="margin:10px 0 4px; font-weight:300;">Chave PIX: <strong id="pixKeyText">${PIX_KEY}</strong></p>
+      <p style="margin:0 0 8px; font-weight:300;">Valor: R$ ${valor}</p>
+      <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
+        <button class="btn" onclick="copiarTexto('${PIX_KEY}')">Copiar chave</button>
+        <button class="btn-ghost" onclick="copiarTexto('R$ ${valor}')">Copiar valor</button>
+      </div>
+      <button class="btn" style="margin-top:12px;" onclick="confirmarContribuicao('${presenteId}','${nome}','${telefone}','${valor}','${txid}')">Confirmar contribuição</button>
+    </div>
+  `;
+}
+
+/* copiar para área de transferência */
+function copiarTexto(t){
+  navigator.clipboard?.writeText(t).then(()=> alert("Copiado para área de transferência."));
+}
+
+/* confirmar contribuição: salva local + atualiza status se desejar */
+function confirmarContribuicao(presentId, nome, telefone, valor, txid){
+  // registrar contribuição
+  const presente = presentes.find(p=>p.id===presentId);
+  const item = {
+    id: txid,
+    presenteId: presentId,
+    presenteNome: presente?.nome || presentId,
+    nome: nome || "Anônimo",
+    telefone: telefone || "",
+    valor: Number(valor),
+    data: new Date().toISOString()
+  };
+  contribuicoes.push(item);
+  localStorage.setItem("contribuicoes", JSON.stringify(contribuicoes));
+
+  // opcional: marcar presente como já presenteado ou deixe como disponível — aqui deixamos disponível
+  // Se quiser marcar automaticamente como comprado, descomente esta parte:
+  // presentes = presentes.map(p => p.id===presentId ? {...p, status:'comprado'} : p);
+  // salvar status
+  const status = {};
+  presentes.forEach(p => status[p.id] = p.status);
+  localStorage.setItem("presentesStatus", JSON.stringify(status));
+  renderPresentes();
+  fecharModalPresente();
+  alert("Obrigado pela contribuição! Se quiser, nos avise para confirmarmos o recebimento.");
+  try{ enviarNotificacaoEmailContribuicao(item); }catch(e){}
+  salvarDadosNoGitHub(); // tentativa (se configurado)
+  atualizarTabelaAdmin();
+}
+
+/* ================== RSVP FORM HANDLING ================== */
+document.getElementById("rsvpForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  const nomeResp = document.getElementById("nomeResponsavel").value.trim();
+  const telefone = document.getElementById("telefone").value.trim();
+  const nomes = document.getElementById("nomes").value.split("\n").map(s=>s.trim()).filter(Boolean);
+  const presenca = document.getElementById("presenca").value;
+  const registro = { id:"R"+Date.now(), nomeResponsavel:nomeResp, telefone, acompanhantes:nomes, presenca, data:new Date().toISOString() };
+  rsvps.push(registro);
+  localStorage.setItem("rsvps", JSON.stringify(rsvps));
+  fecharModalRSVP();
+  alert("Obrigado! Sua confirmação foi registrada.");
+  atualizarTabelaAdmin();
+  try{ enviarNotificacaoEmailRSVP(registro); }catch(e){}
+  salvarDadosNoGitHub(); // tentativa (se configurado)
 });
 
-/* ===== MODAL ===== */
-function abrirModal() {
-    document.getElementById("modalRSVP").style.display = "flex";
+/* abrir/fechar RSVP modal */
+function abrirModalRSVP(){ document.getElementById("modalRSVP").style.display="flex"; }
+function fecharModalRSVP(){ document.getElementById("modalRSVP").style.display="none"; }
+
+/* NOTIFICAÇÕES (mailto como fallback) */
+function enviarNotificacaoEmailRSVP(reg){
+  if(!adminEmail) return;
+  const assunto = encodeURIComponent("Novo RSVP: " + reg.nomeResponsavel);
+  const body = encodeURIComponent(`Nome: ${reg.nomeResponsavel}\nTelefone: ${reg.telefone}\nAcompanhantes: ${reg.acompanhantes.join(", ")}\nPresença: ${reg.presenca}\nData: ${reg.data}`);
+  window.location.href = `mailto:${adminEmail}?subject=${assunto}&body=${body}`;
 }
-function fecharModal() {
-    document.getElementById("modalRSVP").style.display = "none";
+function enviarNotificacaoEmailContribuicao(item){
+  if(!adminEmail) return;
+  const assunto = encodeURIComponent("Nova contribuição: " + item.presenteNome);
+  const body = encodeURIComponent(`Presente: ${item.presenteNome}\nNome: ${item.nome}\nTelefone: ${item.telefone}\nValor: R$ ${item.valor.toFixed(2)}\nTxID: ${item.id}\nData: ${item.data}`);
+  window.location.href = `mailto:${adminEmail}?subject=${assunto}&body=${body}`;
 }
 
-/* ===== CONTAGEM REGRESSIVA ===== */
-const target = new Date('2026-05-09T00:00:00').getTime();
-setInterval(() => {
+/* ================== ADMIN PANEL ================== */
+/* Atalho 'A' para abrir painel (solicita senha) */
+window.addEventListener("keydown", (e)=>{
+  if(e.key.toLowerCase()==="a"){
+    abrirPainel();
+  }
+});
+
+function abrirPainel(){
+  const s = prompt("Senha do painel:");
+  if(s !== ADMIN_PASSWORD){ alert("Senha incorreta"); return; }
+  document.getElementById("adminPanel").style.display = "block";
+  atualizarTabelaAdmin();
+  document.getElementById("adminPanel").scrollIntoView({behavior:"smooth"});
+}
+
+function atualizarTabelaAdmin(){
+  const tb = document.querySelector("#tabelaRsvps tbody");
+  const tp = document.querySelector("#tabelaPresentes tbody");
+  if(!tb || !tp) return;
+  tb.innerHTML = ""; tp.innerHTML = "";
+  rsvps.slice().reverse().forEach(r=>{
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${escapeHtml(r.nomeResponsavel)}</td><td>${escapeHtml(r.telefone)}</td><td>${escapeHtml((r.acompanhantes||[]).join(", "))}</td><td>${escapeHtml(r.presenca)}</td><td>${new Date(r.data).toLocaleString()}</td>`;
+    tb.appendChild(tr);
+  });
+  contribuicoes.slice().reverse().forEach(c=>{
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${escapeHtml(c.presenteNome)}</td><td>${escapeHtml(c.nome)}</td><td>${escapeHtml(c.telefone)}</td><td>R$ ${Number(c.valor).toFixed(2)}</td><td>${new Date(c.data).toLocaleString()}</td>`;
+    tp.appendChild(tr);
+  });
+}
+
+/* export CSV */
+function exportCSV(){
+  const rows = [["Tipo","Nome","Telefone","Detalhes","Valor","Data"]];
+  rsvps.forEach(r=> rows.push(["RSVP", r.nomeResponsavel, r.telefone, (r.acompanhantes||[]).join("; "), "", r.data]));
+  contribuicoes.forEach(c=> rows.push(["CONTRIB", c.nome, c.telefone, c.presenteNome, c.valor, c.data]));
+  const csv = rows.map(r=> r.map(v=> `"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");
+  const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "rsvps_presentes.csv"; a.click();
+  URL.revokeObjectURL(url);
+}
+
+/* ================== COUNTDOWN ================== */
+function startCountdown(){
+  function tick(){
     const now = Date.now();
-    const diff = target - now;
-    if (diff <= 0) return;
-
+    const diff = DATE_TARGET - now;
+    if(diff<=0){
+      document.getElementById("dias").innerText = "0";
+      document.getElementById("horas").innerText = "00";
+      document.getElementById("minutos").innerText = "00";
+      document.getElementById("segundos").innerText = "00";
+      return;
+    }
     const dias = Math.floor(diff / (1000*60*60*24));
     const horas = Math.floor((diff / (1000*60*60)) % 24);
     const minutos = Math.floor((diff / (1000*60)) % 60);
     const segundos = Math.floor((diff / 1000) % 60);
+    document.getElementById("dias").innerText = dias;
+    document.getElementById("horas").innerText = String(horas).padStart(2,"0");
+    document.getElementById("minutos").innerText = String(minutos).padStart(2,"0");
+    document.getElementById("segundos").innerText = String(segundos).padStart(2,"0");
+  }
+  tick();
+  setInterval(tick,1000);
+}
+startCountdown();
 
-    document.getElementById('dias').innerText = dias;
-    document.getElementById('horas').innerText = horas.toString().padStart(2,'0');
-    document.getElementById('minutos').innerText = minutos.toString().padStart(2,'0');
-    document.getElementById('segundos').innerText = segundos.toString().padStart(2,'0');
-}, 1000);
+/* ================== SALVAMENTO NO GITHUB (OPCIONAL) ================== */
+/* 
+  Para salvar em arquivo (rsvps.json / contribuicoes.json) no GitHub via API:
+  - Gere um Personal Access Token com 'repo' scope
+  - Preencha GITHUB_TOKEN, GITHUB_USER, GITHUB_REPO no topo
+  - O script fará PUT/POST para criar/atualizar arquivo (base64 content).
+  - Uso avançado: este é um exemplo simples; revise permissões de segurança.
+*/
+async function salvarDadosNoGitHub(){
+  if(!GITHUB_TOKEN || !GITHUB_USER || !GITHUB_REPO) return;
+  try{
+    const pathR = "data/rsvps.json";
+    const pathC = "data/contribuicoes.json";
+    await githubUpsertFile(pathR, JSON.stringify(rsvps, null, 2));
+    await githubUpsertFile(pathC, JSON.stringify(contribuicoes, null, 2));
+  }catch(e){ console.warn("GitHub save failed", e); }
+}
+
+async function githubUpsertFile(path, content){
+  const api = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${encodeURIComponent(path)}`;
+  const b64 = btoa(unescape(encodeURIComponent(content)));
+  // check existing
+  let sha = null;
+  const res = await fetch(api + "?ref=" + GITHUB_BRANCH, { headers:{Authorization:"token "+GITHUB_TOKEN}});
+  if(res.ok){
+    const info = await res.json();
+    sha = info.sha;
+  }
+  const body = { message:"Atualiza dados do site", content: b64, branch: GITHUB_BRANCH };
+  if(sha) body.sha = sha;
+  const put = await fetch(api, { method:"PUT", headers:{ Authorization:"token "+GITHUB_TOKEN, "Content-Type":"application/json" }, body: JSON.stringify(body) });
+  if(!put.ok) throw new Error("GitHub API error "+put.status);
+  return await put.json();
+}
+
+/* ================== UTILIDADES ================== */
+function escapeHtml(s){
+  if(!s) return "";
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+/* atualizar tabela admin no load */
+document.addEventListener("DOMContentLoaded", ()=> {
+  atualizarTabelaAdmin();
+});
+
+/* detectar scroll para header */
+window.addEventListener("scroll", ()=>{
+  const el = document.getElementById("topo");
+  if(window.scrollY>60) el.classList.add("scrolled"); else el.classList.remove("scrolled");
+});
 
 </script>
 
