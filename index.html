@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Guilherme + Marcella</title>
 
-<!-- EmailJS (coloque sua public key abaixo) -->
+<!-- EmailJS (public key provided by user) -->
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-  // Substitua pelo seu public key (não compartilhe esse token publicamente)
-  // Ex.: emailjs.init("YOUR_EMAILJS_PUBLIC_KEY");
-  emailjs.init("O-dFEDfrDwxNfMC_M");
+  emailjs.init("O-dFEDfrDwxNfMC_M"); // public key you provided
 </script>
 
 <!-- QR lib (qrcodejs) -->
@@ -26,42 +23,26 @@
 *{box-sizing:border-box}
 body{ margin:0; font-family:'Montserrat',sans-serif; color:#111; background:#fff; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
 .container{ max-width:var(--max-width); margin:0 auto; padding:0 18px; }
-
-/* fade-in sections */
 section{ opacity:0; transform:translateY(18px); animation:fadeIn .7s ease forwards; margin-bottom:48px; }
 @keyframes fadeIn{ to{ opacity:1; transform:none } }
-
-/* ===== HEADER ===== */
 header{ position:fixed; left:0; right:0; top:0; z-index:50; padding:16px 0; transition:all .35s ease; backdrop-filter: blur(6px); }
 header.scrolled{ background:rgba(255,255,255,0.95); border-bottom:1px solid #000; box-shadow:0 4px 10px rgba(0,0,0,0.03); }
 nav{ text-align:center; }
 nav a{ display:inline-block; margin:0 18px; text-decoration:none; color:#000; font-weight:300; letter-spacing:1.2px; font-size:15px; transition:opacity .2s; }
 nav a:hover{ opacity:.6; }
-
-/* ===== HERO ===== */
 .hero{ padding-top:120px; padding-bottom:10px; text-align:center; }
 .hero h1{ font-size:52px; font-weight:200; letter-spacing:10px; margin:0 0 12px; }
 .hero h2{ font-weight:300; margin-top:8px; color:#222; }
-
-/* galerias (centralizadas e responsivas) */
 .galeria{ display:flex; justify-content:center; gap:var(--gap); margin-top:18px; flex-wrap:wrap; }
 .galeria img{ width:32%; max-width:320px; border-radius:12px; object-fit:cover; filter:grayscale(100%); transition:transform .35s ease, filter .35s ease; }
 .galeria img:hover{ transform:scale(1.03); filter:grayscale(0%); }
-
-/* ===== CONTAGEM ===== */
 .countdown-section{ width:92%; margin:32px auto; background:#000; color:#fff; padding:34px 18px; border-radius:22px; text-align:center; }
 .countdown-section h3{ font-weight:200; letter-spacing:5px; margin:0 0 12px; font-size:26px; }
 #countdown{ display:flex; justify-content:center; gap:18px; flex-wrap:wrap; margin-top:12px; }
 .count-box{ background:#fff; color:#000; padding:22px 28px; border-radius:16px; min-width:110px; box-shadow:0 6px 18px rgba(0,0,0,0.08); font-weight:300; }
 .count-box span{ display:block; font-size:34px; font-weight:400; margin-bottom:6px; }
-
-/* ===== SEÇÕES GERAIS ===== */
 section .container{ padding-top:6px; padding-bottom:6px; }
-
-/* ===== CERIMÔNIA MAPA ===== */
 .mapa{ width:100%; height:360px; border-radius:18px; border:0; }
-
-/* ===== PRESENTES ===== */
 .grid-presentes{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:22px; margin-top:18px; }
 .item{ border:1px solid #eee; padding:14px; border-radius:12px; text-align:left; transition:box-shadow .25s; background:#fff; }
 .item:hover{ box-shadow:0 10px 30px rgba(0,0,0,0.06); }
@@ -69,34 +50,18 @@ section .container{ padding-top:6px; padding-bottom:6px; }
 .item h3{ margin:10px 0 6px; font-weight:400; }
 .item p{ margin:0 0 8px; color:#333; font-weight:300; }
 .item small{ display:block; margin-bottom:8px; color:#666; }
-
-/* botão primary */
 .btn{ display:inline-block; background:#000; color:#fff; border:none; padding:12px 16px; border-radius:10px; cursor:pointer; font-weight:300; }
 .btn-ghost{ background:transparent; color:#000; border:1px solid #000; }
-
-/* ===== RSVP (botão principal e modal) ===== */
 #rsvp{ text-align:center; padding-bottom:18px; }
 .botao-rsvp{ background:#000; color:#fff; padding:14px 32px; border-radius:10px; font-weight:300; border:none; cursor:pointer; }
-
 .modal-bg{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); z-index:80; }
 .modal{ width:92%; max-width:480px; background:#fff; border-radius:14px; padding:18px; }
-
-/* inputs */
 input[type="text"], textarea, select{ width:100%; padding:12px; border-radius:8px; border:1px solid #ccc; font-family:inherit; margin-top:10px; }
 .modal button{ width:100%; margin-top:12px; }
-
-/* ===== ADMIN PANEL (oculto) ===== */
 #adminPanel{ display:none; position:fixed; right:20px; top:80px; width:480px; max-width:94%; z-index:90; background:#fff; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.12); padding:12px; }
 table{ width:100%; border-collapse:collapse; margin-top:10px; font-size:13px; }
 th, td{ border:1px solid #eee; padding:8px; text-align:left; }
-
-/* responsivo */
-@media (max-width:720px){
-  .galeria img{ width:90%; max-width:420px; }
-  .hero h1{ font-size:38px; letter-spacing:6px; }
-  .count-box{ padding:18px 20px; }
-}
-
+@media (max-width:720px){ .galeria img{ width:90%; max-width:420px; } .hero h1{ font-size:38px; letter-spacing:6px; } .count-box{ padding:18px 20px; } }
 </style>
 </head>
 <body>
@@ -116,7 +81,7 @@ th, td{ border:1px solid #eee; padding:8px; text-align:left; }
   <div class="container">
     <h1>GUILHERME + MARCELLA</h1>
     <div class="galeria" aria-hidden="true">
-      <img src="img/foto1.jpg" alt="Foto casal 1">
+      <img src="/mnt/data/c8058528-4991-46fb-be7f-fb4eb2573ea5.png" alt="Foto casal 1">
       <img src="img/foto2.jpg" alt="Foto casal 2">
       <img src="img/foto3.jpg" alt="Foto casal 3">
     </div>
@@ -223,19 +188,63 @@ th, td{ border:1px solid #eee; padding:8px; text-align:left; }
 
   <h4 style="margin-top:12px;">Contribuições / Presentes</h4>
   <table id="tabelaPresentes"><thead><tr><th>Presente</th><th>Quem</th><th>Telefone</th><th>Valor (R$)</th><th>Data</th></tr></thead><tbody></tbody></table>
+
+  <div style="margin-top:10px; display:flex; gap:8px;">
+    <button class="btn" onclick="reenviaRSVPSelecionado()">Reenviar RSVP selecionado (template RSVP)</button>
+    <button class="btn" onclick="reenviaContribuicaoSelecionada()">Reenviar contribuição selecionada (template Presente Confirmado)</button>
+  </div>
 </div>
 
+<!-- EMAIL TEMPLATES como <template> (usadas para enviar via EmailJS) -->
+<template id="email-template-rsvp">
+  <!DOCTYPE html>
+  <html>
+    <body style="font-family:Arial, sans-serif; color:#333; background:#fafafa; padding:20px;">
+      <div style="max-width:600px; margin:0 auto; background:#fff; padding:24px; border-radius:12px; border:1px solid #eee;">
+        <h2 style="text-align:center; color:#000;">🎉 Presença Confirmada!</h2>
+        <p>Olá {{nome_responsavel}},</p>
+        <p>Agradecemos por confirmar sua presença no nosso casamento.</p>
+        <p><strong>Nomes confirmados:</strong><br>{{acompanhantes}}</p>
+        <p style="text-align:center; margin-top:32px;">Com carinho,<br/><strong>Guilherme & Marcella</strong></p>
+      </div>
+    </body>
+  </html>
+</template>
+
+<template id="email-template-gift-confirmed">
+  <!DOCTYPE html>
+  <html>
+    <body style="font-family:Arial, sans-serif; color:#333; background:#fafafa; padding:20px;">
+      <div style="max-width:600px; margin:0 auto; background:#fff; padding:24px; border-radius:12px; border:1px solid #eee;">
+        <h2 style="text-align:center; color:#000;">💝 Presente Confirmado!</h2>
+        <p>Olá Guilherme & Marcella,</p>
+        <p>Um presente foi comprado e o pagamento foi confirmado!</p>
+        <ul>
+          <li>Convidado: <strong>{{nome}}</strong></li>
+          <li>Presente: <strong>{{presente_nome}}</strong></li>
+          <li>Valor: <strong>R$ {{valor}}</strong></li>
+        </ul>
+        <p style="text-align:center; margin-top:32px;">Sistema automático — Website dos Noivos</p>
+      </div>
+    </body>
+  </html>
+</template>
+
 <script>
-/* ================== CONFIGURAÇÕES (edite aqui se quiser) ================== */
+/* ================== CONFIGURAÇÕES ================== */
+const SERVICE_ID = "service_bh48d3o"; // fornecido
+const TEMPLATE_RSVP = "template_t5l6fd2"; // fornecido
+const TEMPLATE_PRESENTE_CONF = "template_v469su3"; // fornecido
+const PUBLIC_KEY = "O-dFEDfrDwxNfMC_M"; // já inicializado com emailjs.init
 
 /* PIX */
-const PIX_KEY = "97427455-6f14-4aba-aa09-d1cb15de34d4"; // chave PIX — altere se necessário
-const PIX_NOME = "Guilherme de Siqueira Silveira"; // NOME DO RECEBEDOR (já configurado)
-const PIX_CIDADE = "Jacareí"; // cidade no payload
+const PIX_KEY = "97427455-6f14-4aba-aa09-d1cb15de34d4";
+const PIX_NOME = "Guilherme de Siqueira Silveira";
+const PIX_CIDADE = "Sao Paulo";
 
 /* ADMIN / EMAIL */
-const ADMIN_PASSWORD = "20011996";
-let adminEmail = "guilhermesisil@hotmail.com"; // troque para seu e-mail real
+const ADMIN_PASSWORD = "26052026";
+let adminEmail = "seu-email@exemplo.com"; // troque para seu e-mail real
 
 /* GITHUB (opcional) */
 const GITHUB_TOKEN = "";
@@ -243,97 +252,46 @@ const GITHUB_USER = "";
 const GITHUB_REPO = "";
 const GITHUB_BRANCH = "main";
 
-/* outros */
-const DATE_TARGET = new Date("2026-05-09T16:00:00").getTime();
+const DATE_TARGET = new Date("2026-05-09T00:00:00").getTime();
 
-/* ================== DADOS INICIAIS EXEMPLO de PRESENTES ================== */
+/* DADOS INICIAIS */
 let presentes = [
   { id:"p01", nome:"Adega 28 Garrafas", descricao:"Adega climatizada, ideal para guardar nossos vinhos.", imagem:"img/presente1.jpg", link:"https://example.com/adega", endereco:"Rua Exemplo, 123 — São Paulo/SP", status:"disponivel", valor:1500.00 },
   { id:"p02", nome:"Aparelho de Jantar 20 peças", descricao:"Conjunto elegante para receber família e amigos.", imagem:"img/presente2.jpg", link:"https://example.com/jantar", endereco:"Rua Exemplo, 123 — São Paulo/SP", status:"disponivel", valor:350.00 },
   { id:"p03", nome:"Contribuição livre (Fundo Lua-de-mel)", descricao:"Ajude-nos a tornar a lua-de-mel inesquecível.", imagem:"img/presente3.jpg", link:"#", endereco:"", status:"disponivel", valor:null }
 ];
-
-/* carregar statuses salvos */
 const savedPresentesStatus = JSON.parse(localStorage.getItem("presentesStatus")||"{}");
 presentes = presentes.map(p=> ({...p, status: savedPresentesStatus[p.id] || p.status}) );
-
-/* carregar rsvps e contribuições do localStorage */
 let rsvps = JSON.parse(localStorage.getItem("rsvps")||"[]");
 let contribuicoes = JSON.parse(localStorage.getItem("contribuicoes")||"[]");
 
-/* ================== RENDER PRESENTES ================== */
-function renderPresentes(){
-  const el = document.getElementById("listaPresentes");
-  if(!el) return;
-  el.innerHTML = "";
-  presentes.forEach(p=>{
-    const div = document.createElement("div");
-    div.className = "item";
-    div.innerHTML = `
-      <img src="${p.imagem}" alt="${escapeHtml(p.nome)}">
-      <h3>${escapeHtml(p.nome)}</h3>
-      <p>${escapeHtml(p.descricao)}</p>
-      <small>Entrega: ${escapeHtml(p.endereco || "Endereço a combinar")}</small>
+/* RENDER */
+function renderPresentes(){ const el = document.getElementById("listaPresentes"); if(!el) return; el.innerHTML = ""; presentes.forEach(p=>{ const div = document.createElement("div"); div.className = "item"; div.innerHTML = `
+      <img src="${p.imagem}" alt="${p.nome}">
+      <h3>${p.nome}</h3>
+      <p>${p.descricao}</p>
+      <small>Entrega: ${p.endereco || "Endereço a combinar"}</small>
       <div style="display:flex; gap:10px; margin-top:8px;">
         <a class="btn-ghost" href="${p.link}" target="_blank">Ver</a>
         <button class="btn" ${p.status!=="disponivel"? "disabled": ""} onclick="abrirModalPresente('${p.id}')">
           ${p.status==="disponivel" ? "Presentear" : "Já presenteado"}
         </button>
       </div>
-    `;
-    el.appendChild(div);
-  });
-}
+    `; el.appendChild(div); }); }
 renderPresentes();
 
-/* ================== BR-CODE (CRC16) GENERATOR ================== */
-/* Builds BR Code (EMV) and returns string ready to be QR'd */
-function formatField(id, value){
-  const len = String(value).length.toString().padStart(2,'0');
-  return id + len + value;
-}
-function crc16(str){
-  let crc = 0xFFFF;
-  for(let i=0;i<str.length;i++){
-    crc ^= str.charCodeAt(i) << 8;
-    for(let j=0;j<8;j++){
-      crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1);
-      crc &= 0xFFFF;
-    }
-  }
-  return crc.toString(16).toUpperCase().padStart(4,'0');
-}
-function gerarPixBrCode(chave, valorNum, nomeRecebedor=PIX_NOME, cidade=PIX_CIDADE){
-  // valorNum is a number or null
-  // Merchant Account Info (GUI + key)
-  const gui = formatField("00","br.gov.bcb.pix");
-  const keyField = formatField("01", chave);
-  const merchantAccountInfo = formatField("26", gui + keyField);
-  const payloadFormatIndicator = formatField("00","01");
-  const merchantCategory = formatField("52","0000");
-  const currency = formatField("53","986");
-  const valueField = valorNum ? formatField("54", Number(valorNum).toFixed(2)) : "";
-  const country = formatField("58","BR");
-  const merchantName = formatField("59", String(nomeRecebedor).slice(0,25));
-  const merchantCity = formatField("60", String(cidade).slice(0,15));
-  // concatenate without CRC
-  const withoutCRC = payloadFormatIndicator + merchantAccountInfo + merchantCategory + currency + valueField + country + merchantName + merchantCity + "6304";
-  const crc = crc16(withoutCRC);
-  return withoutCRC + crc;
-}
+/* BR Code functions (same as before) */
+function formatField(id, value){ const len = String(value).length.toString().padStart(2,'0'); return id + len + value; }
+function crc16(str){ let crc = 0xFFFF; for(let i=0;i<str.length;i++){ crc ^= str.charCodeAt(i) << 8; for(let j=0;j<8;j++){ crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1); crc &= 0xFFFF; } } return crc.toString(16).toUpperCase().padStart(4,'0'); }
+function gerarPixBrCode(chave, valorNum, nomeRecebedor=PIX_NOME, cidade=PIX_CIDADE){ const gui = formatField("00","br.gov.bcb.pix"); const keyField = formatField("01", chave); const merchantAccountInfo = formatField("26", gui + keyField); const payloadFormatIndicator = formatField("00","01"); const merchantCategory = formatField("52","0000"); const currency = formatField("53","986"); const valueField = valorNum ? formatField("54", Number(valorNum).toFixed(2)) : ""; const country = formatField("58","BR"); const merchantName = formatField("59", String(nomeRecebedor).slice(0,25)); const merchantCity = formatField("60", String(cidade).slice(0,15)); const withoutCRC = payloadFormatIndicator + merchantAccountInfo + merchantCategory + currency + valueField + country + merchantName + merchantCity + "6304"; const crc = crc16(withoutCRC); return withoutCRC + crc; }
 
-/* ================== MODAL PRESENTE & PIX (usa BR code + QR lib) ================== */
-function abrirModalPresente(id){
-  const p = presentes.find(x=>x.id===id);
-  if(!p) return;
-  const modalBg = document.getElementById("modalPresenteBg");
-  const modal = document.getElementById("modalPresente");
-  modal.innerHTML = `
+/* Modal presente */
+function abrirModalPresente(id){ const p = presentes.find(x=>x.id===id); if(!p) return; const modalBg = document.getElementById("modalPresenteBg"); const modal = document.getElementById("modalPresente"); modal.innerHTML = `
     <div style="text-align:right"><button class="fechar-modal btn-ghost" onclick="fecharModalPresente()">✕</button></div>
-    <img src="${p.imagem}" alt="${escapeHtml(p.nome)}" style="width:100%; border-radius:10px; margin-bottom:12px;">
-    <h3 style="margin:0 0 8px;">${escapeHtml(p.nome)}</h3>
-    <p style="margin:0 0 8px; font-weight:300;">${escapeHtml(p.descricao)}</p>
-    <p style="margin:0 0 12px;"><small>Entrega: ${escapeHtml(p.endereco || "Endereço a combinar")}</small></p>
+    <img src="${p.imagem}" alt="${p.nome}" style="width:100%; border-radius:10px; margin-bottom:12px;">
+    <h3 style="margin:0 0 8px;">${p.nome}</h3>
+    <p style="margin:0 0 8px; font-weight:300;">${p.descricao}</p>
+    <p style="margin:0 0 12px;"><small>Entrega: ${p.endereco || "Endereço a combinar"}</small></p>
 
     <label style="font-weight:300; font-size:14px;">Valor (R$)</label>
     <input id="valorPresente" type="text" placeholder="Ex: 150.00" style="margin-bottom:8px;" value="${p.valor?Number(p.valor).toFixed(2):''}">
@@ -348,33 +306,9 @@ function abrirModalPresente(id){
     </div>
 
     <div id="pixArea" style="margin-top:16px; display:none; text-align:center;"></div>
-  `;
-  modalBg.style.display="flex";
-}
-
-function fecharModalPresente(){
-  document.getElementById("modalPresenteBg").style.display="none";
-  document.getElementById("modalPresente").innerHTML="";
-}
-
-/* gerar QR usando BR Code + qrcodejs */
-function gerarPixBR(presenteId){
-  const valorRaw = document.getElementById("valorPresente").value.trim();
-  const valorNum = valorRaw ? Number(valorRaw.replace(',', '.')) : null;
-  if(valorRaw && (isNaN(valorNum) || valorNum <= 0)){
-    alert("Digite um valor válido em reais, ex: 150.00 ou deixe em branco se for contribuição livre.");
-    return;
-  }
-  const nome = document.getElementById("nomePresente").value.trim() || "Convidado";
-  const telefone = document.getElementById("telefonePresente").value.trim() || "";
-  const txid = "PRES"+Date.now();
-  const present = presentes.find(p=>p.id===presenteId);
-  const info = `Contribuição ${present?.nome||presenteId} por ${nome}`;
-  // Gerar BR code (oficial) com CRC16
-  const br = gerarPixBrCode(PIX_KEY, valorNum, PIX_NOME, PIX_CIDADE);
-  const pixArea = document.getElementById("pixArea");
-  pixArea.style.display = "block";
-  pixArea.innerHTML = `<div id="qrcodeHolder" style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+  `; modalBg.style.display="flex"; }
+function fecharModalPresente(){ document.getElementById("modalPresenteBg").style.display="none"; document.getElementById("modalPresente").innerHTML=""; }
+function gerarPixBR(presenteId){ const valorRaw = document.getElementById("valorPresente").value.trim(); const valorNum = valorRaw ? Number(valorRaw.replace(',', '.')) : null; if(valorRaw && (isNaN(valorNum) || valorNum <= 0)){ alert("Digite um valor válido em reais, ex: 150.00 ou deixe em branco se for contribuição livre."); return; } const nome = document.getElementById("nomePresente").value.trim() || "Convidado"; const telefone = document.getElementById("telefonePresente").value.trim() || ""; const txid = "PRES"+Date.now(); const present = presentes.find(p=>p.id===presenteId); const info = `Contribuição ${present?.nome||presenteId} por ${nome}`; const br = gerarPixBrCode(PIX_KEY, valorNum, PIX_NOME, PIX_CIDADE); const pixArea = document.getElementById("pixArea"); pixArea.style.display = "block"; pixArea.innerHTML = `<div id="qrcodeHolder" style="display:flex; flex-direction:column; align-items:center; gap:8px;">
       <div id="qrcode"></div>
       <p style="margin:0; font-weight:300;">Chave PIX: <strong id="pixKeyText">${PIX_KEY}</strong></p>
       <p style="margin:0; font-weight:300;">Valor: ${valorNum?('R$ '+Number(valorNum).toFixed(2)):'Valor livre'}</p>
@@ -383,214 +317,75 @@ function gerarPixBR(presenteId){
         <button class="btn-ghost" onclick="copiarTexto('${valorNum?('R$ '+Number(valorNum).toFixed(2)):'Valor livre'}')">Copiar valor</button>
       </div>
       <button class="btn" style="margin-top:12px;" onclick="confirmarContribuicao('${presenteId}','${nome}','${telefone}','${valorNum?Number(valorNum).toFixed(2):0}','${txid}')">Confirmar contribuição</button>
-    </div>`;
-  // Render QR
-  const qrcodeEl = document.getElementById("qrcode");
-  qrcodeEl.innerHTML = "";
-  new QRCode(qrcodeEl, {
-    text: br,
-    width: 220,
-    height: 220
-  });
-}
+    </div>`; const qrcodeEl = document.getElementById("qrcode"); qrcodeEl.innerHTML = ""; new QRCode(qrcodeEl, { text: br, width: 220, height: 220 }); }
+function copiarTexto(t){ navigator.clipboard?.writeText(t).then(()=> alert("Copiado para área de transferência.")); }
+function confirmarContribuicao(presentId, nome, telefone, valor, txid){ const presente = presentes.find(p=>p.id===presentId); const item = { id: txid, presenteId: presentId, presenteNome: presente?.nome || presentId, nome: nome || "Anônimo", telefone: telefone || "", valor: Number(valor), data: new Date().toISOString() }; contribuicoes.push(item); localStorage.setItem("contribuicoes", JSON.stringify(contribuicoes)); const status = {}; presentes.forEach(p=> status[p.id]=p.status); localStorage.setItem("presentesStatus", JSON.stringify(status)); renderPresentes(); fecharModalPresente(); alert("Obrigado pela contribuição! Verifique o QR e o pagamento no seu app bancário."); try{ enviarNotificacaoEmailContribuicao(item); }catch(e){} salvarDadosNoGitHub(); atualizarTabelaAdmin(); }
 
-/* copiar para área de transferência */
-function copiarTexto(t){
-  navigator.clipboard?.writeText(t).then(()=> alert("Copiado para área de transferência."));
-}
-
-/* confirmar contribuição: salva local + atualiza status se desejar */
-function confirmarContribuicao(presentId, nome, telefone, valor, txid){
-  const presente = presentes.find(p=>p.id===presentId);
-  const item = { id: txid, presenteId: presentId, presenteNome: presente?.nome || presentId, nome: nome || "Anônimo", telefone: telefone || "", valor: Number(valor), data: new Date().toISOString() };
-  contribuicoes.push(item);
-  localStorage.setItem("contribuicoes", JSON.stringify(contribuicoes));
-  // salvar status (mantém como disponível por padrão)
-  const status = {}; presentes.forEach(p=> status[p.id]=p.status);
-  localStorage.setItem("presentesStatus", JSON.stringify(status));
-  renderPresentes();
-  fecharModalPresente();
-  alert("Obrigado pela contribuição! Verifique o QR e o pagamento no seu app bancário.");
-  try{ enviarNotificacaoEmailContribuicao(item); }catch(e){}
-  salvarDadosNoGitHub();
-  atualizarTabelaAdmin();
-}
-
-/* ================== RSVP FORM HANDLING + EmailJS ================ */
-document.getElementById("rsvpForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  const nomeResp = document.getElementById("nomeResponsavel").value.trim();
-  const telefone = document.getElementById("telefone").value.trim();
-  const nomes = document.getElementById("nomes").value.split("\n").map(s=>s.trim()).filter(Boolean);
-  const presenca = document.getElementById("presenca").value;
-  const registro = { id:"R"+Date.now(), nomeResponsavel:nomeResp, telefone, acompanhantes:nomes, presenca, data:new Date().toISOString() };
-  rsvps.push(registro);
-  localStorage.setItem("rsvps", JSON.stringify(rsvps));
-  fecharModalRSVP();
-  alert("Obrigado! Sua confirmação foi registrada.");
-  atualizarTabelaAdmin();
-
-  // === EmailJS send (replace placeholders) ===
-  // Configure in EmailJS dashboard: SERVICE_ID, TEMPLATE_ID
-  try {
-    const serviceId = "service_bh48d3o";
-    const templateId = "template_t5l6fd2";
+/* RSVP + EmailJS send */
+const sendRSVPEmail = async (registro) => {
+  try{
     const templateParams = {
-      nome_responsavel: nomeResp,
-      telefone: telefone,
-      acompanhantes: nomes.join(", "),
-      presenca: presenca,
+      nome_responsavel: registro.nomeResponsavel,
+      telefone: registro.telefone,
+      acompanhantes: (registro.acompanhantes||[]).join(", "),
+      presenca: registro.presenca,
       data: registro.data
     };
-    // Only attempt if user replaced the placeholders
-    if(emailjs && serviceId !== "service_bh48d3o"){
-      emailjs.send(serviceId, templateId, templateParams)
-        .then(()=> console.log("EmailJS: RSVP enviado"))
-        .catch(err => console.warn("EmailJS erro:", err));
-    } else {
-      // fallback: mailto (keeps behavior if user didn't setup EmailJS)
-      if(adminEmail && adminEmail !== "guilhermesisil@hotmail.com"){
-        const assunto = encodeURIComponent("Novo RSVP: " + nomeResp);
-        const body = encodeURIComponent(`Nome: ${nomeResp}\nTelefone: ${telefone}\nAcompanhantes: ${nomes.join(", ")}\nPresença: ${presenca}\nData: ${registro.data}`);
-        window.location.href = `mailto:${adminEmail}?subject=${assunto}&body=${body}`;
-      }
-    }
-  } catch(err){
-    console.warn("EmailJS fallback or error", err);
-  }
+    await emailjs.send(SERVICE_ID, TEMPLATE_RSVP, templateParams);
+    console.log("EmailJS: RSVP enviado");
+  }catch(e){ console.warn("EmailJS RSVP erro:", e); }
+};
 
-  salvarDadosNoGitHub();
-});
+const sendPresenteConfirmadoEmail = async (contrib) => {
+  try{
+    const templateParams = {
+      nome: contrib.nome,
+      presente_nome: contrib.presenteNome,
+      valor: Number(contrib.valor).toFixed(2),
+      txid: contrib.id
+    };
+    await emailjs.send(SERVICE_ID, TEMPLATE_PRESENTE_CONF, templateParams);
+    console.log("EmailJS: presente confirmado enviado");
+  }catch(e){ console.warn("EmailJS presente erro:", e); }
+};
 
-/* abrir/fechar RSVP modal */
+/* Form submit */
+document.getElementById("rsvpForm").addEventListener("submit", function(e){ e.preventDefault(); const nomeResp = document.getElementById("nomeResponsavel").value.trim(); const telefone = document.getElementById("telefone").value.trim(); const nomes = document.getElementById("nomes").value.split("
+").map(s=>s.trim()).filter(Boolean); const presenca = document.getElementById("presenca").value; const registro = { id:"R"+Date.now(), nomeResponsavel:nomeResp, telefone, acompanhantes:nomes, presenca, data:new Date().toISOString() }; rsvps.push(registro); localStorage.setItem("rsvps", JSON.stringify(rsvps)); fecharModalRSVP(); alert("Obrigado! Sua confirmação foi registrada."); atualizarTabelaAdmin(); // send email via EmailJS (to you) sendRSVPEmail(registro); salvarDadosNoGitHub(); });
+
 function abrirModalRSVP(){ document.getElementById("modalRSVP").style.display="flex"; }
 function fecharModalRSVP(){ document.getElementById("modalRSVP").style.display="none"; }
 
-/* NOTIFICAÇÕES (mailto fallback used above and for contributions) */
-function enviarNotificacaoEmailRSVP(reg){
-  if(!adminEmail || adminEmail === "guilhermesisil@hotmail.com") return;
-  const assunto = encodeURIComponent("Novo RSVP: " + reg.nomeResponsavel);
-  const body = encodeURIComponent(`Nome: ${reg.nomeResponsavel}\nTelefone: ${reg.telefone}\nAcompanhantes: ${reg.acompanhantes.join(", ")}\nPresença: ${reg.presenca}\nData: ${reg.data}`);
-  window.location.href = `mailto:${adminEmail}?subject=${assunto}&body=${body}`;
-}
-function enviarNotificacaoEmailContribuicao(item){
-  if(!adminEmail || adminEmail === "guilhermesisil@hotmail.com") return;
-  const assunto = encodeURIComponent("Nova contribuição: " + item.presenteNome);
-  const body = encodeURIComponent(`Presente: ${item.presenteNome}\nNome: ${item.nome}\nTelefone: ${item.telefone}\nValor: R$ ${item.valor.toFixed(2)}\nTxID: ${item.id}\nData: ${item.data}`);
-  window.location.href = `mailto:${adminEmail}?subject=${assunto}&body=${body}`;
+function enviarNotificacaoEmailContribuicao(item){ if(!adminEmail || adminEmail === "seu-email@exemplo.com") return; // fallback: send email via EmailJS to you
+  sendPresenteConfirmadoEmail(item);
 }
 
-/* ================== ADMIN PANEL ================== */
-/* Atalho 'A' para abrir painel (solicita senha) */
-window.addEventListener("keydown", (e)=>{
-  if(e.key.toLowerCase()==="a") abrirPainel();
-});
+/* ADMIN PANEL */
+window.addEventListener("keydown", (e)=>{ if(e.key.toLowerCase()==="a") abrirPainel(); });
+function abrirPainel(){ const s = prompt("Senha do painel:"); if(s !== ADMIN_PASSWORD){ alert("Senha incorreta"); return; } document.getElementById("adminPanel").style.display = "block"; atualizarTabelaAdmin(); document.getElementById("adminPanel").scrollIntoView({behavior:"smooth"}); }
+function atualizarTabelaAdmin(){ const tb = document.querySelector("#tabelaRsvps tbody"); const tp = document.querySelector("#tabelaPresentes tbody"); if(!tb || !tp) return; tb.innerHTML = ""; tp.innerHTML = ""; rsvps.slice().reverse().forEach(r=>{ const tr = document.createElement("tr"); tr.innerHTML = `<td>${escapeHtml(r.nomeResponsavel)}</td><td>${escapeHtml(r.telefone)}</td><td>${escapeHtml((r.acompanhantes||[]).join(", "))}</td><td>${escapeHtml(r.presenca)}</td><td>${new Date(r.data).toLocaleString()}</td>`; tb.appendChild(tr); }); contribuicoes.slice().reverse().forEach(c=>{ const tr = document.createElement("tr"); tr.innerHTML = `<td>${escapeHtml(c.presenteNome)}</td><td>${escapeHtml(c.nome)}</td><td>${escapeHtml(c.telefone)}</td><td>R$ ${Number(c.valor).toFixed(2)}</td><td>${new Date(c.data).toLocaleString()}</td>`; tp.appendChild(tr); }); }
 
-function abrirPainel(){
-  const s = prompt("Senha do painel:");
-  if(s !== ADMIN_PASSWORD){ alert("Senha incorreta"); return; }
-  document.getElementById("adminPanel").style.display = "block";
-  atualizarTabelaAdmin();
-  document.getElementById("adminPanel").scrollIntoView({behavior:"smooth"});
-}
+/* reenvio manual (admin) */
+function reenviaRSVPSelecionado(){ const tb = document.querySelector('#tabelaRsvps tbody tr'); if(!tb){ alert('Não há RSVPs para reenviar'); return; } const primeira = rsvps.slice().reverse()[0]; if(primeira) sendRSVPEmail(primeira); alert('Reenvio de RSVP solicitado (checando console)'); }
+function reenviaContribuicaoSelecionada(){ const primeira = contribuicoes.slice().reverse()[0]; if(!primeira){ alert('Não há contribuições para reenviar'); return; } sendPresenteConfirmadoEmail(primeira); alert('Reenvio de contribuição solicitado (checando console)'); }
 
-function atualizarTabelaAdmin(){
-  const tb = document.querySelector("#tabelaRsvps tbody");
-  const tp = document.querySelector("#tabelaPresentes tbody");
-  if(!tb || !tp) return;
-  tb.innerHTML = ""; tp.innerHTML = "";
-  rsvps.slice().reverse().forEach(r=>{
-    const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${escapeHtml(r.nomeResponsavel)}</td><td>${escapeHtml(r.telefone)}</td><td>${escapeHtml((r.acompanhantes||[]).join(", "))}</td><td>${escapeHtml(r.presenca)}</td><td>${new Date(r.data).toLocaleString()}</td>`;
-    tb.appendChild(tr);
-  });
-  contribuicoes.slice().reverse().forEach(c=>{
-    const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${escapeHtml(c.presenteNome)}</td><td>${escapeHtml(c.nome)}</td><td>${escapeHtml(c.telefone)}</td><td>R$ ${Number(c.valor).toFixed(2)}</td><td>${new Date(c.data).toLocaleString()}</td>`;
-    tp.appendChild(tr);
-  });
-}
+/* exportCSV */
+function exportCSV(){ const rows = [["Tipo","Nome","Telefone","Detalhes","Valor","Data"]]; rsvps.forEach(r=> rows.push(["RSVP", r.nomeResponsavel, r.telefone, (r.acompanhantes||[]).join("; "), "", r.data])); contribuicoes.forEach(c=> rows.push(["CONTRIB", c.nome, c.telefone, c.presenteNome, c.valor, c.data])); const csv = rows.map(r=> r.map(v=> `"${String(v).replace(/"/g,'""')}"`).join(",")).join("
+"); const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"}); const url = URL.createObjectURL(blob); const a = document.createElement("a"); a.href = url; a.download = "rsvps_presentes.csv"; a.click(); URL.revokeObjectURL(url); }
 
-/* export CSV */
-function exportCSV(){
-  const rows = [["Tipo","Nome","Telefone","Detalhes","Valor","Data"]];
-  rsvps.forEach(r=> rows.push(["RSVP", r.nomeResponsavel, r.telefone, (r.acompanhantes||[]).join("; "), "", r.data]));
-  contribuicoes.forEach(c=> rows.push(["CONTRIB", c.nome, c.telefone, c.presenteNome, c.valor, c.data]));
-  const csv = rows.map(r=> r.map(v=> `"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");
-  const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url; a.download = "rsvps_presentes.csv"; a.click();
-  URL.revokeObjectURL(url);
-}
-
-/* ================== COUNTDOWN ================== */
-function startCountdown(){
-  function tick(){
-    const now = Date.now();
-    const diff = DATE_TARGET - now;
-    if(diff<=0){
-      document.getElementById("dias").innerText = "0";
-      document.getElementById("horas").innerText = "00";
-      document.getElementById("minutos").innerText = "00";
-      document.getElementById("segundos").innerText = "00";
-      return;
-    }
-    const dias = Math.floor(diff / (1000*60*60*24));
-    const horas = Math.floor((diff / (1000*60*60)) % 24);
-    const minutos = Math.floor((diff / (1000*60)) % 60);
-    const segundos = Math.floor((diff / 1000) % 60);
-    document.getElementById("dias").innerText = dias;
-    document.getElementById("horas").innerText = String(horas).padStart(2,"0");
-    document.getElementById("minutos").innerText = String(minutos).padStart(2,"0");
-    document.getElementById("segundos").innerText = String(segundos).padStart(2,"0");
-  }
-  tick();
-  setInterval(tick,1000);
-}
+/* COUNTDOWN */
+function startCountdown(){ function tick(){ const now = Date.now(); const diff = DATE_TARGET - now; if(diff<=0){ document.getElementById("dias").innerText = "0"; document.getElementById("horas").innerText = "00"; document.getElementById("minutos").innerText = "00"; document.getElementById("segundos").innerText = "00"; return; } const dias = Math.floor(diff / (1000*60*60*24)); const horas = Math.floor((diff / (1000*60*60)) % 24); const minutos = Math.floor((diff / (1000*60)) % 60); const segundos = Math.floor((diff / 1000) % 60); document.getElementById("dias").innerText = dias; document.getElementById("horas").innerText = String(horas).padStart(2,"0"); document.getElementById("minutos").innerText = String(minutos).padStart(2,"0"); document.getElementById("segundos").innerText = String(segundos).padStart(2,"0"); } tick(); setInterval(tick,1000); }
 startCountdown();
 
-/* ================== SALVAMENTO NO GITHUB (OPCIONAL) ================== */
-/* See previous instructions in conversation. This function attempts to upsert JSON files. */
-async function salvarDadosNoGitHub(){
-  if(!GITHUB_TOKEN || !GITHUB_USER || !GITHUB_REPO) return;
-  try{
-    const pathR = "data/rsvps.json";
-    const pathC = "data/contribuicoes.json";
-    await githubUpsertFile(pathR, JSON.stringify(rsvps, null, 2));
-    await githubUpsertFile(pathC, JSON.stringify(contribuicoes, null, 2));
-  }catch(e){ console.warn("GitHub save failed", e); }
-}
+/* GITHUB save scaffold */
+async function salvarDadosNoGitHub(){ if(!GITHUB_TOKEN || !GITHUB_USER || !GITHUB_REPO) return; try{ const pathR = "data/rsvps.json"; const pathC = "data/contribuicoes.json"; await githubUpsertFile(pathR, JSON.stringify(rsvps, null, 2)); await githubUpsertFile(pathC, JSON.stringify(contribuicoes, null, 2)); }catch(e){ console.warn("GitHub save failed", e); } }
+async function githubUpsertFile(path, content){ const api = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${encodeURIComponent(path)}`; const b64 = btoa(unescape(encodeURIComponent(content))); let sha = null; const res = await fetch(api + "?ref=" + GITHUB_BRANCH, { headers:{Authorization:"token "+GITHUB_TOKEN}}); if(res.ok){ const info = await res.json(); sha = info.sha; } const body = { message:"Atualiza dados do site", content: b64, branch: GITHUB_BRANCH }; if(sha) body.sha = sha; const put = await fetch(api, { method:"PUT", headers:{ Authorization:"token "+GITHUB_TOKEN, "Content-Type":"application/json" }, body: JSON.stringify(body) }); if(!put.ok) throw new Error("GitHub API error "+put.status); return await put.json(); }
 
-async function githubUpsertFile(path, content){
-  const api = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${encodeURIComponent(path)}`;
-  const b64 = btoa(unescape(encodeURIComponent(content)));
-  // check existing
-  let sha = null;
-  const res = await fetch(api + "?ref=" + GITHUB_BRANCH, { headers:{Authorization:"token "+GITHUB_TOKEN}});
-  if(res.ok){
-    const info = await res.json();
-    sha = info.sha;
-  }
-  const body = { message:"Atualiza dados do site", content: b64, branch: GITHUB_BRANCH };
-  if(sha) body.sha = sha;
-  const put = await fetch(api, { method:"PUT", headers:{ Authorization:"token "+GITHUB_TOKEN, "Content-Type":"application/json" }, body: JSON.stringify(body) });
-  if(!put.ok) throw new Error("GitHub API error "+put.status);
-  return await put.json();
-}
+/* util */
+function escapeHtml(s){ if(!s) return ""; return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
-/* ================== UTILIDADES ================== */
-function escapeHtml(s){
-  if(!s) return "";
-  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-}
-
-/* atualizar tabela admin no load */
 document.addEventListener("DOMContentLoaded", ()=> { atualizarTabelaAdmin(); });
-
-/* detectar scroll para header */
 window.addEventListener("scroll", ()=>{ const el = document.getElementById("topo"); if(window.scrollY>60) el.classList.add("scrolled"); else el.classList.remove("scrolled"); });
-
 </script>
 
 </body>
