@@ -279,6 +279,7 @@ const presentes = [
     endereco: "Rua Exemplo 123, Cidade"
   }
 ];
+  presentes.forEach((p, i) => p.id = i);
 
 function carregarPresentes() {
   const container = document.getElementById("listaPresentes");
@@ -313,40 +314,43 @@ function crc16(str){ let crc = 0xFFFF; for(let i=0;i<str.length;i++){ crc ^= str
 function gerarPixBrCode(chave, valorNum, nomeRecebedor=PIX_NOME, cidade=PIX_CIDADE){ const gui = formatField("00","br.gov.bcb.pix"); const keyField = formatField("01", chave); const merchantAccountInfo = formatField("26", gui + keyField); const payloadFormatIndicator = formatField("00","01"); const merchantCategory = formatField("52","0000"); const currency = formatField("53","986"); const valueField = valorNum ? formatField("54", Number(valorNum).toFixed(2)) : ""; const country = formatField("58","BR"); const merchantName = formatField("59", String(nomeRecebedor).slice(0,25)); const merchantCity = formatField("60", String(cidade).slice(0,15)); const withoutCRC = payloadFormatIndicator + merchantAccountInfo + merchantCategory + currency + valueField + country + merchantName + merchantCity + "6304"; const crc = crc16(withoutCRC); return withoutCRC + crc; }
 
 /* Modal presente */
-function abrirModalPresente(id){ const p = presentes.find(x=>x.id===id); if(!p) return; const modalBg = document.getElementById("modalPresenteBg"); const modal = document.getElementById("modalPresente"); modal.innerHTML = `
-    <div style="text-align:right"><button class="fechar-modal btn-ghost" onclick="fecharModalPresente()">✕</button></div>
-    <img src="${p.imagem}" alt="${p.nome}" style="width:100%; border-radius:10px; margin-bottom:12px;">
+function abrirModalPresente(id) {
+  const p = presentes[id];
+  if (!p) return;
+
+  const modalBg = document.getElementById("modalPresenteBg");
+  const modal = document.getElementById("modalPresente");
+
+  modal.innerHTML = `
+    <div style="text-align:right">
+      <button class="fechar-modal btn-ghost" onclick="fecharModalPresente()">✕</button>
+    </div>
+
+    <img src="${p.img}" alt="${p.nome}" style="width:100%; border-radius:10px; margin-bottom:12px;">
+
     <h3 style="margin:0 0 8px;">${p.nome}</h3>
     <p style="margin:0 0 8px; font-weight:300;">${p.descricao}</p>
-    <p style="margin:0 0 12px;"><small>Entrega: ${p.endereco || "Endereço a combinar"}</small></p>
+    <p><small>Entrega: ${p.endereco || "Endereço a combinar"}</small></p>
 
     <label style="font-weight:300; font-size:14px;">Valor (R$)</label>
-    <input id="valorPresente" type="text" placeholder="Ex: 150.00" style="margin-bottom:8px;" value="${p.valor?Number(p.valor).toFixed(2):''}">
+    <input id="valorPresente" type="text" placeholder="Ex: 150.00" value="${p.valor ? Number(p.valor).toFixed(2) : ''}">
+
     <label style="font-weight:300; font-size:14px;">Seu nome</label>
-    <input id="nomePresente" type="text" placeholder="Seu nome (opcional)" style="margin-bottom:8px;">
+    <input id="nomePresente" type="text" placeholder="Seu nome (opcional)">
+
     <label style="font-weight:300; font-size:14px;">Telefone</label>
     <input id="telefonePresente" type="text" placeholder="Telefone (opcional)">
 
     <div style="display:flex; gap:10px; margin-top:12px;">
-      <button class="btn" onclick="gerarPixBR('${p.id}')">Gerar QR PIX (BR Code)</button>
+      <button class="btn" onclick="gerarPixBR(${id})">Gerar QR PIX (BR Code)</button>
       <button class="btn-ghost" onclick="fecharModalPresente()">Cancelar</button>
     </div>
 
     <div id="pixArea" style="margin-top:16px; display:none; text-align:center;"></div>
-  `; modalBg.style.display="flex"; }
-function fecharModalPresente(){ document.getElementById("modalPresenteBg").style.display="none"; document.getElementById("modalPresente").innerHTML=""; }
-function gerarPixBR(presenteId){ const valorRaw = document.getElementById("valorPresente").value.trim(); const valorNum = valorRaw ? Number(valorRaw.replace(',', '.')) : null; if(valorRaw && (isNaN(valorNum) || valorNum <= 0)){ alert("Digite um valor válido em reais, ex: 150.00 ou deixe em branco se for contribuição livre."); return; } const nome = document.getElementById("nomePresente").value.trim() || "Convidado"; const telefone = document.getElementById("telefonePresente").value.trim() || ""; const txid = "PRES"+Date.now(); const present = presentes.find(p=>p.id===presenteId); const info = `Contribuição ${present?.nome||presenteId} por ${nome}`; const br = gerarPixBrCode(PIX_KEY, valorNum, PIX_NOME, PIX_CIDADE); const pixArea = document.getElementById("pixArea"); pixArea.style.display = "block"; pixArea.innerHTML = `<div id="qrcodeHolder" style="display:flex; flex-direction:column; align-items:center; gap:8px;">
-      <div id="qrcode"></div>
-      <p style="margin:0; font-weight:300;">Chave PIX: <strong id="pixKeyText">${PIX_KEY}</strong></p>
-      <p style="margin:0; font-weight:300;">Valor: ${valorNum?('R$ '+Number(valorNum).toFixed(2)):'Valor livre'}</p>
-      <div style="display:flex; gap:8px; margin-top:8px;">
-        <button class="btn" onclick="copiarTexto('${PIX_KEY}')">Copiar chave</button>
-        <button class="btn-ghost" onclick="copiarTexto('${valorNum?('R$ '+Number(valorNum).toFixed(2)):'Valor livre'}')">Copiar valor</button>
-      </div>
-      <button class="btn" style="margin-top:12px;" onclick="confirmarContribuicao('${presenteId}','${nome}','${telefone}','${valorNum?Number(valorNum).toFixed(2):0}','${txid}')">Confirmar contribuição</button>
-    </div>`; const qrcodeEl = document.getElementById("qrcode"); qrcodeEl.innerHTML = ""; new QRCode(qrcodeEl, { text: br, width: 220, height: 220 }); }
-function copiarTexto(t){ navigator.clipboard?.writeText(t).then(()=> alert("Copiado para área de transferência.")); }
-function confirmarContribuicao(presentId, nome, telefone, valor, txid){ const presente = presentes.find(p=>p.id===presentId); const item = { id: txid, presenteId: presentId, presenteNome: presente?.nome || presentId, nome: nome || "Anônimo", telefone: telefone || "", valor: Number(valor), data: new Date().toISOString() }; contribuicoes.push(item); localStorage.setItem("contribuicoes", JSON.stringify(contribuicoes)); const status = {}; presentes.forEach(p=> status[p.id]=p.status); localStorage.setItem("presentesStatus", JSON.stringify(status)); renderPresentes(); fecharModalPresente(); alert("Obrigado pela contribuição! Verifique o QR e o pagamento no seu app bancário."); try{ enviarNotificacaoEmailContribuicao(item); }catch(e){} salvarDadosNoGitHub(); atualizarTabelaAdmin(); }
+  `;
+
+  modalBg.style.display = "flex";
+}
 
 /* RSVP + EmailJS send */
 const sendRSVPEmail = async (registro) => {
@@ -377,8 +381,7 @@ const sendPresenteConfirmadoEmail = async (contrib) => {
 };
 
 /* Form submit */
-document.getElementById("rsvpForm").addEventListener("submit", function(e){ e.preventDefault(); const nomeResp = document.getElementById("nomeResponsavel").value.trim(); const telefone = document.getElementById("telefone").value.trim(); const nomes = document.getElementById("nomes").value.split("
-").map(s=>s.trim()).filter(Boolean); const presenca = document.getElementById("presenca").value; const registro = { id:"R"+Date.now(), nomeResponsavel:nomeResp, telefone, acompanhantes:nomes, presenca, data:new Date().toISOString() }; rsvps.push(registro); localStorage.setItem("rsvps", JSON.stringify(rsvps)); fecharModalRSVP(); alert("Obrigado! Sua confirmação foi registrada."); atualizarTabelaAdmin(); // send email via EmailJS (to you) sendRSVPEmail(registro); salvarDadosNoGitHub(); });
+document.getElementById("rsvpForm").addEventListener("submit", function(e){ e.preventDefault(); const nomeResp = document.getElementById("nomeResponsavel").value.trim(); const telefone = document.getElementById("telefone").value.trim(); const nomes = document.getElementById("nomes").value.split("\n").map(s=>s.trim()).filter(Boolean); const presenca = document.getElementById("presenca").value; const registro = { id:"R"+Date.now(), nomeResponsavel:nomeResp, telefone, acompanhantes:nomes, presenca, data:new Date().toISOString() }; rsvps.push(registro); localStorage.setItem("rsvps", JSON.stringify(rsvps)); fecharModalRSVP(); alert("Obrigado! Sua confirmação foi registrada."); atualizarTabelaAdmin(); // send email via EmailJS (to you) sendRSVPEmail(registro); salvarDadosNoGitHub(); });
 
 function abrirModalRSVP(){ document.getElementById("modalRSVP").style.display="flex"; }
 function fecharModalRSVP(){ document.getElementById("modalRSVP").style.display="none"; }
