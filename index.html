@@ -240,11 +240,11 @@ const PUBLIC_KEY = "O-dFEDfrDwxNfMC_M"; // já inicializado com emailjs.init
 /* PIX */
 const PIX_KEY = "97427455-6f14-4aba-aa09-d1cb15de34d4";
 const PIX_NOME = "Guilherme de Siqueira Silveira";
-const PIX_CIDADE = "Sao Paulo";
+const PIX_CIDADE = "Jacarei";
 
 /* ADMIN / EMAIL */
 const ADMIN_PASSWORD = "26052026";
-let adminEmail = "seu-email@exemplo.com"; // troque para seu e-mail real
+let adminEmail = "guilhermesisil@hotmail.com"; // troque para seu e-mail real
 
 /* GITHUB (opcional) */
 const GITHUB_TOKEN = "";
@@ -252,7 +252,7 @@ const GITHUB_USER = "";
 const GITHUB_REPO = "";
 const GITHUB_BRANCH = "main";
 
-const DATE_TARGET = new Date("2026-05-09T00:00:00").getTime();
+const DATE_TARGET = new Date("2026-05-09T16:00:00").getTime();
 
 /* ===== LISTA DE PRESENTES ===== */
 
@@ -318,10 +318,10 @@ function carregarPresentes() {
         <img src="${p.img}" alt="${p.nome}">
         <h3>${p.nome}</h3>
         <p style="font-weight:300;">${p.descricao}</p>
-        <small>Entrega: ${p.endereco || "Endereço a combinar"}</small>
+        <small>Entrega: ${p.endereco || "Rua Araxá, 316, Passos - MG 37900-002"}</small>
         <div style="display:flex; gap:8px; margin-top:8px;">
           <a class="btn-ghost" href="${p.link}" target="_blank">Ver</a>
-          <button class="btn" onclick="abrirModalPresente(${i})">${p.status === 'disponivel' ? 'Presentear' : 'Já presenteado'}</button>
+          <button class="btn" onclick="abrirModalPresente(${i})">${p.status === 'Disponivel' ? 'Presentear' : 'Já presenteado'}</button>
         </div>
       </div>
     `;
