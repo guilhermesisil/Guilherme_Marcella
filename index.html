@@ -125,14 +125,67 @@ th, td{ border:1px solid #eee; padding:8px; text-align:left; }
 <!-- PRESENTES -->
 <section id="presentes" style="animation-delay:0.16s;">
   <div class="container">
-    <h2>LISTA DE PRESENTES</h2>
-    <p style="font-weight:300; max-width:720px;">Nossa lista — imagens, descrição, link de compra e endereço de entrega. Clique em “Presentear” para abrir o modal de contribuição.</p>
+<meta charset="UTF-8">
+  <title>Lista de Presentes</title>
+  <style>
+    /* estilos gerais da seção */
+    #presentes {
+      animation-delay: 0.16s;
+    }
 
-    <div class="grid-presentes" id="listaPresentes">
-      <!-- preenchido por JS -->
+    #presentes h2 {
+      margin-bottom: 12px;
+    }
+
+    #presentes p {
+      font-weight: 300;
+      max-width: 720px;
+    }
+
+    .grid-presentes {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .item {
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    /* estilos para imagens quadradas */
+    .img-wrapper {
+      width: 200px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f0f0f0; /* fundo para completar quadrado */
+      border: 1px solid #ccc;    /* borda opcional */
+      margin-bottom: 10px;
+    }
+
+    .img-quadrada {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain; /* mantém proporção sem cortar */
+    }
+  </style>
+</head>
+<body>
+  <section id="presentes">
+    <div class="container">
+      <h2>LISTA DE PRESENTES</h2>
+      <p>Nossa lista — imagens, descrição, link de compra e endereço de entrega. Clique em “Presentear” para abrir o modal de contribuição.</p>
+
+      <div class="grid-presentes" id="listaPresentes">
+        <!-- preenchido por JS -->
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
 <!-- RSVP (prioritário) -->
 <section id="rsvp" style="animation-delay:0.18s;">
@@ -306,26 +359,35 @@ let contribuicoes = JSON.parse(localStorage.getItem("contribuicoes") || "[]");
 presentes.forEach((p, i) => p.id = i);
 
 /* renderiza lista de presentes */
-function carregarPresentes() {
-  const container = document.getElementById("listaPresentes");
-  if (!container) return;
-  container.innerHTML = "";
+fconst presentes = [
+      { nome: "Presente 1", descricao: "Descrição do presente", img: "img1.jpg", link: "#", status: "Disponivel" },
+      { nome: "Presente 2", descricao: "Outro presente", img: "img2.jpg", link: "#", status: "Indisponivel" }
+    ];
 
-  presentes.forEach((p, i) => {
-    container.innerHTML += `
-      <div class="item">
-        <img src="${p.img}" alt="${p.nome}">
-        <h3>${p.nome}</h3>
-        <p style="font-weight:300;">${p.descricao}</p>
-        <small>Entrega: ${p.endereco || "Rua Araxá, 316, Passos - MG 37900-002"}</small>
-        <div style="display:flex; gap:8px; margin-top:8px;">
-          <a class="btn-ghost" href="${p.link}" target="_blank">Ver</a>
-          <button class="btn" onclick="abrirModalPresente(${i})">${p.status === 'Disponivel' ? 'Presentear' : 'Já presenteado'}</button>
-        </div>
-      </div>
-    `;
-  });
-}
+    function carregarPresentes() {
+      const container = document.getElementById("listaPresentes");
+      if (!container) return;
+      container.innerHTML = "";
+
+      presentes.forEach((p, i) => {
+        container.innerHTML += `
+          <div class="item">
+            <div class="img-wrapper">
+              <img class="img-quadrada" src="${p.img}" alt="${p.nome}">
+            </div>
+            <h3>${p.nome}</h3>
+            <p style="font-weight:300;">${p.descricao}</p>
+            <small>Entrega: ${p.endereco || "Rua Araxá, 316, Passos - MG 37900-002"}</small>
+            <div style="display:flex; gap:8px; margin-top:8px;">
+              <a class="btn-ghost" href="${p.link}" target="_blank">Ver</a>
+              <button class="btn" onclick="abrirModalPresente(${i})">${p.status === 'Disponivel' ? 'Presentear' : 'Já presenteado'}</button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    carregarPresentes();
 
 /* ===== MODAL RSVP ===== */
 function abrirModalRSVP() {
