@@ -262,58 +262,84 @@ const presentes = [
     descricao: "Ajude os noivos a terem um jantar especial na lua de mel.",
     img: "img/presente1.jpg",
     link: "https://google.com",
-    endereco: "Rua Exemplo 123, Cidade"
+    endereco: "Rua Exemplo 123, Cidade",
+    status: "disponivel"
   },
   {
     nome: "Enxoval do Lar",
     descricao: "Um item essencial para começar a nova vida juntos.",
     img: "img/presente2.jpg",
     link: "https://google.com",
-    endereco: "Rua Exemplo 123, Cidade"
+    endereco: "Rua Exemplo 123, Cidade",
+    status: "disponivel"
   },
   {
     nome: "Cota Lua de Mel",
     descricao: "Qualquer valor contribui com a viagem dos noivos.",
     img: "img/presente3.jpg",
     link: "https://google.com",
-    endereco: "Rua Exemplo 123, Cidade"
+    endereco: "Rua Exemplo 123, Cidade",
+    status: "disponivel"
   }
 ];
-  presentes.forEach((p, i) => p.id = i);
 
+// arrays persistidos (corrigido: inicializar vindo do localStorage)
+let rsvps = JSON.parse(localStorage.getItem("rsvps") || "[]");
+let contribuicoes = JSON.parse(localStorage.getItem("contribuicoes") || "[]");
+
+// garantir ids para os presentes
+presentes.forEach((p, i) => p.id = i);
+
+/* renderiza lista de presentes */
 function carregarPresentes() {
   const container = document.getElementById("listaPresentes");
+  if (!container) return;
   container.innerHTML = "";
 
   presentes.forEach((p, i) => {
     container.innerHTML += `
       <div class="item">
-        <img src="${p.img}">
-        <h4>${p.nome}</h4>
+        <img src="${p.img}" alt="${p.nome}">
+        <h3>${p.nome}</h3>
         <p style="font-weight:300;">${p.descricao}</p>
-        <button onclick="abrirModalPresente(${i})">Presentear</button>
+        <small>Entrega: ${p.endereco || "Endereço a combinar"}</small>
+        <div style="display:flex; gap:8px; margin-top:8px;">
+          <a class="btn-ghost" href="${p.link}" target="_blank">Ver</a>
+          <button class="btn" onclick="abrirModalPresente(${i})">${p.status === 'disponivel' ? 'Presentear' : 'Já presenteado'}</button>
+        </div>
       </div>
     `;
   });
 }
 
-document.addEventListener("DOMContentLoaded", carregarPresentes);
-
 /* ===== MODAL RSVP ===== */
 function abrirModalRSVP() {
   document.getElementById("modalRSVP").style.display = "flex";
 }
-
 function fecharModalRSVP() {
   document.getElementById("modalRSVP").style.display = "none";
 }
-  
-/* BR Code functions (same as before) */
+
+/* BR Code helper */
 function formatField(id, value){ const len = String(value).length.toString().padStart(2,'0'); return id + len + value; }
 function crc16(str){ let crc = 0xFFFF; for(let i=0;i<str.length;i++){ crc ^= str.charCodeAt(i) << 8; for(let j=0;j<8;j++){ crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1); crc &= 0xFFFF; } } return crc.toString(16).toUpperCase().padStart(4,'0'); }
-function gerarPixBrCode(chave, valorNum, nomeRecebedor=PIX_NOME, cidade=PIX_CIDADE){ const gui = formatField("00","br.gov.bcb.pix"); const keyField = formatField("01", chave); const merchantAccountInfo = formatField("26", gui + keyField); const payloadFormatIndicator = formatField("00","01"); const merchantCategory = formatField("52","0000"); const currency = formatField("53","986"); const valueField = valorNum ? formatField("54", Number(valorNum).toFixed(2)) : ""; const country = formatField("58","BR"); const merchantName = formatField("59", String(nomeRecebedor).slice(0,25)); const merchantCity = formatField("60", String(cidade).slice(0,15)); const withoutCRC = payloadFormatIndicator + merchantAccountInfo + merchantCategory + currency + valueField + country + merchantName + merchantCity + "6304"; const crc = crc16(withoutCRC); return withoutCRC + crc; }
+function gerarPixBrCode(chave, valorNum, nomeRecebedor=PIX_NOME, cidade=PIX_CIDADE){
+  const gui = formatField("00","br.gov.bcb.pix");
+  const keyField = formatField("01", chave);
+  const merchantAccountInfo = formatField("26", gui + keyField);
+  const payloadFormatIndicator = formatField("00","01");
+  const merchantCategory = formatField("52","0000");
+  const currency = formatField("53","986");
+  const valueField = valorNum ? formatField("54", Number(valorNum).toFixed(2)) : "";
+  const country = formatField("58","BR");
+  const merchantName = formatField("59", String(nomeRecebedor).slice(0,25));
+  const merchantCity = formatField("60", String(cidade).slice(0,15));
+  const withoutCRC = payloadFormatIndicator + merchantAccountInfo + merchantCategory + currency + valueField + country + merchantName + merchantCity + "6304";
+  const crc = crc16(withoutCRC);
+  return withoutCRC + crc;
+}
 
-/* Modal presente */
+/* abrir modal presente (usa índice) */
 function abrirModalPresente(id) {
   const p = presentes[id];
   if (!p) return;
@@ -351,6 +377,77 @@ function abrirModalPresente(id) {
 
   modalBg.style.display = "flex";
 }
+function fecharModalPresente(){ document.getElementById("modalPresenteBg").style.display="none"; document.getElementById("modalPresente").innerHTML=""; }
+
+/* gerar QR e mostrar BR code */
+function gerarPixBR(presenteId){
+  const valorRaw = document.getElementById("valorPresente").value.trim();
+  const valorNum = valorRaw ? Number(valorRaw.replace(',', '.')) : null;
+  if(valorRaw && (isNaN(valorNum) || valorNum <= 0)){
+    alert("Digite um valor válido em reais, ex: 150.00 ou deixe em branco se for contribuição livre.");
+    return;
+  }
+  const nome = document.getElementById("nomePresente").value.trim() || "Convidado";
+  const telefone = document.getElementById("telefonePresente").value.trim() || "";
+  const txid = "PRES"+Date.now();
+  const present = presentes.find(p=>p.id===presenteId);
+  const br = gerarPixBrCode(PIX_KEY, valorNum, PIX_NOME, PIX_CIDADE);
+
+  const pixArea = document.getElementById("pixArea");
+  pixArea.style.display = "block";
+  pixArea.innerHTML = `
+    <div id="qrcodeHolder" style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+      <div id="qrcode"></div>
+      <p style="margin:0; font-weight:300;">Chave PIX: <strong id="pixKeyText">${PIX_KEY}</strong></p>
+      <p style="margin:0; font-weight:300;">Valor: ${valorNum?('R$ '+Number(valorNum).toFixed(2)):'Valor livre'}</p>
+      <div style="display:flex; gap:8px; margin-top:8px;">
+        <button class="btn" onclick="copiarTexto('${PIX_KEY}')">Copiar chave</button>
+        <button class="btn-ghost" onclick="copiarTexto('${valorNum?('R$ '+Number(valorNum).toFixed(2)):'Valor livre'}')">Copiar valor</button>
+      </div>
+      <button class="btn" style="margin-top:12px;" onclick="confirmarContribuicao(${presenteId}, '${nome.replace(/'/g,"\\'")}', '${(telefone||'').replace(/'/g,"\\'")}', ${valorNum?Number(valorNum).toFixed(2):0}, '${txid}')">Confirmar contribuição</button>
+    </div>
+  `;
+  // gerar QR
+  const qrcodeEl = document.getElementById("qrcode");
+  qrcodeEl.innerHTML = "";
+  new QRCode(qrcodeEl, { text: br, width: 220, height: 220 });
+}
+
+/* copiar para clipboard */
+function copiarTexto(t){ navigator.clipboard?.writeText(t).then(()=> alert("Copiado para área de transferência.")); }
+
+/* confirmar contribuição (salva e notifica) */
+function confirmarContribuicao(presentId, nome, telefone, valor, txid){
+  const presente = presentes.find(p=>p.id===presentId);
+  const item = {
+    id: txid,
+    presenteId: presentId,
+    presenteNome: presente?.nome || presentId,
+    nome: nome || "Anônimo",
+    telefone: telefone || "",
+    valor: Number(valor),
+    data: new Date().toISOString()
+  };
+  contribuicoes.push(item);
+  localStorage.setItem("contribuicoes", JSON.stringify(contribuicoes));
+
+  // opcional: marcar como comprado - aqui mantemos como disponível por segurança
+  // presentes = presentes.map(p => p.id===presentId ? {...p, status:'comprado'} : p);
+  // salvar status (se quiser)
+  // const status = {}; presentes.forEach(p => status[p.id]=p.status);
+  // localStorage.setItem("presentesStatus", JSON.stringify(status));
+
+  carregarPresentes();
+  fecharModalPresente();
+  alert("Obrigado pela contribuição! Verifique o pagamento no seu app bancário.");
+
+  // notificar via EmailJS (painel/voce)
+  try{ enviarNotificacaoEmailContribuicao(item); } catch(e){ console.warn(e); }
+
+  // salvar opcional no GitHub (se configurado)
+  salvarDadosNoGitHub();
+  atualizarTabelaAdmin();
+}
 
 /* RSVP + EmailJS send */
 const sendRSVPEmail = async (registro) => {
@@ -380,28 +477,88 @@ const sendPresenteConfirmadoEmail = async (contrib) => {
   }catch(e){ console.warn("EmailJS presente erro:", e); }
 };
 
-/* Form submit */
-document.getElementById("rsvpForm").addEventListener("submit", function(e){ e.preventDefault(); const nomeResp = document.getElementById("nomeResponsavel").value.trim(); const telefone = document.getElementById("telefone").value.trim(); const nomes = document.getElementById("nomes").value.split("\n").map(s=>s.trim()).filter(Boolean); const presenca = document.getElementById("presenca").value; const registro = { id:"R"+Date.now(), nomeResponsavel:nomeResp, telefone, acompanhantes:nomes, presenca, data:new Date().toISOString() }; rsvps.push(registro); localStorage.setItem("rsvps", JSON.stringify(rsvps)); fecharModalRSVP(); alert("Obrigado! Sua confirmação foi registrada."); atualizarTabelaAdmin(); // send email via EmailJS (to you) sendRSVPEmail(registro); salvarDadosNoGitHub(); });
+/* Form submit - RSVP */
+document.getElementById("rsvpForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  const nomeResp = document.getElementById("nomeResponsavel").value.trim();
+  const telefone = document.getElementById("telefone").value.trim();
+  const nomes = document.getElementById("nomes").value.split("\n").map(s=>s.trim()).filter(Boolean);
+  const presenca = document.getElementById("presenca").value;
+  const registro = { id:"R"+Date.now(), nomeResponsavel:nomeResp, telefone, acompanhantes:nomes, presenca, data:new Date().toISOString() };
 
-function abrirModalRSVP(){ document.getElementById("modalRSVP").style.display="flex"; }
-function fecharModalRSVP(){ document.getElementById("modalRSVP").style.display="none"; }
+  rsvps.push(registro);
+  localStorage.setItem("rsvps", JSON.stringify(rsvps));
 
-function enviarNotificacaoEmailContribuicao(item){ if(!adminEmail || adminEmail === "seu-email@exemplo.com") return; // fallback: send email via EmailJS to you
+  fecharModalRSVP();
+  alert("Obrigado! Sua confirmação foi registrada.");
+  atualizarTabelaAdmin();
+
+  // envia email para o admin/voce (template RSVP)
+  try{ sendRSVPEmail(registro); }catch(e){ console.warn(e); }
+
+  salvarDadosNoGitHub();
+});
+
+/* notificação de contribuição (envia email via EmailJS se adminEmail configurado) */
+function enviarNotificacaoEmailContribuicao(item){
+  // se adminEmail configurado e não for placeholder, enviar via EmailJS
+  if(!adminEmail || adminEmail === "seu-email@exemplo.com"){
+    // fallback: não faz nada (ou poderia usar mailto)
+    return;
+  }
+  // enviar para admin via template de presente confirmado
   sendPresenteConfirmadoEmail(item);
 }
 
 /* ADMIN PANEL */
 window.addEventListener("keydown", (e)=>{ if(e.key.toLowerCase()==="a") abrirPainel(); });
 function abrirPainel(){ const s = prompt("Senha do painel:"); if(s !== ADMIN_PASSWORD){ alert("Senha incorreta"); return; } document.getElementById("adminPanel").style.display = "block"; atualizarTabelaAdmin(); document.getElementById("adminPanel").scrollIntoView({behavior:"smooth"}); }
-function atualizarTabelaAdmin(){ const tb = document.querySelector("#tabelaRsvps tbody"); const tp = document.querySelector("#tabelaPresentes tbody"); if(!tb || !tp) return; tb.innerHTML = ""; tp.innerHTML = ""; rsvps.slice().reverse().forEach(r=>{ const tr = document.createElement("tr"); tr.innerHTML = `<td>${escapeHtml(r.nomeResponsavel)}</td><td>${escapeHtml(r.telefone)}</td><td>${escapeHtml((r.acompanhantes||[]).join(", "))}</td><td>${escapeHtml(r.presenca)}</td><td>${new Date(r.data).toLocaleString()}</td>`; tb.appendChild(tr); }); contribuicoes.slice().reverse().forEach(c=>{ const tr = document.createElement("tr"); tr.innerHTML = `<td>${escapeHtml(c.presenteNome)}</td><td>${escapeHtml(c.nome)}</td><td>${escapeHtml(c.telefone)}</td><td>R$ ${Number(c.valor).toFixed(2)}</td><td>${new Date(c.data).toLocaleString()}</td>`; tp.appendChild(tr); }); }
+
+function atualizarTabelaAdmin(){
+  const tb = document.querySelector("#tabelaRsvps tbody");
+  const tp = document.querySelector("#tabelaPresentes tbody");
+  if(!tb || !tp) return;
+  tb.innerHTML = ""; tp.innerHTML = "";
+
+  rsvps.slice().reverse().forEach(r=>{
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${escapeHtml(r.nomeResponsavel)}</td><td>${escapeHtml(r.telefone)}</td><td>${escapeHtml((r.acompanhantes||[]).join(", "))}</td><td>${escapeHtml(r.presenca)}</td><td>${new Date(r.data).toLocaleString()}</td>`;
+    tb.appendChild(tr);
+  });
+
+  contribuicoes.slice().reverse().forEach(c=>{
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${escapeHtml(c.presenteNome)}</td><td>${escapeHtml(c.nome)}</td><td>${escapeHtml(c.telefone)}</td><td>R$ ${Number(c.valor).toFixed(2)}</td><td>${new Date(c.data).toLocaleString()}</td>`;
+    tp.appendChild(tr);
+  });
+}
 
 /* reenvio manual (admin) */
-function reenviaRSVPSelecionado(){ const tb = document.querySelector('#tabelaRsvps tbody tr'); if(!tb){ alert('Não há RSVPs para reenviar'); return; } const primeira = rsvps.slice().reverse()[0]; if(primeira) sendRSVPEmail(primeira); alert('Reenvio de RSVP solicitado (checando console)'); }
-function reenviaContribuicaoSelecionada(){ const primeira = contribuicoes.slice().reverse()[0]; if(!primeira){ alert('Não há contribuições para reenviar'); return; } sendPresenteConfirmadoEmail(primeira); alert('Reenvio de contribuição solicitado (checando console)'); }
+function reenviaRSVPSelecionado(){
+  const primeira = rsvps.slice().reverse()[0];
+  if(!primeira){ alert('Não há RSVPs para reenviar'); return; }
+  sendRSVPEmail(primeira);
+  alert('Reenvio de RSVP solicitado (checando console)');
+}
+function reenviaContribuicaoSelecionada(){
+  const primeira = contribuicoes.slice().reverse()[0];
+  if(!primeira){ alert('Não há contribuições para reenviar'); return; }
+  sendPresenteConfirmadoEmail(primeira);
+  alert('Reenvio de contribuição solicitado (checando console)');
+}
 
 /* exportCSV */
-function exportCSV(){ const rows = [["Tipo","Nome","Telefone","Detalhes","Valor","Data"]]; rsvps.forEach(r=> rows.push(["RSVP", r.nomeResponsavel, r.telefone, (r.acompanhantes||[]).join("; "), "", r.data])); contribuicoes.forEach(c=> rows.push(["CONTRIB", c.nome, c.telefone, c.presenteNome, c.valor, c.data])); const csv = rows.map(r=> r.map(v=> `"${String(v).replace(/"/g,'""')}"`).join(",")).join("
-"); const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"}); const url = URL.createObjectURL(blob); const a = document.createElement("a"); a.href = url; a.download = "rsvps_presentes.csv"; a.click(); URL.revokeObjectURL(url); }
+function exportCSV(){
+  const rows = [["Tipo","Nome","Telefone","Detalhes","Valor","Data"]];
+  rsvps.forEach(r=> rows.push(["RSVP", r.nomeResponsavel, r.telefone, (r.acompanhantes||[]).join("; "), "", r.data]));
+  contribuicoes.forEach(c=> rows.push(["CONTRIB", c.nome, c.telefone, c.presenteNome, c.valor, c.data]));
+  const csv = rows.map(r=> r.map(v=> `"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");
+  const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "rsvps_presentes.csv"; a.click();
+  URL.revokeObjectURL(url);
+}
 
 /* ===== CONTAGEM REGRESSIVA CORRIGIDA ===== */
 function iniciarCountdown() {
@@ -434,8 +591,6 @@ function iniciarCountdown() {
   setInterval(updateCountdown, 1000);
 }
 
-document.addEventListener("DOMContentLoaded", iniciarCountdown);
-
 /* GITHUB save scaffold */
 async function salvarDadosNoGitHub(){ if(!GITHUB_TOKEN || !GITHUB_USER || !GITHUB_REPO) return; try{ const pathR = "data/rsvps.json"; const pathC = "data/contribuicoes.json"; await githubUpsertFile(pathR, JSON.stringify(rsvps, null, 2)); await githubUpsertFile(pathC, JSON.stringify(contribuicoes, null, 2)); }catch(e){ console.warn("GitHub save failed", e); } }
 async function githubUpsertFile(path, content){ const api = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${encodeURIComponent(path)}`; const b64 = btoa(unescape(encodeURIComponent(content))); let sha = null; const res = await fetch(api + "?ref=" + GITHUB_BRANCH, { headers:{Authorization:"token "+GITHUB_TOKEN}}); if(res.ok){ const info = await res.json(); sha = info.sha; } const body = { message:"Atualiza dados do site", content: b64, branch: GITHUB_BRANCH }; if(sha) body.sha = sha; const put = await fetch(api, { method:"PUT", headers:{ Authorization:"token "+GITHUB_TOKEN, "Content-Type":"application/json" }, body: JSON.stringify(body) }); if(!put.ok) throw new Error("GitHub API error "+put.status); return await put.json(); }
@@ -443,7 +598,11 @@ async function githubUpsertFile(path, content){ const api = `https://api.github.
 /* util */
 function escapeHtml(s){ if(!s) return ""; return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
-document.addEventListener("DOMContentLoaded", ()=> { atualizarTabelaAdmin(); });
+document.addEventListener("DOMContentLoaded", ()=> {
+  carregarPresentes();
+  iniciarCountdown();
+  atualizarTabelaAdmin();
+});
 window.addEventListener("scroll", ()=>{ const el = document.getElementById("topo"); if(window.scrollY>60) el.classList.add("scrolled"); else el.classList.remove("scrolled"); });
 </script>
 
