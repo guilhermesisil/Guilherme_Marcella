@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guilherme + Marcella</title>
     <style>
+/* Fonte elegante */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600&display=swap');
+
+body { font-family: 'Montserrat', sans-serif; }
 /* ===== TEMA PRETO E BRANCO ELEGANTE ===== */
 body {
     margin: 0;
@@ -55,8 +59,24 @@ nav a {
 #countdown {
     display: flex;
     justify-content: center;
-    gap: 25px;
-    font-size: 22px;
+    gap: 20px;
+    margin-top: 20px;
+}
+#countdown div {
+    background: #fff;
+    color: #000;
+    padding: 20px 25px;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 90px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-weight: 300;
+}
+#countdown span {
+    display: block;
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 5px;
 }
 section {
     padding: 60px 20px;
@@ -119,6 +139,7 @@ section {
 
 <header>
     <nav>
+        <a href="#rsvp">RSVP</a>
         <a href="#casal">O Casal</a>
         <a href="#cerimonia">Cerimônia</a>
         <a href="#presentes">Lista de Presentes</a>
@@ -197,11 +218,12 @@ setInterval(() => {
 const form = document.getElementById('rsvpForm');
 form.addEventListener('submit', e => {
     e.preventDefault();
-    const nome = document.getElementById('nome').value;
-    const email = document.getElementById('email').value;
-    const presenca = document.getElementById('presenca').value;
+    const telefone = document.getElementById('telefone').value;
+    const nomes = document.getElementById('nomes').value.split('
+').filter(n => n.trim() !== '');
+    const presenca = document.getElementById('presenca').value; = document.getElementById('presenca').value;
 
-    const novo = { nome, email, presenca };
+    const novo = { telefone, nomes, presenca };
     const lista = JSON.parse(localStorage.getItem('rsvps') || '[]');
     lista.push(novo);
     localStorage.setItem('rsvps', JSON.stringify(lista));
@@ -222,7 +244,7 @@ function abrirPainel() {
     const lista = JSON.parse(localStorage.getItem('rsvps') || '[]');
     lista.forEach(r => {
         const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${r.nome}</td><td>${r.email}</td><td>${r.presenca}</td>`;
+        tr.innerHTML = `<td>${r.nome}</td><td>${r.telefone}</td><td>${r.presenca}</td>`;
         tbody.appendChild(tr);
     });
 }
@@ -236,12 +258,12 @@ window.addEventListener('keydown', e => {
 <section id="rsvp" class="rsvp">
     <h2>CONFIRMAR PRESENÇA</h2>
     <form id="rsvpForm">
-        <input type="text" id="nome" placeholder="Seu nome" required>
-        <input type="email" id="email" placeholder="Seu e-mail" required>
+        <input type="text" id="telefone" placeholder="Seu telefone" required>
+        <textarea id="nomes" placeholder="Nomes das pessoas (1 por linha)" required></textarea>
         <select id="presenca" required>
             <option value="">Você irá?</option>
-            <option value="sim">Sim, estarei lá</option>
-            <option value="nao">Não poderei ir</option>
+            <option value="sim">Sim, estaremos lá</option>
+            <option value="nao">Não poderemos ir</option>
         </select>
         <button type="submit">Enviar</button>
     </form>
