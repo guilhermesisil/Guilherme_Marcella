@@ -1,242 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guilherme + Marcella</title>
-    <style>
-/* ===== TEMA PRETO E BRANCO CORRIGIDO ===== */
-body {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    background: #fff;
-    color: #111;
-}
-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: #fff;
-    border-bottom: 1px solid #000;
-    padding: 15px 0;
-    text-align: center;
-    z-index: 10;
-}
-nav a {
-    margin: 0 20px;
-    text-decoration: none;
-    font-weight: bold;
-    color: #000;
-    letter-spacing: 1px;
-}
-.hero {
-    padding-top: 120px;
-    text-align: center;
-}
-.hero h1 {
-    font-size: 52px;
-    letter-spacing: 10px;
-    font-weight: 300;
-}
-/* ===== GALERIA SEM CARROSSEL (CENTRALIZADA) ===== */
-.galeria {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    width: 100%;
-    margin: 30px auto;
-}
-.galeria img {
-    width: 28%;
-    max-width: 300px;
-    border-radius: 10px;
-    filter: grayscale(100%);
-}
-/* ===== CONTAGEM REGRESSIVA CORRIGIDA ===== */
-.countdown-section {
-    background: #000;
-    color: #fff;
-    padding: 50px 0;
-    margin-top: 40px;
-    text-align: center;
-}
-#countdown {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-}
-#countdown div {
-    background: #fff;
-    color: #000;
-    padding: 20px 25px;
-    border-radius: 12px;
-    min-width: 110px;
-}
-#countdown span {
-    font-size: 36px;
-    font-weight: 400;
-    display: block;
-    margin-bottom: 5px;
-}
-
-/* ===== SEÇÕES ===== */
-section {
-    padding: 60px 20px;
-    max-width: 900px;
-    margin: auto;
-}
-
-.grid-presentes {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 30px;
-}
-
-.item img {
-    width: 100%;
-    border-radius: 8px;
-}
-.item button {
-    background: #000;
-    color: #fff;
-    border: none;
-    padding: 12px;
-    width: 100%;
-}
-
-/* RSVP */
-.rsvp form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 400px;
-    margin: auto;
-}
-.rsvp input, .rsvp textarea, .rsvp select {
-    padding: 12px;
-    border: 1px solid #000;
-}
-.rsvp button {
-    background: #000;
-    color: #fff;
-    border: none;
-    padding: 14px;
-}
-
-/* ADMIN */
-#painel-admin table {
-    width: 100%;
-    border-collapse: collapse;
-}
-#painel-admin td, #painel-admin th {
-    border: 1px solid #000;
-    padding: 10px;
-}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guilherme + Marcella</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <header>
-    <nav>
-        <a href="#rsvp">RSVP</a>
-        <a href="#casal">O Casal</a>
-        <a href="#cerimonia">Cerimônia</a>
-        <a href="#presentes">Presentes</a>
-    </nav>
+<nav>
+<a href="#casal">O Casal</a>
+<a href="#cerimonia">Cerimônia</a>
+<a href="#presentes">Presentes</a>
+<a href="#rsvp">RSVP</a>
+</nav>
 </header>
 
 <section class="hero">
-    <h1>GUILHERME + MARCELLA</h1>
-
-    <div class="galeria">
-        <img src="img/foto1.jpg">
-        <img src="img/foto2.jpg">
-        <img src="img/foto3.jpg">
-    </div>
-
-    <h2>09.05.2026</h2>
+<h1>GUILHERME + MARCELLA</h1>
+<div class="galeria">
+<img src="img/foto1.jpg">
+<img src="img/foto2.jpg">
+<img src="img/foto3.jpg">
+</div>
+<h2>09.05.2026</h2>
 </section>
 
 <section class="countdown-section">
-    <h3>CONTAGEM REGRESSIVA</h3>
-    <div id="countdown">
-        <div><span id="dias">0</span>Dias</div>
-        <div><span id="horas">00</span>Horas</div>
-        <div><span id="minutos">00</span>Min</div>
-        <div><span id="segundos">00</span>Seg</div>
-    </div>
+<h3>CONTAGEM REGRESSIVA</h3>
+<div id="countdown" class="cd-box">
+<div><span id="dias"></span>Dias</div>
+<div><span id="horas"></span>Horas</div>
+<div><span id="minutos"></span>Min</div>
+<div><span id="segundos"></span>Seg</div>
+</div>
 </section>
 
 <section id="casal" class="casal">
-    <h2>O CASAL</h2>
-    <p>História do casal...</p>
+<h2>O CASAL</h2>
+<p>História do casal...</p>
 </section>
 
 <section id="cerimonia" class="cerimonia">
-    <h2>CERIMÔNIA</h2>
-    <p>Local, horário, etc</p>
+<h2>CERIMÔNIA</h2>
+<p>Local e detalhes...</p>
 </section>
 
 <section id="presentes" class="presentes">
-    <h2>Presentes</h2>
-    <div class="grid-presentes">
-        <div class="item">
-            <img src="img/presente1.jpg">
-            <p>Adega</p>
-            <button>Presentear</button>
-        </div>
-        <div class="item">
-            <img src="img/presente2.jpg">
-            <p>Aparelho de jantar</p>
-            <button>Presentear</button>
-        </div>
-    </div>
+<h2>LISTA DE PRESENTES</h2>
+<div id="lista-presentes"></div>
 </section>
 
 <section id="rsvp" class="rsvp">
-    <h2>Confirmar presença</h2>
-    <form id="rsvpForm">
-        <input type="text" id="telefone" placeholder="Telefone" required>
-        <textarea id="nomes" placeholder="Nomes (1 por linha)" required></textarea>
-        <select id="presenca" required>
-            <option value="">Você irá?</option>
-            <option value="sim">Sim</option>
-            <option value="nao">Não</option>
-        </select>
-        <button type="submit">Enviar</button>
-    </form>
+<h2>CONFIRMAR PRESENÇA</h2>
+<form id="rsvpForm">
+<input type="text" name="nome" placeholder="Seu nome" required>
+<input type="text" name="telefone" placeholder="Telefone" required>
+<textarea name="acompanhantes" placeholder="Nome dos acompanhantes"></textarea>
+<button type="submit">Enviar RSVP</button>
+</form>
 </section>
 
-<section id="painel-admin" style="display:none;">
-    <h2>Painel</h2>
-    <table id="tabela-rsvps">
-        <thead>
-            <tr><th>Nomes</th><th>Telefone</th><th>Presença</th></tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-</section>
+<div id="modal" class="modal hidden">
+<div class="modal-content">
+<span id="closeModal">&times;</span>
+<img id="modalImg">
+<h3 id="modalNome"></h3>
+<p id="modalDesc"></p>
+<a id="modalLink" target="_blank">Link para compra</a>
+<p id="modalEnd"></p>
+<button id="confirmarPresente">Confirmar presente</button>
+</div>
+</div>
 
-<script>
-// ===== CONTAGEM REGRESSIVA CORRIGIDA =====
-const target = new Date('2026-05-09T00:00:00').getTime();
-setInterval(() => {
-    const now = Date.now();
-    const diff = target - now;
-    if (diff <= 0) return;
-
-    const dias = Math.floor(diff / (1000*60*60*24));
-    const horas = Math.floor((diff / (1000*60*60)) % 24);
-    const minutos = Math.floor((diff / (1000*60)) % 60);
-    const segundos = Math.floor((diff / 1000) % 60);
-
-    document.getElementById('dias').innerText = dias;
-    document.getElementById('horas').innerText = horas.toString().padStart(2,'0');
-    document.getElementById('minutos').innerText = minutos.toString().padStart(2,'0');
-    document.getElementById('segundos').innerText = segundos.toString().padStart(2,'0');
-}, 1000);
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
