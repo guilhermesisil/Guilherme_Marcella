@@ -11,7 +11,7 @@
 <script>
   // Substitua pelo seu public key (não compartilhe esse token publicamente)
   // Ex.: emailjs.init("YOUR_EMAILJS_PUBLIC_KEY");
-  emailjs.init(O-dFEDfrDwxNfMC_M);
+  emailjs.init("O-dFEDfrDwxNfMC_M");
 </script>
 
 <!-- QR lib (qrcodejs) -->
@@ -433,8 +433,8 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
   // === EmailJS send (replace placeholders) ===
   // Configure in EmailJS dashboard: SERVICE_ID, TEMPLATE_ID
   try {
-    const serviceId = "YOUR_SERVICE_ID";
-    const templateId = "YOUR_TEMPLATE_ID";
+    const serviceId = "service_bh48d3o";
+    const templateId = "template_t5l6fd2";
     const templateParams = {
       nome_responsavel: nomeResp,
       telefone: telefone,
@@ -443,13 +443,13 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e){
       data: registro.data
     };
     // Only attempt if user replaced the placeholders
-    if(emailjs && serviceId !== "YOUR_SERVICE_ID"){
+    if(emailjs && serviceId !== "service_bh48d3o"){
       emailjs.send(serviceId, templateId, templateParams)
         .then(()=> console.log("EmailJS: RSVP enviado"))
         .catch(err => console.warn("EmailJS erro:", err));
     } else {
       // fallback: mailto (keeps behavior if user didn't setup EmailJS)
-      if(adminEmail && adminEmail !== "seu-email@exemplo.com"){
+      if(adminEmail && adminEmail !== "guilhermesisil@hotmail.com"){
         const assunto = encodeURIComponent("Novo RSVP: " + nomeResp);
         const body = encodeURIComponent(`Nome: ${nomeResp}\nTelefone: ${telefone}\nAcompanhantes: ${nomes.join(", ")}\nPresença: ${presenca}\nData: ${registro.data}`);
         window.location.href = `mailto:${adminEmail}?subject=${assunto}&body=${body}`;
@@ -468,13 +468,13 @@ function fecharModalRSVP(){ document.getElementById("modalRSVP").style.display="
 
 /* NOTIFICAÇÕES (mailto fallback used above and for contributions) */
 function enviarNotificacaoEmailRSVP(reg){
-  if(!adminEmail || adminEmail === "seu-email@exemplo.com") return;
+  if(!adminEmail || adminEmail === "guilhermesisil@hotmail.com") return;
   const assunto = encodeURIComponent("Novo RSVP: " + reg.nomeResponsavel);
   const body = encodeURIComponent(`Nome: ${reg.nomeResponsavel}\nTelefone: ${reg.telefone}\nAcompanhantes: ${reg.acompanhantes.join(", ")}\nPresença: ${reg.presenca}\nData: ${reg.data}`);
   window.location.href = `mailto:${adminEmail}?subject=${assunto}&body=${body}`;
 }
 function enviarNotificacaoEmailContribuicao(item){
-  if(!adminEmail || adminEmail === "seu-email@exemplo.com") return;
+  if(!adminEmail || adminEmail === "guilhermesisil@hotmail.com") return;
   const assunto = encodeURIComponent("Nova contribuição: " + item.presenteNome);
   const body = encodeURIComponent(`Presente: ${item.presenteNome}\nNome: ${item.nome}\nTelefone: ${item.telefone}\nValor: R$ ${item.valor.toFixed(2)}\nTxID: ${item.id}\nData: ${item.data}`);
   window.location.href = `mailto:${adminEmail}?subject=${assunto}&body=${body}`;
