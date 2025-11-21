@@ -1,14 +1,23 @@
-/* presentes.js - versão corrigida e integrada */
+/* presentes.js - versão corrigida com BR Code (Pix Copia e Cola) válido,
+   modal com scroll, grid/list view, 120 itens gerados, ordenação/filtragem,
+   geração de QR com texto BR Code correto, botão de copiar o Pix Copia e Cola.
+   Requer que a página inclua a biblioteca QRCode (qrcodejs) e que o HTML
+   possua elementos com ids: lista, filtroCategoria, ordenar, viewToggle (opcional).
+*/
 
+/* ========== CONFIGURAÇÃO ========== */
 const SERVICE_ID = window.SERVICE_ID || 'service_bh48d3o';
 const TEMPLATE_PRESENTE_CONF = window.TEMPLATE_PRESENTE_CONF || 'template_v469su3';
 const PIX_KEY = window.PIX_KEY || '97427455-6f14-4aba-aa09-d1cb15de34d4';
 const PIX_NOME = window.PIX_NOME || 'Guilherme de Siqueira Silveira';
 const PIX_CIDADE = window.PIX_CIDADE || 'Jacarei';
+const PIX_POINT_OF_INIT = '12'; // 12 = dynamic QR (use 11 for static if preferred)
 
+/* armazenamento */
 let contribuicoes = JSON.parse(localStorage.getItem('contribuicoes') || '[]');
+let rsvps = JSON.parse(localStorage.getItem('rsvps') || '[]');
 
-/* ========== GERAR 120 PRESENTES ========== */
+/* ========== GERADOR de 120 PRESENTES ========== */
 (function generateItems(){
   const categorias = ['Cozinha','Eletrodomésticos','Lua de Mel','Decoração','Sala','Quarto','Banheiro','Lavanderia','Escritório','Eletrônicos'];
   const sampleImages = [
@@ -17,145 +26,237 @@ let contribuicoes = JSON.parse(localStorage.getItem('contribuicoes') || '[]');
     'img/presente11.jpg','img/presente12.jpg'
   ];
 
+  window.presentes = []; // global
+
   const templates = {
-    'Cozinha': [['Jogo de Panelas','Conjunto antiaderente premium'],['Conjunto de Facas','Facas profissionais']],
-    'Eletrodomésticos': [['Liquidificador','1200W com várias velocidades'],['Micro-ondas','28L compacto']],
-    'Lua de Mel': [['Vale Jantar','Jantar romântico para duas pessoas'],['Passeio Romântico','Passeio guiado']],
-    'Decoração': [['Quadro Decorativo','Quadro moderno para sala'],['Vaso Cerâmica','Vaso artesanal']],
-    'Sala': [['Manta de Sofá','Manta aconchegante'],['Abajur','Design minimalista']],
-    'Quarto': [['Lençóis 300 fios','Conforto casal'],['Travesseiro','2 travesseiros de pluma']],
-    'Banheiro': [['Toalhas Premium','Jogo 4 peças'],['Kit Banheiro','Porta-sabonete e suporte']],
-    'Lavanderia': [['Varal Portátil','Fácil de guardar'],['Mini Lava-louças','Compacta 6 serviços']],
-    'Escritório': [['Cadeira Ergonômica','Apoio lombar'],['Escrivaninha','Mesa com gavetas']],
-    'Eletrônicos': [['Aspirador Robot','Limpeza automática'],['Smart TV 43"','4K Smart TV']]
+    'Cozinha': [
+      ['Jogo de Panelas', 'Conjunto premium antiaderente 5 peças'],
+      ['Conjunto de Facas', 'Facas profissionais de aço inox']
+    ],
+    'Eletrodomésticos': [
+      ['Liquidificador', 'Potente 1200W com copo de vidro'],
+      ['Micro-ondas', 'Micro-ondas 28L econômico']
+    ],
+    'Lua de Mel': [
+      ['Vale Jantar Romântico', 'Jantar especial para o casal'],
+      ['Passeio Guiado', 'Experiência turística local']
+    ],
+    'Decoração': [
+      ['Quadro Decorativo', 'Quadro com moldura minimalista'],
+      ['Vaso Cerâmica', 'Vaso decorativo artesanal']
+    ],
+    'Sala': [
+      ['Manta de Sofá', 'Manta aconchegante para o sofá'],
+      ['Abajur', 'Abajur com luz suave']
+    ],
+    'Quarto': [
+      ['Lençóis 300 fios', 'Jogo de lençóis casal 300 fios'],
+      ['Travesseiros Confort', 'Travesseiros ortopédicos']
+    ],
+    'Banheiro': [
+      ['Toalhas Premium', 'Jogo de toalhas 4 peças'],
+      ['Kit Banheiro', 'Conjunto saboneteira e porta-escovas']
+    ],
+    'Lavanderia': [
+      ['Varal Portátil', 'Varal retrátil e compacto'],
+      ['Cesto Organizador', 'Cesto para roupas sujas']
+    ],
+    'Escritório': [
+      ['Cadeira Ergonômica', 'Cadeira com apoio lombar'],
+      ['Escrivaninha Compacta', 'Mesa funcional com gavetas']
+    ],
+    'Eletrônicos': [
+      ['Aspirador Robot', 'Aspirador inteligente com app'],
+      ['Smart TV 43"', 'TV 4K com HDR']
+    ]
   };
 
-  window.presentes = [];
   for(let i=1;i<=120;i++){
     const categoria = categorias[(i-1) % categorias.length];
-    const tpl = templates[categoria][(i-1) % templates[categoria].length];
+    const tplList = templates[categoria];
+    const tpl = tplList[(i-1) % tplList.length];
     const nomeBase = tpl[0];
-    const descricaoBase = tpl[1];
-    const preco = Number((50 + Math.random()*4500).toFixed(2));
-    const img = sampleImages[(i-1) % sampleImages.length];
+    const descBase = tpl[1];
+    const preco = Number((50 + Math.random()*4500).toFixed(2)); // 50 a 4550
+    const img = sampleImages[i % sampleImages.length];
     const item = {
-      id: 'p'+String(i).padStart(3,'0'),
+      id: 'p' + String(i).padStart(3,'0'),
       nome: `${nomeBase} — ${i}`,
-      descricao: `${descricaoBase} — modelo ${1000+i}`,
+      descricao: `${descBase} — modelo ${1000+i}`,
       categoria,
       preco,
       img,
       link: '#',
       endereco: 'Rua Araxá, 316, Passos - MG',
-      status: 'Disponivel'
+      status: 'Disponível'
     };
     window.presentes.push(item);
   }
 })();
 
-/* ========== RENDER + CONTROLES ========== */
-function escapeHtml(s){ if(!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-function renderList(items, view='grid'){
-  const container = document.getElementById('lista');
-  if(!container) return;
-  container.className = view === 'grid' ? 'grid' : 'lista';
-  container.innerHTML = '';
-
-  if(view === 'grid'){
-    items.forEach(p=>{
-      const div = document.createElement('div');
-      div.className = 'item';
-      div.innerHTML = `
-        <div class="img-box"><img src="${p.img}" alt="${escapeHtml(p.nome)}"></div>
-        <h4>${escapeHtml(p.nome)}</h4>
-        <p class="price">R$ ${Number(p.preco).toFixed(2)}</p>
-        <p class="category">${escapeHtml(p.categoria)}</p>
-        <div class="actions">
-          <button class="btn" data-id="${p.id}">Presentear</button>
-          <a class="btn-ghost" href="${p.link}" target="_blank">Ver</a>
-        </div>
-      `;
-      // attach open modal on presentear button
-      div.querySelector('.btn')?.addEventListener('click', ()=> abrirModalPresenteById(p.id));
-      container.appendChild(div);
-    });
-  } else {
-    items.forEach(p=>{
-      const div = document.createElement('div');
-      div.className = 'item';
-      div.innerHTML = `
-        <div style="display:flex; gap:12px; align-items:center;">
-          <div style="width:120px; flex:0 0 120px;" class="img-box"><img src="${p.img}" alt="${escapeHtml(p.nome)}"></div>
-          <div style="flex:1;">
-            <h4>${escapeHtml(p.nome)}</h4>
-            <p style="font-size:13px; color:#666; margin:6px 0;">${escapeHtml(p.descricao)}</p>
-            <p class="price">R$ ${Number(p.preco).toFixed(2)}</p>
-          </div>
-          <div><button class="btn" data-id="${p.id}">Presentear</button></div>
-        </div>
-      `;
-      div.querySelector('.btn')?.addEventListener('click', ()=> abrirModalPresenteById(p.id));
-      container.appendChild(div);
-    });
+/* ========== BR CODE (PIX Copia e Cola) - GERADOR CORRIGIDO ========== */
+/* Monta BR Code seguindo padrão EMV + CRC16 (compatível com apps bancários) */
+function gerarBRCodePix({ chave, nome, cidade, valor, txid, pointOfInit = PIX_POINT_OF_INIT }){
+  function f(id, value){
+    return id + String(value.length).padStart(2,'0') + value;
   }
+  function crc16(input){
+    let crc = 0xFFFF;
+    for(let i=0;i<input.length;i++){
+      crc ^= input.charCodeAt(i) << 8;
+      for(let j=0;j<8;j++){
+        if ((crc & 0x8000) !== 0) crc = ((crc << 1) ^ 0x1021) & 0xFFFF;
+        else crc = (crc << 1) & 0xFFFF;
+      }
+    }
+    return crc.toString(16).toUpperCase().padStart(4,'0');
+  }
+
+  const mai_gui = f('00','br.gov.bcb.pix');
+  const mai_key = f('01', String(chave));
+  const mai = f('26', mai_gui + mai_key);
+  const pfi = f('00','01');
+  const pim = f('01', String(pointOfInit));
+  const mcc = f('52','0000');
+  const currency = f('53','986');
+  const valueField = (typeof valor === 'number' && !isNaN(valor)) ? f('54', Number(valor).toFixed(2)) : '';
+  const country = f('58','BR');
+  const mname = f('59', String(nome).slice(0,25));
+  const mcity = f('60', String(cidade).slice(0,15));
+  const tx = txid ? f('05', String(txid)) : '';
+  const additional = tx ? f('62', tx) : '';
+  const payloadNoCRC = pfi + pim + mai + mcc + currency + valueField + country + mname + mcity + additional + '6304';
+  const crc = crc16(payloadNoCRC);
+  return payloadNoCRC + crc;
 }
 
-function populateCategoriaFilter(){
-  const sel = document.getElementById('filtroCategoria');
-  if(!sel) return;
-  const cats = Array.from(new Set(window.presentes.map(p=>p.categoria)));
-  cats.forEach(c=>{
-    const opt = document.createElement('option');
-    opt.value = c; opt.textContent = c;
-    sel.appendChild(opt);
+/* ========== RENDER + CONTROLES ========== */
+(function ui(){
+  function $(id){ return document.getElementById(id); }
+
+  function populateCategoriaSelect(){
+    const sel = $('filtroCategoria');
+    if(!sel) return;
+    const cats = Array.from(new Set(window.presentes.map(p=>p.categoria))).sort();
+    sel.innerHTML = '<option value="">Todas</option>' + cats.map(c=> `<option value="${c}">${c}</option>`).join('');
+  }
+
+  function renderList(items, view='grid'){
+    const container = $('lista') || $('listaPresentes');
+    if(!container) return;
+    container.innerHTML = '';
+
+    if(view === 'grid'){
+      container.className = 'grid';
+      items.forEach(p=>{
+        const d = document.createElement('div'); d.className='item card-present';
+        d.innerHTML = `
+          <div class="img-box" aria-hidden="true">
+            <div class="img-square"><img src="${p.img}" alt="${escapeHtml(p.nome)}"></div>
+          </div>
+          <h4>${escapeHtml(p.nome)}</h4>
+          <p class="price">R$ ${Number(p.preco).toFixed(2)}</p>
+          <p class="category">${escapeHtml(p.categoria)}</p>
+          <div style="display:flex; gap:8px; margin-top:10px;">
+            <button class="btn" data-id="${p.id}">Presentear</button>
+            <a class="btn-ghost" href="${p.link}" target="_blank" rel="noopener">Ver</a>
+          </div>
+        `;
+        container.appendChild(d);
+        d.querySelector('.btn')?.addEventListener('click', ()=> abrirModalPresenteById(p.id));
+      });
+    } else {
+      container.className = 'lista';
+      items.forEach(p=>{
+        const d = document.createElement('div'); d.className='item list-item';
+        d.innerHTML = `
+          <div style="display:flex; gap:12px; align-items:center;">
+            <div style="width:100px; flex:0 0 100px;" class="img-box"><div class="img-square"><img src="${p.img}" alt="${escapeHtml(p.nome)}"></div></div>
+            <div style="flex:1;">
+              <h4>${escapeHtml(p.nome)}</h4>
+              <p style="margin:6px 0 4px; color:#555;">${escapeHtml(p.descricao)}</p>
+              <p class="price">R$ ${Number(p.preco).toFixed(2)}</p>
+            </div>
+            <div style="flex:0 0 120px;">
+              <button class="btn" data-id="${p.id}">Presentear</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(d);
+        d.querySelector('.btn')?.addEventListener('click', ()=> abrirModalPresenteById(p.id));
+      });
+    }
+  }
+
+  function applyFilterSortView(){
+    const cat = $('filtroCategoria') ? $('filtroCategoria').value : '';
+    const ord = $('ordenar') ? $('ordenar').value : '';
+    const view = $('viewToggle') ? $('viewToggle').value : 'grid';
+
+    let arr = window.presentes.slice();
+    if(cat) arr = arr.filter(x=> x.categoria === cat);
+
+    if(ord){
+      if(ord === 'preco_asc') arr.sort((a,b)=> a.preco - b.preco);
+      if(ord === 'preco_desc') arr.sort((a,b)=> b.preco - a.preco);
+      if(ord === 'nome_asc') arr.sort((a,b)=> a.nome.localeCompare(b.nome));
+      if(ord === 'nome_desc') arr.sort((a,b)=> b.nome.localeCompare(a.nome));
+    }
+
+    renderList(arr, view);
+  }
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    populateCategoriaSelect();
+    const cat = $('filtroCategoria');
+    const ord = $('ordenar');
+    const view = $('viewToggle');
+    if(cat) cat.addEventListener('change', applyFilterSortView);
+    if(ord) ord.addEventListener('change', applyFilterSortView);
+    if(view) view.addEventListener('change', applyFilterSortView);
+
+    if($('lista')) applyFilterSortView();
+    if($('listaPresentes')){
+      const sample = window.presentes.slice(0,12);
+      renderList(sample, 'grid');
+    }
   });
-}
 
-function applyFilterAndSort(){
-  const cat = document.getElementById('filtroCategoria')?.value || '';
-  const ord = document.getElementById('ordenar')?.value || '';
-  const view = document.getElementById('viewToggle')?.value || 'grid';
+  window.abrirModalPresenteById = function(id){
+    const p = window.presentes.find(x=> x.id === id);
+    if(!p) return alert('Presente não encontrado');
+    openPresentModal(p);
+  };
+})();
 
-  let arr = window.presentes.slice();
-  if(cat) arr = arr.filter(x=> x.categoria === cat);
-
-  if(ord === 'preco-asc') arr.sort((a,b)=> a.preco - b.preco);
-  if(ord === 'preco-desc') arr.sort((a,b)=> b.preco - a.preco);
-  if(ord === 'nome-asc') arr.sort((a,b)=> a.nome.localeCompare(b.nome));
-  if(ord === 'nome-desc') arr.sort((a,b)=> b.nome.localeCompare(a.nome));
-
-  renderList(arr, view);
-}
-
-document.addEventListener('DOMContentLoaded', ()=>{
-  populateCategoriaFilter();
-  // attach events
-  document.getElementById('filtroCategoria')?.addEventListener('change', applyFilterAndSort);
-  document.getElementById('ordenar')?.addEventListener('change', applyFilterAndSort);
-  document.getElementById('viewToggle')?.addEventListener('change', applyFilterAndSort);
-
-  // initial render
-  applyFilterAndSort();
-});
-
-/* ========= modal helpers (uses modalPresenteBg wrapper) ========= */
-window.abrirModalPresenteById = function(id){
-  const p = window.presentes.find(x=> x.id === id);
-  if(!p) return alert('Presente não encontrado');
-  openPresentModal(p);
+/* ========== MODAL, QR, CONFIRMAÇÃO ========== */
+function ensureModalExists(){
+  let modalBg = document.getElementById('modalPresenteBg');
+  if(modalBg) return modalBg;
+  modalBg = document.createElement('div');
+  modalBg.id = 'modalPresenteBg';
+  modalBg.className = 'modal-bg';
+  modalBg.style.display = 'none';
+  modalBg.innerHTML = `<div class="modal" id="modalPresenteContent" style="max-height:80vh; overflow:auto;"></div>`;
+  document.body.appendChild(modalBg);
+  return modalBg;
 }
 
 function openPresentModal(p){
-  const modalBg = document.getElementById('modalPresenteBg');
-  const modal = document.getElementById('modalPresente');
-  modalBg.style.display = 'flex';
-  modal.innerHTML = `
-    <button class="fechar" onclick="fecharModalPresente()">✕</button>
-    <h3 style="margin-top:0;">${escapeHtml(p.nome)}</h3>
-    <div style="margin:12px 0;"><div style="width:100%; aspect-ratio:1/1; background:#fff; display:flex; align-items:center; justify-content:center; overflow:hidden; border-radius:10px;"><img src="${p.img}" style="max-width:100%; max-height:100%; object-fit:contain; padding:8px;"></div></div>
-    <p style="margin:8px 0 0; font-weight:300;">${escapeHtml(p.descricao)}</p>
-    <p style="font-weight:400;">Entrega: ${escapeHtml(p.endereco)}</p>
+  const modalBg = ensureModalExists();
+  const content = document.getElementById('modalPresenteContent');
+  content.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <h3 style="font-weight:300; margin:0;">${escapeHtml(p.nome)}</h3>
+      <button class="fechar-modal btn-ghost" id="fecharModalBtn">✕</button>
+    </div>
+    <div style="margin-top:12px;">
+      <div style="width:100%; aspect-ratio:1/1; background:#fff; display:flex; align-items:center; justify-content:center; overflow:hidden; border-radius:10px;">
+        <img src="${p.img}" style="max-width:100%; max-height:100%; object-fit:contain; padding:8px;">
+      </div>
+    </div>
+    <p style="margin-top:10px; font-weight:300;">${escapeHtml(p.descricao)}</p>
+    <p style="font-weight:400;">Entrega: ${escapeHtml(p.endereco || '')}</p>
 
     <label style="display:block; margin-top:12px; font-weight:300;">Valor (R$)</label>
     <input id="valorPresenteModal" type="text" placeholder="150.00" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-top:6px;">
@@ -166,10 +267,15 @@ function openPresentModal(p){
 
     <div style="display:flex; gap:8px; margin-top:12px;">
       <button class="btn" id="gerarPixBtn">Gerar QR (PIX)</button>
-      <button class="btn-ghost" onclick="fecharModalPresente()">Cancelar</button>
+      <button class="btn-ghost" id="cancelPixBtn">Cancelar</button>
     </div>
+
     <div id="pixAreaModal" style="margin-top:12px; display:none; text-align:center;"></div>
   `;
+
+  modalBg.style.display = 'flex';
+  document.getElementById('fecharModalBtn').onclick = ()=> modalBg.style.display='none';
+  document.getElementById('cancelPixBtn').onclick = ()=> modalBg.style.display='none';
 
   document.getElementById('gerarPixBtn').onclick = function(){
     const valorRaw = document.getElementById('valorPresenteModal').value.trim();
@@ -179,76 +285,58 @@ function openPresentModal(p){
   };
 }
 
-function fecharModalPresente(){
-  const modalBg = document.getElementById('modalPresenteBg');
-  modalBg.style.display = 'none';
-  const pixArea = document.getElementById('pixAreaModal');
-  if(pixArea) pixArea.innerHTML = '';
-}
-
-/* ===== BR Code generator with CRC16 ===== */
-function formatField(id, value){ const len = String(value).length.toString().padStart(2,'0'); return id + len + value; }
-function crc16(str){ let crc=0xFFFF; for(let i=0;i<str.length;i++){ crc ^= str.charCodeAt(i) << 8; for(let j=0;j<8;j++){ crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1); crc &= 0xFFFF; } } return crc.toString(16).toUpperCase().padStart(4,'0'); }
-
 function generateAndShowBRCode(present, valorNum){
-  const brcode = gerarBRCodePix({
-    chave: PIX_KEY,
-    nome: PIX_NOME,
-    cidade: PIX_CIDADE,
-    valor: valorNum
-  });
+  const txid = 'PRES' + Date.now();
+  const brcode = gerarBRCodePix({ chave: PIX_KEY, nome: PIX_NOME, cidade: PIX_CIDADE, valor: valorNum, txid, pointOfInit: PIX_POINT_OF_INIT });
 
   const pixArea = document.getElementById('pixAreaModal');
   pixArea.style.display = 'block';
-
   const qrHolderId = 'qrcode_pres_' + present.id;
   pixArea.innerHTML = `
-    <div id="${qrHolderId}"></div>
-    <p><strong>Chave:</strong> ${PIX_KEY}</p>
-    <p><strong>Valor:</strong> ${valorNum ? 'R$ ' + valorNum.toFixed(2) : 'Livre'}</p>
+    <div id="${qrHolderId}" style="display:inline-block; margin-bottom:8px;"></div>
+    <p style="margin:6px 0;">Chave PIX: <strong>${PIX_KEY}</strong></p>
+    <p style="margin:6px 0;">Valor: ${valorNum?('R$ '+Number(valorNum).toFixed(2)):'Valor livre'}</p>
+    <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
+      <button class="btn" id="copBr">Copiar Pix Copia e Cola</button>
+      <button class="btn-ghost" id="copCh">Copiar chave</button>
+    </div>
+    <div style="display:flex; gap:8px; justify-content:center; margin-top:10px;">
+      <button class="btn" id="confirmContrib">Confirmar contribuição</button>
+    </div>
   `;
 
-  new QRCode(document.getElementById(qrHolderId), {
-    text: brcode,
-    width: 260,
-    height: 260
-  });
-}
+  try{
+    if(typeof QRCode === 'undefined') throw new Error('QRCode lib não encontrada');
+    const qrEl = document.getElementById(qrHolderId);
+    qrEl.innerHTML = '';
+    new QRCode(qrEl, { text: brcode, width: 260, height: 260 });
+  }catch(e){
+    document.getElementById(qrHolderId).innerText = brcode;
+  }
 
-  const guia = formatField('00','br.gov.bcb.pix');
-  const key = formatField('01', PIX_KEY);
-  const mai = formatField('26', guia + key);
-  const pfi = formatField('00','01');
-  const mc = formatField('52','0000');
-  const cur = formatField('53','986');
-  const val = valorNum ? formatField('54', Number(valorNum).toFixed(2)) : '';
-  const country = formatField('58','BR');
-  const mname = formatField('59', String(PIX_NOME).slice(0,25));
-  const mcity = formatField('60', String(PIX_CIDADE).slice(0,15));
-  const withoutCRC = pfi + mai + mc + cur + val + country + mname + mcity + '6304';
-  const crc = crc16(withoutCRC);
-  const brcode = withoutCRC + crc;
+  document.getElementById('copBr').onclick = ()=> { navigator.clipboard?.writeText(brcode).then(()=> alert('BR Code copiado (Pix Copia e Cola)')); };
+  document.getElementById('copCh').onclick = ()=> { navigator.clipboard?.writeText(PIX_KEY).then(()=> alert('Chave PIX copiada')); };
 
-  const pixArea = document.getElementById('pixAreaModal');
-  pixArea.style.display = 'block';
-  const qrHolderId = 'qrcode_pres_' + present.id;
-  pixArea.innerHTML = `<div id="${qrHolderId}"></div><p style="margin:6px 0;">Chave PIX: <strong>${PIX_KEY}</strong></p><p style="margin:6px 0;">Valor: ${valorNum?('R$ '+Number(valorNum).toFixed(2)):'Valor livre'}</p><div style="display:flex; gap:8px; justify-content:center; margin-top:8px;"><button class='btn' id='copChave'>Copiar chave</button><button class='btn-ghost' id='copValor'>Copiar valor</button></div><button class='btn' id='confirmContrib' style='margin-top:12px;'>Confirmar contribuição</button>`;
-
-  // gerar QR
-  try{ new QRCode(document.getElementById(qrHolderId), { text: brcode, width: 220, height: 220 }); }catch(e){ document.getElementById(qrHolderId).innerText = brcode; }
-
-  document.getElementById('copChave').onclick = ()=> navigator.clipboard?.writeText(PIX_KEY).then(()=> alert('Chave copiada'));
-  document.getElementById('copValor').onclick = ()=> navigator.clipboard?.writeText(valorNum?('R$ '+Number(valorNum).toFixed(2)):'Valor livre').then(()=> alert('Valor copiado'));
-
-  document.getElementById('confirmContrib').onclick = function(){
+  document.getElementById('confirmContrib').onclick = ()=>{
     const nome = document.getElementById('nomePresenteModal').value.trim() || 'Anônimo';
     const tel = document.getElementById('telefonePresenteModal').value.trim() || '';
-    const txid = 'PRES'+Date.now();
     const item = { id: txid, presenteId: present.id, presenteNome: present.nome, nome, telefone: tel, valor: valorNum?Number(valorNum).toFixed(2):0, data: new Date().toISOString() };
     contribuicoes.push(item);
     localStorage.setItem('contribuicoes', JSON.stringify(contribuicoes));
     alert('Obrigado pela contribuição!');
-    try{ if(typeof emailjs !== 'undefined'){ emailjs.send(SERVICE_ID, TEMPLATE_PRESENTE_CONF, { nome: item.nome, presente_nome: item.presenteNome, valor: item.valor, txid: item.id }); } }catch(e){ console.warn('EmailJS erro', e); }
-    fecharModalPresente();
+    try{
+      if(typeof emailjs !== 'undefined'){
+        emailjs.send(SERVICE_ID, TEMPLATE_PRESENTE_CONF, { nome: item.nome, presente_nome: item.presenteNome, valor: item.valor, txid: item.id });
+      }
+    }catch(e){ console.warn('EmailJS erro', e); }
+    const modalBg = document.getElementById('modalPresenteBg');
+    if(modalBg) modalBg.style.display='none';
+    if(window.atualizarTabelaAdmin) try{ window.atualizarTabelaAdmin(); }catch(e){}
   };
 }
+
+/* util */
+function escapeHtml(s){ if(!s && s !== 0) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* export helper */
+window.__presentes_module = { gerarBRCodePix };
