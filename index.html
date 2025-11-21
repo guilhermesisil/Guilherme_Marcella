@@ -141,8 +141,13 @@ function tick(){
 tick(); setInterval(tick,1000);
 
 // modal rsvp handlers (simplified)
-function abrirModalRSVP(){ document.getElementById('modalRSVP').style.display='flex'; }
-function fecharModalRSVP(){ document.getElementById('modalRSVP').style.display='none'; }
+function abrirModalRSVP() {
+    document.getElementById("modalRSVP").style.display = "flex";
+}
+function fecharModalRSVP() {
+    document.getElementById("modalRSVP").style.display = "none";
+}
+
 
 // form submit (saves to localStorage)
 let rsvps = JSON.parse(localStorage.getItem('rsvps')||'[]');
