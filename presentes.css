@@ -259,3 +259,4 @@ body {
   background: #bbb;
   border-radius: 4px;
 }
+#modalPresenteBg .modal { max-height:80vh; overflow:auto; }
