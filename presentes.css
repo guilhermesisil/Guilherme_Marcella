@@ -179,3 +179,41 @@ body {
   #lista.lista .item { flex-direction: column; align-items: flex-start; }
   #lista.lista .item .img-box { display: block; width: 100%; aspect-ratio: 1/1; margin-bottom:12px; }
 }
+
+/* --- Modal com altura limitada e scroll interno --- */
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.6);
+  z-index: 999;
+  padding: 20px; /* ajuda em telas pequenas */
+}
+
+.modal {
+  width: 92%;
+  max-width: 520px;
+
+  /* NOVO: limitar altura */
+  max-height: 90vh;
+
+  overflow-y: auto;        /* scroll vertical */
+  overflow-x: hidden;
+
+  background: #fff;
+  border-radius: 14px;
+  padding: 18px 18px 28px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+  position: relative;
+}
+
+/* deixa o scroll mais bonito */
+.modal::-webkit-scrollbar {
+  width: 6px;
+}
+.modal::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
