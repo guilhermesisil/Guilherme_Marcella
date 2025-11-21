@@ -191,6 +191,30 @@ function formatField(id, value){ const len = String(value).length.toString().pad
 function crc16(str){ let crc=0xFFFF; for(let i=0;i<str.length;i++){ crc ^= str.charCodeAt(i) << 8; for(let j=0;j<8;j++){ crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1); crc &= 0xFFFF; } } return crc.toString(16).toUpperCase().padStart(4,'0'); }
 
 function generateAndShowBRCode(present, valorNum){
+  const brcode = gerarBRCodePix({
+    chave: PIX_KEY,
+    nome: PIX_NOME,
+    cidade: PIX_CIDADE,
+    valor: valorNum
+  });
+
+  const pixArea = document.getElementById('pixAreaModal');
+  pixArea.style.display = 'block';
+
+  const qrHolderId = 'qrcode_pres_' + present.id;
+  pixArea.innerHTML = `
+    <div id="${qrHolderId}"></div>
+    <p><strong>Chave:</strong> ${PIX_KEY}</p>
+    <p><strong>Valor:</strong> ${valorNum ? 'R$ ' + valorNum.toFixed(2) : 'Livre'}</p>
+  `;
+
+  new QRCode(document.getElementById(qrHolderId), {
+    text: brcode,
+    width: 260,
+    height: 260
+  });
+}
+
   const guia = formatField('00','br.gov.bcb.pix');
   const key = formatField('01', PIX_KEY);
   const mai = formatField('26', guia + key);
