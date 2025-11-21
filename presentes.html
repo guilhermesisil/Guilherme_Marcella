@@ -1,69 +1,100 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lista de Presentes — Guilherme & Marcella</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Presentes — Guilherme & Marcella</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="presentes.css">
 
 <!-- QR Code lib -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
 </head>
 <body>
 
 <header class="topo">
   <div class="container">
+    <a class="voltar" href="index.html">← Voltar</a>
     <h1>Lista de Presentes</h1>
-    <a href="index.html" class="voltar">← Voltar</a>
+    <div style="width:72px"></div><!-- espaço para equilibrar layout -->
   </div>
 </header>
 
 <section class="container">
-
-  <!-- Controles -->
   <div class="controls">
     <div class="control-item">
-      <label>Categoria</label>
-      <select id="filtroCategoria">
-        <option value="">Todas</option>
-      </select>
+      <label for="filtroCategoria">Categoria</label>
+      <select id="filtroCategoria"></select>
     </div>
 
     <div class="control-item">
-      <label>Ordenar por</label>
+      <label for="ordenar">Ordenar por</label>
       <select id="ordenar">
         <option value="">Padrão</option>
-        <option value="preco-asc">Preço ↑</option>
-        <option value="preco-desc">Preço ↓</option>
-        <option value="nome-asc">Nome A–Z</option>
-        <option value="nome-desc">Nome Z–A</option>
+        <option value="preco_asc">Preço ↑</option>
+        <option value="preco_desc">Preço ↓</option>
+        <option value="nome_asc">Nome A–Z</option>
+        <option value="nome_desc">Nome Z–A</option>
       </select>
     </div>
 
     <div class="control-item">
-      <label>Exibição</label>
+      <label for="viewToggle">Exibição</label>
       <select id="viewToggle">
         <option value="grid">Grid</option>
-        <option value="lista">Lista</option>
+        <option value="lista">Lista (texto)</option>
       </select>
     </div>
   </div>
 
-  <!-- Lista -->
   <div id="lista" class="grid"></div>
-
 </section>
 
-<!-- Modal Presentear (inicialmente oculto; será controlado pelo JS) -->
+<!-- Modal template (injetado por JS se necessário) -->
 <div id="modalPresenteBg" class="modal-bg" style="display:none;">
-  <div class="modal" id="modalPresente">
-    <!-- preenchido por JS -->
-  </div>
+  <div class="modal" id="modalPresenteContent" style="max-height:85vh; overflow:auto;"></div>
 </div>
 
+<!-- seu presentes.js (cole o presentes.js corrigido que você já recebeu) -->
 <script src="presentes.js"></script>
+
+<!-- VALIDADOR RÁPIDO — para testar BR Code no console (também útil para debug) -->
+<script>
+  // função disponível globalmente: validateBRCode(brcode) -> retorna {valid:Boolean, crcExpected, crcFound}
+  function validateBRCode(br){
+    if(!br || typeof br !== 'string') return { valid:false, error:'BR code vazio' };
+    // extrai os últimos 4 caracteres (CRC) e testa
+    const without = br.slice(0, -4);
+    const crcGiven = br.slice(-4).toUpperCase();
+
+    function crc16(input){
+      let crc = 0xFFFF;
+      for(let i=0;i<input.length;i++){
+        crc ^= input.charCodeAt(i) << 8;
+        for(let j=0;j<8;j++){
+          if(crc & 0x8000) crc = ((crc << 1) ^ 0x1021) & 0xFFFF;
+          else crc = (crc << 1) & 0xFFFF;
+        }
+      }
+      return crc.toString(16).toUpperCase().padStart(4,'0');
+    }
+
+    const expected = crc16(without + '6304'); // alguns BR codes já incluem 6304 — se não, função usada antes usava '...6304'
+    // fallback calculo direto sem adicionar 6304 somente se mismatch
+    const expected_alt = crc16(without);
+
+    return {
+      valid: crcGiven === expected || crcGiven === expected_alt,
+      crcFound: crcGiven,
+      crcExpected: expected,
+      crcExpectedAlt: expected_alt
+    };
+  }
+
+  // expose for debugging
+  window.validateBRCode = validateBRCode;
+</script>
+
 </body>
 </html>
