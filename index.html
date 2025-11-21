@@ -46,7 +46,15 @@ section .container{ padding-top:6px; padding-bottom:6px; }
 .grid-presentes{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:22px; margin-top:18px; }
 .item{ border:1px solid #eee; padding:14px; border-radius:12px; text-align:left; transition:box-shadow .25s; background:#fff; }
 .item:hover{ box-shadow:0 10px 30px rgba(0,0,0,0.06); }
-.item img{ width:100%; border-radius:10px; object-fit:cover; }
+.item img {
+  width: 100%;
+  aspect-ratio: 1 / 1;        /* força imagem quadrada */
+  object-fit: contain;        /* mantém proporção das imagens */
+  background: #fff;           /* fundo branco para preencher espaços */
+  border-radius: 10px;
+  padding: 6px;               /* borda interna opcional para estética */
+  box-sizing: border-box;
+}
 .item h3{ margin:10px 0 6px; font-weight:400; }
 .item p{ margin:0 0 8px; color:#333; font-weight:300; }
 .item small{ display:block; margin-bottom:8px; color:#666; }
