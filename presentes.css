@@ -112,79 +112,32 @@ body {
 
 
 /* ===== LISTA (detalhes) ===== */
-#lista.lista img {
-  width: 140px;
-  height: 140px;
-}
-
-.item h3 {
-  margin: 10px 0 4px;
-  font-weight: 400;
-}
-.item p {
-  margin: 0;
-  font-weight: 300;
-  color: #444;
-}
-
-/* ===== MODAL ===== */
-.modal-bg {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.6);
+/* LISTA — esconder imagens */
+#lista.lista .img-box {
   display: none;
-  justify-content: center;
+}
+
+/* Lista mais organizada */
+#lista.lista .item {
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  z-index: 50;
-  padding: 20px;
-}
-.modal {
-  background: #fff;
-  padding: 22px;
-  width: 100%;
-  max-width: 420px;
-  border-radius: 14px;
-  position: relative;
-  text-align: center;
-}
-.fechar {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  background: none;
-  border: none;
-  font-size: 22px;
-  cursor: pointer;
-}
-.modal-img {
-  width: 100%;
+  gap: 12px;
+  padding: 18px;
   border-radius: 12px;
-  margin: 12px 0;
+  border: 1px solid #eee;
 }
 
-.modal-info {
-  background: #f9f9f9;
-  padding: 14px;
-  border-radius: 12px;
-  margin-top: 12px;
+#lista.lista .item h3 {
+  margin: 0 0 4px;
+}
+
+#lista.lista .item p {
+  margin: 0;
   font-size: 14px;
-}
-.pix-chave {
-  font-size: 13px;
-  word-break: break-all;
+  color: #555;
 }
 
-.btn {
-  width: 100%;
-  margin-top: 16px;
-  padding: 14px;
-  border: none;
-  border-radius: 10px;
-  font-weight: 300;
-  cursor: pointer;
-  background: #000;
-  color: #fff;
-}
 
 /* ===== RESPONSIVO ===== */
 @media (max-width: 768px) {
@@ -195,4 +148,22 @@ body {
     width: 100px;
     height: 100px;
   }
+}
+/* ===== botao ghost ===== */
+.btn-ghost {
+  background: transparent;
+  border: 1px solid #000;
+  color: #000;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 300;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  transition: .25s;
+}
+
+.btn-ghost:hover {
+  background: #000;
+  color: #fff;
 }
