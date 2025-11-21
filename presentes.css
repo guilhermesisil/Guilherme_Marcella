@@ -1,0 +1,165 @@
+/* presentes.css - estilo "loja" sofisticado para a lista de presentes */
+:root{
+  --max-width:1200px;
+  --gap:18px;
+  --bg:#fff;
+  --muted:#777;
+  --accent:#000;
+  --card-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  --radius:12px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  background:var(--bg);
+  color:#111;
+  -webkit-font-smoothing:antialiased;
+}
+
+.container{ max-width:var(--max-width); margin:0 auto; padding:20px; }
+
+.shop-header{
+  border-bottom:1px solid #eee;
+  background:#fff;
+  position:sticky;
+  top:0;
+  z-index:40;
+}
+
+.shop-top{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo{
+  color:var(--accent);
+  text-decoration:none;
+  font-weight:600;
+  margin-right:auto;
+  padding:14px 0;
+}
+
+.shop-top h1{
+  margin:0;
+  font-weight:300;
+  letter-spacing:1px;
+  font-size:20px;
+}
+
+/* controles */
+.controls{ display:flex; gap:18px; align-items:center; justify-content:space-between; margin:18px 0 6px; flex-wrap:wrap; }
+.search input{
+  width:320px;
+  max-width:60vw;
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid #e6e6e6;
+  font-size:15px;
+}
+.filters{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.filters select{ padding:8px 10px; border-radius:8px; border:1px solid #e6e6e6; background:#fff; }
+
+/* grid com até 6 colunas (responsivo) */
+.grid-presentes{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap:var(--gap);
+  margin-top:12px;
+}
+
+/* card de presente */
+.item{
+  background:#fff;
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid #f0f0f0;
+  transition:transform .18s ease, box-shadow .18s ease;
+  display:flex;
+  flex-direction:column;
+  min-height:220px;
+}
+.item:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--card-shadow);
+}
+.item .img-square{
+  width:100%;
+  aspect-ratio:1/1;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.item .img-square img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:8px;
+  background:#fff;
+}
+.item .content{
+  padding:12px;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.item h4{ margin:0; font-size:15px; font-weight:500; }
+.item p{ margin:0; color:var(--muted); font-size:13px; font-weight:300; }
+.item .meta{ display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:auto; }
+.item .price{ font-weight:600; color:var(--accent); }
+
+.btn{ display:inline-block; background:var(--accent); color:#fff; border:none; padding:8px 10px; border-radius:8px; cursor:pointer; text-decoration:none; font-weight:500; }
+.btn-ghost{ background:transparent; color:var(--accent); border:1px solid var(--accent); padding:8px 10px; border-radius:8px; cursor:pointer; font-weight:500; }
+
+/* pagination */
+.pagination{ display:flex; justify-content:center; gap:8px; margin:20px 0; }
+.page-btn{ padding:8px 12px; border-radius:8px; border:1px solid #eee; background:#fff; cursor:pointer; }
+.page-btn.active{ background:#111; color:#fff; border-color:#111; }
+
+/* modal present detail */
+.present-modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0.5);
+  z-index:60;
+  padding:20px;
+}
+.present-modal[aria-hidden="false"]{ display:flex; }
+.present-modal-inner{
+  background:#fff;
+  width:92%;
+  max-width:880px;
+  border-radius:14px;
+  box-shadow:var(--card-shadow);
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:14px;
+  padding:18px;
+}
+.present-modal-media{ padding:8px; }
+.present-modal-media .img-square{ border-radius:10px; }
+.present-modal-info{ padding:6px 12px; display:flex; flex-direction:column; gap:10px; }
+.present-modal-info h2{ margin:0; font-weight:600; }
+.present-modal-info p{ margin:0; color:var(--muted); }
+.present-modal-info .price{ font-size:20px; font-weight:700; color:var(--accent); }
+
+.close-modal{ position:absolute; right:24px; top:24px; background:#fff; border-radius:10px; border:1px solid #eee; padding:8px 10px; cursor:pointer; }
+
+/* responsivo */
+@media (max-width:900px){
+  .present-modal-inner{ grid-template-columns: 1fr; }
+  .grid-presentes{ grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+}
+@media (max-width:520px){
+  .controls{ flex-direction:column; align-items:stretch; gap:10px; }
+  .shop-top h1{ font-size:18px; }
+  .grid-presentes{ grid-template-columns: repeat(2, 1fr); }
+}
