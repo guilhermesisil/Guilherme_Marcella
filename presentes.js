@@ -127,6 +127,90 @@ function markAsBought(){
 // escape helper
 function escapeHtml(s){ if(!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
+// ==========================
+//   PIX BRCode Generator
+// ==========================
+
+// Chave PIX fixa do casal
+const PIX_KEY = "97427455-6f14-4aba-aa09-d1cb15de34d4";
+
+// Nome recebedor
+const PIX_NOME = "GUILHERME DE SIQUEIRA SILVEIRA";
+
+// Cidade (obrigatória)
+const PIX_CIDADE = "PASSOS";
+
+// Gera payload BR Code com CRC16
+function gerarPayloadPix(valor, descricao) {
+  function pad(x){ return x.length < 2 ? "0"+x : x; }
+
+  const CRC_ID = "6304";
+
+  const payload =
+    "000201" +
+    "010212" +
+    "26" + pad(
+      "0014br.gov.bcb.pix01" +
+      PIX_KEY.length + PIX_KEY
+    ) +
+    "52" + pad("0000") +
+    "53" + pad("986") +
+    "54" + valor.toFixed(2).replace(".", "") +
+    "58" + pad("BR") +
+    "59" + pad(PIX_NOME.length) + PIX_NOME +
+    "60" + pad(PIX_CIDADE.length) + PIX_CIDADE +
+    "62" + pad(
+      ("05" + pad(descricao.length) + descricao).length
+    ) +
+      "05" + pad(descricao.length) + descricao +
+    CRC_ID;
+
+  // Cálculo CRC16
+  const polinomio = 0x1021;
+  let resultado = 0xFFFF;
+
+  for (let c = 0; c < payload.length; c++) {
+    resultado ^= payload.charCodeAt(c) << 8;
+    for (let i = 0; i < 8; i++) {
+      if (resultado & 0x8000) resultado = (resultado << 1) ^ polinomio;
+      else resultado <<= 1;
+      resultado &= 0xFFFF;
+    }
+  }
+
+  const crc = resultado.toString(16).toUpperCase().padStart(4, "0");
+  return payload + crc;
+}
+
+function gerarPix(){
+  const id = Number(document.getElementById('presentModal').dataset.current);
+  const item = presentes.find(x=>x.id === id);
+  if(!item) return alert("Erro ao gerar PIX.");
+
+  const descricao = "Presente " + item.nome;
+  const valor = Number(item.preco || 0);
+
+  const payload = gerarPayloadPix(valor, descricao);
+
+  document.getElementById("pixCodePresent").value = payload;
+
+  document.getElementById("qrcodePresent").innerHTML = "";
+
+  new QRCode(document.getElementById("qrcodePresent"), {
+    text: payload,
+    width: 180,
+    height: 180
+  });
+}
+
+function copyPIX(){
+  const txt = document.getElementById("pixCodePresent");
+  txt.select();
+  navigator.clipboard.writeText(txt.value);
+  alert("Código PIX copiado!");
+}
+
+
 // init: try load from localStorage too
 (function init(){
   const saved = JSON.parse(localStorage.getItem('presentes_shop')||'null');
