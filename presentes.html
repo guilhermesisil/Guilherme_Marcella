@@ -1,82 +1,85 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Lista de Presentes — Guilherme & Marcella</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="presentes.css">
-
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Lista de Presentes — Guilherme & Marcella</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+body{ font-family:'Montserrat',sans-serif; margin:0; background:#fff; }
+header{ position:fixed; top:0; left:0; right:0; background:#fff; padding:16px 0; text-align:center; z-index:20; border-bottom:1px solid #eee; }
+header a{ margin:0 14px; text-decoration:none; color:#000; font-weight:300; }
+main{ padding-top:90px; max-width:1200px; margin:0 auto; }
+.controls{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:20px; }
+select{ padding:10px; border-radius:8px; border:1px solid #ccc; }
+.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:20px; }
+.card{ border:1px solid #eee; border-radius:12px; padding:10px; background:#fff; box-shadow:0 2px 8px rgba(0,0,0,0.05); }
+.card img{ width:100%; border-radius:10px; }
+.card h4{ margin:8px 0 4px; font-weight:400; }
+.card p{ margin:0 0 6px; font-weight:300; font-size:14px; }
+</style>
 </head>
 <body>
-  <header class="shop-header">
-    <div class="shop-top container">
-      <a class="logo" href="index.html">← Voltar</a>
-      <h1>Lista de Presentes</h1>
-    </div>
-  </header>
-
-  <main class="container shop-main">
-    <section class="controls">
-      <div class="search">
-        <input id="searchInput" placeholder="Buscar presente por nome..." />
-      </div>
-
-      <div class="filters">
-        <label>Ordenar:</label>
-        <select id="sortSelect">
-          <option value="default">Padrão</option>
-          <option value="price-asc">Preço: menor → maior</option>
-          <option value="price-desc">Preço: maior → menor</option>
-          <option value="name-asc">Nome A → Z</option>
-          <option value="name-desc">Nome Z → A</option>
-        </select>
-
-        <label>Itens por página:</label>
-        <select id="perPageSelect">
-          <option value="24">24</option>
-          <option value="48">48</option>
-          <option value="96">96</option>
-        </select>
-      </div>
-    </section>
-
-    <section id="grid" class="grid-presentes" aria-live="polite"></section>
-
-    <nav class="pagination" id="pagination"></nav>
-  </main>
-
-  <!-- Modal detalhe presente -->
-  <div id="presentModal" class="present-modal" aria-hidden="true">
-    <div class="present-modal-inner">
-      <button class="close-modal" onclick="closePresentModal()">✕</button>
-      <div class="present-modal-media">
-        <div class="img-square"><img id="modalImage" src="" alt=""></div>
-      </div>
-      <div class="present-modal-info">
-        <h2 id="modalTitle"></h2>
-        <p id="modalDesc"></p>
-        <p class="price" id="modalPrice"></p>
-        <p class="address" id="modalAddress"></p>
-        <div class="modal-actions">
-  <a id="modalLink" class="btn" target="_blank" rel="noopener">Ver link</a>
-
-  <button class="btn" onclick="gerarPix()">Gerar PIX</button>
-
-  <button class="btn-ghost" onclick="copyPIX()">Copiar código</button>
-  <button class="btn-ghost" onclick="markAsBought()">Marcar como comprado</button>
-</div>
-
-<div style="margin-top:15px; text-align:center;">
-  <div id="qrcodePresent"></div>
-  <textarea id="pixCodePresent" readonly style="width:100%; margin-top:10px; padding:10px; border-radius:8px; font-size:13px;"></textarea>
-</div>
-
-      </div>
-    </div>
+<header>
+  <a href="index.html#rsvp">RSVP</a>
+  <a href="index.html#casal">O Casal</a>
+  <a href="index.html#cerimonia">Cerimônia</a>
+  <a href="presentes.html">Presentes</a>
+</header>
+<main>
+  <h2>Lista de Presentes</h2>
+  <div class="controls">
+    <select id="filtroCategoria">
+      <option value="">Todas categorias</option>
+      <option>Cozinha</option>
+      <option>Sala</option>
+      <option>Quarto</option>
+      <option>Banheiro</option>
+      <option>Lavanderia</option>
+      <option>Escritório</option>
+      <option>Decoração</option>
+      <option>Eletrônicos</option>
+      <option>Pets</option>
+      <option>Lua de Mel</option>
+    </select>
+    <select id="ordenar">
+      <option value="">Ordenar</option>
+      <option value="preco-asc">Preço: menor → maior</option>
+      <option value="preco-desc">Preço: maior → menor</option>
+      <option value="nome-asc">Nome A-Z</option>
+      <option value="nome-desc">Nome Z-A</option>
+    </select>
   </div>
+  <div id="lista" class="grid"></div>
+</main>
+<script src="presentes.js"></script>
+<script>
+function render(){
+  let lista = [...presentes];
+  const cat = document.getElementById('filtroCategoria').value;
+  const ord = document.getElementById('ordenar').value;
 
-  <script src="presentes.js"></script>
+  if(cat) lista = lista.filter(x=> x.categoria === cat);
+
+  if(ord === 'preco-asc') lista.sort((a,b)=> a.preco - b.preco);
+  if(ord === 'preco-desc') lista.sort((a,b)=> b.preco - a.preco);
+  if(ord === 'nome-asc') lista.sort((a,b)=> a.nome.localeCompare(b.nome));
+  if(ord === 'nome-desc') lista.sort((a,b)=> b.nome.localeCompare(a.nome));
+
+  const el = document.getElementById('lista');
+  el.innerHTML = lista.map(p=>`
+    <div class='card'>
+      <img src='${p.img}' alt='${p.nome}'>
+      <h4>${p.nome}</h4>
+      <p>R$ ${p.preco.toFixed(2)}</p>
+      <p>${p.categoria}</p>
+    </div>`).join('');
+}
+
+document.getElementById('filtroCategoria').onchange = render;
+document.getElementById('ordenar').onchange = render;
+render();
+</script>
 </body>
 </html>
