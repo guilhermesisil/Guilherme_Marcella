@@ -127,14 +127,14 @@ section .container{ padding-top:6px; padding-bottom:6px; }
 }
 
 /* ===== FIX MODAL RSVP — SOBRESCREVER ESTILOS ===== */
-#modalRSVP.modal-bg,
-.modal-bg {
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    background:rgba(0,0,0,0.6) !important;
+#modalRSVP.modal-bg {
+    display:none; /* estado inicial */
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,0.6);
     padding:20px;
 }
+
 
 #modalRSVP .modal,
 .modal {
