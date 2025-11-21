@@ -62,14 +62,59 @@ section .container{ padding-top:6px; padding-bottom:6px; }
   .count-box{ padding:18px 20px; }
 }
 
-.botao-rsvp {
-    background:#000 !important;
-    color:#fff !important;
-    padding:14px 32px !important;
-    border-radius:10px !important;
-    font-weight:300 !important;
-    border:none !important;
-    cursor:pointer !important;
-    display:inline-block !important;
-    margin-top:10px;
+/* === FIX MODAL RSVP === */
+
+.modal-bg {
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(0,0,0,0.65) !important;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999 !important;
+    backdrop-filter: blur(4px);
 }
+
+.modal {
+    width: 92%;
+    max-width: 480px;
+    background: #fff !important;
+    padding: 24px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    animation: modalFade .35s ease;
+}
+
+@keyframes modalFade {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.modal h3 {
+    font-weight: 300 !important;
+}
+
+.modal input,
+.modal textarea,
+.modal select {
+    width: 100% !important;
+    padding: 12px !important;
+    border-radius: 10px !important;
+    border: 1px solid #ccc !important;
+    margin-top: 10px !important;
+    font-family: inherit;
+}
+
+.modal button.btn {
+    width: 100% !important;
+    margin-top: 14px !important;
+    background: #000 !important;
+    color: #fff !important;
+    border-radius: 10px !important;
+    padding: 14px !important;
+}
+
+.modal .fechar-modal {
+    border-radius: 8px;
+}
+
