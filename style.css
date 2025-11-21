@@ -61,3 +61,15 @@ section .container{ padding-top:6px; padding-bottom:6px; }
   .hero h1{ font-size:38px; letter-spacing:6px; }
   .count-box{ padding:18px 20px; }
 }
+
+.botao-rsvp {
+    background:#000 !important;
+    color:#fff !important;
+    padding:14px 32px !important;
+    border-radius:10px !important;
+    font-weight:300 !important;
+    border:none !important;
+    cursor:pointer !important;
+    display:inline-block !important;
+    margin-top:10px;
+}
