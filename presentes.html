@@ -1,40 +1,72 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Lista de Presentes — Guilherme & Marcella</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lista de Presentes — Guilherme & Marcella</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="presentes.css">
+
 </head>
 <body>
-<header id="topo">
-  <nav>
-    <a href="index.html#rsvp">RSVP</a>
-    <a href="index.html#casal">O Casal</a>
-    <a href="index.html#cerimonia">Cerimônia</a>
-    <a href="presentes.html">Presentes</a>
-  </nav>
-</header>
+  <header class="shop-header">
+    <div class="shop-top container">
+      <a class="logo" href="index.html">← Voltar</a>
+      <h1>Lista de Presentes</h1>
+    </div>
+  </header>
 
-<section class="hero">
-  <div class="container">
-    <h1>LISTA DE PRESENTES</h1>
-    <p style="font-weight:300;">Aqui está a nossa lista completa — clique em "Presentear" para contribuir.</p>
+  <main class="container shop-main">
+    <section class="controls">
+      <div class="search">
+        <input id="searchInput" placeholder="Buscar presente por nome..." />
+      </div>
+
+      <div class="filters">
+        <label>Ordenar:</label>
+        <select id="sortSelect">
+          <option value="default">Padrão</option>
+          <option value="price-asc">Preço: menor → maior</option>
+          <option value="price-desc">Preço: maior → menor</option>
+          <option value="name-asc">Nome A → Z</option>
+          <option value="name-desc">Nome Z → A</option>
+        </select>
+
+        <label>Itens por página:</label>
+        <select id="perPageSelect">
+          <option value="24">24</option>
+          <option value="48">48</option>
+          <option value="96">96</option>
+        </select>
+      </div>
+    </section>
+
+    <section id="grid" class="grid-presentes" aria-live="polite"></section>
+
+    <nav class="pagination" id="pagination"></nav>
+  </main>
+
+  <!-- Modal detalhe presente -->
+  <div id="presentModal" class="present-modal" aria-hidden="true">
+    <div class="present-modal-inner">
+      <button class="close-modal" onclick="closePresentModal()">✕</button>
+      <div class="present-modal-media">
+        <div class="img-square"><img id="modalImage" src="" alt=""></div>
+      </div>
+      <div class="present-modal-info">
+        <h2 id="modalTitle"></h2>
+        <p id="modalDesc"></p>
+        <p class="price" id="modalPrice"></p>
+        <p class="address" id="modalAddress"></p>
+        <div class="modal-actions">
+          <a id="modalLink" class="btn" target="_blank" rel="noopener">Ver link</a>
+          <button class="btn-ghost" onclick="markAsBought()">Marcar como comprado</button>
+        </div>
+      </div>
+    </div>
   </div>
-</section>
 
-<section>
-  <div class="container">
-    <div class="grid-presentes" id="listaPresentes"></div>
-  </div>
-</section>
-
-<!-- modal for present -->
-<div class="modal-bg" id="modalPresenteBg" style="display:none;">
-  <div class="modal" id="modalPresente"></div>
-</div>
-
-<script src="presentes.js"></script>
+  <script src="presentes.js"></script>
 </body>
 </html>
