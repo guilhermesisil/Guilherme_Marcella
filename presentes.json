@@ -1,0 +1,1348 @@
+[
+  {
+    "id": 1,
+    "categoria": "Cozinha",
+    "nome": "Jogo de Panelas Inox 5pçs",
+    "preco": 399.90,
+    "img": "img/presente1.jpg",
+    "descricao": "Conjunto de panelas de inox com tampa de vidro temperado.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 2,
+    "categoria": "Cozinha",
+    "nome": "Conjunto de Facas Profissionais",
+    "preco": 249.90,
+    "img": "img/presente2.jpg",
+    "descricao": "Kit com 6 facas profissionais para cozinha.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 3,
+    "categoria": "Cozinha",
+    "nome": "Jogo de Copos de Vidro",
+    "preco": 89.90,
+    "img": "img/presente3.jpg",
+    "descricao": "Jogo com 6 copos de vidro cristalino.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 4,
+    "categoria": "Cozinha",
+    "nome": "Aparelho de Jantar 20 Peças",
+    "preco": 279.90,
+    "img": "img/presente4.jpg",
+    "descricao": "Aparelho de jantar moderno para 4 pessoas.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 5,
+    "categoria": "Cozinha",
+    "nome": "Kit de Utensílios de Silicone",
+    "preco": 59.90,
+    "img": "img/presente5.jpg",
+    "descricao": "6 utensílios de silicone resistentes ao calor.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 6,
+    "categoria": "Eletrodomésticos",
+    "nome": "Airfryer 5L",
+    "preco": 499.90,
+    "img": "img/presente6.jpg",
+    "descricao": "Fritadeira sem óleo com capacidade de 5 litros.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 7,
+    "categoria": "Eletrodomésticos",
+    "nome": "Liquidificador Alta Potência",
+    "preco": 199.90,
+    "img": "img/presente7.jpg",
+    "descricao": "Liquidificador turbo com jarra de 3 litros.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 8,
+    "categoria": "Eletrodomésticos",
+    "nome": "Batedeira Planetária",
+    "preco": 399.90,
+    "img": "img/presente8.jpg",
+    "descricao": "Ideal para massas pesadas e claras em neve.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 9,
+    "categoria": "Eletrodomésticos",
+    "nome": "Mixer 3 em 1",
+    "preco": 149.90,
+    "img": "img/presente9.jpg",
+    "descricao": "Mixer com batedor e mini processador.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 10,
+    "categoria": "Eletrodomésticos",
+    "nome": "Cafeteira Elétrica",
+    "preco": 169.90,
+    "img": "img/presente10.jpg",
+    "descricao": "Cafeteira para até 30 cafés com filtro reutilizável.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 11,
+    "categoria": "Casa & Decoração",
+    "nome": "Conjunto de Quadros Decorativos",
+    "preco": 129.90,
+    "img": "img/presente11.jpg",
+    "descricao": "Trio de quadros minimalistas em preto e branco.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 12,
+    "categoria": "Casa & Decoração",
+    "nome": "Tapete Sala 2x1,5m",
+    "preco": 299.90,
+    "img": "img/presente12.jpg",
+    "descricao": "Tapete macio antialérgico ideal para sala.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 13,
+    "categoria": "Casa & Decoração",
+    "nome": "Abajur de Mesa Moderno",
+    "preco": 159.90,
+    "img": "img/presente13.jpg",
+    "descricao": "Abajur em LED com design moderno.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 14,
+    "categoria": "Casa & Decoração",
+    "nome": "Vaso Decorativo em Cerâmica",
+    "preco": 79.90,
+    "img": "img/presente14.jpg",
+    "descricao": "Vaso em cerâmica para arranjos florais.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 15,
+    "categoria": "Casa & Decoração",
+    "nome": "Espelho Decorativo Redondo 60cm",
+    "preco": 219.90,
+    "img": "img/presente15.jpg",
+    "descricao": "Espelho minimalista com moldura preta.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 16,
+    "categoria": "Cozinha",
+    "nome": "Tábua de Corte em Bamboo",
+    "preco": 79.90,
+    "img": "img/presente16.jpg",
+    "descricao": "Tábua resistente e antibacteriana.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 17,
+    "categoria": "Cozinha",
+    "nome": "Organizador de Temperos",
+    "preco": 59.90,
+    "img": "img/presente17.jpg",
+    "descricao": "Porta temperos com potes de vidro.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 18,
+    "categoria": "Cozinha",
+    "nome": "Assadeira Antiaderente",
+    "preco": 49.90,
+    "img": "img/presente18.jpg",
+    "descricao": "Assadeira grande ideal para forno elétrico ou a gás.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 19,
+    "categoria": "Cozinha",
+    "nome": "Panela Wok",
+    "preco": 119.90,
+    "img": "img/presente19.jpg",
+    "descricao": "Panela wok antiaderente para salteados.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 20,
+    "categoria": "Cozinha",
+    "nome": "Jogo de Taças de Vinho",
+    "preco": 159.90,
+    "img": "img/presente20.jpg",
+    "descricao": "Jogo com 6 taças de cristal fino.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 21,
+    "categoria": "Casa & Decoração",
+    "nome": "Kit Aromatizador + Difusor",
+    "preco": 89.90,
+    "img": "img/presente21.jpg",
+    "descricao": "Aromatizador com fragrância para casa.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 22,
+    "categoria": "Casa & Decoração",
+    "nome": "Relógio de Parede Minimalista",
+    "preco": 129.90,
+    "img": "img/presente22.jpg",
+    "descricao": "Relógio silencioso com design moderno.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 23,
+    "categoria": "Casa & Decoração",
+    "nome": "Luminária LED Inteligente",
+    "preco": 189.90,
+    "img": "img/presente23.jpg",
+    "descricao": "Luminária com intensidade e cor ajustáveis.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 24,
+    "categoria": "Casa & Decoração",
+    "nome": "Porta-Retratos Casal",
+    "preco": 39.90,
+    "img": "img/presente24.jpg",
+    "descricao": "Porta-retratos 20x25cm para fotos especiais.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 25,
+    "categoria": "Casa & Decoração",
+    "nome": "Almofadas Decorativas (2un)",
+    "preco": 99.90,
+    "img": "img/presente25.jpg",
+    "descricao": "Almofadas macias com capa removível.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 26,
+    "categoria": "Cozinha",
+    "nome": "Espremedor de Frutas Manual",
+    "preco": 39.90,
+    "img": "img/presente26.jpg",
+    "descricao": "Espremedor simples e prático para o dia a dia.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 27,
+    "categoria": "Cozinha",
+    "nome": "Pipoqueira Antiaderente",
+    "preco": 89.90,
+    "img": "img/presente27.jpg",
+    "descricao": "Panela pipoqueira com cabo ergonômico.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 28,
+    "categoria": "Cozinha",
+    "nome": "Conjunto de Bowls Coloridos (5un)",
+    "preco": 49.90,
+    "img": "img/presente28.jpg",
+    "descricao": "Bowls empilháveis para servir ou preparar.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 29,
+    "categoria": "Cozinha",
+    "nome": "Torradeira Inox",
+    "preco": 129.90,
+    "img": "img/presente29.jpg",
+    "descricao": "Torradeira com ajuste de níveis e bandeja coletora.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 30,
+    "categoria": "Cozinha",
+    "nome": "Leiteira Antiaderente",
+    "preco": 34.90,
+    "img": "img/presente30.jpg",
+    "descricao": "Leiteira pequena antiaderente para uso diário.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  }
+]
+[
+  {
+    "id": 31,
+    "categoria": "Eletrodomésticos",
+    "nome": "Ferro de Passar a Vapor",
+    "preco": 159.90,
+    "img": "img/presente31.jpg",
+    "descricao": "Ferro com base antiaderente e jato de vapor extra.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 32,
+    "categoria": "Eletrodomésticos",
+    "nome": "Ventilador de Mesa 40cm",
+    "preco": 189.90,
+    "img": "img/presente32.jpg",
+    "descricao": "Ventilador silencioso com 3 velocidades.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 33,
+    "categoria": "Eletrodomésticos",
+    "nome": "Aspirador de Pó Portátil",
+    "preco": 249.90,
+    "img": "img/presente33.jpg",
+    "descricao": "Aspirador portátil sem fio para limpeza rápida.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 34,
+    "categoria": "Eletrodomésticos",
+    "nome": "Grill Elétrico",
+    "preco": 129.90,
+    "img": "img/presente34.jpg",
+    "descricao": "Grelha carnes e sanduíches sem óleo.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 35,
+    "categoria": "Eletrodomésticos",
+    "nome": "Sanduicheira 2 Pães",
+    "preco": 89.90,
+    "img": "img/presente35.jpg",
+    "descricao": "Sanduicheira prática com placas antiaderentes.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 36,
+    "categoria": "Lavanderia",
+    "nome": "Tábua de Passar Dobrável",
+    "preco": 169.90,
+    "img": "img/presente36.jpg",
+    "descricao": "Tábua leve e dobrável com altura ajustável.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 37,
+    "categoria": "Lavanderia",
+    "nome": "Cesto de Roupa Suja",
+    "preco": 59.90,
+    "img": "img/presente37.jpg",
+    "descricao": "Cesto dobrável de tecido reforçado.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 38,
+    "categoria": "Lavanderia",
+    "nome": "Varal de Chão Dobrável",
+    "preco": 129.90,
+    "img": "img/presente38.jpg",
+    "descricao": "Varal em aço para apartamentos e lavanderias.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 39,
+    "categoria": "Lavanderia",
+    "nome": "Kit Organizadores de Roupa (6un)",
+    "preco": 89.90,
+    "img": "img/presente39.jpg",
+    "descricao": "Organizadores para malas e armários.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 40,
+    "categoria": "Lavanderia",
+    "nome": "Porta-sabão e Porta-Amaciante",
+    "preco": 49.90,
+    "img": "img/presente40.jpg",
+    "descricao": "Conjunto hermético para lavanderia.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 41,
+    "categoria": "Cama/Mesa/Banho",
+    "nome": "Jogo de Lençol Queen 4 Peças",
+    "preco": 199.90,
+    "img": "img/presente41.jpg",
+    "descricao": "Jogo de lençol 150 fios para cama queen.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 42,
+    "categoria": "Cama/Mesa/Banho",
+    "nome": "Edredom Queen Dupla Face",
+    "preco": 249.90,
+    "img": "img/presente42.jpg",
+    "descricao": "Edredom macio e aconchegante dupla face.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 43,
+    "categoria": "Cama/Mesa/Banho",
+    "nome": "Toalhas de Banho (Jogo 4un)",
+    "preco": 129.90,
+    "img": "img/presente43.jpg",
+    "descricao": "Toalhas felpudas 100% algodão.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 44,
+    "categoria": "Cama/Mesa/Banho",
+    "nome": "Jogo de Toalhas de Rosto (4un)",
+    "preco": 69.90,
+    "img": "img/presente44.jpg",
+    "descricao": "Toalhas 100% algodão de excelente absorção.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 45,
+    "categoria": "Cama/Mesa/Banho",
+    "nome": "Colcha Queen Matelassê",
+    "preco": 199.90,
+    "img": "img/presente45.jpg",
+    "descricao": "Colcha leve, ideal para meia estação.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 46,
+    "categoria": "Organização",
+    "nome": "Organizador de Sapatos",
+    "preco": 59.90,
+    "img": "img/presente46.jpg",
+    "descricao": "Organizador vertical para 12 pares.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 47,
+    "categoria": "Organização",
+    "nome": "Cesto de Organização com Tampa",
+    "preco": 39.90,
+    "img": "img/presente47.jpg",
+    "descricao": "Cesto para guardar objetos diversos.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 48,
+    "categoria": "Organização",
+    "nome": "Gaveteiro Plástico 3 Andares",
+    "preco": 109.90,
+    "img": "img/presente48.jpg",
+    "descricao": "Gaveteiro multiuso para closet ou escritório.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 49,
+    "categoria": "Organização",
+    "nome": "Suporte de Pratos para Armário",
+    "preco": 29.90,
+    "img": "img/presente49.jpg",
+    "descricao": "Suporte metálico para otimização de espaço.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 50,
+    "categoria": "Organização",
+    "nome": "Kit Organizadores de Acrílico (5un)",
+    "preco": 119.90,
+    "img": "img/presente50.jpg",
+    "descricao": "Organizadores transparentes para geladeira e despensa.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 51,
+    "categoria": "Cama/Mesa/Banho",
+    "nome": "Jogo Americano (6 peças)",
+    "preco": 49.90,
+    "img": "img/presente51.jpg",
+    "descricao": "Jogos americanos trançados estilo elegante.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 52,
+    "categoria": "Cama/Mesa/Banho",
+    "nome": "Guardanapos de Tecido (6un)",
+    "preco": 39.90,
+    "img": "img/presente52.jpg",
+    "descricao": "Guardanapos elegantes para mesa posta.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 53,
+    "categoria": "Cama/Mesa/Banho",
+    "nome": "Toalha de Mesa Retangular",
+    "preco": 59.90,
+    "img": "img/presente53.jpg",
+    "descricao": "Toalha de mesa estampada 8 lugares.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 54,
+    "categoria": "Cama/Mesa/Banho",
+    "nome": "Manta Decorativa para Sofá",
+    "preco": 79.90,
+    "img": "img/presente54.jpg",
+    "descricao": "Manta macia ideal para sala.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 55,
+    "categoria": "Cama/Mesa/Banho",
+    "nome": "Tapete Antiderrapante para Banheiro",
+    "preco": 29.90,
+    "img": "img/presente55.jpg",
+    "descricao": "Tapete confortável com base antiderrapante.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 56,
+    "categoria": "Casa & Decoração",
+    "nome": "Lixeira Inox 5L",
+    "preco": 89.90,
+    "img": "img/presente56.jpg",
+    "descricao": "Lixeira compacta para banheiro ou escritório.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 57,
+    "categoria": "Casa & Decoração",
+    "nome": "Cortina Blackout",
+    "preco": 119.90,
+    "img": "img/presente57.jpg",
+    "descricao": "Cortina blackout para reduzir a luminosidade.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 58,
+    "categoria": "Casa & Decoração",
+    "nome": "Mesa Lateral Decorativa",
+    "preco": 149.90,
+    "img": "img/presente58.jpg",
+    "descricao": "Mesa auxiliar moderna para sala.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 59,
+    "categoria": "Casa & Decoração",
+    "nome": "Lixeira para Cozinha 12L",
+    "preco": 69.90,
+    "img": "img/presente59.jpg",
+    "descricao": "Lixeira resistente com tampa basculante.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 60,
+    "categoria": "Casa & Decoração",
+    "nome": "Conjunto de Velas Aromáticas",
+    "preco": 49.90,
+    "img": "img/presente60.jpg",
+    "descricao": "Kit com 3 velas aromáticas perfumadas.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  }
+]
+[
+  {
+    "id": 61,
+    "categoria": "Cozinha",
+    "nome": "Panela de Pressão 4,5L",
+    "preco": 149.90,
+    "img": "img/presente61.jpg",
+    "descricao": "Panela de pressão segura com 3 válvulas.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 62,
+    "categoria": "Cozinha",
+    "nome": "Jogo de Bowls de Inox (5 peças)",
+    "preco": 79.90,
+    "img": "img/presente62.jpg",
+    "descricao": "Bowls resistentes para preparo de alimentos.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 63,
+    "categoria": "Cozinha",
+    "nome": "Forma Antiaderente para Bolo",
+    "preco": 29.90,
+    "img": "img/presente63.jpg",
+    "descricao": "Forma redonda antiaderente alta durabilidade.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 64,
+    "categoria": "Cozinha",
+    "nome": "Leiteira Antiaderente 1,8L",
+    "preco": 39.90,
+    "img": "img/presente64.jpg",
+    "descricao": "Leiteira com cabo ergonômico e fundo reforçado.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 65,
+    "categoria": "Cozinha",
+    "nome": "Pipoqueira de Alumínio",
+    "preco": 79.90,
+    "img": "img/presente65.jpg",
+    "descricao": "Pipoqueira com manivela para preparo uniforme.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 66,
+    "categoria": "Sala de Estar",
+    "nome": "Almofadas Decorativas (2un)",
+    "preco": 59.90,
+    "img": "img/presente66.jpg",
+    "descricao": "Almofadas macias com capa removível.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 67,
+    "categoria": "Sala de Estar",
+    "nome": "Tapete Decorativo 1,5m",
+    "preco": 129.90,
+    "img": "img/presente67.jpg",
+    "descricao": "Tapete felpudo para sala de estar.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 68,
+    "categoria": "Sala de Estar",
+    "nome": "Luminária de Mesa",
+    "preco": 89.90,
+    "img": "img/presente68.jpg",
+    "descricao": "Luminária moderna com luz suave ambiente.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 69,
+    "categoria": "Sala de Estar",
+    "nome": "Quadro Decorativo Minimalista",
+    "preco": 79.90,
+    "img": "img/presente69.jpg",
+    "descricao": "Quadro elegante em preto e branco.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 70,
+    "categoria": "Sala de Estar",
+    "nome": "Aromatizador Elétrico",
+    "preco": 49.90,
+    "img": "img/presente70.jpg",
+    "descricao": "Difusor de aromas elétrico para o ambiente.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 71,
+    "categoria": "Decoração",
+    "nome": "Vaso Decorativo de Cerâmica",
+    "preco": 39.90,
+    "img": "img/presente71.jpg",
+    "descricao": "Vaso moderno para sala ou hall de entrada.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 72,
+    "categoria": "Decoração",
+    "nome": "Conjunto de Plantas Artificiais",
+    "preco": 59.90,
+    "img": "img/presente72.jpg",
+    "descricao": "Mini plantas artificiais em vasos decorativos.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 73,
+    "categoria": "Decoração",
+    "nome": "Relógio de Parede Minimalista",
+    "preco": 69.90,
+    "img": "img/presente73.jpg",
+    "descricao": "Relógio moderno em tema preto e branco.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 74,
+    "categoria": "Decoração",
+    "nome": "Porta-Retrato Moderno",
+    "preco": 29.90,
+    "img": "img/presente74.jpg",
+    "descricao": "Porta-retrato em vidro e madeira.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 75,
+    "categoria": "Decoração",
+    "nome": "Espelho Decorativo Redondo",
+    "preco": 159.90,
+    "img": "img/presente75.jpg",
+    "descricao": "Espelho de 50cm com moldura fina preta.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 76,
+    "categoria": "Escritório",
+    "nome": "Cadeira de Escritório Confort",
+    "preco": 299.90,
+    "img": "img/presente76.jpg",
+    "descricao": "Cadeira ergonômica para home office.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 77,
+    "categoria": "Escritório",
+    "nome": "Luminária com Braço Articulado",
+    "preco": 89.90,
+    "img": "img/presente77.jpg",
+    "descricao": "Luminária articulada com ajuste suave.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 78,
+    "categoria": "Escritório",
+    "nome": "Organizador de Mesa",
+    "preco": 39.90,
+    "img": "img/presente78.jpg",
+    "descricao": "Organizador elegante para mesa de trabalho.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 79,
+    "categoria": "Escritório",
+    "nome": "Mouse Pad Estendido",
+    "preco": 49.90,
+    "img": "img/presente79.jpg",
+    "descricao": "Mouse pad grande antiderrapante.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 80,
+    "categoria": "Escritório",
+    "nome": "Suporte para Notebook",
+    "preco": 69.90,
+    "img": "img/presente80.jpg",
+    "descricao": "Suporte ergonômico para elevar o notebook.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 81,
+    "categoria": "Banheiro",
+    "nome": "Kit Tapetes para Banheiro (3 peças)",
+    "preco": 59.90,
+    "img": "img/presente81.jpg",
+    "descricao": "Kit de tapetes antiderrapantes.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 82,
+    "categoria": "Banheiro",
+    "nome": "Dispenser para Sabonete Líquido",
+    "preco": 29.90,
+    "img": "img/presente82.jpg",
+    "descricao": "Dispenser moderno em acrílico.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 83,
+    "categoria": "Banheiro",
+    "nome": "Suporte de Papel Higiênico Inox",
+    "preco": 34.90,
+    "img": "img/presente83.jpg",
+    "descricao": "Suporte moderno em aço inox.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 84,
+    "categoria": "Banheiro",
+    "nome": "Escova Sanitária com Suporte",
+    "preco": 29.90,
+    "img": "img/presente84.jpg",
+    "descricao": "Escova moderna com base discreta.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 85,
+    "categoria": "Banheiro",
+    "nome": "Kit Acessórios Inox (5 peças)",
+    "preco": 99.90,
+    "img": "img/presente85.jpg",
+    "descricao": "Suportes e ganchos para banheiro completo.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 86,
+    "categoria": "Cozinha",
+    "nome": "Coador de Café de Aço Inox",
+    "preco": 24.90,
+    "img": "img/presente86.jpg",
+    "descricao": "Coador permanente reutilizável.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 87,
+    "categoria": "Cozinha",
+    "nome": "Organizador de Talheres",
+    "preco": 29.90,
+    "img": "img/presente87.jpg",
+    "descricao": "Bandeja ajustável para gavetas.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 88,
+    "categoria": "Cozinha",
+    "nome": "Afiador de Facas",
+    "preco": 39.90,
+    "img": "img/presente88.jpg",
+    "descricao": "Afiador manual de dois estágios.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 89,
+    "categoria": "Cozinha",
+    "nome": "Pote Hermético 2L",
+    "preco": 19.90,
+    "img": "img/presente89.jpg",
+    "descricao": "Pote hermético ideal para mantimentos.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 90,
+    "categoria": "Cozinha",
+    "nome": "Kit Utensílios em Silicone (6 peças)",
+    "preco": 79.90,
+    "img": "img/presente90.jpg",
+    "descricao": "Utensílios resistente ao calor com cabo de madeira.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  }
+]
+[
+  {
+    "id": 91,
+    "categoria": "Cozinha",
+    "nome": "Concha de Silicone",
+    "preco": 24.90,
+    "img": "img/presente91.jpg",
+    "descricao": "Concha resistente ao calor, cabo de madeira.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 92,
+    "categoria": "Cozinha",
+    "nome": "Jogo de Xícaras para Chá (6 unidades)",
+    "preco": 49.90,
+    "img": "img/presente92.jpg",
+    "descricao": "Xícaras clássicas brancas com pires.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 93,
+    "categoria": "Cozinha",
+    "nome": "Forma Retangular Grande",
+    "preco": 34.90,
+    "img": "img/presente93.jpg",
+    "descricao": "Forma antiaderente grande para assados.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 94,
+    "categoria": "Cozinha",
+    "nome": "Cafeteira Italiana",
+    "preco": 119.90,
+    "img": "img/presente94.jpg",
+    "descricao": "Cafeteira moka compacta para café expresso.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 95,
+    "categoria": "Cozinha",
+    "nome": "Moedor Manual de Café",
+    "preco": 89.90,
+    "img": "img/presente95.jpg",
+    "descricao": "Moedor elegante com ajuste de granulação.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 96,
+    "categoria": "Lavanderia",
+    "nome": "Cesta de Roupa Suja",
+    "preco": 39.90,
+    "img": "img/presente96.jpg",
+    "descricao": "Cesta dobrável em tecido reforçado.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 97,
+    "categoria": "Lavanderia",
+    "nome": "Tábua de Passar Roupas",
+    "preco": 129.90,
+    "img": "img/presente97.jpg",
+    "descricao": "Tábua reforçada com altura ajustável.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 98,
+    "categoria": "Lavanderia",
+    "nome": "Varal Portátil",
+    "preco": 79.90,
+    "img": "img/presente98.jpg",
+    "descricao": "Varal portátil dobrável de alumínio.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 99,
+    "categoria": "Lavanderia",
+    "nome": "Kit Cestos Organizadores (3un)",
+    "preco": 49.90,
+    "img": "img/presente99.jpg",
+    "descricao": "Cestos multiuso para organização.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 100,
+    "categoria": "Lavanderia",
+    "nome": "Porta-Produtos de Lavanderia",
+    "preco": 39.90,
+    "img": "img/presente100.jpg",
+    "descricao": "Organizador para sabão, amaciante e acessórios.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 101,
+    "categoria": "Decoração",
+    "nome": "Cortina Blackout",
+    "preco": 149.90,
+    "img": "img/presente101.jpg",
+    "descricao": "Cortina blackout moderna, ideal para quarto.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 102,
+    "categoria": "Decoração",
+    "nome": "Luminária de Pé Minimalista",
+    "preco": 199.90,
+    "img": "img/presente102.jpg",
+    "descricao": "Luminária elegante para iluminação ambiente.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 103,
+    "categoria": "Decoração",
+    "nome": "Centro de Mesa Metálico",
+    "preco": 59.90,
+    "img": "img/presente103.jpg",
+    "descricao": "Centro de mesa preto com design moderno.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 104,
+    "categoria": "Decoração",
+    "nome": "Bandeja Decorativa Espejada",
+    "preco": 69.90,
+    "img": "img/presente104.jpg",
+    "descricao": "Bandeja clássica com fundo de espelho.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 105,
+    "categoria": "Decoração",
+    "nome": "Castiçais Modernos (2un)",
+    "preco": 49.90,
+    "img": "img/presente105.jpg",
+    "descricao": "Castiçais pretos minimalistas.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 106,
+    "categoria": "Sala",
+    "nome": "Manta Decorativa de Sofá",
+    "preco": 79.90,
+    "img": "img/presente106.jpg",
+    "descricao": "Manta macia e elegante para sala.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 107,
+    "categoria": "Sala",
+    "nome": "Difusor de Aromas Premium",
+    "preco": 59.90,
+    "img": "img/presente107.jpg",
+    "descricao": "Difusor com fragrância suave e elegante.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 108,
+    "categoria": "Sala",
+    "nome": "Conjunto de Velas Decorativas",
+    "preco": 34.90,
+    "img": "img/presente108.jpg",
+    "descricao": "Velas aromáticas decorativas.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 109,
+    "categoria": "Sala",
+    "nome": "Cesto Decorativo de Fibra",
+    "preco": 69.90,
+    "img": "img/presente109.jpg",
+    "descricao": "Cesto decorativo grande para sala.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 110,
+    "categoria": "Sala",
+    "nome": "Abajur de Mesa",
+    "preco": 139.90,
+    "img": "img/presente110.jpg",
+    "descricao": "Abajur com base metálica e cúpula de tecido.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 111,
+    "categoria": "Lua de Mel",
+    "nome": "Jantar Romântico",
+    "preco": 150.00,
+    "img": "img/presente111.jpg",
+    "descricao": "Contribuição para um jantar especial a dois.",
+    "link": "#",
+    "endereco": "Lua de Mel",
+    "status": "Disponível"
+  },
+  {
+    "id": 112,
+    "categoria": "Lua de Mel",
+    "nome": "Passeio de Barco",
+    "preco": 200.00,
+    "img": "img/presente112.jpg",
+    "descricao": "Contribuição para passeio marítimo.",
+    "link": "#",
+    "endereco": "Lua de Mel",
+    "status": "Disponível"
+  },
+  {
+    "id": 113,
+    "categoria": "Lua de Mel",
+    "nome": "Massagem para Casal",
+    "preco": 180.00,
+    "img": "img/presente113.jpg",
+    "descricao": "Sessão de massagem relaxante para o casal.",
+    "link": "#",
+    "endereco": "Lua de Mel",
+    "status": "Disponível"
+  },
+  {
+    "id": 114,
+    "categoria": "Lua de Mel",
+    "nome": "Passeio Turístico Guiado",
+    "preco": 120.00,
+    "img": "img/presente114.jpg",
+    "descricao": "Tour guiado conhecendo pontos turísticos locais.",
+    "link": "#",
+    "endereco": "Lua de Mel",
+    "status": "Disponível"
+  },
+  {
+    "id": 115,
+    "categoria": "Lua de Mel",
+    "nome": "Cota para Hospedagem",
+    "preco": 250.00,
+    "img": "img/presente115.jpg",
+    "descricao": "Ajuda na estadia da lua de mel.",
+    "link": "#",
+    "endereco": "Lua de Mel",
+    "status": "Disponível"
+  },
+
+  {
+    "id": 116,
+    "categoria": "Banheiro",
+    "nome": "Toalhas de Rosto (2un)",
+    "preco": 29.90,
+    "img": "img/presente116.jpg",
+    "descricao": "Toalhas macias de algodão.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 117,
+    "categoria": "Banheiro",
+    "nome": "Porta-Sabonete",
+    "preco": 19.90,
+    "img": "img/presente117.jpg",
+    "descricao": "Porta-sabonete elegante de cerâmica branca.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 118,
+    "categoria": "Banheiro",
+    "nome": "Tapete Macio Antiderrapante",
+    "preco": 39.90,
+    "img": "img/presente118.jpg",
+    "descricao": "Tapete para área do chuveiro.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 119,
+    "categoria": "Banheiro",
+    "nome": "Cesto para Banheiro",
+    "preco": 34.90,
+    "img": "img/presente119.jpg",
+    "descricao": "Cesto pequeno para banheiro minimalista.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  },
+  {
+    "id": 120,
+    "categoria": "Banheiro",
+    "nome": "Organizador de Chuveiro Inox",
+    "preco": 49.90,
+    "img": "img/presente120.jpg",
+    "descricao": "Organizador pendente em aço inox.",
+    "link": "#",
+    "endereco": "Rua Araxá, 316, Passos - MG",
+    "status": "Disponível"
+  }
+]
