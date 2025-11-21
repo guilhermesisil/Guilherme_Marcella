@@ -62,59 +62,38 @@ section .container{ padding-top:6px; padding-bottom:6px; }
   .count-box{ padding:18px 20px; }
 }
 
-/* === FIX MODAL RSVP === */
-
+/* ===== FIX MODAL RSVP — SOBRESCREVER ESTILOS ===== */
+#modalRSVP.modal-bg,
 .modal-bg {
-    position: fixed !important;
-    inset: 0 !important;
-    background: rgba(0,0,0,0.65) !important;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 999 !important;
-    backdrop-filter: blur(4px);
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    background:rgba(0,0,0,0.6) !important;
+    padding:20px;
 }
 
+#modalRSVP .modal,
 .modal {
-    width: 92%;
-    max-width: 480px;
-    background: #fff !important;
-    padding: 24px !important;
-    border-radius: 16px !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    animation: modalFade .35s ease;
+    background:#fff !important;
+    border-radius:14px !important;
+    padding:22px !important;
+    max-width:480px !important;
+    width:92% !important;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25) !important;
 }
 
-@keyframes modalFade {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
+#modalRSVP input,
+#modalRSVP textarea,
+#modalRSVP select {
+    width:100% !important;
+    padding:12px !important;
+    border-radius:8px !important;
+    border:1px solid #ccc !important;
+    font-family:inherit !important;
 }
 
-.modal h3 {
-    font-weight: 300 !important;
-}
-
-.modal input,
-.modal textarea,
-.modal select {
-    width: 100% !important;
-    padding: 12px !important;
-    border-radius: 10px !important;
-    border: 1px solid #ccc !important;
-    margin-top: 10px !important;
-    font-family: inherit;
-}
-
-.modal button.btn {
-    width: 100% !important;
-    margin-top: 14px !important;
-    background: #000 !important;
-    color: #fff !important;
-    border-radius: 10px !important;
-    padding: 14px !important;
-}
-
-.modal .fechar-modal {
-    border-radius: 8px;
+#modalRSVP button.btn {
+    width:100% !important;
+    margin-top:14px !important;
 }
 
