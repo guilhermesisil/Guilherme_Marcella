@@ -93,11 +93,23 @@ body {
   box-shadow: 0 10px 30px rgba(0,0,0,0.06);
 }
 
-.item img {
+.item .img-box {
   width: 100%;
+  aspect-ratio: 1 / 1;
   border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item .img-box img {
+  width: 90%;
+  height: 90%;
   object-fit: contain;
 }
+
 
 /* ===== LISTA (detalhes) ===== */
 #lista.lista img {
