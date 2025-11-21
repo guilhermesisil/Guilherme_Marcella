@@ -36,16 +36,19 @@
       <label>Ordenar por</label>
       <select id="ordenar">
         <option value="">Padrão</option>
-        <option value="preco_asc">Preço ↑</option>
-        <option value="preco_desc">Preço ↓</option>
-        <option value="nome_asc">Nome A–Z</option>
-        <option value="nome_desc">Nome Z–A</option>
+        <option value="preco-asc">Preço ↑</option>
+        <option value="preco-desc">Preço ↓</option>
+        <option value="nome-asc">Nome A–Z</option>
+        <option value="nome-desc">Nome Z–A</option>
       </select>
     </div>
 
     <div class="control-item">
       <label>Exibição</label>
-      <button id="toggleView" class="toggle">Grid</button>
+      <select id="viewToggle">
+        <option value="grid">Grid</option>
+        <option value="lista">Lista</option>
+      </select>
     </div>
   </div>
 
@@ -54,32 +57,13 @@
 
 </section>
 
-
-<!-- Modal Presentear -->
-<div class="modal-bg" id="modalPresente">
-  <div class="modal">
-    <button class="fechar" onclick="fecharModalPresente()">✕</button>
-
-    <h2 id="modalTitulo"></h2>
-    <img id="modalImg" class="modal-img" alt="Presente">
-
-    <p id="modalDescricao"></p>
-    <p><strong>Preço:</strong> R$ <span id="modalPreco"></span></p>
-
-    <h3>Contribuir com este presente</h3>
-
-    <div class="modal-info">
-      <p><strong>PIX:</strong></p>
-      <div id="qr"></div>
-      <p class="pix-chave" id="pixChave"></p>
-    </div>
-
-    <button class="btn" onclick="confirmarPresente()">Confirmar compra</button>
+<!-- Modal Presentear (inicialmente oculto; será controlado pelo JS) -->
+<div id="modalPresenteBg" class="modal-bg" style="display:none;">
+  <div class="modal" id="modalPresente">
+    <!-- preenchido por JS -->
   </div>
 </div>
 
-
 <script src="presentes.js"></script>
-
 </body>
 </html>
