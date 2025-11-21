@@ -217,3 +217,45 @@ body {
   background: #ccc;
   border-radius: 3px;
 }
+
+/* =============================
+   MODAL PRESENTE — FORÇAR SCROLL
+   ============================= */
+#modalPresenteBg,
+.modal-bg {
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(0,0,0,0.65) !important;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999 !important;
+  padding: 20px;
+}
+
+/* Forçar scroll no conteúdo */
+#modalPresenteBg .modal,
+.modal-bg .modal {
+  width: 92% !important;
+  max-width: 500px !important;
+
+  max-height: 88vh !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+
+  background: #fff !important;
+  border-radius: 14px !important;
+  padding: 20px !important;
+  box-shadow: 0px 20px 60px rgba(0,0,0,0.25) !important;
+
+  position: relative !important;
+}
+
+/* Scrollbar elegante */
+#modalPresenteBg .modal::-webkit-scrollbar {
+  width: 8px;
+}
+#modalPresenteBg .modal::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 4px;
+}
