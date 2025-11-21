@@ -60,9 +60,19 @@
         <p class="price" id="modalPrice"></p>
         <p class="address" id="modalAddress"></p>
         <div class="modal-actions">
-          <a id="modalLink" class="btn" target="_blank" rel="noopener">Ver link</a>
-          <button class="btn-ghost" onclick="markAsBought()">Marcar como comprado</button>
-        </div>
+  <a id="modalLink" class="btn" target="_blank" rel="noopener">Ver link</a>
+
+  <button class="btn" onclick="gerarPix()">Gerar PIX</button>
+
+  <button class="btn-ghost" onclick="copyPIX()">Copiar código</button>
+  <button class="btn-ghost" onclick="markAsBought()">Marcar como comprado</button>
+</div>
+
+<div style="margin-top:15px; text-align:center;">
+  <div id="qrcodePresent"></div>
+  <textarea id="pixCodePresent" readonly style="width:100%; margin-top:10px; padding:10px; border-radius:8px; font-size:13px;"></textarea>
+</div>
+
       </div>
     </div>
   </div>
