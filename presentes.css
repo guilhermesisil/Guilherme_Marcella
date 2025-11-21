@@ -148,36 +148,112 @@ body {
 }
 #lista.lista .img-square { display:none; width:0; height:0; }
 
-/* modal */
+/* ============================
+   MODAL DE PRESENTE — NOVO LAYOUT
+   ============================ */
+
 .modal-bg {
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:flex-start;
-  justify-content:center;
-  background:rgba(0,0,0,0.45);
-  padding:30px 16px;
-  z-index:120;
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  background: rgba(0,0,0,0.55);
+  padding: 25px 10px;
+  z-index: 120;
 }
+
 .modal {
-  width:100%;
-  max-width:720px;
+  width: 100%;
+  max-width: 420px;          /* MODAL MAIS ESTREITO */
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+/* cabeçalho */
+.modal .modal-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+.modal .modal-head h3 {
+  margin:0;
+  font-weight:300;
+  font-size:20px;
+}
+
+/* imagem quadrada menor */
+.modal .img-preview {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
   background:#fff;
-  border-radius:12px;
-  padding:18px;
-  box-shadow:0 20px 60px rgba(0,0,0,0.18);
-  max-height:85vh;
-  overflow-y:auto; /* *** SCROLL NO MODAL *** */
+  border:1px solid #ececec;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:14px;
 }
-.modal .modal-head { display:flex; justify-content:space-between; align-items:center; gap:12px; }
-.modal input[type="text"],
+.modal .img-preview img {
+  width: 86%;
+  height: 86%;
+  object-fit: contain;
+  padding: 6px;
+}
+
+/* textos */
+.modal p {
+  font-size: 14px;
+  color:#444;
+  margin: 6px 0;
+}
+
+/* campos */
+.modal label {
+  font-size:14px;
+  margin-top:12px;
+  font-weight:400;
+}
+
+.modal input[type="text"], 
 .modal input[type="number"] {
-  width:100%;
-  padding:10px 12px;
-  border-radius:8px;
-  border:1px solid #e0e0e2;
-  margin-top:8px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  margin-top:6px;
+  background:#fafafa;
 }
+
+/* botões do modal */
+.modal .btn,
+.modal .btn-ghost {
+  width: 100%;
+  margin-top:10px;
+}
+
+.modal .btn-row {
+  display:flex;
+  gap:10px;
+  margin-top:14px;
+}
+
+#pixAreaModal {
+  margin-top:16px;
+  text-align:center;
+}
+
+#pixAreaModal button {
+  width:auto;
+}
+
 
 /* QR holder */
 #qrHolder { display:flex; justify-content:center; margin:14px 0; }
