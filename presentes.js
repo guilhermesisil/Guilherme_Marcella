@@ -3,7 +3,7 @@
 // CONFIGURAÇÃO
 const DATE_TARGET = new Date("2026-05-09T16:00:00").getTime();
 // COLE SUA URL AQUI TAMBÉM (A mesma do presentes.js)
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx92D_muLSOPiYt_68pQhcAkXEpcUcnqCY8fxQ7Pva91c0IwYMEpKLFcwome4btMXp6/exec"; 
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyAGdnf8IcbzT-tVIC7Yf2vnw_Kbfi6Tqh-XFjQ-AhG-Lff1ODy3lbzrXW7L7HsPdbN/exec"; 
 
 // COUNTDOWN
 function tick(){
