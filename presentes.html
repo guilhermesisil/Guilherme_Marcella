@@ -15,22 +15,22 @@
 
 <header class="topo">
   <div class="container">
-    <a class="voltar" href="index.html">← Voltar</a>
+    <a class="voltar" href="index.html" aria-label="Voltar para página inicial">← Voltar</a>
     <h1>Lista de Presentes</h1>
-    <div style="width:72px"></div><!-- espaço para equilibrar layout -->
+    <div style="width:72px" aria-hidden="true"></div><!-- espaço para equilibrar layout -->
   </div>
 </header>
 
-<section class="container">
-  <div class="controls">
+<main class="container" role="main">
+  <section class="controls" aria-label="Controles de filtro e exibição">
     <div class="control-item">
       <label for="filtroCategoria">Categoria</label>
-      <select id="filtroCategoria"></select>
+      <select id="filtroCategoria" aria-controls="lista"></select>
     </div>
 
     <div class="control-item">
       <label for="ordenar">Ordenar por</label>
-      <select id="ordenar">
+      <select id="ordenar" aria-controls="lista">
         <option value="">Padrão</option>
         <option value="preco_asc">Preço ↑</option>
         <option value="preco_desc">Preço ↓</option>
@@ -41,33 +41,33 @@
 
     <div class="control-item">
       <label for="viewToggle">Exibição</label>
-      <select id="viewToggle">
+      <select id="viewToggle" aria-controls="lista">
         <option value="grid">Grid</option>
         <option value="lista">Lista (texto)</option>
       </select>
     </div>
-  </div>
+  </section>
 
-  <div id="lista" class="grid"></div>
-</section>
+  <section id="lista" class="grid" aria-live="polite" aria-label="Lista de presentes">
+    <!-- renderizado por presentes.js -->
+  </section>
+</main>
 
-<!-- Modal template (injetado por JS se necessário) -->
-<div id="modalPresenteBg" class="modal-bg" style="display:none;">
+<!-- Modal (inicialmente oculto) -->
+<div id="modalPresenteBg" class="modal-bg hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
   <div class="modal" id="modalPresenteContent" style="max-height:85vh; overflow:auto;"></div>
 </div>
 
-<!-- seu presentes.js (cole o presentes.js corrigido que você já recebeu) -->
+<!-- presentes.js (a versão corrigida que gera BR Code, ordenação etc.) -->
 <script src="presentes.js"></script>
 
-<!-- VALIDADOR RÁPIDO — para testar BR Code no console (também útil para debug) -->
+<!-- ferramenta de debug/validação breve (mantive sua função) -->
 <script>
-  // função disponível globalmente: validateBRCode(brcode) -> retorna {valid:Boolean, crcExpected, crcFound}
+  // function validateBRCode(br) { ... }  (mantive a sua função como utilitária)
   function validateBRCode(br){
     if(!br || typeof br !== 'string') return { valid:false, error:'BR code vazio' };
-    // extrai os últimos 4 caracteres (CRC) e testa
     const without = br.slice(0, -4);
     const crcGiven = br.slice(-4).toUpperCase();
-
     function crc16(input){
       let crc = 0xFFFF;
       for(let i=0;i<input.length;i++){
@@ -79,11 +79,8 @@
       }
       return crc.toString(16).toUpperCase().padStart(4,'0');
     }
-
-    const expected = crc16(without + '6304'); // alguns BR codes já incluem 6304 — se não, função usada antes usava '...6304'
-    // fallback calculo direto sem adicionar 6304 somente se mismatch
+    const expected = crc16(without + '6304');
     const expected_alt = crc16(without);
-
     return {
       valid: crcGiven === expected || crcGiven === expected_alt,
       crcFound: crcGiven,
@@ -91,8 +88,6 @@
       crcExpectedAlt: expected_alt
     };
   }
-
-  // expose for debugging
   window.validateBRCode = validateBRCode;
 </script>
 
