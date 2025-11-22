@@ -303,3 +303,17 @@ body {
     border-color: #000;
     box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
 }
+/* FORÇAR CENTRALIZAÇÃO DO PREÇO */
+#valorPresenteModal {
+    text-align: center !important; /* Força o texto para o meio */
+    font-size: 32px !important;    /* Aumenta a fonte */
+    font-weight: 700 !important;   /* Deixa negrito */
+    color: #000 !important;
+    padding: 10px !important;
+    width: 100% !important;
+}
+
+/* Se você atualizou o JS e tem o container 'input-group', isso ajusta o layout */
+.input-group {
+    justify-content: center !important;
+}
