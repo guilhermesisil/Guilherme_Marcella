@@ -1,7 +1,6 @@
 // ============================
 //  CARREGAR LISTA DE PRESENTES
 // ============================
-
 let PRESENTES = [];
 
 // Carrega automaticamente o arquivo presentes.json
