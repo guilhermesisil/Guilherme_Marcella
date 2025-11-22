@@ -1,125 +1,115 @@
-/* presentes.css — aparência "site de loja" premium (revisado) */
-/* Reset e base */
+/* presentes.css — versão final "loja premium" */
+/* Reset leve */
 * { box-sizing: border-box; }
+html,body{ height:100%; }
 body {
   margin: 0;
   font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: #f7f7f9;
+  background: #f6f7f9;
   color: #111;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
+  line-height:1.4;
 }
 
-/* container */
+/* Container */
 .container {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 20px;
+  max-width:1180px;
+  margin:0 auto;
+  padding:20px;
 }
 
-/* topo */
+/* Topo */
 .topo {
-  background: #fff;
-  border-bottom: 1px solid #e6e6e9;
   position: sticky;
   top: 0;
-  z-index: 40;
+  z-index:60;
+  background:#fff;
+  border-bottom:1px solid #e6e6e9;
+  box-shadow: 0 4px 18px rgba(12,12,12,0.02);
 }
 .topo .container {
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap: 12px;
-  padding: 18px 20px;
+  gap:12px;
+  padding:18px 20px;
 }
-.topo h1 {
-  margin:0;
-  font-weight:300;
-  letter-spacing:2px;
-  font-size:20px;
-}
-.voltar {
-  text-decoration:none;
-  color:#111;
-  font-weight:400;
-  opacity:.9;
-}
+.topo h1{ margin:0; font-weight:300; font-size:20px; letter-spacing:1px; }
+.voltar{ text-decoration:none; color:#111; font-weight:400; opacity:.95; }
 
-/* controls */
+/* Controls */
 .controls {
   display:flex;
   gap:18px;
   align-items:center;
-  margin:20px 0;
+  margin:22px 0;
   flex-wrap:wrap;
 }
-.control-item{ display:flex; flex-direction:column; gap:6px; font-size:13px; color:#333; }
+.control-item { display:flex; flex-direction:column; gap:8px; font-size:13px; color:#333; }
+.control-item label { font-weight:300; font-size:13px; color:#666; }
 .control-item select,
 .control-item button {
   padding:10px 12px;
   border-radius:10px;
-  border:1px solid #ddd;
+  border:1px solid #e2e2e5;
   background:#fff;
   font-family:inherit;
   font-size:14px;
+  min-width:140px;
 }
 
-/* layout grid */
+/* Grid layout */
 #lista.grid {
   display:grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(6, 1fr); /* 6 colunas */
   gap:20px;
   margin-bottom:40px;
 }
-@media (max-width:1280px){
-  #lista.grid { grid-template-columns: repeat(4, 1fr); }
-}
-@media (max-width:900px){
-  #lista.grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width:520px){
-  #lista.grid { grid-template-columns: 1fr; }
-}
+@media (max-width:1280px){ #lista.grid{ grid-template-columns: repeat(4, 1fr); } }
+@media (max-width:900px){ #lista.grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width:520px){ #lista.grid{ grid-template-columns: 1fr; } }
 
-/* item estilo loja */
+/* Item card */
 .item {
   background:#fff;
   border-radius:12px;
   padding:12px;
-  border:1px solid #eee;
+  border:1px solid #f0f0f2;
   display:flex;
   flex-direction:column;
   gap:10px;
-  transition: transform .18s ease, box-shadow .18s ease;
+  transition: transform .18s cubic-bezier(.2,.9,.3,1), box-shadow .18s ease;
+  min-height:220px;
 }
-.item:hover { transform: translateY(-6px); box-shadow: 0 14px 30px rgba(18,18,18,0.06); }
+.item:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(12,12,12,0.06); }
 
-/* caixas de imagem quadradas (sempre iguais) */
-.img-square {
+/* imagem quadrada */
+.img-wrap {
   width:100%;
   aspect-ratio: 1/1;
   background:#fff;
+  border-radius:8px;
+  overflow:hidden;
+  border:1px solid #f6f6f6;
   display:flex;
   align-items:center;
   justify-content:center;
-  overflow:hidden;
-  border-radius:10px;
-  border:1px solid #f0f0f0;
 }
-.img-square img {
-  width:100%;
-  height:100%;
-  object-fit:contain; /* mantém a imagem inteira; fundo branco preenche o restante */
-  padding:8px;
+.img-wrap img {
+  width:92%;
+  height:92%;
+  object-fit:contain; /* manter proporção e preencher fundo branco */
   background:#fff;
+  padding:6px;
 }
 
-/* informações */
-.item h4 { margin:0; font-size:14px; font-weight:500; letter-spacing:.2px; }
-.item .price { margin:0; font-weight:600; color:#0b0b0b; font-size:15px; }
-.item .category { color:#666; font-size:12px; margin-top:4px; }
+/* info */
+.item h3 { margin:0; font-size:14px; font-weight:500; color:#111; }
+.item .preco { margin:0; font-weight:700; color:#0b0b0b; font-size:15px; }
+.item .categoria { font-size:12px; color:#777; margin-top:2px; }
 
-/* actions */
+/* actions row */
 .actions { display:flex; gap:10px; margin-top:auto; }
 .btn {
   flex:1 1 auto;
@@ -129,9 +119,11 @@ body {
   padding:10px 12px;
   border-radius:10px;
   cursor:pointer;
-  font-weight:500;
+  font-weight:600;
   text-align:center;
+  transition: transform .12s ease;
 }
+.btn:active{ transform: translateY(1px); }
 .btn-ghost {
   background:transparent;
   color:#0b0b0b;
@@ -141,45 +133,43 @@ body {
   cursor:pointer;
 }
 
-/* lista (modo alternativo) — sem imagens */
-#lista.lista { display:flex; flex-direction:column; gap:12px; }
-#lista.lista .item {
-  flex-direction:row;
-  align-items:center;
-  gap:14px;
-}
-#lista.lista .img-square { display:none; width:0; height:0; }
+/* LIST VIEW - sem imagens, foco em texto */
+#lista.lista { display:flex; flex-direction:column; gap:12px; margin-bottom:40px; }
+#lista.lista .item { flex-direction:row; align-items:center; gap:16px; padding:14px; }
+#lista.lista .img-wrap { display:none; width:0; height:0; }
+#lista.lista .item h3{ font-size:15px; }
+#lista.lista .item .meta { color:#666; font-size:13px; }
 
-/* ===========================
-   MODAL DE PRESENTE — LAYOUT REVISADO
-   - modal mais estreito para ficar confortável em mobile
-   - imagem menor e quadrada
-   - campos alinhados verticalmente e com espaçamento consistente
-   =========================== */
-
+/* Modal (overlay) */
 .modal-bg {
-  position: fixed;
-  inset: 0;
-  display: none;
-  align-items: flex-start;
-  justify-content: center;
-  background: rgba(0,0,0,0.55);
-  padding: 25px 10px;
-  z-index: 120;
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:flex-start;
+  justify-content:center;
+  background: rgba(0,0,0,0.56);
+  padding: 32px 16px;
+  z-index:140;
+  -webkit-overflow-scrolling:touch;
 }
+.modal-bg.show { display:flex; }
 
+/* Modal box */
 .modal {
-  width: 100%;
-  max-width: 420px;          /* modal mais estreito */
-  background: #fff;
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.18);
-  max-height: 85vh;
-  overflow-y: auto;
+  width:100%;
+  max-width:560px;      /* leve mais largo para acomodar info */
+  background:#fff;
+  border-radius:14px;
+  padding:22px;
+  box-shadow: 0 28px 80px rgba(12,12,12,0.22);
+  max-height:86vh;
+  overflow-y:auto;
+  transform-origin: center top;
+  animation: popIn .18s cubic-bezier(.2,.9,.3,1);
 }
+@keyframes popIn { from{ opacity:0; transform: translateY(-10px) scale(.995) } to{ opacity:1; transform:none } }
 
-/* modal header */
+/* modal head */
 .modal .modal-head {
   display:flex;
   align-items:center;
@@ -187,88 +177,67 @@ body {
   gap:12px;
   margin-bottom:12px;
 }
-.modal .modal-head h3 {
-  margin:0;
-  font-weight:400;
-  font-size:18px;
-}
+.modal .modal-head h3 { margin:0; font-weight:400; font-size:18px; }
 
-/* imagem de preview menor/quadrada */
+/* modal content layout */
+.modal .modal-content {
+  display:grid;
+  grid-template-columns: 120px 1fr;
+  gap:14px;
+  align-items:start;
+}
+@media (max-width:640px){
+  .modal .modal-content { grid-template-columns: 1fr; }
+}
 .modal .img-preview {
-  width: 160px;               /* imagem agora menor e fixa */
-  height: 160px;
-  border-radius: 10px;
-  overflow: hidden;
-  background:#fff;
-  border:1px solid #ececec;
+  width:120px;
+  height:120px;
+  border-radius:10px;
+  overflow:hidden;
+  border:1px solid #f0f0f0;
   display:flex;
   align-items:center;
   justify-content:center;
-  margin: 8px 0 12px 0;
+  background:#fff;
 }
-.modal .img-preview img {
-  width: 92%;
-  height: 92%;
-  object-fit: contain;
-  padding: 6px;
-}
+.modal .img-preview img { width:90%; height:90%; object-fit:contain; }
 
-/* descrição e entrega */
-.modal p {
-  font-size: 14px;
-  color:#444;
-  margin: 6px 0;
-}
-
-/* form fields layout */
-.modal .form-grid {
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  margin-top:6px;
-}
-.modal label {
-  font-size:13px;
-  margin-top:6px;
-  font-weight:500;
-  color:#333;
-}
-.modal input[type="text"], 
-.modal input[type="number"] {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid #e6e6e6;
-  font-size: 14px;
-  background:#fafafa;
-}
-
-/* botões do modal — full width e alinhados */
-.modal .btn,
-.modal .btn-ghost {
-  width: 100%;
+/* modal texts & inputs */
+.modal .desc { color:#444; margin:6px 0 0 0; font-size:14px; }
+.modal label { display:block; font-size:13px; margin-top:12px; color:#444; font-weight:500; }
+.modal input[type="text"], .modal input[type="number"], .modal textarea {
+  width:100%;
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid #e8e8ea;
+  background:#fbfbfc;
   margin-top:8px;
+  font-size:14px;
+  box-sizing:border-box;
 }
-
-/* linha com botões lado a lado (quando necessário) */
-.modal .btn-row {
-  display:flex;
-  gap:10px;
-  margin-top:10px;
-}
-.modal .btn-row .btn, .modal .btn-row .btn-ghost { width: auto; flex:1; }
 
 /* pix area */
-#pixAreaModal {
-  margin-top:16px;
-  text-align:center;
-}
-#pixAreaModal button { width:auto; }
-
-/* QR holder */
+#pixArea { margin-top:14px; text-align:center; }
 #qrHolder { display:flex; justify-content:center; margin:12px 0; }
+.pix-code {
+  width:100%;
+  min-height:72px;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #eee;
+  background:#fafafa;
+  font-family:monospace;
+  font-size:12px;
+  resize:none;
+}
 
-/* util classes */
+/* buttons inside modal */
+.modal .btn, .modal .btn-ghost { width:100%; margin-top:8px; }
+.modal .btn-row { display:flex; gap:10px; margin-top:12px; }
+.modal .btn-row .btn, .modal .btn-row .btn-ghost { flex:1; }
+
+/* small helpers */
 .hidden { display:none !important; }
-.price { color:#111; font-weight:600; }
-.category { font-size:12px; color:#666; }
+.sr-only { position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+/* finished */
