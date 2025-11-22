@@ -158,7 +158,7 @@ body {
 #lista.lista .item .btn {
   width: 100px;        /* Tamanho fixo */
   flex-shrink: 0;      /* Impede o botão de ser esmagado se o texto for longo */
-  margin-left: auto;   /* Empurra o botão totalmente para a direita */
+  margin-right: auto;   /* Empurra o botão totalmente para a direita */
   text-align: center;
 }
 
