@@ -200,33 +200,49 @@ function abrirModalPresenteById(id){
   openPresentModal(p);
 }
 
+/* Substitua a função openPresentModal no arquivo presentes.js */
+
 function openPresentModal(p){
   const bg = ensureModalExists();
   const box = $('modalPresenteContent');
 
+  // Adicionamos classes para criar o layout em Grid (duas colunas)
   box.innerHTML = `
-    <div class="modal-head">
+    <div class="modal-header">
       <h3>${escapeHtml(p.nome)}</h3>
-      <button class="btn-ghost" id="closeModal">✕</button>
-    </div>
-    <div class="img-square" style="margin-top:10px; max-height:200px">
-      <img src="${p.img}" style="max-height:100%">
-    </div>
-    <p style="margin-top:10px">${escapeHtml(p.descricao)}</p>
-    
-    <div style="background:#f9f9f9; padding:15px; border-radius:8px; margin-top:10px;">
-        <label style="font-size:12px; font-weight:bold;">Valor do Presente (R$)</label>
-        <input id="valorPresenteModal" type="number" value="${p.preco.toFixed(2)}" step="0.01">
-
-        <label style="font-size:12px; font-weight:bold; margin-top:8px; display:block;">Seu nome (para o cartão)</label>
-        <input id="nomePresenteModal" placeholder="Ex: Tio João">
-
-        <label style="font-size:12px; font-weight:bold; margin-top:8px; display:block;">Mensagem / Telefone</label>
-        <input id="telefonePresenteModal" placeholder="Deixe um recado...">
+      <button class="btn-close" id="closeModal">✕</button>
     </div>
 
-    <button class="btn" id="gerarPixBtn" style="width:100%; margin-top:15px;">Gerar QR PIX</button>
-    <div id="pixAreaModal" style="display:none; margin-top:20px; text-align:center; border-top:1px solid #eee; padding-top:15px;"></div>
+    <div class="modal-body-grid">
+      
+      <div class="col-visual">
+        <div class="img-container">
+           <img src="${p.img}" onerror="this.src='img/presentes/placeholder.jpg'">
+        </div>
+        <p class="desc-text">${escapeHtml(p.descricao)}</p>
+        <p class="entrega-info"><small>📍 Entrega: ${escapeHtml(p.endereco)}</small></p>
+      </div>
+
+      <div class="col-form">
+        <div class="form-box">
+            <label>Valor do Presente (R$)</label>
+            <div class="input-group">
+                <span class="currency">R$</span>
+                <input id="valorPresenteModal" type="number" value="${p.preco.toFixed(2)}" step="0.01">
+            </div>
+
+            <label>Seu nome (para o cartão)</label>
+            <input id="nomePresenteModal" placeholder="Ex: Tio João e Tia Maria">
+
+            <label>Mensagem aos noivos</label>
+            <textarea id="telefonePresenteModal" rows="3" placeholder="Escreva uma mensagem carinhosa..."></textarea>
+        </div>
+
+        <button class="btn-action" id="gerarPixBtn">Gerar QR PIX</button>
+        
+        <div id="pixAreaModal" class="pix-area" style="display:none;"></div>
+      </div>
+    </div>
   `;
 
   bg.style.display='flex';
