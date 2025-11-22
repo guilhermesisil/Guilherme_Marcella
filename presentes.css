@@ -139,31 +139,78 @@ body {
   cursor:pointer;
 }
 
-/* lista (modo alternativo) — sem imagens */
-#lista.lista { 
-  display: flex; 
-  flex-direction: column; 
-  gap: 12px; 
+/* =========================================
+   VISUALIZAÇÃO EM LISTA (TEXTO + BOTÃO FIXO)
+   ========================================= */
+
+/* Container da linha (o item em si) */
+#lista.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 #lista.lista .item {
-  flex-direction: row;
-  align-items: center;
-  gap: 14px;
-  /* Garante que o conteúdo se espalhe */
-  justify-content: space-between; 
+  display: flex !important;        /* Garante que é linha */
+  flex-direction: row !important;
+  align-items: center !important;  /* Centraliza verticalmente */
+  justify-content: space-between !important;
+  gap: 15px;
+  padding: 16px;                   /* Mais espaço interno */
+  width: 100%;
 }
 
-/* === NOVO: Estilo do botão APENAS na lista === */
+/* 1. A div que contém o TEXTO (Nome, Descrição, Preço) */
+/* O SEGREDO ESTÁ AQUI: flex: 1 faz essa div crescer e empurrar o botão */
+#lista.lista .item > div:first-child {
+  flex: 1;             
+  min-width: 0;        /* Evita que texto muito longo quebre o layout */
+  padding-right: 20px; /* Espaço de respiro antes do botão */
+  text-align: left;
+}
+
+/* Ajustes finos no texto da lista */
+#lista.lista .item h4 { margin-bottom: 4px; font-size: 16px; }
+#lista.lista .item p { margin-bottom: 4px; font-size: 13px; color: #666; }
+#lista.lista .item .price { font-size: 16px; font-weight: bold; color: #000; margin-top: 6px; }
+
+
+/* 2. O BOTÃO (Tamanho fixo e direita) */
 #lista.lista .item .btn {
-  width: 100px;        /* Tamanho fixo */
-  flex-shrink: 0;      /* Impede o botão de ser esmagado se o texto for longo */
-  margin-right: auto;   /* Empurra o botão totalmente para a direita */
-  text-align: center;
+  width: 160px !important;     /* Largura fixa que você pediu */
+  height: 44px !important;     /* Altura fixa para ficar elegante */
+  flex-shrink: 0 !important;   /* IMPEDE o botão de encolher/amassar */
+  margin: 0 !important;        /* Remove margens automáticas */
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
 }
 
-#lista.lista .img-square { display: none; width: 0; height: 0; }
+/* Esconde elementos que são só do Grid */
+#lista.lista .img-square { display: none !important; }
+#lista.lista .category { display: none !important; } /* Opcional: esconde categoria na lista para limpar */
 
+
+/* RESPONSIVIDADE PARA LISTA (Celular) */
+/* No celular, o botão fixo de 160px pode ser muito grande. Vamos ajustar. */
+@media (max-width: 600px) {
+  #lista.lista .item {
+    flex-direction: column !important; /* Vira coluna no celular */
+    align-items: flex-start !important;
+  }
+  
+  #lista.lista .item > div:first-child {
+    padding-right: 0;
+    margin-bottom: 12px;
+  }
+
+  #lista.lista .item .btn {
+    width: 100% !important; /* Botão ocupa largura total no celular */
+  }
+}
 /* modal */
 .modal-bg {
   position:fixed;
