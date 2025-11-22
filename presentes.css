@@ -362,7 +362,7 @@ body {
     max-width: 160px;          /* Limita largura para não quebrar */
     
     text-align: left !important; /* Número fica encostado no R$ */
-    font-size: 32px !important;
+    font-size: 24px !important;
     font-weight: 700 !important;
     color: #000 !important;
     padding: 0 !important;
