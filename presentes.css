@@ -188,3 +188,131 @@ body {
 
 /* utilidades */
 .hidden { display:none !important; }
+
+/* === NOVO LAYOUT DO MODAL (Copie e cole no final do CSS) === */
+
+/* Cabeçalho fixo no topo do modal */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+.modal-header h3 { margin: 0; font-size: 20px; color: #333; }
+.btn-close {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+    line-height: 1;
+}
+.btn-close:hover { color: #000; }
+
+/* Grid Layout (Computador) */
+.modal-body-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr; /* Esquerda menor, Direita maior */
+    gap: 30px;
+}
+
+/* Coluna Visual (Imagem) */
+.img-container {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 10px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+}
+.img-container img {
+    max-width: 100%;
+    max-height: 250px;
+    object-fit: contain;
+}
+.desc-text { font-size: 14px; color: #555; line-height: 1.5; margin-bottom: 8px; }
+.entrega-info { color: #888; margin-top: 5px; }
+
+/* Coluna Formulário */
+.form-box {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+}
+
+.form-box label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #777;
+    margin-bottom: 6px;
+    margin-top: 14px;
+}
+.form-box label:first-child { margin-top: 0; }
+
+/* Inputs mais bonitos */
+.input-group {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0 10px;
+}
+.input-group .currency { color: #888; font-weight: 500; }
+.input-group input { border: none; box-shadow: none; padding-left: 5px; }
+
+.form-box input, 
+.form-box textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border .2s;
+}
+.form-box input:focus, 
+.form-box textarea:focus {
+    border-color: #000;
+    outline: none;
+}
+
+/* Botão de Ação */
+.btn-action {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background .2s;
+}
+.btn-action:hover { background: #333; }
+
+/* Pix Area */
+.pix-area {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px dashed #eee;
+    text-align: center;
+}
+
+/* Responsivo (Celular) */
+@media (max-width: 768px) {
+    .modal-body-grid {
+        grid-template-columns: 1fr; /* Vira uma coluna só */
+        gap: 20px;
+    }
+    .img-container img { max-height: 180px; }
+}
