@@ -156,7 +156,7 @@ body {
 
 /* === NOVO: Estilo do botão APENAS na lista === */
 #lista.lista .item .btn {
-  width: 140px;        /* Tamanho fixo */
+  width: 100px;        /* Tamanho fixo */
   flex-shrink: 0;      /* Impede o botão de ser esmagado se o texto for longo */
   margin-left: auto;   /* Empurra o botão totalmente para a direita */
   text-align: center;
