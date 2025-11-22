@@ -329,3 +329,49 @@ body {
 .input-group {
     justify-content: center !important;
 }
+/* === CORREÇÃO DEFINITIVA DO PREÇO (CENTRALIZADO E SEM BORDAS EXTRAS) === */
+
+/* 1. A caixa externa (contorno cinza único) */
+.input-group {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important; /* Joga tudo para o meio */
+    border: 1px solid #ddd !important;
+    border-radius: 8px;
+    padding: 10px 0 !important;
+    background: #fff;
+    width: 100%;
+}
+
+/* 2. O símbolo R$ */
+.input-group .currency {
+    font-size: 28px !important;
+    font-weight: 600;
+    color: #333;
+    margin-right: 6px; /* Espaço entre o R$ e o número */
+    line-height: 1;
+}
+
+/* 3. O Campo de digitar (Input) */
+#valorPresenteModal {
+    border: none !important;   /* <--- ISSO REMOVE O CONTORNO INTERNO */
+    outline: none !important;  /* Remove a borda azul/preta de foco */
+    background: transparent !important;
+    
+    width: auto !important;    /* Tamanho automático para não empurrar o R$ */
+    max-width: 160px;          /* Limita largura para não quebrar */
+    
+    text-align: left !important; /* Número fica encostado no R$ */
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    color: #000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: auto !important;
+}
+
+/* Efeito visual quando clica para digitar */
+.input-group:focus-within {
+    border-color: #000 !important; /* A borda externa fica preta */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
