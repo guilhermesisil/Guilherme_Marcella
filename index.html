@@ -149,22 +149,43 @@ function fecharModalRSVP() {
 }
 
 
-// form submit (saves to localStorage)
-let rsvps = JSON.parse(localStorage.getItem('rsvps')||'[]');
+// URL DO SCRIPT (Mesma do passo 2)
+const SCRIPT_URL = "https://script.google.com/macros/s/SEU_CODIGO_GIGANTE_AQUI/exec";
+
 document.getElementById('rsvpForm').addEventListener('submit', function(e){
   e.preventDefault();
-  const registro = {
-    id: 'R'+Date.now(),
-    nomeResponsavel: document.getElementById('nomeResponsavel').value,
+  
+  const btn = e.target.querySelector('button');
+  btn.innerText = "Enviando...";
+  btn.disabled = true;
+
+  const dados = {
+    action: 'rsvp',
+    nome: document.getElementById('nomeResponsavel').value,
     telefone: document.getElementById('telefone').value,
-    acompanhantes: document.getElementById('nomes').value.split('\\n').map(s=>s.trim()).filter(Boolean),
-    presenca: document.getElementById('presenca').value,
-    data: new Date().toISOString()
+    acompanhantes: document.getElementById('nomes').value, // Envia o texto todo
+    presenca: document.getElementById('presenca').value
   };
-  rsvps.push(registro);
-  localStorage.setItem('rsvps', JSON.stringify(rsvps));
-  fecharModalRSVP();
-  alert('Obrigado! Sua confirmação foi registrada.');
+
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(dados)
+  })
+  .then(() => {
+    alert('Obrigado! Sua confirmação foi registrada.');
+    fecharModalRSVP();
+    e.target.reset(); // Limpa o formulário
+  })
+  .catch(error => {
+    console.error('Erro!', error.message);
+    alert('Houve um erro ao enviar. Tente novamente.');
+  })
+  .finally(() => {
+      btn.innerText = "Enviar RSVP";
+      btn.disabled = false;
+  });
 });
 </script>
 
