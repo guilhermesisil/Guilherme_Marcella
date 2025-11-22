@@ -1,0 +1,1052 @@
+[
+  {
+    "id": 1,
+    "nome": "Jogo de Facas Inox Premium",
+    "preco": 149.90,
+    "categoria": "Cozinha",
+    "descricao": "Conjunto de facas de cozinha em aço inox.",
+    "img": "img/presentes/facas.jpg"
+  },
+  {
+    "id": 2,
+    "nome": "Conjunto de Panelas Antiaderentes",
+    "preco": 299.90,
+    "categoria": "Cozinha",
+    "descricao": "Jogo de panelas antiaderentes profissional.",
+    "img": "img/presentes/panelas.jpg"
+  },
+  {
+    "id": 3,
+    "nome": "Jogo de Pratos Branco 24 peças",
+    "preco": 189.00,
+    "categoria": "Cozinha",
+    "descricao": "Aparelho de jantar completo para 6 pessoas.",
+    "img": "img/presentes/pratos.jpg"
+  },
+  {
+    "id": 4,
+    "nome": "Kit Taças de Vinho",
+    "preco": 129.90,
+    "categoria": "Cozinha",
+    "descricao": "Conjunto com 6 taças para vinho.",
+    "img": "img/presentes/tacas_vinho.jpg"
+  },
+  {
+    "id": 5,
+    "nome": "Kit Taças de Champanhe",
+    "preco": 139.90,
+    "categoria": "Cozinha",
+    "descricao": "Kit com 6 taças de champagne em cristal.",
+    "img": "img/presentes/tacas_champagne.jpg"
+  },
+  {
+    "id": 6,
+    "nome": "Pratos de Sobremesa",
+    "preco": 89.90,
+    "categoria": "Cozinha",
+    "descricao": "Conjunto com 6 pratos pequenos.",
+    "img": "img/presentes/pratos_sobremesa.jpg"
+  },
+
+  {
+    "id": 7,
+    "nome": "Liquidificador de Alta Potência",
+    "preco": 249.90,
+    "categoria": "Eletrodomésticos",
+    "descricao": "Liquidificador profissional de 1200W.",
+    "img": "img/presentes/liquidificador.jpg"
+  },
+  {
+    "id": 8,
+    "nome": "Air Fryer 5L",
+    "preco": 399.90,
+    "categoria": "Eletrodomésticos",
+    "descricao": "Fritadeira elétrica sem óleo de 5 litros.",
+    "img": "img/presentes/airfryer.jpg"
+  },
+  {
+    "id": 9,
+    "nome": "Batedeira Planetária",
+    "preco": 349.00,
+    "categoria": "Eletrodomésticos",
+    "descricao": "Batedeira planetária com 8 velocidades.",
+    "img": "img/presentes/batedeira.jpg"
+  },
+  {
+    "id": 10,
+    "nome": "Sanduicheira Inox",
+    "preco": 129.90,
+    "categoria": "Eletrodomésticos",
+    "descricao": "Sanduicheira compacta em aço inox.",
+    "img": "img/presentes/sanduicheira.jpg"
+  },
+  {
+    "id": 11,
+    "nome": "Cafeteira Elétrica 30 xícaras",
+    "preco": 199.00,
+    "categoria": "Eletrodomésticos",
+    "descricao": "Cafeteira com capacidade para 30 xícaras.",
+    "img": "img/presentes/cafeteira.jpg"
+  },
+  {
+    "id": 12,
+    "nome": "Torradeira 2 Fatias",
+    "preco": 119.00,
+    "categoria": "Eletrodomésticos",
+    "descricao": "Torradeira elétrica com ajuste de intensidade.",
+    "img": "img/presentes/torradeira.jpg"
+  },
+
+  {
+    "id": 13,
+    "nome": "Edredom Queen Branco",
+    "preco": 269.90,
+    "categoria": "Quarto",
+    "descricao": "Edredom macio tamanho Queen.",
+    "img": "img/presentes/edredom.jpg"
+  },
+  {
+    "id": 14,
+    "nome": "Jogo de Lençol Queen 400 fios",
+    "preco": 349.90,
+    "categoria": "Quarto",
+    "descricao": "Jogo de lençol premium 400 fios.",
+    "img": "img/presentes/lencol_400.jpg"
+  },
+  {
+    "id": 15,
+    "nome": "Travesseiro de Pena",
+    "preco": 139.90,
+    "categoria": "Quarto",
+    "descricao": "Travesseiro de pena premium.",
+    "img": "img/presentes/travesseiro.jpg"
+  },
+
+  {
+    "id": 16,
+    "nome": "Toalhas de Banho Premium",
+    "preco": 199.90,
+    "categoria": "Banheiro",
+    "descricao": "Jogo de toalhas 6 peças extremo conforto.",
+    "img": "img/presentes/toalhas.jpg"
+  },
+  {
+    "id": 17,
+    "nome": "Kit Tapetes para Banheiro",
+    "preco": 89.90,
+    "categoria": "Banheiro",
+    "descricao": "Conjunto com 3 tapetes antiderrapantes.",
+    "img": "img/presentes/tapetes_banheiro.jpg"
+  },
+  {
+    "id": 18,
+    "nome": "Difusor de Aromas Elétrico",
+    "preco": 149.90,
+    "categoria": "Banheiro",
+    "descricao": "Difusor elétrico com refil incluso.",
+    "img": "img/presentes/difusor.jpg"
+  },
+
+  {
+    "id": 19,
+    "nome": "Sofá Decor",
+    "preco": 899.00,
+    "categoria": "Sala",
+    "descricao": "Sofá moderno de 2 lugares.",
+    "img": "img/presentes/sofa.jpg"
+  },
+  {
+    "id": 20,
+    "nome": "Mesa de Centro de Madeira",
+    "preco": 399.00,
+    "categoria": "Sala",
+    "descricao": "Mesa de centro em madeira maciça.",
+    "img": "img/presentes/mesa_centro.jpg"
+  },
+  {
+    "id": 21,
+    "nome": "Kit Quadros Minimalistas",
+    "preco": 159.90,
+    "categoria": "Sala",
+    "descricao": "Conjunto com 3 quadros estilo minimalista.",
+    "img": "img/presentes/quadros.jpg"
+  },
+
+  {
+    "id": 22,
+    "nome": "Alexa Echo Dot",
+    "preco": 299.00,
+    "categoria": "Tecnologia",
+    "descricao": "Assistente virtual inteligente.",
+    "img": "img/presentes/alexa.jpg"
+  },
+  {
+    "id": 23,
+    "nome": "Smart TV 43\" 4K",
+    "preco": 2299.00,
+    "categoria": "Tecnologia",
+    "descricao": "Smart TV com resolução 4K.",
+    "img": "img/presentes/tv43.jpg"
+  },
+  {
+    "id": 24,
+    "nome": "Caixa de Som Bluetooth",
+    "preco": 199.00,
+    "categoria": "Tecnologia",
+    "descricao": "Caixa portátil com som estéreo.",
+    "img": "img/presentes/som_bt.jpg"
+  },
+
+  {
+    "id": 25,
+    "nome": "Noite Romântica — Hotel",
+    "preco": 550.00,
+    "categoria": "Lua de Mel",
+    "descricao": "Hospedagem romântica com café da manhã.",
+    "img": "img/presentes/noite_romantica.jpg"
+  },
+  {
+    "id": 26,
+    "nome": "Passeio de Lancha",
+    "preco": 390.00,
+    "categoria": "Lua de Mel",
+    "descricao": "Passeio de lancha privativo.",
+    "img": "img/presentes/lancha.jpg"
+  },
+  {
+    "id": 27,
+    "nome": "Jantar Especial",
+    "preco": 280.00,
+    "categoria": "Lua de Mel",
+    "descricao": "Jantar completo para o casal.",
+    "img": "img/presentes/jantar.jpg"
+  },
+ {
+    id: 29,
+    nome: "Kit Toalhas de Cozinha (8 unidades)",
+    preco: 49.90,
+    categoria: "Cozinha",
+    imagem: "img/presente29.jpg",
+    descricao: "Toalhas absorventes, resistentes e estilosas.",
+    status: "disponivel"
+  },
+  {
+    id: 30,
+    nome: "Relógio de Parede Minimalista",
+    preco: 89.90,
+    categoria: "Casa",
+    imagem: "img/presente30.jpg",
+    descricao: "Design clean com ponteiros silenciosos.",
+    status: "disponivel"
+  },
+    {
+    id: 31,
+    nome: "Kit Utensílios de Silicone (10 peças)",
+    preco: 119.90,
+    categoria: "Cozinha",
+    imagem: "img/presente31.jpg",
+    descricao: "Utensílios resistentes ao calor com cabo em madeira.",
+    status: "disponivel"
+  },
+  {
+    id: 32,
+    nome: "Jogo de Taças para Vinho (6 unidades)",
+    preco: 159.90,
+    categoria: "Cozinha",
+    imagem: "img/presente32.jpg",
+    descricao: "Taças elegantes para vinhos tinto e branco.",
+    status: "disponivel"
+  },
+  {
+    id: 33,
+    nome: "Frigideira Grande Antiaderente",
+    preco: 99.90,
+    categoria: "Cozinha",
+    imagem: "img/presente33.jpg",
+    descricao: "Perfeita para grelhados, revestimento premium.",
+    status: "disponivel"
+  },
+  {
+    id: 34,
+    nome: "Grill Elétrico Inox",
+    preco: 229.90,
+    categoria: "Cozinha",
+    imagem: "img/presente34.jpg",
+    descricao: "Grelha carnes, legumes e sanduíches.",
+    status: "disponivel"
+  },
+  {
+    id: 35,
+    nome: "Torradeira Inox 7 Níveis",
+    preco: 149.90,
+    categoria: "Cozinha",
+    imagem: "img/presente35.jpg",
+    descricao: "Design moderno e controle preciso de tostagem.",
+    status: "disponivel"
+  },
+  {
+    id: 36,
+    nome: "Aspirador de Pó Sem Fio",
+    preco: 799.00,
+    categoria: "Eletrodomésticos",
+    imagem: "img/presente36.jpg",
+    descricao: "Alta potência, leve e 40 min de autonomia.",
+    status: "disponivel"
+  },
+  {
+    id: 37,
+    nome: "Purificador de Água",
+    preco: 949.90,
+    categoria: "Eletrodomésticos",
+    imagem: "img/presente37.jpg",
+    descricao: "Água gelada e natural com tripla filtragem.",
+    status: "disponivel"
+  },
+  {
+    id: 38,
+    nome: "Umidificador de Ar",
+    preco: 159.90,
+    categoria: "Casa",
+    imagem: "img/presente38.jpg",
+    descricao: "Ultra silencioso, ideal para noites secas.",
+    status: "disponivel"
+  },
+  {
+    id: 39,
+    nome: "Conjunto Aromatizador + Difusor",
+    preco: 89.90,
+    categoria: "Casa",
+    imagem: "img/presente39.jpg",
+    descricao: "Perfuma o ambiente com fragrância duradoura.",
+    status: "disponivel"
+  },
+  {
+    id: 40,
+    nome: "Tapete Sala 2x1,5m",
+    preco: 349.90,
+    categoria: "Casa",
+    imagem: "img/presente40.jpg",
+    descricao: "Tapete macio com textura premium.",
+    status: "disponivel"
+  },
+  {
+    id: 41,
+    nome: "Escorredor de Louça Inox",
+    preco: 139.90,
+    categoria: "Cozinha",
+    imagem: "img/presente41.jpg",
+    descricao: "Resistente à corrosão, moderno e prático.",
+    status: "disponivel"
+  },
+  {
+    id: 42,
+    nome: "Panela Wok Antiaderente",
+    preco: 149.90,
+    categoria: "Cozinha",
+    imagem: "img/presente42.jpg",
+    descricao: "Ideal para receitas orientais.",
+    status: "disponivel"
+  },
+  {
+    id: 43,
+    nome: "Jogo de Travessas de Vidro (3 unidades)",
+    preco: 119.90,
+    categoria: "Cozinha",
+    imagem: "img/presente43.jpg",
+    descricao: "Travessas refratárias resistentes.",
+    status: "disponivel"
+  },
+  {
+    id: 44,
+    nome: "Chaleira Elétrica Inox",
+    preco: 139.90,
+    categoria: "Cozinha",
+    imagem: "img/presente44.jpg",
+    descricao: "Ferve água em segundos.",
+    status: "disponivel"
+  },
+  {
+    id: 45,
+    nome: "Tábua de Corte Bambu",
+    preco: 79.90,
+    categoria: "Cozinha",
+    imagem: "img/presente45.jpg",
+    descricao: "Antibacteriana e resistente.",
+    status: "disponivel"
+  },
+  {
+    id: 46,
+    nome: "Kit Bar (Coqueteleira + Utensílios)",
+    preco: 149.90,
+    categoria: "Cozinha",
+    imagem: "img/presente46.jpg",
+    descricao: "Perfeito para preparar drinks.",
+    status: "disponivel"
+  },
+  {
+    id: 47,
+    nome: "Secador de Cabelos Profissional",
+    preco: 199.90,
+    categoria: "Eletrodomésticos",
+    imagem: "img/presente47.jpg",
+    descricao: "Potente e silencioso com controle de temperatura.",
+    status: "disponivel"
+  },
+  {
+    id: 48,
+    nome: "Barbeador Elétrico",
+    preco: 169.90,
+    categoria: "Eletrodomésticos",
+    imagem: "img/presente48.jpg",
+    descricao: "Aparelho ergonômico com lâminas flutuantes.",
+    status: "disponivel"
+  },
+  {
+    id: 49,
+    nome: "Kit Ferramentas Completo 129 peças",
+    preco: 259.90,
+    categoria: "Casa",
+    imagem: "img/presente49.jpg",
+    descricao: "Maleta com diversas ferramentas essenciais.",
+    status: "disponivel"
+  },
+  {
+    id: 50,
+    nome: "Jogo de Cabides Madeira Premium (20 unidades)",
+    preco: 139.90,
+    categoria: "Casa",
+    imagem: "img/presente50.jpg",
+    descricao: "Cabides reforçados com design elegante.",
+    status: "disponivel"
+  },
+  {
+    id: 51,
+    nome: "Roteador Wi-Fi de Alta Performance",
+    preco: 239.90,
+    categoria: "Casa",
+    imagem: "img/presente51.jpg",
+    descricao: "Wi-Fi rápido com longo alcance.",
+    status: "disponivel"
+  },
+  {
+    id: 52,
+    nome: "Caixa de Som Bluetooth",
+    preco: 159.90,
+    categoria: "Casa",
+    imagem: "img/presente52.jpg",
+    descricao: "Som potente e bateria duradoura.",
+    status: "disponivel"
+  },
+  {
+    id: 53,
+    nome: "Cortina Blackout Casal",
+    preco: 179.90,
+    categoria: "Quarto",
+    imagem: "img/presente53.jpg",
+    descricao: "Bloqueia luz e reduz ruído.",
+    status: "disponivel"
+  },
+  {
+    id: 54,
+    nome: "Travesseiro de Plumas Sintéticas",
+    preco: 89.90,
+    categoria: "Quarto",
+    imagem: "img/presente54.jpg",
+    descricao: "Macio e confortável para noites tranquilas.",
+    status: "disponivel"
+  },
+  {
+    id: 55,
+    nome: "Cobertor Sherpa Ultra Macio",
+    preco: 199.00,
+    categoria: "Quarto",
+    imagem: "img/presente55.jpg",
+    descricao: "Conforto máximo para o inverno.",
+    status: "disponivel"
+  },
+  {
+    id: 56,
+    nome: "Conjunto Decorativo de Parede",
+    preco: 129.90,
+    categoria: "Casa",
+    imagem: "img/presente56.jpg",
+    descricao: "Quadros minimalistas modernos.",
+    status: "disponivel"
+  },
+  {
+    id: 57,
+    nome: "Luminária LED Minimalista",
+    preco: 149.90,
+    categoria: "Casa",
+    imagem: "img/presente57.jpg",
+    descricao: "Iluminação suave com design limpo.",
+    status: "disponivel"
+  },
+  {
+    id: 58,
+    nome: "Vaporizador de Roupas Portátil",
+    preco: 169.90,
+    categoria: "Eletrodomésticos",
+    imagem: "img/presente58.jpg",
+    descricao: "Tira amassados em segundos.",
+    status: "disponivel"
+  },
+  {
+    id: 59,
+    nome: "Kit Banho Luxo (Sabonetes + Óleos)",
+    preco: 89.90,
+    categoria: "Casa & Banho",
+    imagem: "img/presente59.jpg",
+    descricao: "Aromas sofisticados para o banho.",
+    status: "disponivel"
+  },
+  {
+    id: 60,
+    nome: "Jogo de Porta-Temperos Magnéticos",
+    preco: 119.90,
+    categoria: "Cozinha",
+    imagem: "img/presente60.jpg",
+    descricao: "Conjunto com imãs e visor transparente.",
+    status: "disponivel"
+  },
+  {
+    id: 61,
+    nome: "Kit de Facas Profissionais Chef",
+    preco: 229.90,
+    categoria: "Cozinha",
+    imagem: "img/presente61.jpg",
+    descricao: "Lâminas afiadas e cabo ergonômico.",
+    status: "disponivel"
+  },
+  {
+    id: 62,
+    nome: "Panela de Pressão Inox 4,5L",
+    preco: 189.90,
+    categoria: "Cozinha",
+    imagem: "img/presente62.jpg",
+    descricao: "Segura, moderna e fácil de limpar.",
+    status: "disponivel"
+  },
+  {
+    id: 63,
+    nome: "Batedeira Planetária 700W",
+    preco: 499.90,
+    categoria: "Eletrodomésticos",
+    imagem: "img/presente63.jpg",
+    descricao: "Perfeita para massas e confeitaria.",
+    status: "disponivel"
+  },
+  {
+    id: 64,
+    nome: "Airfryer 5L Touch",
+    preco: 479.90,
+    categoria: "Eletrodomésticos",
+    imagem: "img/presente64.jpg",
+    descricao: "Sistema de circulação de ar quente.",
+    status: "disponivel"
+  },
+  {
+    id: 65,
+    nome: "Mini Processador Elétrico",
+    preco: 89.90,
+    categoria: "Cozinha",
+    imagem: "img/presente65.jpg",
+    descricao: "Tritura alho, cebola e temperos rápido.",
+    status: "disponivel"
+  },
+  {
+    id: 66,
+    nome: "Mixer 3 em 1",
+    preco: 159.90,
+    categoria: "Cozinha",
+    imagem: "img/presente66.jpg",
+    descricao: "Mixer + batedor + triturador.",
+    status: "disponivel"
+  },
+  {
+    id: 67,
+    nome: "Forma de Bolo Antiaderente",
+    preco: 49.90,
+    categoria: "Cozinha",
+    imagem: "img/presente67.jpg",
+    descricao: "Alta durabilidade e resistência.",
+    status: "disponivel"
+  },
+  {
+    id: 68,
+    nome: "Conjunto de Pratos de Porcelana (6 unidades)",
+    preco: 229.90,
+    categoria: "Cozinha",
+    imagem: "img/presente68.jpg",
+    descricao: "Porcelana de alta qualidade, acabamento premium.",
+    status: "disponivel"
+  },
+  {
+    id: 69,
+    nome: "Jogo de Bowls Empilháveis",
+    preco: 99.90,
+    categoria: "Cozinha",
+    imagem: "img/presente69.jpg",
+    descricao: "Perfeito para preparo de receitas e servir.",
+    status: "disponivel"
+  },
+  {
+    id: 70,
+    nome: "Assadeira Inox Grande",
+    preco: 129.90,
+    categoria: "Cozinha",
+    imagem: "img/presente70.jpg",
+    descricao: "Borda reforçada e superfície polida.",
+    status: "disponivel"
+  },
+  {
+    id: 71,
+    nome: "Organizador de Gavetas (Kit 4 peças)",
+    preco: 79.90,
+    categoria: "Casa",
+    imagem: "img/presente71.jpg",
+    descricao: "Organização prática para roupas e utensílios.",
+    status: "disponivel"
+  },
+  {
+    id: 72,
+    nome: "Jogo de Banho Premium (2 Toalhas)",
+    preco: 139.90,
+    categoria: "Banheiro",
+    imagem: "img/presente72.jpg",
+    descricao: "Toalhas macias de algodão egípcio.",
+    status: "disponivel"
+  },
+  {
+    id: 73,
+    nome: "Kit Spa em Casa",
+    preco: 159.90,
+    categoria: "Banheiro",
+    imagem: "img/presente73.jpg",
+    descricao: "Sais de banho, espuma e óleos essenciais.",
+    status: "disponivel"
+  },
+  {
+    id: 74,
+    nome: "Lixeira Inox com Tampa Automática",
+    preco: 199.90,
+    categoria: "Casa",
+    imagem: "img/presente74.jpg",
+    descricao: "Sensor infravermelho, abertura sem toque.",
+    status: "disponivel"
+  },
+  {
+    id: 75,
+    nome: "Cafeteira Elétrica 30 Xícaras",
+    preco: 179.90,
+    categoria: "Eletrodomésticos",
+    imagem: "img/presente75.jpg",
+    descricao: "Perfeita para receber amigos e família.",
+    status: "disponivel"
+  },
+  {
+    id: 76,
+    nome: "Umidificador Ultrasônico LED",
+    preco: 129.90,
+    categoria: "Casa",
+    imagem: "img/presente76.jpg",
+    descricao: "Com iluminação colorida e controle inteligente.",
+    status: "disponivel"
+  },
+  {
+    id: 77,
+    nome: "Relógio de Parede Minimalista",
+    preco: 89.90,
+    categoria: "Decoração",
+    imagem: "img/presente77.jpg",
+    descricao: "Design silencioso e sofisticado.",
+    status: "disponivel"
+  },
+  {
+    id: 78,
+    nome: "Espelho Decorativo Bronze",
+    preco: 229.90,
+    categoria: "Decoração",
+    imagem: "img/presente78.jpg",
+    descricao: "Acabamento premium e moldura metálica.",
+    status: "disponivel"
+  },
+  {
+    id: 79,
+    nome: "Almofadas Decorativas (2 unidades)",
+    preco: 89.90,
+    categoria: "Decoração",
+    imagem: "img/presente79.jpg",
+    descricao: "Fofas e elegantes para sala ou quarto.",
+    status: "disponivel"
+  },
+  {
+    id: 80,
+    nome: "Aparador de Livros Minimalista",
+    preco: 79.90,
+    categoria: "Decoração",
+    imagem: "img/presente80.jpg",
+    descricao: "Peças metálicas com estética moderna.",
+    status: "disponivel"
+  },
+  {
+    id: 81,
+    nome: "Cadeira de Escritório Confort",
+    preco: 499.90,
+    categoria: "Escritório",
+    imagem: "img/presente81.jpg",
+    descricao: "Ergonômica, respirável e ajustável.",
+    status: "disponivel"
+  },
+  {
+    id: 82,
+    nome: "Luminária de Mesa LED",
+    preco: 129.90,
+    categoria: "Escritório",
+    imagem: "img/presente82.jpg",
+    descricao: "Iluminação regulável com 3 tons.",
+    status: "disponivel"
+  },
+  {
+    id: 83,
+    nome: "Kit Escrivaninha Minimalista",
+    preco: 299.90,
+    categoria: "Escritório",
+    imagem: "img/presente83.jpg",
+    descricao: "Organizadores + mousepad premium.",
+    status: "disponivel"
+  },
+  {
+    id: 84,
+    nome: "Jogo de Lençóis Casal 300 fios",
+    preco: 199.90,
+    categoria: "Quarto",
+    imagem: "img/presente84.jpg",
+    descricao: "Tecido macio, respirável e elegante.",
+    status: "disponivel"
+  },
+  {
+    id: 85,
+    nome: "Manta de Sofá Trançada",
+    preco: 139.90,
+    categoria: "Sala",
+    imagem: "img/presente85.jpg",
+    descricao: "Design aconchegante e moderno.",
+    status: "disponivel"
+  },
+  {
+    id: 86,
+    nome: "Poltrona Decorativa Compacta",
+    preco: 599.90,
+    categoria: "Sala",
+    imagem: "img/presente86.jpg",
+    descricao: "Estofado confortável e estrutura reforçada.",
+    status: "disponivel"
+  },
+  {
+    id: 87,
+    nome: "Mesa Lateral de Ferro",
+    preco: 199.90,
+    categoria: "Sala",
+    imagem: "img/presente87.jpg",
+    descricao: "Acabamento escovado com tampo redondo.",
+    status: "disponivel"
+  },
+  {
+    id: 88,
+    nome: "Smart Lamp RGB com App",
+    preco: 139.90,
+    categoria: "Eletrônicos",
+    imagem: "img/presente88.jpg",
+    descricao: "Controle remoto via app e comandos de voz.",
+    status: "disponivel"
+  },
+  {
+    id: 89,
+    nome: "Fone Bluetooth Premium",
+    preco: 229.90,
+    categoria: "Eletrônicos",
+    imagem: "img/presente89.jpg",
+    descricao: "Som cristalino com cancelamento de ruído.",
+    status: "disponivel"
+  },
+  {
+    id: 90,
+    nome: "Caixa de Som Smart Assistant",
+    preco: 299.90,
+    categoria: "Eletrônicos",
+    imagem: "img/presente90.jpg",
+    descricao: "Controle sua casa inteligente por voz.",
+    status: "disponivel"
+  },
+  {
+    id: 91,
+    nome: "Smartwatch Fitness Premium",
+    preco: 329.90,
+    categoria: "Eletrônicos",
+    imagem: "img/presente91.jpg",
+    descricao: "Monitoramento de saúde, passos e sono.",
+    status: "disponivel"
+  },
+  {
+    id: 92,
+    nome: "Carregador Wireless Rápido",
+    preco: 89.90,
+    categoria: "Eletrônicos",
+    imagem: "img/presente92.jpg",
+    descricao: "Compatível com iPhone e Android.",
+    status: "disponivel"
+  },
+  {
+    id: 93,
+    nome: "Aspirador Vertical 2 em 1",
+    preco: 259.90,
+    categoria: "Eletrodomésticos",
+    imagem: "img/presente93.jpg",
+    descricao: "Filtro HEPA e cabo ergonômico.",
+    status: "disponivel"
+  },
+  {
+    id: 94,
+    nome: "Ferro de Passar Vapor",
+    preco: 149.90,
+    categoria: "Eletrodomésticos",
+    imagem: "img/presente94.jpg",
+    descricao: "Jato de vapor extra e base cerâmica.",
+    status: "disponivel"
+  },
+  {
+    id: 95,
+    nome: "Tábua de Passar Acolchoada",
+    preco: 99.90,
+    categoria: "Lavanderia",
+    imagem: "img/presente95.jpg",
+    descricao: "Superfície macia e durável.",
+    status: "disponivel"
+  },
+  {
+    id: 96,
+    nome: "Cesto de Roupa Dobrável",
+    preco: 69.90,
+    categoria: "Lavanderia",
+    imagem: "img/presente96.jpg",
+    descricao: "Tecido reforçado, leve e prático.",
+    status: "disponivel"
+  },
+  {
+    id: 97,
+    nome: "Kit de Utensílios de Silicone (10 peças)",
+    preco: 159.90,
+    categoria: "Cozinha",
+    imagem: "img/presente97.jpg",
+    descricao: "Resistentes ao calor, não riscam panelas.",
+    status: "disponivel"
+  },
+  {
+    id: 98,
+    nome: "Copo Térmico Inox",
+    preco: 119.90,
+    categoria: "Cozinha",
+    imagem: "img/presente98.jpg",
+    descricao: "Mantém bebidas geladas por 12h.",
+    status: "disponivel"
+  },
+  {
+    id: 99,
+    nome: "Jogo de Taças para Vinho (6 unidades)",
+    preco: 159.90,
+    categoria: "Cozinha",
+    imagem: "img/presente99.jpg",
+    descricao: "Cristal transparente de alta qualidade.",
+    status: "disponivel"
+  },
+  {
+    id: 100,
+    nome: "Ventilador de Mesa Turbo 40cm",
+    preco: 189.90,
+    categoria: "Eletrodomésticos",
+    imagem: "img/presente100.jpg",
+    descricao: "Silencioso e muito potente.",
+    status: "disponivel"
+  },
+  {
+    id: 101,
+    nome: "Kit Frigideiras Antiaderentes (2 un.)",
+    preco: 129.90,
+    categoria: "Cozinha",
+    imagem: "img/presente101.jpg",
+    descricao: "Revestimento premium e cabo antitérmico.",
+    status: "disponivel"
+  },
+  {
+    id: 102,
+    nome: "Roteador Wi-Fi Alta Performance",
+    preco: 249.90,
+    categoria: "Eletrônicos",
+    imagem: "img/presente102.jpg",
+    descricao: "Dual band, ideal para streaming 4K.",
+    status: "disponivel"
+  },
+  {
+    id: 103,
+    nome: "Luminária de Pé Moderna",
+    preco: 219.90,
+    categoria: "Sala",
+    imagem: "img/presente103.jpg",
+    descricao: "Luz quente suave e haste metálica.",
+    status: "disponivel"
+  },
+  {
+    id: 104,
+    nome: "Tapete Macio Antiderrapante",
+    preco: 179.90,
+    categoria: "Sala",
+    imagem: "img/presente104.jpg",
+    descricao: "Confortável e fácil de lavar.",
+    status: "disponivel"
+  },
+  {
+    id: 105,
+    nome: "Fronhas Premium (par)",
+    preco: 59.90,
+    categoria: "Quarto",
+    imagem: "img/presente105.jpg",
+    descricao: "Tecido macio, toque suave.",
+    status: "disponivel"
+  },
+  {
+    id: 106,
+    nome: "Cobertor Sherpa",
+    preco: 189.90,
+    categoria: "Quarto",
+    imagem: "img/presente106.jpg",
+    descricao: "Super macio para dias frios.",
+    status: "disponivel"
+  },
+  {
+    id: 107,
+    nome: "Kit Organizadores de Closet (6 un.)",
+    preco: 129.90,
+    categoria: "Quarto",
+    imagem: "img/presente107.jpg",
+    descricao: "Perfeitos para roupas e acessórios.",
+    status: "disponivel"
+  },
+  {
+    id: 108,
+    nome: "Toalhas Lavabo Luxo (2 un.)",
+    preco: 69.90,
+    categoria: "Banheiro",
+    imagem: "img/presente108.jpg",
+    descricao: "Acabamento sofisticado.",
+    status: "disponivel"
+  },
+  {
+    id: 109,
+    nome: "Difusor de Aromas com Varetas",
+    preco: 59.90,
+    categoria: "Banheiro",
+    imagem: "img/presente109.jpg",
+    descricao: "Aroma suave para ambiente relaxante.",
+    status: "disponivel"
+  },
+  {
+    id: 110,
+    nome: "Kit Baldes Organizadores (3 un.)",
+    preco: 89.90,
+    categoria: "Lavanderia",
+    imagem: "img/presente110.jpg",
+    descricao: "Material resistente, fácil de lavar.",
+    status: "disponivel"
+  },
+  {
+    id: 111,
+    nome: "Cortina Blackout para Sala",
+    preco: 179.90,
+    categoria: "Sala",
+    imagem: "img/presente111.jpg",
+    descricao: "Bloqueia luminosidade e ruídos.",
+    status: "disponivel"
+  },
+  {
+    id: 112,
+    nome: "Enfeite Decorativo de Mesa",
+    preco: 69.90,
+    categoria: "Decoração",
+    imagem: "img/presente112.jpg",
+    descricao: "Minimalista e elegante, cor neutra.",
+    status: "disponivel"
+  },
+  {
+    id: 113,
+    nome: "Vaso Moderno para Plantas",
+    preco: 99.90,
+    categoria: "Decoração",
+    imagem: "img/presente113.jpg",
+    descricao: "Ideal para plantas naturais ou artificiais.",
+    status: "disponivel"
+  },
+  {
+    id: 114,
+    nome: "Quadro Abstrato Grande",
+    preco: 249.90,
+    categoria: "Decoração",
+    imagem: "img/presente114.jpg",
+    descricao: "Peça de destaque para sala.",
+    status: "disponivel"
+  },
+  {
+    id: 115,
+    nome: "Carregador Portátil 20.000mAh",
+    preco: 159.90,
+    categoria: "Eletrônicos",
+    imagem: "img/presente115.jpg",
+    descricao: "Alta capacidade para vários carregamentos.",
+    status: "disponivel"
+  },
+  {
+    id: 116,
+    nome: "Extensão 5 Tomadas com Proteção",
+    preco: 49.90,
+    categoria: "Eletrônicos",
+    imagem: "img/presente116.jpg",
+    descricao: "Proteção contra surtos elétricos.",
+    status: "disponivel"
+  },
+  {
+    id: 117,
+    nome: "Liquidificador Individual Portátil",
+    preco: 129.90,
+    categoria: "Eletrodomésticos",
+    imagem: "img/presente117.jpg",
+    descricao: "Perfeito para sucos e shakes.",
+    status: "disponivel"
+  },
+  {
+    id: 118,
+    nome: "Sanduicheira Antiaderente",
+    preco: 119.90,
+    categoria: "Eletrodomésticos",
+    imagem: "img/presente118.jpg",
+    descricao: "Preparo rápido e fácil.",
+    status: "disponivel"
+  },
+  {
+    id: 119,
+    nome: "Kit Colheres Inox (12 peças)",
+    preco: 79.90,
+    categoria: "Cozinha",
+    imagem: "img/presente119.jpg",
+    descricao: "Resistentes e polidas.",
+    status: "disponivel"
+  },
+  {
+    id: 120,
+    nome: "Kit Pratos Fundo Cerâmica (6 un.)",
+    preco: 159.90,
+    categoria: "Cozinha",
+    imagem: "img/presente120.jpg",
+    descricao: "Acabamento artesanal e elegante.",
+    status: "disponivel"
+  }
+];
