@@ -20,81 +20,44 @@ let contribuicoes = JSON.parse(localStorage.getItem('contribuicoes') || '[]');
 
 
 /* ===========================================================
-   GERAR 120 PRESENTES
+   CARREGAR PRESENTES DE UM ARQUIVO JSON
 =========================================================== */
-(function generateItems(){
-  const categorias = ['Cozinha','Eletrodomésticos','Lua de Mel','Decoração','Sala','Quarto','Banheiro','Lavanderia','Escritório','Eletrônicos'];
 
-  const sampleImages = [
-    'img/presente1.jpg','img/presente2.jpg','img/presente3.jpg','img/presente4.jpg','img/presente5.jpg',
-    'img/presente6.jpg','img/presente7.jpg','img/presente8.jpg','img/presente9.jpg','img/presente10.jpg',
-    'img/presente11.jpg','img/presente12.jpg'
-  ];
+window.presentes = [];
 
-  const templates = {
-    'Cozinha': [
-      ['Jogo de Panelas', 'Conjunto premium antiaderente 5 peças'],
-      ['Conjunto de Facas', 'Facas profissionais de aço inox']
-    ],
-    'Eletrodomésticos': [
-      ['Liquidificador', 'Potente 1200W com copo de vidro'],
-      ['Micro-ondas', 'Micro-ondas 28L econômico']
-    ],
-    'Lua de Mel': [
-      ['Vale Jantar Romântico', 'Jantar especial para o casal'],
-      ['Passeio Guiado', 'Experiência turística local']
-    ],
-    'Decoração': [
-      ['Quadro Decorativo', 'Quadro com moldura minimalista'],
-      ['Vaso Cerâmica', 'Vaso decorativo artesanal']
-    ],
-    'Sala': [
-      ['Manta de Sofá', 'Manta aconchegante para o sofá'],
-      ['Abajur', 'Abajur com luz suave']
-    ],
-    'Quarto': [
-      ['Lençóis 300 fios', 'Jogo casal 300 fios'],
-      ['Travesseiros Confort', 'Travesseiros ortopédicos']
-    ],
-    'Banheiro': [
-      ['Toalhas Premium', 'Jogo de toalhas 4 peças'],
-      ['Kit Banheiro', 'Conjunto saboneteira e porta-escovas']
-    ],
-    'Lavanderia': [
-      ['Varal Portátil', 'Varal retrátil e compacto'],
-      ['Cesto Organizador', 'Cesto para roupas sujas']
-    ],
-    'Escritório': [
-      ['Cadeira Ergonômica', 'Cadeira com apoio lombar'],
-      ['Escrivaninha Compacta', 'Mesa com gavetas']
-    ],
-    'Eletrônicos': [
-      ['Aspirador Robot', 'Aspirador inteligente com app'],
-      ['Smart TV 43"', 'TV 4K com HDR']
-    ]
-  };
+async function carregarPresentes() {
+    try {
+        const resposta = await fetch("presentes.json");
+        const dados = await resposta.json();
 
-  window.presentes = [];
+        // Garante que fica no mesmo formato usado no resto do site
+        window.presentes = dados.map(item => ({
+            id: item.id,
+            nome: item.nome,
+            descricao: item.descricao,
+            categoria: item.categoria,
+            preco: item.preco,
+            img: item.img || item.imagem || "",
+            link: "#",
+            endereco: "Rua Araxá, 316, Passos - MG",
+            status: "Disponível"
+        }));
 
-  for(let i=1;i<=120;i++){
-    const categoria = categorias[(i-1) % categorias.length];
-    const tpl = templates[categoria][(i-1) % templates[categoria].length];
+        console.log("Presentes carregados:", window.presentes);
 
-    const preco = Number((50 + Math.random()*4500).toFixed(2));
+        // Se você tem alguma função de inicialização
+        if (typeof inicializarInterface === "function") {
+            inicializarInterface();
+        }
 
-    window.presentes.push({
-      id: 'p' + String(i).padStart(3,'0'),
-      nome: `${tpl[0]} — ${i}`,
-      descricao: `${tpl[1]} — modelo ${1000+i}`,
-      categoria,
-      preco,
-      img: sampleImages[i % sampleImages.length],
-      link: '#',
-      endereco: 'Rua Araxá, 316, Passos - MG',
-      status: 'Disponível'
-    });
-  }
-})();
+    } catch (erro) {
+        console.error("Erro ao carregar presentes.json:", erro);
+    }
+}
+
+// CHAMAR A FUNÇÃO AO ABRIR A PÁGINA
+carregarPresentes();
+
 
 
 /* ===========================================================
