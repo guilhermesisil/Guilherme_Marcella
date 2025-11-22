@@ -319,8 +319,7 @@ body {
 /* FORÇAR CENTRALIZAÇÃO DO PREÇO */
 #valorPresenteModal {
     text-align: center !important; /* Força o texto para o meio */
-    font-size: 32px !important;    /* Aumenta a fonte */
-    font-weight: 700 !important;   /* Deixa negrito */
+    font-size: 20px !important;    /* Aumenta a fonte */
     color: #000 !important;
     padding: 10px !important;
     width: 100% !important;
