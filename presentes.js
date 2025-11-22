@@ -18,45 +18,47 @@ const PIX_POINT_OF_INIT = '12'; // 12 = QR dinâmico
 
 let contribuicoes = JSON.parse(localStorage.getItem('contribuicoes') || '[]');
 
+// COLE SUA URL DO PASSO 2 AQUI EMBAIXO
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyyEV3iFu_NpAxW4xO6V9GMeXIZrAjIwBgKeRh7FvD_xtj3GKYmnzp-w696na631gZv/exec";
 
-/* ===========================================================
-   CARREGAR PRESENTES DE UM ARQUIVO JSON
-=========================================================== */
-
-window.presentes = [];
-
+// NOVA FUNÇÃO DE CARREGAR
 async function carregarPresentes() {
     try {
-        const resposta = await fetch("presentes.json");
+        // Agora busca da planilha, não do JSON local
+        const resposta = await fetch(GOOGLE_SCRIPT_URL); 
         const dados = await resposta.json();
 
-        // Garante que fica no mesmo formato usado no resto do site
+        // Filtra e formata (garante compatibilidade)
         window.presentes = dados.map(item => ({
             id: item.id,
             nome: item.nome,
             descricao: item.descricao,
             categoria: item.categoria,
             preco: item.preco,
-            img: item.img || item.imagem || "",
+            img: item.img || "",
             link: "#",
             endereco: "Rua Araxá, 316, Passos - MG",
-            status: "Disponível"
+            status: item.status || "Disponível"
         }));
 
-        console.log("Presentes carregados:", window.presentes);
-
-        // Se você tem alguma função de inicialização
-        if (typeof inicializarInterface === "function") {
-            inicializarInterface();
+        console.log("Presentes carregados da nuvem:", window.presentes);
+        
+        // Renderiza a interface
+        if(typeof inicializarInterface === "function") inicializarInterface();
+        else {
+             populateCategoriaSelect();
+             applyFilterSortView(); // Atualiza a tela
         }
 
     } catch (erro) {
-        console.error("Erro ao carregar presentes.json:", erro);
+        console.error("Erro ao carregar presentes:", erro);
+        // Fallback: tenta carregar local se a internet falhar
+        const resp = await fetch("presentes.json");
+        const dados = await resp.json();
+        window.presentes = dados;
+        applyFilterSortView();
     }
 }
-
-// CHAMAR A FUNÇÃO AO ABRIR A PÁGINA
-carregarPresentes();
 
 
 
@@ -306,25 +308,45 @@ function generateAndShowBRCode(present, valor){
   $('copBr').onclick = ()=> navigator.clipboard.writeText(brcode).then(()=> alert('Pix Copia e Cola copiado'));
   $('copCh').onclick = ()=> navigator.clipboard.writeText(PIX_KEY).then(()=> alert('Chave copiada'));
 
-  $('confirmarContrib').onclick = () => {
+ $('confirmarContrib').onclick = () => {
     const nome = $('nomePresenteModal').value.trim() || 'Anônimo';
     const tel = $('telefonePresenteModal').value.trim() || '';
+    
+    // Botão muda texto para dar feedback
+    const btn = $('confirmarContrib');
+    const txtOriginal = btn.innerText;
+    btn.innerText = "Salvando...";
+    btn.disabled = true;
 
-    contribuicoes.push({
-      id: txid,
-      presenteId: present.id,
-      presenteNome: present.nome,
-      nome,
-      telefone: tel,
-      valor: valor || 0,
-      data: new Date().toISOString()
+    // Envia para o Google Sheets
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors", // Importante para Apps Script
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            action: "contribuir",
+            txid: 'PRES' + Date.now(), // ou use o txid gerado antes
+            presenteId: present.id,
+            presenteNome: present.nome,
+            valor: valor || 0,
+            nomeDoador: nome,
+            msg: tel // usando campo telefone como msg/contato
+        })
+    }).then(() => {
+        alert('Obrigado! Sua contribuição foi registrada.');
+        $('modalPresenteBg').style.display='none';
+        
+        // Opcional: Recarregar a lista para atualizar status "Reservado"
+        carregarPresentes(); 
+        
+    }).catch(err => {
+        alert('Erro ao salvar. Avise os noivos!');
+        console.error(err);
+    }).finally(() => {
+        btn.innerText = txtOriginal;
+        btn.disabled = false;
     });
-    localStorage.setItem('contribuicoes', JSON.stringify(contribuicoes));
-
-    alert('Obrigado pela contribuição!');
-    $('modalPresenteBg').style.display='none';
-  };
-}
+};
 
 
 /* Util */
