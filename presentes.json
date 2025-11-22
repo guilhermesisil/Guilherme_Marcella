@@ -8,6 +8,7 @@ window.presentes = [
     descricao: "Conjunto premium com revestimento triplo e tampas de vidro temperado.",
     status: "disponivel"
   },
+  
   {
     id: 2,
     nome: "Kit Facas de Chef Inoxidáveis",
