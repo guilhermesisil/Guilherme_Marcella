@@ -257,62 +257,49 @@ body {
 .form-box label:first-child { margin-top: 0; }
 
 /* Inputs mais bonitos */
+/* AJUSTE DO CAMPO DE VALOR (Centralizado e Maior) */
+
 .input-group {
     display: flex;
     align-items: center;
+    justify-content: center; /* Centraliza o conjunto */
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 0 10px;
+    padding: 10px; /* Mais espaço interno */
 }
-.input-group .currency { color: #888; font-weight: 500; }
-.input-group input { border: none; box-shadow: none; padding-left: 5px; }
 
-.form-box input, 
-.form-box textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: 14px;
-    transition: border .2s;
+.input-group .currency {
+    font-size: 24px; /* R$ maior */
+    font-weight: 600;
+    color: #333;
+    margin-right: 5px;
 }
-.form-box input:focus, 
-.form-box textarea:focus {
+
+.input-group input {
+    text-align: center; /* O número fica no meio */
+    font-size: 28px !important; /* Número GRANDE */
+    font-weight: 700;
+    color: #000;
+    border: none !important; /* Remove borda interna do input */
+    width: 100%;
+    background: transparent;
+    padding: 0;
+}
+
+/* Remove as setinhas de aumentar/diminuir número do input (Chrome/Safari/Edge) */
+.input-group input::-webkit-outer-spin-button,
+.input-group input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Remove para Firefox */
+.input-group input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Ajuste de foco para ficar bonito */
+.input-group:focus-within {
     border-color: #000;
-    outline: none;
-}
-
-/* Botão de Ação */
-.btn-action {
-    width: 100%;
-    background: #000;
-    color: #fff;
-    border: none;
-    padding: 16px;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background .2s;
-}
-.btn-action:hover { background: #333; }
-
-/* Pix Area */
-.pix-area {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 2px dashed #eee;
-    text-align: center;
-}
-
-/* Responsivo (Celular) */
-@media (max-width: 768px) {
-    .modal-body-grid {
-        grid-template-columns: 1fr; /* Vira uma coluna só */
-        gap: 20px;
-    }
-    .img-container img { max-height: 180px; }
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
 }
