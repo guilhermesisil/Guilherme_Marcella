@@ -140,13 +140,29 @@ body {
 }
 
 /* lista (modo alternativo) — sem imagens */
-#lista.lista { display:flex; flex-direction:column; gap:12px; }
-#lista.lista .item {
-  flex-direction:row;
-  align-items:center;
-  gap:14px;
+#lista.lista { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 12px; 
 }
-#lista.lista .img-square { display:none; width:0; height:0; }
+
+#lista.lista .item {
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  /* Garante que o conteúdo se espalhe */
+  justify-content: space-between; 
+}
+
+/* === NOVO: Estilo do botão APENAS na lista === */
+#lista.lista .item .btn {
+  width: 140px;        /* Tamanho fixo */
+  flex-shrink: 0;      /* Impede o botão de ser esmagado se o texto for longo */
+  margin-left: auto;   /* Empurra o botão totalmente para a direita */
+  text-align: center;
+}
+
+#lista.lista .img-square { display: none; width: 0; height: 0; }
 
 /* modal */
 .modal-bg {
