@@ -11,7 +11,7 @@ async function carregarPresentes() {
         PRESENTES = await response.json();
         inicializarInterface();
     } catch (e) {
-        console.error("Erro ao carregar presentes.json", e);
+        console.error("Erro ao carregar presentes.json", e, response);
         document.getElementById("lista").innerHTML =
             "<p style='padding:20px'>Erro ao carregar a lista de presentes.</p>";
     }
