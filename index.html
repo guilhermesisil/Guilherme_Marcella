@@ -123,70 +123,130 @@
 
 <script src="presentes.js"></script>
 <script>
-// countdown
+// =================================================================
+// 1. CONFIGURAÇÕES GERAIS
+// =================================================================
 const DATE_TARGET = new Date("2026-05-09T16:00:00").getTime();
+
+// SUA URL DO GOOGLE APPS SCRIPT
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyAGdnf8IcbzT-tVIC7Yf2vnw_Kbfi6Tqh-XFjQ-AhG-Lff1ODy3lbzrXW7L7HsPdbN/exec"; 
+
+// =================================================================
+// 2. CONTAGEM REGRESSIVA (COUNTDOWN)
+// =================================================================
 function tick(){
   const now = Date.now();
   const diff = DATE_TARGET - now;
-  if(diff<=0){ document.getElementById('dias').innerText='0'; document.getElementById('horas').innerText='00'; document.getElementById('minutos').innerText='00'; document.getElementById('segundos').innerText='00'; return; }
+  
+  // Helper para atualizar texto apenas se o elemento existir
+  const el = (id, val) => { 
+      const element = document.getElementById(id);
+      if(element) element.innerText = val; 
+  }
+  
+  if(diff <= 0){ 
+      el('dias','0'); el('horas','00'); el('minutos','00'); el('segundos','00'); 
+      return; 
+  }
+  
   const dias = Math.floor(diff/(1000*60*60*24));
   const horas = Math.floor((diff/(1000*60*60))%24);
   const minutos = Math.floor((diff/(1000*60))%60);
   const segundos = Math.floor((diff/1000)%60);
-  document.getElementById('dias').innerText=dias;
-  document.getElementById('horas').innerText=String(horas).padStart(2,'0');
-  document.getElementById('minutos').innerText=String(minutos).padStart(2,'0');
-  document.getElementById('segundos').innerText=String(segundos).padStart(2,'0');
-}
-tick(); setInterval(tick,1000);
-
-// modal rsvp handlers (simplified)
-function abrirModalRSVP() {
-    document.getElementById("modalRSVP").style.display = "flex";
-}
-function fecharModalRSVP() {
-    document.getElementById("modalRSVP").style.display = "none";
-}
-
-
-// URL DO SCRIPT (Mesma do passo 2)
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyAGdnf8IcbzT-tVIC7Yf2vnw_Kbfi6Tqh-XFjQ-AhG-Lff1ODy3lbzrXW7L7HsPdbN/exec";
-
-document.getElementById('rsvpForm').addEventListener('submit', function(e){
-  e.preventDefault();
   
-  const btn = e.target.querySelector('button');
-  btn.innerText = "Enviando...";
-  btn.disabled = true;
+  el('dias', dias);
+  el('horas', String(horas).padStart(2,'0'));
+  el('minutos', String(minutos).padStart(2,'0'));
+  el('segundos', String(segundos).padStart(2,'0'));
+}
+tick(); 
+setInterval(tick, 1000);
 
-  const dados = {
-    action: 'rsvp',
-    nome: document.getElementById('nomeResponsavel').value,
-    telefone: document.getElementById('telefone').value,
-    acompanhantes: document.getElementById('nomes').value, // Envia o texto todo
-    presenca: document.getElementById('presenca').value
-  };
 
-  fetch(SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(dados)
-  })
-  .then(() => {
-    alert('Obrigado! Sua confirmação foi registrada.');
-    fecharModalRSVP();
-    e.target.reset(); // Limpa o formulário
-  })
-  .catch(error => {
-    console.error('Erro!', error.message);
-    alert('Houve um erro ao enviar. Tente novamente.');
-  })
-  .finally(() => {
-      btn.innerText = "Enviar RSVP";
-      btn.disabled = false;
-  });
+// =================================================================
+// 3. MODAL DE RSVP
+// =================================================================
+function abrirModalRSVP() { 
+    document.getElementById("modalRSVP").style.display = "flex"; 
+}
+
+function fecharModalRSVP() { 
+    document.getElementById("modalRSVP").style.display = "none"; 
+}
+
+
+// =================================================================
+// 4. ENVIO DO FORMULÁRIO PARA O GOOGLE SHEETS
+// =================================================================
+const form = document.getElementById('rsvpForm');
+
+if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      // Feedback visual no botão
+      const btn = form.querySelector('button');
+      const textoOriginal = btn.innerText;
+      btn.innerText = "Enviando...";
+      btn.disabled = true;
+
+      // Coleta os dados
+      const dados = {
+        action: 'rsvp',
+        nome: document.getElementById('nomeResponsavel').value,
+        telefone: document.getElementById('telefone').value,
+        acompanhantes: document.getElementById('nomes').value,
+        presenca: document.getElementById('presenca').value
+      };
+
+      // Envia para a planilha
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Necessário para Apps Script
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados)
+      })
+      .then(() => {
+        alert('Obrigado! Sua confirmação foi registrada com sucesso.');
+        fecharModalRSVP();
+        form.reset();
+      })
+      .catch(error => {
+        console.error('Erro envio:', error);
+        alert('Erro ao conectar com o servidor. Tente novamente mais tarde.');
+      })
+      .finally(() => {
+        btn.innerText = textoOriginal;
+        btn.disabled = false;
+      });
+    });
+}
+
+
+// =================================================================
+// 5. PAINEL ADMIN (Tecla 'A') E EXPORTAR CSV
+// =================================================================
+
+// Detecta a tecla "A" para abrir o painel oculto
+document.addEventListener('keydown', function(e){
+    // Se apertar 'a' (sem segurar shift/ctrl)
+    if(e.key.toLowerCase() === 'a' && !e.ctrlKey && !e.metaKey && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA'){
+        const senha = prompt("Painel Admin - Digite a senha:");
+        // Defina a senha aqui (ex: 1234)
+        if(senha === '1234'){ 
+            const painel = document.getElementById('adminPanel');
+            if(painel) painel.style.display = 'block';
+        }
+    }
 });
+
+// Função chamada pelo botão "Exportar CSV"
+function exportCSV(){
+    alert("Como seu site agora está integrado ao Google Sheets, você não precisa exportar nada por aqui!\n\nBasta abrir sua Planilha no Google Drive (aba RSVP) para ver todas as confirmações em tempo real.");
+    
+    // Opcional: Se quiser abrir a planilha direto, descomente a linha abaixo e coloque o link da planilha (não do script)
+    // window.open("LINK_DA_SUA_PLANILHA_AQUI", "_blank");
+}
 </script>
 
 </body>
