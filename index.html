@@ -165,64 +165,134 @@ tick();
 setInterval(tick, 1000);
 
 
-// =================================================================
-// 3. MODAL DE RSVP
-// =================================================================
-function abrirModalRSVP() { 
-    document.getElementById("modalRSVP").style.display = "flex"; 
+// ===============================
+// ABRIR MODAL PELO MENU
+// ===============================
+
+document.querySelectorAll('a[href="#rsvp"]').forEach(link => {
+
+link.addEventListener('click', function(e){
+
+e.preventDefault()
+
+abrirModalRSVP()
+
+history.replaceState(null,null,'#rsvp')
+
+})
+
+})
+
+window.addEventListener("load",function(){
+
+if(window.location.hash=="#rsvp"){
+abrirModalRSVP()
 }
 
-function fecharModalRSVP() { 
-    document.getElementById("modalRSVP").style.display = "none"; 
+})
+
+
+// ===============================
+// VERIFICAR CÓDIGO DO CONVITE
+// ===============================
+
+document.getElementById("codigoConvite").addEventListener("blur", verificarCodigo)
+
+function verificarCodigo(){
+
+const codigo = document.getElementById("codigoConvite").value
+
+fetch(SCRIPT_URL + "?action=verificar&codigo=" + codigo)
+
+.then(r=>r.json())
+
+.then(data=>{
+
+const info = document.getElementById("infoConvite")
+
+if(!data.ok){
+
+info.innerText = "Código inválido"
+
+return
+
+}
+
+info.innerText = "Convite para " + data.nome + " (até " + data.limite + " pessoas)"
+
+document.getElementById("nomeResponsavel").value = data.nome
+
+})
+
 }
 
 
-// =================================================================
-// 4. ENVIO DO FORMULÁRIO PARA O GOOGLE SHEETS
-// =================================================================
-const form = document.getElementById('rsvpForm');
+// ===============================
+// ENVIO DO FORMULÁRIO
+// ===============================
 
-if(form){
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
+const form = document.getElementById("rsvpForm")
 
-      // Feedback visual no botão
-      const btn = form.querySelector('button');
-      const textoOriginal = btn.innerText;
-      btn.innerText = "Enviando...";
-      btn.disabled = true;
+form.addEventListener("submit",function(e){
 
-      // Coleta os dados
-      const dados = {
-        action: 'rsvp',
-        nome: document.getElementById('nomeResponsavel').value,
-        telefone: document.getElementById('telefone').value,
-        acompanhantes: document.getElementById('nomes').value,
-        presenca: document.getElementById('presenca').value
-      };
+e.preventDefault()
 
-      // Envia para a planilha
-      fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors', // Necessário para Apps Script
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dados)
-      })
-      .then(() => {
-        alert('Obrigado! Sua confirmação foi registrada com sucesso.');
-        fecharModalRSVP();
-        form.reset();
-      })
-      .catch(error => {
-        console.error('Erro envio:', error);
-        alert('Erro ao conectar com o servidor. Tente novamente mais tarde.');
-      })
-      .finally(() => {
-        btn.innerText = textoOriginal;
-        btn.disabled = false;
-      });
-    });
+const acompanhantesTexto = document.getElementById("nomes").value.trim()
+
+const lista = acompanhantesTexto
+? acompanhantesTexto.split("\n").filter(n=>n.trim()!="")
+: []
+
+const total = 1 + lista.length
+
+const dados = {
+
+action:"rsvp",
+
+codigo:document.getElementById("codigoConvite").value,
+
+nome:document.getElementById("nomeResponsavel").value,
+
+telefone:document.getElementById("telefone").value,
+
+acompanhantes:lista.join(", "),
+
+total:total,
+
+presenca:document.getElementById("presenca").value
+
 }
+
+fetch(SCRIPT_URL,{
+
+method:"POST",
+
+mode:"no-cors",
+
+headers:{'Content-Type':'application/json'},
+
+body:JSON.stringify(dados)
+
+})
+
+.then(()=>{
+
+alert("Confirmação enviada com sucesso!")
+
+fecharModalRSVP()
+
+form.reset()
+
+})
+
+.catch(()=>{
+
+alert("Erro ao enviar confirmação")
+
+})
+
+})
+
 
 
 // =================================================================
@@ -268,6 +338,12 @@ window.addEventListener("load", function(){
     abrirModalRSVP();
   }
 });
+  document.getElementById("modalRSVP").addEventListener("click", function(e){
+  if(e.target === this){
+    fecharModalRSVP();
+  }
+});
+
 </script>
 
 </body>
