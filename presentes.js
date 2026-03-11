@@ -26,17 +26,17 @@ async function carregarPresentes() {
 
         // Mapeia os dados da planilha para o formato do site
         // Certifique-se que os cabeçalhos na planilha (linha 1) sejam: id, nome, descricao, categoria, preco, img
-        window.presentes = dados.map(item => ({
-            id: item.id,
-            nome: item.nome,
-            descricao: item.descricao,
-            categoria: item.categoria,
-            preco: Number(item.preco), // Garante que é número
-            img: item.img || "img/presentes/placeholder.jpg",
-            link: "#",
-            endereco: "Rua Araxá, 316, Passos - MG",
-            status: item.status || "Disponível" // Se adicionar coluna status na planilha
-        }));
+window.presentes = dados.map(item => ({
+    id: item.id,
+    nome: item.nome,
+    descricao: item.descricao,
+    categoria: item.categoria,
+    preco: Number(item.preco),
+    img: item.img || "img/presentes/placeholder.jpg",
+    link: item.link || null,
+    endereco: "Rua Araxá, 316, Passos - MG",
+    status: item.status || "Disponível"
+}));
 
         console.log("Presentes carregados da Planilha:", window.presentes);
         if (typeof inicializarInterface === "function") inicializarInterface();
@@ -203,57 +203,87 @@ function abrirModalPresenteById(id){
 /* Substitua a função openPresentModal no arquivo presentes.js */
 
 function openPresentModal(p){
+
   const bg = ensureModalExists();
   const box = $('modalPresenteContent');
 
-  // Adicionamos classes para criar o layout em Grid (duas colunas)
+  const botaoLoja = p.link ? `
+      <a href="${p.link}" target="_blank" class="btn-loja">
+        Comprar na loja
+      </a>
+  ` : '';
+
   box.innerHTML = `
-    <div class="modal-header">
+  <div class="modal-header">
       <h3>${escapeHtml(p.nome)}</h3>
       <button class="btn-close" id="closeModal">✕</button>
-    </div>
+  </div>
 
-    <div class="modal-body-grid">
-      
+  <div class="modal-body-grid">
+
       <div class="col-visual">
-        <div class="img-container">
-           <img src="${p.img}" onerror="this.src='img/presentes/placeholder.jpg'">
-        </div>
-        <p class="desc-text">${escapeHtml(p.descricao)}</p>
-        <p class="entrega-info"><small>📍 Entrega: ${escapeHtml(p.endereco)}</small></p>
+
+          <div class="img-container">
+              <img src="${p.img}" onerror="this.src='img/presentes/placeholder.jpg'">
+          </div>
+
+          <p class="desc-text">${escapeHtml(p.descricao)}</p>
+
+          <p class="entrega-info">
+            <small>📍 Entrega: ${escapeHtml(p.endereco)}</small>
+          </p>
+
+          ${botaoLoja}
+
       </div>
 
       <div class="col-form">
-        <div class="form-box">
-            <label>Valor do Presente (R$)</label>
-            <div class="input-group">
-                <span class="currency">R$</span>
-                <input id="valorPresenteModal" type="number" value="${p.preco.toFixed(2)}" step="0.01">
-            </div>
 
-            <label>Seu nome (para o cartão)</label>
-            <input id="nomePresenteModal" placeholder="Ex: Tio João e Tia Maria">
+          <div class="form-box">
 
-            <label>Mensagem aos noivos</label>
-            <textarea id="telefonePresenteModal" rows="3" placeholder="Escreva uma mensagem carinhosa..."></textarea>
-        </div>
+              <label>Valor do Presente</label>
 
-        <button class="btn-action" id="gerarPixBtn">Gerar QR PIX</button>
-        
-        <div id="pixAreaModal" class="pix-area" style="display:none;"></div>
+              <div class="input-group">
+                  <span class="currency">R$</span>
+                  <input id="valorPresenteModal" type="number" value="${p.preco.toFixed(2)}" step="0.01">
+              </div>
+
+              <label>Seu nome</label>
+              <input id="nomePresenteModal" placeholder="Ex: João e Maria">
+
+              <label>Mensagem para os noivos</label>
+              <textarea id="telefonePresenteModal" rows="3"></textarea>
+
+          </div>
+
+          <button class="btn-action" id="gerarPixBtn">
+              Presentear via PIX
+          </button>
+
+          <div id="pixAreaModal" class="pix-area" style="display:none;"></div>
+
       </div>
-    </div>
+
+  </div>
   `;
 
   bg.style.display='flex';
+
   $('closeModal').onclick = ()=> bg.style.display='none';
 
   $('gerarPixBtn').onclick = () => {
+
     const raw = $('valorPresenteModal').value.trim();
     const val = raw ? Number(raw.replace(',','.')) : 0;
-    if(isNaN(val) || val<=0) return alert('Valor inválido');
+
+    if(isNaN(val) || val<=0){
+        alert('Valor inválido');
+        return;
+    }
+
     generateAndShowBRCode(p, val);
   };
+
 }
 
 function generateAndShowBRCode(present, valor){
