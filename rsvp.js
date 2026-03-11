@@ -1,5 +1,5 @@
 
-const SCRIPT_URL="COLE_SEU_GOOGLE_SCRIPT_AQUI";
+const SCRIPT_URL="https://script.google.com/macros/s/AKfycbxM-JD679gNUBK6wKLvsPPT-BVPReGqg2t5AXpeC-sdiXoBKitU6qwlF0-6cB88SdaE/exec";
 
 function abrirModal(){
 document.getElementById("modalRSVP").style.display="flex";
