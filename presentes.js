@@ -41,7 +41,7 @@ document.getElementById("btnLoja").href=p.link||"#";
 document.getElementById("qrcode").innerHTML="";
 
 new QRCode(document.getElementById("qrcode"),{
-text:"SEU_PIX_AQUI",
+text:"35991376178",
 width:200,
 height:200
 });
