@@ -8,7 +8,7 @@ const PIX_KEY = '97427455-6f14-4aba-aa09-d1cb15de34d4'; // Sua chave
 const PIX_NOME = 'Guilherme de Siqueira Silveira'; // Seu nome
 const PIX_CIDADE = 'Jacarei';
 const PIX_POINT_OF_INIT = '12'; // QR dinâmico
-
+ 
 /* ===========================================================
    CARREGAR PRESENTES (GOOGLE SHEETS)
 =========================================================== */
