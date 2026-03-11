@@ -1,278 +1,114 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Guilherme + Marcella</title>
 
-<!-- EmailJS (public key provided by user) -->
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script>
-  emailjs.init("O-dFEDfrDwxNfMC_M"); // public key provided
-</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- QR lib (qrcodejs) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<title>Guilherme & Marcella</title>
 
-<!-- Fonte elegante -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
 </head>
+
 <body>
 
-<!-- HEADER -->
-<header id="topo">
-  <nav>
-    <a href="#rsvp">RSVP</a>
-    <a href="#casal">O Casal</a>
-    <a href="#cerimonia">Cerimônia</a>
-    <a href="presentes.html">Presentes</a>
-  </nav>
+<header>
+
+<nav>
+
+<a href="#casal">O Casal</a>
+<a href="#cerimonia">Cerimônia</a>
+<a href="presentes.html">Presentes</a>
+<a href="#rsvp">RSVP</a>
+
+</nav>
+
 </header>
 
-<!-- HERO -->
-<section class="hero" style="animation-delay:0.05s;">
-  <div class="container">
-    <h1>GUILHERME + MARCELLA</h1>
-    <div class="galeria" aria-hidden="true">
-      <img src="img/foto1.jpeg" alt="Foto casal 1">
-      <img src="img/foto2.jpeg" alt="Foto casal 2">
-      <img src="img/foto3.jpeg" alt="Foto casal 3">
-    </div>
-    <h2>09.05.2026</h2>
-  </div>
+<section class="hero">
+
+<h1>Guilherme & Marcella</h1>
+
+<p>09 de Maio de 2026</p>
+
 </section>
 
-<!-- COUNTDOWN -->
-<section class="countdown-section" style="animation-delay:0.08s;">
-  <div class="container">
-    <h3>CONTAGEM REGRESSIVA</h3>
-    <div id="countdown">
-      <div class="count-box"><span id="dias">0</span> Dias</div>
-      <div class="count-box"><span id="horas">00</span> Horas</div>
-      <div class="count-box"><span id="minutos">00</span> Min</div>
-      <div class="count-box"><span id="segundos">00</span> Seg</div>
-    </div>
-  </div>
+<section id="casal">
+
+<h2>O Casal</h2>
+
+<p>
+
+Histórias de amor existem, e às vezes nem nós mesmos acreditamos no tempo que já estamos juntos.
+
+Mas o brilho intenso dos nossos olhares nos lembra o motivo de estarmos aqui.
+
+Vamos nos casar!
+
+</p>
+
 </section>
 
-<!-- O CASAL -->
-<section id="casal" style="animation-delay:0.12s;">
-  <div class="container">
-    <h2>O CASAL</h2>
-    <p style="font-weight:300;">Histórias de amor existem, e, às vezes, nem nós mesmos acreditamos todo o tempo que já estamos juntos. Porém, o brilho intenso e apaixonado dos nossos olhares nos fazem lembrar o porquê de chegarmos até aqui sem sentir tanto o tempo passar....Vamos nos casar! Estamos preparando tudo com muito carinho para curtirmos cada momento com nossos amigos e familiares queridos!</p>
-  </div>
+<section id="cerimonia">
+
+<h2>Cerimônia</h2>
+
+<p>
+
+9 de Maio de 2026 às 16h  
+Casa A Eventos  
+Passos - MG
+
+</p>
+
+<iframe
+src="https://www.google.com/maps?q=Casa+A+Eventos+Passos+MG&output=embed"
+loading="lazy">
+</iframe>
+
 </section>
 
-<!-- CERIMÔNIA -->
-<section id="cerimonia" style="animation-delay:0.14s;">
-  <div class="container">
-    <h2>CERIMÔNIA</h2>
-    <p style="font-weight:300;">Gostaríamos muito de contar com a presença de todos vocês no momento em que nossa união será abençoada diante de Deus! A cerimônia será rápida e tentaremos ser extremamente pontuais. Contamos com vocês! Dia 9 de maio de 2026, às 16h. Casa A Eventos, Rodovia MG-050. Passos - MG</p>
+<section id="rsvp">
 
-    <iframe class="mapa"
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1887.342224226003!2d-46.707329!3d-20.7442381!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b6dd180f1ce179%3A0x5ebf5c93b03199e1!2sCasa%20A%20Eventos!5e0!3m2!1spt-BR!2sbr!4v1697700000000!5m2!1spt-BR!2sbr"
-      style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-  </div>
+<h2>Confirmar presença</h2>
+
+<button onclick="abrirModal()">Confirmar</button>
+
 </section>
 
-<!-- RSVP (prioritário) -->
-<section id="rsvp" style="animation-delay:0.18s;">
-  <div class="container" style="text-align:center;">
-    <h2>Confirmar Presença</h2>
-    <p style="font-weight:300; margin-bottom:14px;">Clique em confirmar para abrir o formulário.</p>
-    <button class="botao-rsvp" onclick="abrirModalRSVP()">CONFIRMAR</button>
-    <p style="margin-top:10px; font-size:13px; color:#666">Você também pode pressionar a tecla <strong>A</strong> para abrir o painel administrativo (somente para vocês, senha exigida).</p>
-  </div>
-</section>
+<div id="modalRSVP" class="modal">
 
-<!-- MODAL RSVP -->
-<div class="modal-bg" id="modalRSVP">
-  <div class="modal">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <h3 style="font-weight:300; margin:0;">Confirmar presença</h3>
-      <button class="fechar-modal btn-ghost" onclick="fecharModalRSVP()">✕</button>
-    </div>
+<div class="modal-content">
 
-    <form id="rsvpForm" style="margin-top:12px;">
-      <input type="text" id="nomeResponsavel" placeholder="Seu nome (responsável pela confirmação)" required>
-      <input type="text" id="telefone" placeholder="Telefone (WhatsApp preferencial)" required>
-      <textarea id="nomes" placeholder="Nomes dos acompanhantes (1 por linha)" rows="4"></textarea>
-      <select id="presenca" required>
-        <option value="">Vocês irão?</option>
-        <option value="sim">Sim — iremos</option>
-        <option value="nao">Não — não iremos</option>
-      </select>
-      <button class="btn" type="submit">Enviar RSVP</button>
-    </form>
-  </div>
+<h3>Confirmação de presença</h3>
+
+<input id="nome" placeholder="Seu nome">
+
+<input id="telefone" placeholder="Telefone">
+
+<textarea id="nomes" placeholder="Acompanhantes"></textarea>
+
+<select id="presenca">
+
+<option value="">Vocês irão?</option>
+<option value="sim">Sim</option>
+<option value="nao">Não</option>
+
+</select>
+
+<button onclick="enviarRSVP()">Enviar</button>
+
+<button onclick="fecharModal()">Fechar</button>
+
 </div>
 
-<!-- ADMIN PANEL (kept minimal here) -->
-<div id="adminPanel" aria-hidden="true" style="display:none;">
-  <div style="display:flex; justify-content:space-between; align-items:center;">
-    <strong>PAINEL ADMIN</strong>
-    <div>
-      <button class="btn-ghost" onclick="exportCSV()">Exportar CSV</button>
-      <button class="btn" onclick="document.getElementById('adminPanel').style.display='none'">Fechar</button>
-    </div>
-  </div>
 </div>
 
-<script src="presentes.js"></script>
-<script>
-// =================================================================
-// 1. CONFIGURAÇÕES GERAIS
-// =================================================================
-const DATE_TARGET = new Date("2026-05-09T16:00:00").getTime();
-
-// SUA URL DO GOOGLE APPS SCRIPT
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyAGdnf8IcbzT-tVIC7Yf2vnw_Kbfi6Tqh-XFjQ-AhG-Lff1ODy3lbzrXW7L7HsPdbN/exec"; 
-
-// =================================================================
-// 2. CONTAGEM REGRESSIVA (COUNTDOWN)
-// =================================================================
-function tick(){
-  const now = Date.now();
-  const diff = DATE_TARGET - now;
-  
-  // Helper para atualizar texto apenas se o elemento existir
-  const el = (id, val) => { 
-      const element = document.getElementById(id);
-      if(element) element.innerText = val; 
-  }
-  
-  if(diff <= 0){ 
-      el('dias','0'); el('horas','00'); el('minutos','00'); el('segundos','00'); 
-      return; 
-  }
-  
-  const dias = Math.floor(diff/(1000*60*60*24));
-  const horas = Math.floor((diff/(1000*60*60))%24);
-  const minutos = Math.floor((diff/(1000*60))%60);
-  const segundos = Math.floor((diff/1000)%60);
-  
-  el('dias', dias);
-  el('horas', String(horas).padStart(2,'0'));
-  el('minutos', String(minutos).padStart(2,'0'));
-  el('segundos', String(segundos).padStart(2,'0'));
-}
-tick(); 
-setInterval(tick, 1000);
-
-
-// =================================================================
-// 3. MODAL DE RSVP
-// =================================================================
-function abrirModalRSVP() { 
-    document.getElementById("modalRSVP").style.display = "flex"; 
-}
-
-function fecharModalRSVP() { 
-    document.getElementById("modalRSVP").style.display = "none"; 
-}
-
-
-// =================================================================
-// 4. ENVIO DO FORMULÁRIO PARA O GOOGLE SHEETS
-// =================================================================
-const form = document.getElementById('rsvpForm');
-
-if(form){
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-
-      // Feedback visual no botão
-      const btn = form.querySelector('button');
-      const textoOriginal = btn.innerText;
-      btn.innerText = "Enviando...";
-      btn.disabled = true;
-
-      // Coleta os dados
-      const dados = {
-        action: 'rsvp',
-        nome: document.getElementById('nomeResponsavel').value,
-        telefone: document.getElementById('telefone').value,
-        acompanhantes: document.getElementById('nomes').value,
-        presenca: document.getElementById('presenca').value
-      };
-
-      // Envia para a planilha
-      fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors', // Necessário para Apps Script
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dados)
-      })
-      .then(() => {
-        alert('Obrigado! Sua confirmação foi registrada com sucesso.');
-        fecharModalRSVP();
-        form.reset();
-      })
-      .catch(error => {
-        console.error('Erro envio:', error);
-        alert('Erro ao conectar com o servidor. Tente novamente mais tarde.');
-      })
-      .finally(() => {
-        btn.innerText = textoOriginal;
-        btn.disabled = false;
-      });
-    });
-}
-
-
-// =================================================================
-// 5. PAINEL ADMIN (Tecla 'A') E EXPORTAR CSV
-// =================================================================
-
-// Detecta a tecla "A" para abrir o painel oculto
-document.addEventListener('keydown', function(e){
-    // Se apertar 'a' (sem segurar shift/ctrl)
-    if(e.key.toLowerCase() === 'a' && !e.ctrlKey && !e.metaKey && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA'){
-        const senha = prompt("Painel Admin - Digite a senha:");
-        // Defina a senha aqui (ex: 1234)
-        if(senha === '1234'){ 
-            const painel = document.getElementById('adminPanel');
-            if(painel) painel.style.display = 'block';
-        }
-    }
-});
-
-// Função chamada pelo botão "Exportar CSV"
-function exportCSV(){
-    alert("Como seu site agora está integrado ao Google Sheets, você não precisa exportar nada por aqui!\n\nBasta abrir sua Planilha no Google Drive (aba RSVP) para ver todas as confirmações em tempo real.");
-    
-    // Opcional: Se quiser abrir a planilha direto, descomente a linha abaixo e coloque o link da planilha (não do script)
-    // window.open("LINK_DA_SUA_PLANILHA_AQUI", "_blank");
-}
-  // ================================================================
-// 6. ABRIR MODAL VIA LINK #rsvp
-// ================================================================
-
-// Quando clicar no link do menu
-document.querySelectorAll('a[href="#rsvp"]').forEach(link => {
-  link.addEventListener('click', function(e){
-    e.preventDefault(); // impede o scroll
-    abrirModalRSVP();
-    history.replaceState(null, null, '#rsvp'); // mantém #rsvp na URL
-  });
-});
-
-// Se entrar no site já com #rsvp
-window.addEventListener("load", function(){
-  if(window.location.hash === "#rsvp"){
-    abrirModalRSVP();
-  }
-});
-// Fechar ao clicar fora do modal 
-  document.getElementById("modalRSVP").addEventListener("click", function(e){
-  if(e.target === this){
-    fecharModalRSVP();
-  }
-});
-</script>
+<script src="js/rsvp.js"></script>
 
 </body>
 </html>
