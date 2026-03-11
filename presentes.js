@@ -2,7 +2,7 @@
 
 /* ========== CONFIGURAÇÃO ========== */
 // COLE AQUI A URL DO SEU GOOGLE APPS SCRIPT (WEB APP)
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZoDeYrFquTxuDfk7apZRYRg_EYL3HE2hZbHdWUb6gxEM6s9Ind2bXRxJIIqFsytxB/exec"; 
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBFQ7M-wW6YwG_M-FJaP6KqxlNUhPJlq7FJyAoPafH9zlRtGhn4pWevI4mxX4i6fKu/exec"; 
 
 const PIX_KEY = '97427455-6f14-4aba-aa09-d1cb15de34d4'; // Sua chave
 const PIX_NOME = 'Guilherme de Siqueira Silveira'; // Seu nome
@@ -21,7 +21,7 @@ async function carregarPresentes() {
         // Tenta carregar da nuvem (Planilha)
         if(container) container.innerHTML = '<div style="text-align:center; padding:40px;">Carregando lista atualizada...</div>';
         
-        const resposta = await fetch(GOOGLE_SCRIPT_URL);
+        const resposta = await fetch(GOOGLE_SCRIPT_URL + "?t=" + Date.now());
         const dados = await resposta.json();
 
         // Mapeia os dados da planilha para o formato do site
@@ -49,14 +49,7 @@ window.presentes = dados.map(item => ({
         console.error("Erro ao carregar da planilha. Tentando backup local...", erro);
         
         // FALLBACK: Se a planilha falhar, carrega do arquivo local
-        try {
-            const resp = await fetch("presentes.json");
-            const dadosLocal = await resp.json();
-            window.presentes = dadosLocal;
-            populateCategoriaSelect();
-            applyFilterSortView();
-        } catch(e) {
-            if(container) container.innerHTML = '<p>Erro ao carregar presentes.</p>';
+        console.error("Erro ao carregar presentes da planilha.");
         }
     }
 }
