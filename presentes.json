@@ -1,0 +1,18 @@
+[
+{
+"id":1,
+"nome":"Air Fryer",
+"descricao":"Para fazermos batata frita 🍟",
+"preco":350,
+"status":"Disponível",
+"link":"https://amazon.com"
+},
+{
+"id":2,
+"nome":"Jogo de Panelas",
+"descricao":"Para nossas primeiras receitas",
+"preco":500,
+"status":"Disponível",
+"link":"https://amazon.com"
+}
+]
