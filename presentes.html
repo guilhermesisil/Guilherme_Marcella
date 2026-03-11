@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Lista de Presentes</title>
 
@@ -13,45 +15,27 @@
 
 <body>
 
-<header>
-
 <h1>Lista de Presentes</h1>
-
-<p>Escolha um presente para nos abençoar ❤️</p>
-
-</header>
 
 <div id="lista" class="grid"></div>
 
+<div id="modal" class="modal">
 
-<!-- MODAL -->
+<div class="modal-content">
 
-<div id="modal" class="modal-bg">
+<h2 id="titulo"></h2>
 
-<div class="modal">
-
-<h2 id="tituloPresente"></h2>
-
-<p id="descricaoPresente"></p>
-
-<p id="valorPresente"></p>
+<p id="valor"></p>
 
 <div id="qrcode"></div>
 
-<div class="botoes">
-
-<button id="btnPix">Gerar PIX</button>
-
 <a id="btnLoja" target="_blank">Comprar na loja</a>
-
-</div>
 
 <button onclick="fecharModal()">Fechar</button>
 
 </div>
 
 </div>
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
