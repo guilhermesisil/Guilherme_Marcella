@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guilherme & Marcella</title>
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+<nav>
+<a href="#casal">O Casal</a>
+<a href="#cerimonia">Cerimônia</a>
+<a href="presentes.html">Presentes</a>
+<a href="#rsvp">RSVP</a>
+</nav>
+</header>
+
+<section class="hero">
+<h1>Guilherme & Marcella</h1>
+<p>09 de Maio de 2026</p>
+</section>
+
+<section id="casal">
+<h2>O Casal</h2>
+<p>
+Histórias de amor existem, e às vezes nem nós mesmos acreditamos no tempo que já estamos juntos.
+Mas o brilho dos nossos olhares nos lembra o motivo de estarmos aqui.
+Vamos nos casar!
+</p>
+</section>
+
+<section id="cerimonia">
+<h2>Cerimônia</h2>
+<p>9 de Maio de 2026 às 16h — Casa A Eventos — Passos MG</p>
+
+<iframe
+src="https://www.google.com/maps?q=Casa+A+Eventos+Passos+MG&output=embed"
+loading="lazy">
+</iframe>
+</section>
+
+<section id="rsvp">
+<h2>Confirmar presença</h2>
+<button onclick="abrirModal()">Confirmar</button>
+</section>
+
+<div id="modalRSVP" class="modal">
+<div class="modal-content">
+
+<h3>Confirmação de presença</h3>
+
+<input id="nome" placeholder="Seu nome">
+<input id="telefone" placeholder="Telefone">
+<textarea id="nomes" placeholder="Acompanhantes"></textarea>
+
+<select id="presenca">
+<option value="">Vocês irão?</option>
+<option value="sim">Sim</option>
+<option value="nao">Não</option>
+</select>
+
+<button onclick="enviarRSVP()">Enviar</button>
+<button onclick="fecharModal()">Fechar</button>
+
+</div>
+</div>
+
+<script src="js/rsvp.js"></script>
+
+</body>
+</html>
