@@ -1,100 +1,61 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Presentes — Guilherme & Marcella</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="presentes.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- QR Code lib -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<title>Lista de Presentes</title>
+
+<link rel="stylesheet" href="css/presentes.css">
+
 </head>
+
 <body>
 
-<header class="topo">
-  <div class="container">
-    <a class="voltar" href="index.html">← Voltar</a>
-    <h1>Lista de Presentes</h1>
-    <div style="width:72px"></div><!-- espaço para equilibrar layout -->
-  </div>
+<header>
+
+<h1>Lista de Presentes</h1>
+
+<p>Escolha um presente para nos abençoar ❤️</p>
+
 </header>
 
-<section class="container">
-  <div class="controls">
-    <div class="control-item">
-      <label for="filtroCategoria">Categoria</label>
-      <select id="filtroCategoria"></select>
-    </div>
+<div id="lista" class="grid"></div>
 
-    <div class="control-item">
-      <label for="ordenar">Ordenar por</label>
-      <select id="ordenar">
-        <option value="">Padrão</option>
-        <option value="preco_asc">Preço ↑</option>
-        <option value="preco_desc">Preço ↓</option>
-        <option value="nome_asc">Nome A–Z</option>
-        <option value="nome_desc">Nome Z–A</option>
-      </select>
-    </div>
 
-    <div class="control-item">
-      <label for="viewToggle">Exibição</label>
-      <select id="viewToggle">
-        <option value="grid">Grid</option>
-        <option value="lista">Lista (texto)</option>
-      </select>
-    </div>
-  </div>
+<!-- MODAL -->
 
-  <div id="lista" class="grid"></div>
-</section>
+<div id="modal" class="modal-bg">
 
-<!-- Modal template (injetado por JS se necessário) -->
-<div id="modalPresenteBg" class="modal-bg" style="display:none;">
-  <div class="modal" id="modalPresenteContent" style="max-height:85vh; overflow:auto;"></div>
+<div class="modal">
+
+<h2 id="tituloPresente"></h2>
+
+<p id="descricaoPresente"></p>
+
+<p id="valorPresente"></p>
+
+<div id="qrcode"></div>
+
+<div class="botoes">
+
+<button id="btnPix">Gerar PIX</button>
+
+<a id="btnLoja" target="_blank">Comprar na loja</a>
+
 </div>
 
-<!-- seu presentes.js (cole o presentes.js corrigido que você já recebeu) -->
-<script src="presentes.js"></script>
+<button onclick="fecharModal()">Fechar</button>
 
-<!-- VALIDADOR RÁPIDO — para testar BR Code no console (também útil para debug) -->
-<script>
-  // função disponível globalmente: validateBRCode(brcode) -> retorna {valid:Boolean, crcExpected, crcFound}
-  function validateBRCode(br){
-    if(!br || typeof br !== 'string') return { valid:false, error:'BR code vazio' };
-    // extrai os últimos 4 caracteres (CRC) e testa
-    const without = br.slice(0, -4);
-    const crcGiven = br.slice(-4).toUpperCase();
+</div>
 
-    function crc16(input){
-      let crc = 0xFFFF;
-      for(let i=0;i<input.length;i++){
-        crc ^= input.charCodeAt(i) << 8;
-        for(let j=0;j<8;j++){
-          if(crc & 0x8000) crc = ((crc << 1) ^ 0x1021) & 0xFFFF;
-          else crc = (crc << 1) & 0xFFFF;
-        }
-      }
-      return crc.toString(16).toUpperCase().padStart(4,'0');
-    }
+</div>
 
-    const expected = crc16(without + '6304'); // alguns BR codes já incluem 6304 — se não, função usada antes usava '...6304'
-    // fallback calculo direto sem adicionar 6304 somente se mismatch
-    const expected_alt = crc16(without);
 
-    return {
-      valid: crcGiven === expected || crcGiven === expected_alt,
-      crcFound: crcGiven,
-      crcExpected: expected,
-      crcExpectedAlt: expected_alt
-    };
-  }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-  // expose for debugging
-  window.validateBRCode = validateBRCode;
-</script>
+<script src="js/presentes.js"></script>
 
 </body>
 </html>
