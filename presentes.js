@@ -2,7 +2,7 @@
 
 /* ========== CONFIGURAÇÃO ========== */
 // COLE AQUI A URL DO SEU GOOGLE APPS SCRIPT (WEB APP)
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBFQ7M-wW6YwG_M-FJaP6KqxlNUhPJlq7FJyAoPafH9zlRtGhn4pWevI4mxX4i6fKu/exec"; 
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxM-JD679gNUBK6wKLvsPPT-BVPReGqg2t5AXpeC-sdiXoBKitU6qwlF0-6cB88SdaE/exec"; 
 
 const PIX_KEY = '97427455-6f14-4aba-aa09-d1cb15de34d4'; // Sua chave
 const PIX_NOME = 'Guilherme de Siqueira Silveira'; // Seu nome
