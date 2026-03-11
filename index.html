@@ -1,31 +1,55 @@
 
-const SCRIPT_URL="COLE_SEU_GOOGLE_SCRIPT_AQUI";
+let presentes=[];
 
-function abrirModal(){
-document.getElementById("modalRSVP").style.display="flex";
+async function carregarPresentes(){
+const resp=await fetch("data/presentes.json");
+presentes=await resp.json();
+renderizar();
+}
+
+function renderizar(){
+
+const lista=document.getElementById("lista");
+lista.innerHTML="";
+
+presentes.forEach(p=>{
+
+const card=document.createElement("div");
+card.className="card";
+
+card.innerHTML=`
+<h3>${p.nome}</h3>
+<p>R$ ${p.preco}</p>
+<button onclick="abrirModal(${p.id})">Presentear</button>
+`;
+
+lista.appendChild(card);
+
+});
+
+}
+
+function abrirModal(id){
+
+const p=presentes.find(x=>x.id==id);
+
+document.getElementById("modal").style.display="flex";
+document.getElementById("titulo").innerText=p.nome;
+document.getElementById("valor").innerText="R$ "+p.preco;
+document.getElementById("btnLoja").href=p.link||"#";
+
+document.getElementById("qrcode").innerHTML="";
+
+new QRCode(document.getElementById("qrcode"),{
+text:"SEU_PIX_AQUI",
+width:200,
+height:200
+});
+
 }
 
 function fecharModal(){
-document.getElementById("modalRSVP").style.display="none";
+document.getElementById("modal").style.display="none";
 }
 
-async function enviarRSVP(){
-
-const dados={
-action:"rsvp",
-nome:document.getElementById("nome").value,
-telefone:document.getElementById("telefone").value,
-acompanhantes:document.getElementById("nomes").value,
-presenca:document.getElementById("presenca").value
-};
-
-await fetch(SCRIPT_URL,{
-method:"POST",
-mode:"no-cors",
-body:JSON.stringify(dados)
-});
-
-alert("Confirmação enviada!");
-fecharModal();
-
-}
+carregarPresentes();
