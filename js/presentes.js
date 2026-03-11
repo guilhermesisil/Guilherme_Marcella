@@ -1,27 +1,27 @@
-const SCRIPT_URL = "COLE_AQUI_SEU_SCRIPT";
+const SCRIPT_URL = "SEU_SCRIPT_AQUI";
 
 let presentes = [];
-
 
 async function carregarPresentes(){
 
 try{
 
-const res = await fetch(SCRIPT_URL + "?t=" + Date.now());
+const resp = await fetch(SCRIPT_URL + "?t=" + Date.now());
 
-presentes = await res.json();
+if(!resp.ok) throw new Error("Erro API");
+
+presentes = await resp.json();
 
 renderizar();
 
 }
-
 catch(e){
 
-console.log("Erro planilha, carregando backup");
+console.warn("Erro API — carregando backup");
 
-const res = await fetch("presentes.json");
+const resp = await fetch("data/presentes.json");
 
-presentes = await res.json();
+presentes = await resp.json();
 
 renderizar();
 
@@ -40,41 +40,82 @@ presentes.forEach(p=>{
 
 if(p.status==="Reservado") return;
 
-const div=document.createElement("div");
+const card = document.createElement("div");
 
-div.className="item";
+card.className="card-presente";
 
-div.innerHTML=`
+card.innerHTML=`
 
 <h3>${p.nome}</h3>
 
-<p>R$ ${p.preco}</p>
+<p class="preco">R$ ${p.preco}</p>
+
+<button onclick="abrirModal(${p.id})">
+Presentear
+</button>
+
+${p.link ? `
+<a href="${p.link}" target="_blank" class="btn-loja">
+Comprar na loja
+</a>
+` : ``}
 
 `;
 
-div.onclick=()=>abrirModal(p);
-
-lista.appendChild(div);
+lista.appendChild(card);
 
 });
 
 }
 
 
-function abrirModal(p){
+function abrirModal(id){
+
+const presente = presentes.find(p=>p.id==id);
+
+if(!presente) return;
+
+if(presente.status==="Reservado"){
+
+alert("Este presente já foi escolhido.");
+
+return;
+
+}
+
+mostrarModal(presente);
+
+}
+
+
+function mostrarModal(p){
 
 document.getElementById("modal").style.display="flex";
 
-document.getElementById("tituloPresente").innerText=p.nome;
+document.getElementById("titulo").innerText=p.nome;
 
-document.getElementById("descricaoPresente").innerText=p.descricao;
+document.getElementById("valor").innerText="R$ "+p.preco;
 
-document.getElementById("valorPresente").innerText="Valor: R$ "+p.preco;
+gerarQR(p);
 
-document.getElementById("btnLoja").href=p.link||"#";
+}
 
 
-document.getElementById("btnPix").onclick=()=>gerarPix(p);
+function gerarQR(p){
+
+const qrcodeDiv = document.getElementById("qrcode");
+
+qrcodeDiv.innerHTML="";
+
+new QRCode(qrcodeDiv,{
+
+text:"SEU_PIX_AQUI",
+
+width:220,
+
+height:220
+
+});
 
 }
 
@@ -84,40 +125,5 @@ function fecharModal(){
 document.getElementById("modal").style.display="none";
 
 }
-
-
-function gerarPix(p){
-
-document.getElementById("qrcode").innerHTML="";
-
-new QRCode(document.getElementById("qrcode"),{
-
-text:"pix@email.com",
-
-width:200,
-
-height:200
-
-});
-
-}
-
-
-document.addEventListener("keydown",e=>{
-
-if(e.ctrlKey && e.shiftKey && e.key==="G"){
-
-const senha=prompt("Painel dos noivos");
-
-if(senha==="09052026"){
-
-alert("Abrir painel admin futuramente");
-
-}
-
-}
-
-});
-
 
 carregarPresentes();
