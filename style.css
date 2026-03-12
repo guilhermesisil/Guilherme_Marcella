@@ -18,7 +18,7 @@ nav a:hover{ opacity:.6; }
 .countdown-section {
     display: block;          /* Volta para o comportamento padrão de bloco */
     width: 92%;              /* No celular, ela ocupa quase tudo */
-    max-width: 860px;        /* AJUSTE AQUI: Aumente ou diminua esse valor para a largura que achar ideal */
+    max-width: 960px;        /* AJUSTE AQUI: Aumente ou diminua esse valor para a largura que achar ideal */
     margin: 32px auto;       /* Centraliza a caixa na página */
     background: #000;
     color: #fff;
