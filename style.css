@@ -15,8 +15,24 @@ nav a:hover{ opacity:.6; }
 .galeria{ display:flex; justify-content:center; gap:var(--gap); margin-top:18px; flex-wrap:wrap; }
 .galeria img{ width:32%; max-width:320px; border-radius:12px; object-fit:cover; filter:grayscale(100%); transition:transform .35s ease, filter .35s ease; }
 .galeria img:hover{ transform:scale(1.03); filter:grayscale(0%); }
-.countdown-section{ width: fit-content;max-width:92%; margin:32px auto; background:#000; color:#fff; padding:24px 30px; border-radius:22px; text-align:center; }
-.countdown-section h3{ font-weight:200; letter-spacing:5px; margin:0 0 12px; font-size:26px; }
+.countdown-section {
+    display: table;           /* Força a caixa a ter exatamente o tamanho do conteúdo */
+    margin: 32px auto;        /* Centraliza a caixa na tela */
+    background: #000;
+    color: #fff;
+    padding: 20px 30px;       /* Reduzi o espaço interno para ela ficar menor */
+    border-radius: 22px;
+    text-align: center;
+    width: auto;              /* Garante que não use os 92% de antes */
+}
+
+.countdown-section h3 {
+    font-weight: 200;
+    letter-spacing: 5px;
+    margin: 0 0 12px;
+    font-size: 20px;          /* Diminuí um pouco o título para não alargar a caixa */
+    white-space: nowrap;      /* Impede o título de forçar a largura se for longo */
+}
 #countdown{ display:flex; justify-content:center; gap:18px; flex-wrap:wrap; margin-top:12px; }
 .count-box{ background:#fff; color:#000; padding:22px 28px; border-radius:16px; min-width:110px; box-shadow:0 6px 18px rgba(0,0,0,0.08); font-weight:300; }
 .count-box span{ display:block; font-size:34px; font-weight:400; margin-bottom:6px; }
