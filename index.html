@@ -247,6 +247,31 @@ function exportCSV(){
     // Opcional: Se quiser abrir a planilha direto, descomente a linha abaixo e coloque o link da planilha (não do script)
     // window.open("LINK_DA_SUA_PLANILHA_AQUI", "_blank");
 }
+  // ================================================================
+// 6. ABRIR MODAL VIA LINK #rsvp
+// ================================================================
+
+// Quando clicar no link do menu
+document.querySelectorAll('a[href="#rsvp"]').forEach(link => {
+  link.addEventListener('click', function(e){
+    e.preventDefault(); // impede o scroll
+    abrirModalRSVP();
+    history.replaceState(null, null, '#rsvp'); // mantém #rsvp na URL
+  });
+});
+
+// Se entrar no site já com #rsvp
+window.addEventListener("load", function(){
+  if(window.location.hash === "#rsvp"){
+    abrirModalRSVP();
+  }
+});
+// Fechar ao clicar fora do modal 
+  document.getElementById("modalRSVP").addEventListener("click", function(e){
+  if(e.target === this){
+    fecharModalRSVP();
+  }
+});
 </script>
 
 </body>
