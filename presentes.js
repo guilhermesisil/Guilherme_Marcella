@@ -33,6 +33,7 @@ async function carregarPresentes() {
             categoria: item.categoria,
             preco: Number(item.preco), // Garante que é número
             img: item.img || "img/presentes/placeholder.jpg",
+             link: item.descricao, // <--- Aqui dizemos que o link é a própria descrição
             endereco: "Rua Araxá, 316, Passos - MG",
             status: item.status || "Disponível" // Se adicionar coluna status na planilha
         }));
@@ -148,7 +149,7 @@ function renderList(items, view='grid'){
       ` : `
         <div>
           <h4>${escapeHtml(p.nome)}</h4>
-          <p>${escapeHtml(p.descricao)}</p>
+          <p><a href="${p.descricao}" target="_blank" style="color:blue; text-decoration:underline;">Clique aqui para ver o item</a></p>
           <p class="price">R$ ${p.preco.toFixed(2)}</p>
         </div>
         <button class="${btnClass}" data-id="${p.id}" ${disabled}>${btnText}</button>
@@ -218,7 +219,7 @@ function openPresentModal(p){
         <div class="img-container">
            <img src="${p.img}" onerror="this.src='img/presentes/placeholder.jpg'">
         </div>
-        <p class="desc-text">${escapeHtml(p.descricao)}</p>
+        <p class="desc-text"><a href="${p.descricao}" target="_blank" style="color:blue; text-decoration:underline;">Ver detalhes do produto</a></p>
         <p class="entrega-info"><small>📍 Entrega: ${escapeHtml(p.endereco)}</small></p>
       </div>
 
