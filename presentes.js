@@ -33,7 +33,6 @@ async function carregarPresentes() {
             categoria: item.categoria,
             preco: Number(item.preco), // Garante que é número
             img: item.img || "img/presentes/placeholder.jpg",
-            link: "#",
             endereco: "Rua Araxá, 316, Passos - MG",
             status: item.status || "Disponível" // Se adicionar coluna status na planilha
         }));
