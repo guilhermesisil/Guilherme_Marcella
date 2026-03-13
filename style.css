@@ -75,7 +75,33 @@ section .container{ padding-top:6px; padding-bottom:6px; }
 @media (max-width:720px){
   .galeria img{ width:90%; max-width:420px; }
   .hero h1{ font-size:38px; letter-spacing:6px; }
-  .count-box{ padding:18px 20px; }
+
+  /* Ajustes do Countdown para não empilhar */
+  .countdown-section {
+    padding: 25px 10px; /* Reduz o respiro lateral da caixa preta */
+    width: 95%;
+  }
+
+  #countdown {
+    flex-wrap: nowrap; /* Força os itens a ficarem na mesma linha */
+    gap: 8px;          /* Diminui o espaço entre as caixas brancas */
+  }
+
+  .count-box {
+    padding: 12px 8px; /* Caixas mais compactas */
+    min-width: 0;      /* Remove a largura mínima que forçava o empilhamento */
+    flex: 1;           /* Faz as 4 caixas dividirem o espaço igualmente */
+  }
+
+  .count-box span {
+    font-size: 20px;   /* Números menores para caber */
+    margin-bottom: 2px;
+  }
+
+  .count-box {
+    font-size: 10px;   /* Texto (Dias, Horas...) bem pequeno */
+    letter-spacing: 0;
+  }
 }
 
 /* ===== FIX MODAL RSVP — SOBRESCREVER ESTILOS ===== */
