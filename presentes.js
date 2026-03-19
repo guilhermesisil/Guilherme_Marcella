@@ -250,7 +250,12 @@ function openPresentModal(p){
         </div>
 
         <button class="btn-action" id="gerarPixBtn">Gerar QR PIX</button>
-        
+
+<button class="btn-ghost" id="btnJaCompreiModal" style="margin-top:10px;">
+  Já comprei este presente
+</button>
+
+<div id="pixAreaModal" class="pix-area" style="display:none;"></div>
         <div id="pixAreaModal" class="pix-area" style="display:none;"></div>
       </div>
     </div>
@@ -265,6 +270,7 @@ function openPresentModal(p){
     if(isNaN(val) || val<=0) return alert('Valor inválido');
     generateAndShowBRCode(p, val);
   };
+   $('btnJaCompreiModal').onclick = () => marcarComoComprado(p);
 }
 
 function generateAndShowBRCode(present, valor){
