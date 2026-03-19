@@ -89,16 +89,21 @@ body {
 
   /* deixa os cards menores */
   .item {
-    padding: 10px;
-    gap: 8px;
+    height: 100%; /* 🔥 garante mesma altura */
   }
 
   .item h4 {
-    font-size: 12px;
-  }
+  min-height: 34px; /* segura 2 linhas padrão */
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* limita a 2 linhas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
   .item .price {
     font-size: 13px;
+    min-height: 20px;
+}
   }
 
   .btn {
@@ -151,7 +156,9 @@ body {
 .item .category { color:#666; font-size:12px; margin-top:4px; }
 
 /* actions */
-.actions { display:flex; gap:10px; margin-top:auto; }
+.actions {
+  margin-top: auto; /* 🔥 empurra botão pro fundo */
+}
 .btn {
   flex:1 1 auto;
   background:#0b0b0b;
