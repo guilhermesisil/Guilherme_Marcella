@@ -254,6 +254,18 @@ function openPresentModal(p){
     if(isNaN(val) || val<=0) return alert('Valor inválido');
     generateAndShowBRCode(p, val);
   };
+   <button class="btn" id="confirmarAntesPix" style="width:100%; margin-top:10px; background:#2ecc71; border:none;">
+  Confirmar Pagamento
+</button>
+   $('confirmarAntesPix').onclick = () => {
+  const raw = $('valorPresenteModal').value.trim();
+  const val = raw ? Number(raw.replace(',','.')) : 0;
+  if(isNaN(val) || val<=0) return alert('Valor inválido');
+
+  const txid = 'PRES' + Math.floor(Math.random() * 100000);
+
+  confirmarPagamento(p, val, txid);
+};
 }
 
 function generateAndShowBRCode(present, valor){
@@ -297,42 +309,43 @@ function generateAndShowBRCode(present, valor){
   $('copBr').onclick = ()=> navigator.clipboard.writeText(brcode).then(()=> alert('Pix Copia e Cola copiado!'));
 
   // LOGICA DE SALVAR NO GOOGLE SHEETS
-  $('confirmarContrib').onclick = () => {
-    const nome = $('nomePresenteModal').value.trim() || 'Anônimo';
-    const msg = $('telefonePresenteModal').value.trim() || '';
+$('confirmarContrib').onclick = () => confirmarPagamento(present, valor, txid);
+}
 
-    const btn = $('confirmarContrib');
+function confirmarPagamento(present, valor, txid){
+  const nome = $('nomePresenteModal').value.trim() || 'Anônimo';
+  const msg = $('telefonePresenteModal').value.trim() || '';
+
+  const btn = document.activeElement; // botão clicado
+  if(btn){
     btn.innerText = "Registrando...";
     btn.disabled = true;
+  }
 
-    // Monta objeto para enviar
-    const payload = {
-        action: "contribuir",
-        txid: txid,
-        presenteId: present.id,
-        presenteNome: present.nome,
-        valor: valor,
-        nomeDoador: nome,
-        msg: msg
-    };
-
-    // Envia para o Google Apps Script
-    fetch(GOOGLE_SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors", // Importante para não dar erro de CORS
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-    }).then(() => {
-        alert(`Obrigado, ${nome}! Sua contribuição foi registrada com sucesso.`);
-        $('modalPresenteBg').style.display='none';
-        // Recarrega para atualizar o status se tiver mudado para Reservado
-        carregarPresentes();
-    }).catch(err => {
-        alert('Houve um erro ao registrar. Mas se você fez o PIX, está tudo certo!');
-        console.error(err);
-        $('modalPresenteBg').style.display='none';
-    });
+  const payload = {
+      action: "contribuir",
+      txid: txid,
+      presenteId: present.id,
+      presenteNome: present.nome,
+      valor: valor,
+      nomeDoador: nome,
+      msg: msg
   };
+
+  fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+  }).then(() => {
+      alert(`Obrigado, ${nome}! Sua contribuição foi registrada com sucesso.`);
+      $('modalPresenteBg').style.display='none';
+      carregarPresentes();
+  }).catch(err => {
+      alert('Houve um erro ao registrar. Mas se você fez o PIX, está tudo certo!');
+      console.error(err);
+      $('modalPresenteBg').style.display='none';
+  });
 }
 
 function escapeHtml(s){
