@@ -138,14 +138,17 @@ function renderList(items, view='grid'){
       const btnClass = isReservado ? 'btn-ghost' : 'btn';
       const disabled = isReservado ? 'disabled' : '';
 
-      const html = view === 'grid' ? `
-        <div class="img-square"><img src="${p.img}" onerror="this.src='img/presentes/placeholder.jpg'"></div>
-        <h4>${escapeHtml(p.nome)}</h4>
-        <p class="price">R$ ${p.preco.toFixed(2)}</p>
-        <p class="category">${escapeHtml(p.categoria)}</p>
-        <div class="actions">
-          <button class="${btnClass}" data-id="${p.id}" ${disabled}>${btnText}</button>
-        </div>
+const html = view === 'grid' ? `
+  <div class="img-square"><img src="${p.img}" onerror="this.src='img/presentes/placeholder.jpg'"></div>
+  <h4>${escapeHtml(p.nome)}</h4>
+  <p class="price">R$ ${p.preco.toFixed(2)}</p>
+  <p class="category">${escapeHtml(p.categoria)}</p>
+
+  <div class="actions">
+    <button class="${btnClass}" data-id="${p.id}" ${disabled}>${btnText}</button>
+    ${!isReservado ? `<button class="btn-ghost btn-ja-comprei" data-id="${p.id}">Já comprei</button>` : ''}
+  </div>
+
       ` : `
         <div>
           <h4>${escapeHtml(p.nome)}</h4>
@@ -161,9 +164,17 @@ function renderList(items, view='grid'){
       d.innerHTML = html;
       container.appendChild(d);
 
-      if(!isReservado) {
-          d.querySelector('button').onclick = ()=> abrirModalPresenteById(p.id);
-      }
+     if(!isReservado) {
+    const btnPresentear = d.querySelector('.btn');
+    if(btnPresentear){
+        btnPresentear.onclick = ()=> abrirModalPresenteById(p.id);
+    }
+
+    const btnJaComprei = d.querySelector('.btn-ja-comprei');
+    if(btnJaComprei){
+        btnJaComprei.onclick = ()=> marcarComoComprado(p);
+    }
+}
   });
 }
 
@@ -337,4 +348,28 @@ function generateAndShowBRCode(present, valor){
 
 function escapeHtml(s){
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function marcarComoComprado(present){
+    const nome = prompt("Seu nome (opcional):") || "Convidado";
+
+    if(!confirm(`Confirmar que você já comprou "${present.nome}"?`)) return;
+
+    const payload = {
+        action: "reservar",
+        presenteId: present.id,
+        presenteNome: present.nome,
+        nome: nome
+    };
+
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    }).then(() => {
+        alert("Perfeito! Marcamos como comprado 😊");
+        carregarPresentes(); // 🔥 atualiza lista
+    }).catch(() => {
+        alert("Erro ao registrar, mas pode ficar tranquilo se já comprou 👍");
+    });
 }
