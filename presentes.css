@@ -83,27 +83,28 @@ body {
 
 @media (max-width:520px){
   #lista.grid { 
-    grid-template-columns: repeat(2, 1fr); /* mantém 2 colunas */
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
 
-  /* deixa os cards menores */
   .item {
-    height: 100%; /* 🔥 garante mesma altura */
+    height: 100%;
+    padding: 10px;
+    gap: 8px;
   }
 
   .item h4 {
-  min-height: 34px; /* segura 2 linhas padrão */
-  display: -webkit-box;
-  -webkit-line-clamp: 2; /* limita a 2 linhas */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
+    min-height: 34px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 12px;
+  }
 
   .item .price {
     font-size: 13px;
     min-height: 20px;
-}
   }
 
   .btn {
@@ -114,7 +115,6 @@ body {
   .img-square {
     border-radius: 8px;
   }
-}
 }
 
 /* item estilo loja */
