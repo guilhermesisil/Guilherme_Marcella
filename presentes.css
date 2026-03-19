@@ -73,10 +73,41 @@ body {
   #lista.grid { grid-template-columns: repeat(4, 1fr); }
 }
 @media (max-width:900px){
-  #lista.grid { grid-template-columns: repeat(2, 1fr); }
+  #lista.grid { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 16px;
+  }
 }
+
 @media (max-width:520px){
-  #lista.grid { grid-template-columns: 1fr; }
+  #lista.grid { 
+    grid-template-columns: repeat(2, 1fr); /* mantém 2 colunas */
+    gap: 12px;
+  }
+
+  /* deixa os cards menores */
+  .item {
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .item h4 {
+    font-size: 12px;
+  }
+
+  .item .price {
+    font-size: 13px;
+  }
+
+  .btn {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .img-square {
+    border-radius: 8px;
+  }
+}
 }
 
 /* item estilo loja */
