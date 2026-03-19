@@ -4,7 +4,7 @@ window.presentes = [];
 
 /* ================= LOAD ================= */
 async function carregarPresentes() {
-    const res = await fetch(GOOGLE_SCRIPT_URL);
+    const res = await fetch(GOOGLE_SCRIPT_URL + "?t=" + Date.now());
     const dados = await res.json();
 
     window.presentes = dados.map(p => ({
@@ -26,7 +26,7 @@ function renderList(){
     container.innerHTML = '';
 
     window.presentes.forEach(p => {
-        const reservado = p.status !== "Disponível";
+        const reservado = String(p.status).toLowerCase().trim() !== "disponível";
 
         const div = document.createElement('div');
         div.className = 'item';
@@ -100,15 +100,16 @@ function enviar(payload){
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
     })
-    .then(res => res.text())
-    .then(res => {
-        console.log(res);
+    .then(async res => {
+        const txt = await res.text();
+        console.log("Resposta do script:", txt);
+        
         alert("Registrado!");
         document.getElementById('modalPresenteBg').style.display = 'none';
         carregarPresentes();
     })
     .catch(err => {
-        console.error(err);
+        console.error("Erro real:", err);
         alert("Erro ao registrar");
     });
 }
