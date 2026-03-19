@@ -432,7 +432,7 @@ body {
     margin: 0 !important;
     height: auto !important;
 }
-
+ 
 /* Efeito visual quando clica para digitar */
 .input-group:focus-within {
     border-color: #000 !important; /* A borda externa fica preta */
