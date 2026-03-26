@@ -379,7 +379,7 @@ section .container{ padding-top:6px; padding-bottom:6px; }
   justify-content: center;
   gap: 12px;
 
-  width: 90%;
+  width: 100%;
   max-width: 260px;
 
   padding: 14px;
