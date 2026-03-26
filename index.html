@@ -339,12 +339,7 @@ const res = await fetch(SCRIPT_URL, {
   body: formData
 });
 
-const res = await fetch(SCRIPT_URL, {
-  method: "POST",
-  body: formData
-});
-
-const data = await res.json(); // ✅ só isso
+const data = await res.json();
 
 if(data.status === "ok"){
   alert("Presença confirmada com sucesso!");
