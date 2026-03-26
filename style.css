@@ -430,3 +430,12 @@ section .container{ padding-top:6px; padding-bottom:6px; }
   font-weight: 300;
   letter-spacing: 1px;
 }
+/* espaçamento vertical consistente no formulário */
+#modalRSVP form > * {
+  margin-top: 14px;
+}
+
+/* evita duplicar espaço no primeiro item */
+#modalRSVP form > *:first-child {
+  margin-top: 0;
+}
