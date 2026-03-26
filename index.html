@@ -307,7 +307,11 @@ function renderAcompanhantes(listaAcomp){
       });
     }
   }
-  const form = document.getElementById("rsvpForm");
+}
+  // ===============================
+// SUBMIT DO FORMULÁRIO (ENVIO)
+// ===============================
+const form = document.getElementById("rsvpForm");
 
 form.addEventListener("submit", async function(e){
   e.preventDefault();
@@ -320,7 +324,6 @@ form.addEventListener("submit", async function(e){
   const telefone = document.getElementById("telefone").value;
   const presenca = document.getElementById("presenca").value;
 
-  // pegar acompanhantes selecionados
   const acompanhantesSelecionados = [
     ...document.querySelectorAll("#acompanhantesBox input:checked")
   ].map(i => i.value);
@@ -352,7 +355,6 @@ form.addEventListener("submit", async function(e){
     alert("Erro ao enviar confirmação.");
   }
 });
-}
 
 // =================================================================
 // 5. PAINEL ADMIN (Tecla 'A') E EXPORTAR CSV
