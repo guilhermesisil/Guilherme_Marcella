@@ -327,28 +327,30 @@ document.getElementById("rsvpForm").addEventListener("submit", async function(e)
   ].map(i => i.value);
 
   try{
-    const formData = new FormData();
+    const res = await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        nome: convidadoAtual.nome,
+        telefone: telefone,
+        acompanhantes: acompanhantes,
+        presenca: presenca
+      })
+    });
 
-formData.append("nome", convidadoAtual.nome);
-formData.append("telefone", telefone);
-formData.append("acompanhantes", acompanhantes.join(", "));
-formData.append("presenca", presenca);
+    const data = await res.json();
 
-const res = await fetch(SCRIPT_URL, {
-  method: "POST",
-  body: formData
-});
+    if(data.status === "ok"){
+      alert("Presença confirmada com sucesso!");
+      fecharModalRSVP();
+      document.getElementById("rsvpForm").reset();
+    }else{
+      alert("Erro ao enviar confirmação.");
+      console.log("ERRO BACKEND:", data);
+    }
 
-const data = await res.json();
-
-if(data.status === "ok"){
-  alert("Presença confirmada com sucesso!");
-  fecharModalRSVP();
-  document.getElementById("rsvpForm").reset();
-}else{
-  alert("Erro ao enviar confirmação.");
-  console.log(data);
-}
   }catch(err){
     alert("Erro de conexão.");
     console.error(err);
