@@ -311,9 +311,7 @@ function renderAcompanhantes(listaAcomp){
   // ===============================
 // SUBMIT DO FORMULÁRIO (ENVIO)
 // ===============================
-const form = document.getElementById("rsvpForm");
-
-form.addEventListener("submit", async function(e){
+document.getElementById("rsvpForm").addEventListener("submit", async function(e){
   e.preventDefault();
 
   if(!convidadoAtual){
@@ -324,38 +322,35 @@ form.addEventListener("submit", async function(e){
   const telefone = document.getElementById("telefone").value;
   const presenca = document.getElementById("presenca").value;
 
-  const acompanhantesSelecionados = [
+  const acompanhantes = [
     ...document.querySelectorAll("#acompanhantesBox input:checked")
   ].map(i => i.value);
 
-  const payload = {
-    nome: convidadoAtual.nome,
-    telefone: telefone,
-    presenca: presenca,
-    acompanhantes: acompanhantesSelecionados
-  };
-
   try{
-    await fetch(SCRIPT_URL, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify(payload)
-});
+    const res = await fetch(SCRIPT_URL, {
+      method: "POST",
+      body: JSON.stringify({
+        nome: convidadoAtual.nome,
+        telefone,
+        acompanhantes,
+        presenca
+      })
+    });
 
-    alert("Presença confirmada com sucesso! 🎉");
+    const data = await res.json();
 
-    form.reset();
-    document.getElementById("acompanhantesBox").innerHTML = "";
-    document.getElementById("contadorAcompanhantes").innerText = "";
-    document.getElementById("convidadoSelecionado").style.display = "none";
-
-    fecharModalRSVP();
+    if(data.status === "ok"){
+      alert("Presença confirmada com sucesso!");
+      fecharModalRSVP();
+      document.getElementById("rsvpForm").reset();
+    }else{
+      alert("Erro ao enviar confirmação.");
+      console.log(data);
+    }
 
   }catch(err){
+    alert("Erro de conexão.");
     console.error(err);
-    alert("Erro ao enviar confirmação.");
   }
 });
 
