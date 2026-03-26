@@ -368,3 +368,65 @@ section .container{ padding-top:6px; padding-bottom:6px; }
 #modalRSVP select {
   text-align: center !important;
 }
+/* ===============================
+   RSVP APP UI
+=============================== */
+
+/* CARD */
+.acomp-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  width: 100%;
+  max-width: 260px;
+
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid #eee;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  background: #fff;
+}
+
+/* TEXTO */
+.acomp-card span {
+  flex: 1;
+  text-align: center;
+}
+
+/* HOVER */
+.acomp-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+/* CHECKBOX */
+.acomp-card input {
+  display: none;
+}
+
+/* SELECIONADO */
+.acomp-card:has(input:checked) {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+  transform: scale(1.03);
+}
+
+/* DESABILITADO */
+.acomp-card.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* CONTADOR */
+#contadorAcompanhantes {
+  text-align: center;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
