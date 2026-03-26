@@ -327,18 +327,19 @@ document.getElementById("rsvpForm").addEventListener("submit", async function(e)
   ].map(i => i.value);
 
   try{
-    const res = await fetch(SCRIPT_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        nome: convidadoAtual.nome,
-        telefone,
-        acompanhantes,
-        presenca
-      })
-    });
+    const formData = new FormData();
+
+formData.append("nome", convidadoAtual.nome);
+formData.append("telefone", telefone);
+formData.append("acompanhantes", acompanhantes.join(", "));
+formData.append("presenca", presenca);
+
+const res = await fetch(SCRIPT_URL, {
+  method: "POST",
+  body: formData
+});
+
+const data = await res.json();
 
     const text = await res.text();
     console.log("RAW:", text);
