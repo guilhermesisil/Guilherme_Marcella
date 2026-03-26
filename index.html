@@ -180,6 +180,7 @@ function tick(){
 tick(); 
 setInterval(tick, 1000);
 
+document.addEventListener("DOMContentLoaded", function(){
 
 let convidadosLista = [];
 let convidadoAtual = null;
@@ -197,21 +198,24 @@ async function carregarConvidados(){
 // ===============================
 // ABRIR MODAL
 // ===============================
-async function abrirModalRSVP() { 
+window.abrirModalRSVP = async function(){ 
   document.getElementById("modalRSVP").style.display = "flex"; 
   await carregarConvidados();
 }
 
-function fecharModalRSVP() { 
+window.fecharModalRSVP = function(){ 
   document.getElementById("modalRSVP").style.display = "none"; 
 }
 
 // ===============================
-// AUTOCOMPLETE
+// ELEMENTOS (AGORA FUNCIONA)
 // ===============================
 const buscaInput = document.getElementById("buscaNome");
 const lista = document.getElementById("listaSugestoes");
 
+// ===============================
+// AUTOCOMPLETE
+// ===============================
 buscaInput.addEventListener("input", function(){
   const valor = this.value.toLowerCase();
   lista.innerHTML = "";
@@ -233,7 +237,7 @@ buscaInput.addEventListener("input", function(){
 });
 
 // ===============================
-// SELECIONAR CONVIDADO
+// SELEÇÃO
 // ===============================
 function selecionarConvidado(c){
   convidadoAtual = c;
@@ -248,7 +252,7 @@ function selecionarConvidado(c){
 }
 
 // ===============================
-// RENDER ACOMPANHANTES
+// ACOMPANHANTES
 // ===============================
 function renderAcompanhantes(listaAcomp){
   const box = document.getElementById("acompanhantesBox");
@@ -263,10 +267,7 @@ function renderAcompanhantes(listaAcomp){
     const label = document.createElement("label");
     label.style.display = "block";
 
-    label.innerHTML = `
-      <input type="checkbox" value="${nome}"> ${nome}
-    `;
-
+    label.innerHTML = `<input type="checkbox" value="${nome}"> ${nome}`;
     box.appendChild(label);
   });
 }
@@ -318,13 +319,13 @@ document.getElementById('rsvpForm').addEventListener('submit', function(e){
     document.getElementById("convidadoSelecionado").style.display = "none";
     convidadoAtual = null;
   })
-  .catch(() => {
-    alert("Erro ao enviar.");
-  })
   .finally(() => {
     btn.innerText = textoOriginal;
     btn.disabled = false;
   });
+
+});
+
 });
 
 // =================================================================
