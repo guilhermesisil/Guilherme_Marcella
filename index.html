@@ -114,6 +114,7 @@
   <input type="text" id="telefone" placeholder="Telefone (WhatsApp)" required>
 
   <!-- ACOMPANHANTES -->
+  <div id="contadorAcompanhantes" style="margin-top:10px; font-size:13px; color:#666;"></div>
   <div id="acompanhantesBox" style="margin-top:10px;"></div>
 
   <!-- PRESENÇA -->
@@ -251,82 +252,71 @@ function selecionarConvidado(c){
   renderAcompanhantes(c.acompanhantes);
 }
 
-// ===============================
-// ACOMPANHANTES
-// ===============================
 function renderAcompanhantes(listaAcomp){
   const box = document.getElementById("acompanhantesBox");
+  const contador = document.getElementById("contadorAcompanhantes");
+
   box.innerHTML = "";
 
   if(listaAcomp.length === 0){
-    box.innerHTML = "<p style='font-size:13px;'>Sem acompanhantes</p>";
+    box.innerHTML = "<p>Sem acompanhantes</p>";
+    contador.innerText = "";
     return;
   }
+
+  let selecionados = 0;
+  const limite = listaAcomp.length;
+
+  contador.innerText = `0 / ${limite} acompanhantes selecionados`;
 
   listaAcomp.forEach(nome => {
-    const label = document.createElement("label");
-    label.style.display = "block";
 
-    label.innerHTML = `<input type="checkbox" value="${nome}"> ${nome}`;
+    const label = document.createElement("label");
+    label.classList.add("acomp-card");
+
+    label.innerHTML = `
+      <input type="checkbox" value="${nome}">
+      <span>${nome}</span>
+    `;
+
+    const checkbox = label.querySelector("input");
+
+    // CLIQUE NO CARD INTEIRO
+    label.addEventListener("click", function(e){
+      if(e.target.tagName !== "INPUT"){
+        checkbox.checked = !checkbox.checked;
+      }
+
+      atualizarEstado();
+    });
+
+    checkbox.addEventListener("change", atualizarEstado);
+
     box.appendChild(label);
   });
-}
 
-// ===============================
-// SUBMIT
-// ===============================
-document.getElementById('rsvpForm').addEventListener('submit', function(e){
-  e.preventDefault();
+  function atualizarEstado(){
+    const todos = [...box.querySelectorAll("input")];
+    selecionados = todos.filter(i => i.checked).length;
 
-  const btn = this.querySelector("button");
-  const textoOriginal = btn.innerText;
+    contador.innerText = `${selecionados} / ${limite} acompanhantes selecionados`;
 
-  btn.innerText = "Enviando...";
-  btn.disabled = true;
-
-  if(!convidadoAtual){
-    alert("Selecione seu nome na lista.");
-    btn.innerText = textoOriginal;
-    btn.disabled = false;
-    return;
+    // BLOQUEIA SE PASSAR DO LIMITE
+    if(selecionados >= limite){
+      todos.forEach(i => {
+        if(!i.checked){
+          i.disabled = true;
+          i.parentElement.classList.add("disabled");
+        }
+      });
+    } else {
+      todos.forEach(i => {
+        i.disabled = false;
+        i.parentElement.classList.remove("disabled");
+      });
+    }
   }
-
-  const telefone = document.getElementById("telefone").value;
-  const presenca = document.getElementById("presenca").value;
-
-  const selecionados = [...document.querySelectorAll("#acompanhantesBox input:checked")]
-    .map(i => i.value);
-
-  const dados = {
-    action: "rsvp",
-    nome: convidadoAtual.nome,
-    telefone,
-    acompanhantes: selecionados.join(", "),
-    presenca
-  };
-
-  fetch(SCRIPT_URL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(dados)
-  })
-  .then(() => {
-    alert("Confirmado com sucesso!");
-    fecharModalRSVP();
-    this.reset();
-    document.getElementById("acompanhantesBox").innerHTML = "";
-    document.getElementById("convidadoSelecionado").style.display = "none";
-    convidadoAtual = null;
-  })
-  .finally(() => {
-    btn.innerText = textoOriginal;
-    btn.disabled = false;
-  });
-
-});
-
-});
+}
 
 // =================================================================
 // 5. PAINEL ADMIN (Tecla 'A') E EXPORTAR CSV
