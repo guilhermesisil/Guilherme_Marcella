@@ -224,7 +224,7 @@ buscaInput.addEventListener("input", function(){
   if(valor.length < 2) return;
 
   const filtrados = convidadosLista.filter(c =>
-    c.nome.toLowerCase().includes(valor)
+    (c.nome || "").toLowerCase().includes(valor)
   );
 
   filtrados.forEach(c => {
