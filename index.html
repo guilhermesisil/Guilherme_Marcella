@@ -339,22 +339,21 @@ const res = await fetch(SCRIPT_URL, {
   body: formData
 });
 
-const data = await res.json();
+const res = await fetch(SCRIPT_URL, {
+  method: "POST",
+  body: formData
+});
 
-    const text = await res.text();
-    console.log("RAW:", text);
+const data = await res.json(); // ✅ só isso
 
-    const data = JSON.parse(text);
-
-    if(data.status === "ok"){
-      alert("Presença confirmada com sucesso!");
-      fecharModalRSVP();
-      document.getElementById("rsvpForm").reset();
-    }else{
-      alert("Erro ao enviar confirmação.");
-      console.log(data);
-    }
-
+if(data.status === "ok"){
+  alert("Presença confirmada com sucesso!");
+  fecharModalRSVP();
+  document.getElementById("rsvpForm").reset();
+}else{
+  alert("Erro ao enviar confirmação.");
+  console.log(data);
+}
   }catch(err){
     alert("Erro de conexão.");
     console.error(err);
