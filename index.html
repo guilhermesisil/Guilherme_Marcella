@@ -165,10 +165,19 @@ setInterval(tick, 1000);
 
 
 // =================================================================
-// 3. MODAL DE RSVP
+// MODAL + LOAD CONVIDADOS
 // =================================================================
-function abrirModalRSVP() { 
+async function abrirModalRSVP() { 
     document.getElementById("modalRSVP").style.display = "flex"; 
+
+    if(convidadosLista.length === 0){
+        try{
+            const res = await fetch(SCRIPT_URL + "?action=convidados");
+            convidadosLista = await res.json();
+        }catch(e){
+            console.error("Erro convidados", e);
+        }
+    }
 }
 
 function fecharModalRSVP() { 
@@ -177,50 +186,79 @@ function fecharModalRSVP() {
 
 
 // =================================================================
-// 4. ENVIO DO FORMULÁRIO PARA O GOOGLE SHEETS
+// ENVIO RSVP COM VALIDAÇÃO
 // =================================================================
 const form = document.getElementById('rsvpForm');
 
 if(form){
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
+form.addEventListener('submit', function(e){
+  e.preventDefault();
 
-      // Feedback visual no botão
-      const btn = form.querySelector('button');
-      const textoOriginal = btn.innerText;
-      btn.innerText = "Enviando...";
-      btn.disabled = true;
+  const btn = form.querySelector('button');
+  const textoOriginal = btn.innerText;
+  btn.innerText = "Enviando...";
+  btn.disabled = true;
 
-      // Coleta os dados
-      const dados = {
-        action: 'rsvp',
-        nome: document.getElementById('nomeResponsavel').value,
-        telefone: document.getElementById('telefone').value,
-        acompanhantes: document.getElementById('nomes').value,
-        presenca: document.getElementById('presenca').value
-      };
+  const nome = document.getElementById('nomeResponsavel').value.trim();
+  const telefone = document.getElementById('telefone').value;
+  const acompanhantesTexto = document.getElementById('nomes').value;
+  const presenca = document.getElementById('presenca').value;
 
-      // Envia para a planilha
-      fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors', // Necessário para Apps Script
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dados)
-      })
-      .then(() => {
-        alert('Obrigado! Sua confirmação foi registrada com sucesso.');
-        fecharModalRSVP();
-        form.reset();
-      })
-      .catch(error => {
-        console.error('Erro envio:', error);
-        alert('Erro ao conectar com o servidor. Tente novamente mais tarde.');
-      })
-      .finally(() => {
-        btn.innerText = textoOriginal;
-        btn.disabled = false;
-      });
-    });
+  const convidado = convidadosLista.find(c =>
+    c.nome.toLowerCase() === nome.toLowerCase()
+  );
+
+  // ❌ BLOQUEIA SE NÃO ESTIVER NA LISTA
+  if(!convidado){
+    alert("Seu nome não está na lista de convidados.");
+    btn.innerText = textoOriginal;
+    btn.disabled = false;
+    return;
+  }
+
+  // TRATA ACOMPANHANTES
+  const acompanhantesInput = acompanhantesTexto
+    .split('\n')
+    .map(n => n.trim())
+    .filter(n => n !== '');
+
+  const limite = convidado.acompanhantes.length;
+
+  if(acompanhantesInput.length > limite){
+    alert(`Você pode adicionar no máximo ${limite} acompanhante(s).`);
+    btn.innerText = textoOriginal;
+    btn.disabled = false;
+    return;
+  }
+
+  const dados = {
+    action: 'rsvp',
+    nome,
+    telefone,
+    acompanhantes: acompanhantesInput.join(", "),
+    presenca
+  };
+
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(dados)
+  })
+  .then(() => {
+    alert('Presença confirmada com sucesso!');
+    fecharModalRSVP();
+    form.reset();
+  })
+  .catch(() => {
+    alert('Erro ao enviar.');
+  })
+  .finally(() => {
+    btn.innerText = textoOriginal;
+    btn.disabled = false;
+  });
+
+});
 }
 
 
