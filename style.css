@@ -155,3 +155,124 @@ section .container{ padding-top:6px; padding-bottom:6px; }
 .lista-sugestoes div:hover {
   background: #f2f2f2;
 }
+/* ===============================
+   RSVP 3.0 — ESTILO PROFISSIONAL
+=============================== */
+
+/* INPUT BUSCA */
+#buscaNome {
+  text-align: center;
+  font-size: 15px;
+}
+
+/* LISTA DE SUGESTÕES */
+.lista-sugestoes {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  margin-top: 6px;
+  max-height: 160px;
+  overflow-y: auto;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+}
+
+.lista-sugestoes div {
+  padding: 10px;
+  text-align: center;
+  font-weight: 300;
+  transition: background .2s;
+}
+
+.lista-sugestoes div:hover {
+  background: #f7f7f7;
+}
+
+/* NOME SELECIONADO */
+#convidadoSelecionado {
+  text-align: center;
+  margin-top: 12px;
+}
+
+#nomeSelecionado {
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+/* BOX ACOMPANHANTES */
+#acompanhantesBox {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 🔥 centraliza tudo */
+  gap: 8px;
+}
+
+/* CADA ITEM */
+#acompanhantesBox label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 260px;
+  padding: 10px 14px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 300;
+}
+
+/* HOVER */
+#acompanhantesBox label:hover {
+  background: #f9f9f9;
+  transform: scale(1.02);
+}
+
+/* CHECKBOX CUSTOM */
+#acompanhantesBox input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* CHECKED ESTILO */
+#acompanhantesBox input[type="checkbox"]:checked + span,
+#acompanhantesBox label:has(input:checked) {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+/* TEXTO */
+#acompanhantesBox label {
+  text-align: center;
+}
+
+/* SEM ACOMPANHANTES */
+#acompanhantesBox p {
+  font-size: 13px;
+  color: #777;
+  text-align: center;
+}
+
+/* SELECT */
+#modalRSVP select {
+  text-align: center;
+}
+
+/* INPUT TELEFONE */
+#modalRSVP input[type="text"] {
+  text-align: center;
+}
+
+/* BOTÃO */
+#modalRSVP .btn {
+  margin-top: 18px !important;
+  font-size: 15px;
+  letter-spacing: 1px;
+  transition: transform .2s ease;
+}
+
+#modalRSVP .btn:hover {
+  transform: scale(1.03);
+}
