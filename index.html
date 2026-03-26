@@ -329,6 +329,9 @@ document.getElementById("rsvpForm").addEventListener("submit", async function(e)
   try{
     const res = await fetch(SCRIPT_URL, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         nome: convidadoAtual.nome,
         telefone,
@@ -337,7 +340,10 @@ document.getElementById("rsvpForm").addEventListener("submit", async function(e)
       })
     });
 
-    const data = await res.json();
+    const text = await res.text();
+    console.log("RAW:", text);
+
+    const data = JSON.parse(text);
 
     if(data.status === "ok"){
       alert("Presença confirmada com sucesso!");
