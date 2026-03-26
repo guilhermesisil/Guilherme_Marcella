@@ -138,3 +138,20 @@ section .container{ padding-top:6px; padding-bottom:6px; }
     width:100% !important;
     margin-top:14px !important;
 }
+.lista-sugestoes {
+  border: 1px solid #ddd;
+  max-height: 150px;
+  overflow-y: auto;
+  text-align: left;
+  background: white;
+  position: relative;
+}
+
+.lista-sugestoes div {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.lista-sugestoes div:hover {
+  background: #f2f2f2;
+}
