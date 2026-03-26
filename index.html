@@ -281,19 +281,33 @@ function renderAcompanhantes(listaAcomp){
 
     const checkbox = label.querySelector("input");
 
-    // CLIQUE NO CARD INTEIRO
-    label.addEventListener("click", function(e){
-      if(e.target.tagName !== "INPUT"){
-        checkbox.checked = !checkbox.checked;
-      }
-
-      atualizarEstado();
-    });
-
+    // ✅ ÚNICO EVENTO NECESSÁRIO
     checkbox.addEventListener("change", atualizarEstado);
 
     box.appendChild(label);
   });
+
+  function atualizarEstado(){
+    const todos = [...box.querySelectorAll("input")];
+    selecionados = todos.filter(i => i.checked).length;
+
+    contador.innerText = `${selecionados} / ${limite} acompanhantes selecionados`;
+
+    if(selecionados >= limite){
+      todos.forEach(i => {
+        if(!i.checked){
+          i.disabled = true;
+          i.parentElement.classList.add("disabled");
+        }
+      });
+    } else {
+      todos.forEach(i => {
+        i.disabled = false;
+        i.parentElement.classList.remove("disabled");
+      });
+    }
+  }
+}
 
   function atualizarEstado(){
     const todos = [...box.querySelectorAll("input")];
