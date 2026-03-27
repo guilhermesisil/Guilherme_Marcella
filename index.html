@@ -79,39 +79,34 @@
 // =================================================================
 const DATE_TARGET = new Date(2026, 4, 9, 16, 15, 0).getTime();
 
-// =================================================================
-// 2. CONTAGEM REGRESSIVA (COUNTDOWN)
-// =================================================================
 function tick(){
   const now = Date.now();
   const diff = DATE_TARGET - now;
-  
-  // Helper para atualizar texto apenas se o elemento existir
+
   const el = (id, val) => { 
-      const element = document.getElementById(id);
-      if(element) element.innerText = val; 
+    const element = document.getElementById(id);
+    if(element) element.innerText = val; 
   }
-  
+
   if(diff <= 0){ 
-      el('dias','0'); el('horas','00'); el('minutos','00'); el('segundos','00'); 
-      return; 
+    el('dias','0'); el('horas','00'); el('minutos','00'); el('segundos','00'); 
+    return; 
   }
-  
+
   const dias = Math.floor(diff/(1000*60*60*24));
   const horas = Math.floor((diff/(1000*60*60))%24);
   const minutos = Math.floor((diff/(1000*60))%60);
   const segundos = Math.floor((diff/1000)%60);
-  
+
   el('dias', dias);
   el('horas', String(horas).padStart(2,'0'));
   el('minutos', String(minutos).padStart(2,'0'));
   el('segundos', String(segundos).padStart(2,'0'));
 }
-tick(); 
-setInterval(tick, 1000);
 
 document.addEventListener("DOMContentLoaded", function(){
 
-let convidadosLista = [];
-let convidadoAtual = null;
+  tick(); // roda quando DOM já existe
+  setInterval(tick, 1000);
+
 });
