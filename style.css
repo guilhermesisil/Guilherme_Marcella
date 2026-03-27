@@ -21,10 +21,14 @@ nav a:hover{ opacity:.6; }
 
 /* fotos padrão */
 .galeria img{
-  width: 100%;
-  max-heigth: 320px;
+  width: 100%;;
   border-radius:12px;
   object-fit:cover;
+}
+
+.galeria img:nth-child(1),
+.galeria img:nth-child(2){
+  height: 320px;
 }
 
 /* FOTO 3 ocupa 2 colunas */
