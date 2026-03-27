@@ -73,7 +73,7 @@
   </div>
 </section>
 
-<script>
+<script defer>
 // =================================================================
 // 1. CONFIGURAÇÕES GERAIS
 // =================================================================
@@ -104,9 +104,6 @@ function tick(){
   el('segundos', String(segundos).padStart(2,'0'));
 }
 
-document.addEventListener("DOMContentLoaded", function(){
-
-  tick(); // roda quando DOM já existe
-  setInterval(tick, 1000);
-
-});
+// roda direto (com defer funciona perfeito)
+tick();
+setInterval(tick, 1000);
