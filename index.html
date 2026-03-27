@@ -73,24 +73,19 @@
   </div>
 </section>
 
-<script defer>
-// =================================================================
-// 1. CONFIGURAÇÕES GERAIS
-// =================================================================
+<script>
 const DATE_TARGET = new Date("2026-05-09T16:15:00-03:00").getTime();
 
 function tick(){
   const now = Date.now();
   const diff = DATE_TARGET - now;
 
-  const el = (id, val) => { 
-    const element = document.getElementById(id);
-    if(element) element.innerText = val; 
-  }
-
-  if(diff <= 0){ 
-    el('dias','0'); el('horas','00'); el('minutos','00'); el('segundos','00'); 
-    return; 
+  if(diff <= 0){
+    document.getElementById('dias').innerText = '0';
+    document.getElementById('horas').innerText = '00';
+    document.getElementById('minutos').innerText = '00';
+    document.getElementById('segundos').innerText = '00';
+    return;
   }
 
   const dias = Math.floor(diff/(1000*60*60*24));
@@ -98,12 +93,14 @@ function tick(){
   const minutos = Math.floor((diff/(1000*60))%60);
   const segundos = Math.floor((diff/1000)%60);
 
-  el('dias', dias);
-  el('horas', String(horas).padStart(2,'0'));
-  el('minutos', String(minutos).padStart(2,'0'));
-  el('segundos', String(segundos).padStart(2,'0'));
+  document.getElementById('dias').innerText = dias;
+  document.getElementById('horas').innerText = String(horas).padStart(2,'0');
+  document.getElementById('minutos').innerText = String(minutos).padStart(2,'0');
+  document.getElementById('segundos').innerText = String(segundos).padStart(2,'0');
 }
 
-// roda direto (com defer funciona perfeito)
-tick();
-setInterval(tick, 1000);
+document.addEventListener("DOMContentLoaded", () => {
+  tick();
+  setInterval(tick, 1000);
+});
+</script>
