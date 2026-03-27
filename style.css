@@ -10,7 +10,11 @@ nav{ text-align:center; }
 nav a{ display:inline-block; margin:0 18px; text-decoration:none; color:#000; font-weight:300; letter-spacing:1.2px; font-size:15px; transition:opacity .2s; }
 nav a:hover{ opacity:.6; }
 .hero{ padding-top:120px; padding-bottom:10px; text-align:center; }
-.hero h1{ font-size:52px; font-weight:200; letter-spacing:10px; margin:0 0 12px; }
+.hero h1{
+  font-size: clamp(28px, 6vw, 52px);
+  letter-spacing: clamp(2px, 1.5vw, 10px);
+  line-height: 1.2;
+}
 .hero h2{ font-weight:300; margin-top:8px; color:#222; }
 .galeria{
   display: grid;
