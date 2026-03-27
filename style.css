@@ -11,6 +11,8 @@ nav a{ display:inline-block; margin:0 18px; text-decoration:none; color:#000; fo
 nav a:hover{ opacity:.6; }
 .hero{ padding-top:120px; padding-bottom:10px; text-align:center; }
 .hero h1{
+  font-family: 'Montserrat', sans-serif; /* 🔥 força a fonte correta */
+  font-weight: 200;
   font-size: clamp(28px, 6vw, 52px);
   letter-spacing: clamp(2px, 1.5vw, 10px);
   line-height: 1.2;
