@@ -26,7 +26,6 @@
 <!-- HEADER -->
 <header id="topo">
   <nav>
-    <a href="#rsvp">Confirmar Presença</a>
     <a href="presentes.html">Presentes</a>
   </nav>
 </header>
@@ -80,55 +79,6 @@
   </div>
 </section>
 
-<!-- RSVP (prioritário) -->
-<section id="rsvp" style="animation-delay:0.18s;">
-  <div class="container" style="text-align:center;">
-    <h2>Confirmar Presença</h2>
-    <p style="font-weight:300; margin-bottom:14px;">Clique em confirmar para abrir o formulário.</p>
-    <button class="botao-rsvp" onclick="abrirModalRSVP()">CONFIRMAR</button>
-  </div>
-</section>
-
-<!-- MODAL RSVP -->
-<div class="modal-bg" id="modalRSVP">
-  <div class="modal">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <h3 style="font-weight:300; margin:0;">Confirmar presença</h3>
-      <button class="fechar-modal btn-ghost" onclick="fecharModalRSVP()">✕</button>
-    </div>
-
-<form id="rsvpForm" style="margin-top:12px;">
-
-  <!-- BUSCA DE CONVIDADO -->
-  <input type="text" id="buscaNome" placeholder="Digite seu nome" autocomplete="off" required>
-
-  <!-- LISTA DINÂMICA -->
-  <div id="listaSugestoes" class="lista-sugestoes"></div>
-
-  <!-- SELECIONADO -->
-  <div id="convidadoSelecionado" style="display:none; margin-top:10px;">
-    <p><strong id="nomeSelecionado"></strong></p>
-  </div>
-
-  <!-- TELEFONE -->
-  <input type="text" id="telefone" placeholder="Telefone (WhatsApp)" required>
-
-  <!-- ACOMPANHANTES -->
-  <div id="contadorAcompanhantes" style="margin-top:10px; font-size:13px; color:#666;"></div>
-  <div id="acompanhantesBox" style="margin-top:10px;"></div>
-
-  <!-- PRESENÇA -->
-  <select id="presenca" required>
-    <option value="">Vocês irão?</option>
-    <option value="sim">Sim — iremos</option>
-    <option value="nao">Não — não iremos</option>
-  </select>
-
-  <button class="btn" type="submit">Confirmar Presença</button>
-</form>
-  </div>
-</div>
-
 <!-- ADMIN PANEL (kept minimal here) -->
 <div id="adminPanel" aria-hidden="true" style="display:none;">
   <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -146,9 +96,6 @@
 // 1. CONFIGURAÇÕES GERAIS
 // =================================================================
 const DATE_TARGET = new Date("2026-05-09T16:00:00").getTime();
-
-// SUA URL DO GOOGLE APPS SCRIPT
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw-ZgFzefu95ahLv5lxpYo_qa__U3-QOZg4_cUDYs78PLC8IKXe_ksYlMDIRKTZQRRJ/exec"; 
 
 // =================================================================
 // 2. CONTAGEM REGRESSIVA (COUNTDOWN)
@@ -186,169 +133,6 @@ document.addEventListener("DOMContentLoaded", function(){
 let convidadosLista = [];
 let convidadoAtual = null;
 
-// ===============================
-// LOAD CONVIDADOS
-// ===============================
-async function carregarConvidados(){
-  if(convidadosLista.length > 0) return;
-
-  const res = await fetch(SCRIPT_URL + "?action=convidados");
-  convidadosLista = await res.json();
-}
-
-// ===============================
-// ABRIR MODAL
-// ===============================
-window.abrirModalRSVP = async function(){ 
-  document.getElementById("modalRSVP").style.display = "flex"; 
-  await carregarConvidados();
-}
-
-window.fecharModalRSVP = function(){ 
-  document.getElementById("modalRSVP").style.display = "none"; 
-}
-
-// ===============================
-// ELEMENTOS (AGORA FUNCIONA)
-// ===============================
-const buscaInput = document.getElementById("buscaNome");
-const lista = document.getElementById("listaSugestoes");
-
-// ===============================
-// AUTOCOMPLETE
-// ===============================
-buscaInput.addEventListener("input", function(){
-  const valor = this.value.toLowerCase();
-  lista.innerHTML = "";
-
-  if(valor.length < 2) return;
-
-  const filtrados = convidadosLista.filter(c =>
-    (c.nome || "").toLowerCase().includes(valor)
-  );
-
-  filtrados.forEach(c => {
-    const div = document.createElement("div");
-    div.innerText = c.nome;
-
-    div.onclick = () => selecionarConvidado(c);
-
-    lista.appendChild(div);
-  });
-});
-
-// ===============================
-// SELEÇÃO
-// ===============================
-function selecionarConvidado(c){
-  convidadoAtual = c;
-
-  document.getElementById("nomeSelecionado").innerText = c.nome;
-  document.getElementById("convidadoSelecionado").style.display = "block";
-
-  lista.innerHTML = "";
-  buscaInput.value = c.nome;
-
-  renderAcompanhantes(c.acompanhantes);
-}
-
-function renderAcompanhantes(listaAcomp){
-  const box = document.getElementById("acompanhantesBox");
-  const contador = document.getElementById("contadorAcompanhantes");
-
-  box.innerHTML = "";
-
-  if(listaAcomp.length === 0){
-    box.innerHTML = "<p>Sem acompanhantes</p>";
-    contador.innerText = "";
-    return;
-  }
-
-  let selecionados = 0;
-  const limite = listaAcomp.length;
-
-  contador.innerText = `0 / ${limite} acompanhantes selecionados`;
-
-  listaAcomp.forEach(nome => {
-
-    const label = document.createElement("label");
-    label.classList.add("acomp-card");
-
-    label.innerHTML = `
-      <input type="checkbox" value="${nome}">
-      <span>${nome}</span>
-    `;
-
-    const checkbox = label.querySelector("input");
-
-    // ✅ ÚNICO EVENTO NECESSÁRIO
-    checkbox.addEventListener("change", atualizarEstado);
-
-    box.appendChild(label);
-  });
-
-  function atualizarEstado(){
-    const todos = [...box.querySelectorAll("input")];
-    selecionados = todos.filter(i => i.checked).length;
-
-    contador.innerText = `${selecionados} / ${limite} acompanhantes selecionados`;
-
-    if(selecionados >= limite){
-      todos.forEach(i => {
-        if(!i.checked){
-          i.disabled = true;
-          i.parentElement.classList.add("disabled");
-        }
-      });
-    } else {
-      todos.forEach(i => {
-        i.disabled = false;
-        i.parentElement.classList.remove("disabled");
-      });
-    }
-  }
-}
-  // ===============================
-// SUBMIT DO FORMULÁRIO (ENVIO)
-// ===============================
-document.getElementById("rsvpForm").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  if(!convidadoAtual){
-    alert("Selecione seu nome.");
-    return;
-  }
-
-  const form = document.createElement("form");
-  form.action = SCRIPT_URL;
-  form.method = "POST";
-  form.target = "hidden_iframe";
-
-  function addField(name, value){
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = name;
-    input.value = value;
-    form.appendChild(input);
-  }
-
-  const acompanhantes = [
-    ...document.querySelectorAll("#acompanhantesBox input:checked")
-  ].map(i => i.value);
-
-  addField("nome", convidadoAtual.nome);
-  addField("telefone", document.getElementById("telefone").value);
-  addField("acompanhantes", acompanhantes.join(", "));
-  addField("presenca", document.getElementById("presenca").value);
-
-  document.body.appendChild(form);
-  form.submit();
-
-  alert("Presença enviada com sucesso!");
-  fecharModalRSVP();
-  document.getElementById("rsvpForm").reset();
-});
-
 // =================================================================
 // 5. PAINEL ADMIN (Tecla 'A') E EXPORTAR CSV
 // =================================================================
@@ -373,34 +157,3 @@ function exportCSV(){
     // Opcional: Se quiser abrir a planilha direto, descomente a linha abaixo e coloque o link da planilha (não do script)
     // window.open("LINK_DA_SUA_PLANILHA_AQUI", "_blank");
 }
-  // ================================================================
-// 6. ABRIR MODAL VIA LINK #rsvp
-// ================================================================
-
-// Quando clicar no link do menu
-document.querySelectorAll('a[href="#rsvp"]').forEach(link => {
-  link.addEventListener('click', function(e){
-    e.preventDefault(); // impede o scroll
-    abrirModalRSVP();
-    history.replaceState(null, null, '#rsvp'); // mantém #rsvp na URL
-  });
-});
-
-// Se entrar no site já com #rsvp
-window.addEventListener("load", function(){
-  if(window.location.hash === "#rsvp"){
-    abrirModalRSVP();
-  }
-});
-// Fechar ao clicar fora do modal 
-  document.getElementById("modalRSVP").addEventListener("click", function(e){
-  if(e.target === this){
-    fecharModalRSVP();
-  }
-});
-
-}); // ✅ FECHAMENTO CORRETO
-</script>
-<iframe name="hidden_iframe" style="display:none;"></iframe>
-</body>
-</html>
