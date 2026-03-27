@@ -311,50 +311,42 @@ function renderAcompanhantes(listaAcomp){
   // ===============================
 // SUBMIT DO FORMULÁRIO (ENVIO)
 // ===============================
-document.getElementById("rsvpForm").addEventListener("submit", async function(e){
+document.getElementById("rsvpForm").addEventListener("submit", function(e){
   e.preventDefault();
 
   if(!convidadoAtual){
-    alert("Selecione seu nome na lista.");
+    alert("Selecione seu nome.");
     return;
   }
 
-  const telefone = document.getElementById("telefone").value;
-  const presenca = document.getElementById("presenca").value;
+  const form = document.createElement("form");
+  form.action = SCRIPT_URL;
+  form.method = "POST";
+  form.target = "hidden_iframe";
+
+  function addField(name, value){
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = name;
+    input.value = value;
+    form.appendChild(input);
+  }
 
   const acompanhantes = [
     ...document.querySelectorAll("#acompanhantesBox input:checked")
   ].map(i => i.value);
 
-  try{
-    const res = await fetch(SCRIPT_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        nome: convidadoAtual.nome,
-        telefone: telefone,
-        acompanhantes: acompanhantes,
-        presenca: presenca
-      })
-    });
+  addField("nome", convidadoAtual.nome);
+  addField("telefone", document.getElementById("telefone").value);
+  addField("acompanhantes", acompanhantes.join(", "));
+  addField("presenca", document.getElementById("presenca").value);
 
-    const data = await res.json();
+  document.body.appendChild(form);
+  form.submit();
 
-    if(data.status === "ok"){
-      alert("Presença confirmada com sucesso!");
-      fecharModalRSVP();
-      document.getElementById("rsvpForm").reset();
-    }else{
-      alert("Erro ao enviar confirmação.");
-      console.log("ERRO BACKEND:", data);
-    }
-
-  }catch(err){
-    alert("Erro de conexão.");
-    console.error(err);
-  }
+  alert("Presença enviada com sucesso!");
+  fecharModalRSVP();
+  document.getElementById("rsvpForm").reset();
 });
 
 // =================================================================
@@ -409,6 +401,6 @@ window.addEventListener("load", function(){
 
 }); // ✅ FECHAMENTO CORRETO
 </script>
-
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 </body>
 </html>
