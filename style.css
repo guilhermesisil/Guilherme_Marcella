@@ -28,7 +28,7 @@ nav a:hover{ opacity:.6; }
 
 .galeria img:nth-child(1),
 .galeria img:nth-child(2){
-  height: 320px;
+  height: 640px;
 }
 
 /* FOTO 3 ocupa 2 colunas */
