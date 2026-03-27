@@ -6,12 +6,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Guilherme + Marcella</title>
 
-<!-- EmailJS  (public key provided by user) -->
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script>
-  emailjs.init("O-dFEDfrDwxNfMC_M"); // public key provided
-</script>
-
 <!-- QR lib (qrcodejs) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
@@ -79,18 +73,6 @@
   </div>
 </section>
 
-<!-- ADMIN PANEL (kept minimal here) -->
-<div id="adminPanel" aria-hidden="true" style="display:none;">
-  <div style="display:flex; justify-content:space-between; align-items:center;">
-    <strong>PAINEL ADMIN</strong>
-    <div>
-      <button class="btn-ghost" onclick="exportCSV()">Exportar CSV</button>
-      <button class="btn" onclick="document.getElementById('adminPanel').style.display='none'">Fechar</button>
-    </div>
-  </div>
-</div>
-
-<script src="presentes.js"></script>
 <script>
 // =================================================================
 // 1. CONFIGURAÇÕES GERAIS
@@ -133,27 +115,3 @@ document.addEventListener("DOMContentLoaded", function(){
 let convidadosLista = [];
 let convidadoAtual = null;
 });
-// =================================================================
-// 5. PAINEL ADMIN (Tecla 'A') E EXPORTAR CSV
-// =================================================================
-
-// Detecta a tecla "A" para abrir o painel oculto
-document.addEventListener('keydown', function(e){
-    // Se apertar 'a' (sem segurar shift/ctrl)
-    if(e.key.toLowerCase() === 'a' && !e.ctrlKey && !e.metaKey && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA'){
-        const senha = prompt("Painel Admin - Digite a senha:");
-        // Defina a senha aqui (ex: 1234)
-        if(senha === '1234'){ 
-            const painel = document.getElementById('adminPanel');
-            if(painel) painel.style.display = 'block';
-        }
-    }
-});
-
-// Função chamada pelo botão "Exportar CSV"
-function exportCSV(){
-    alert("Como seu site agora está integrado ao Google Sheets, você não precisa exportar nada por aqui!\n\nBasta abrir sua Planilha no Google Drive (aba RSVP) para ver todas as confirmações em tempo real.");
-    
-    // Opcional: Se quiser abrir a planilha direto, descomente a linha abaixo e coloque o link da planilha (não do script)
-    // window.open("LINK_DA_SUA_PLANILHA_AQUI", "_blank");
-}
