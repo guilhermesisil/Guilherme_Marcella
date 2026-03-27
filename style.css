@@ -1,13 +1,13 @@
 :root{ --max-width:960px; --gap:20px; }
 *{box-sizing:border-box}
-body{ margin:0; font-family:'Montserrat',sans-serif; color:#111; background:#fff; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+body{ font-size: clamp(15px, 1vw, 18px);margin:0; font-family:'Montserrat',sans-serif; color:#111; background:#fff; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
 .container{ max-width:var(--max-width); margin:0 auto; padding:0 18px; }
 section{ opacity:0; transform:translateY(18px); animation:fadeIn .7s ease forwards; margin-bottom:48px; }
 @keyframes fadeIn{ to{ opacity:1; transform:none } }
 header{ position:fixed; left:0; right:0; top:0; z-index:50; padding:16px 0; transition:all .35s ease; backdrop-filter: blur(6px); }
 header.scrolled{ background:rgba(255,255,255,0.95); border-bottom:1px solid #000; box-shadow:0 4px 10px rgba(0,0,0,0.03); }
 nav{ text-align:center; }
-nav a{ display:inline-block; margin:0 18px; text-decoration:none; color:#000; font-weight:300; letter-spacing:1.2px; font-size:15px; transition:opacity .2s; }
+nav a{ display:inline-block; margin:0 18px; text-decoration:none; color:#000; font-weight:300; letter-spacing:1.2px; font-size: clamp(14px, 1vw, 18px); transition:opacity .2s; }
 nav a:hover{ opacity:.6; }
 .hero{ padding-top:120px; padding-bottom:10px; text-align:center; }
 .hero h1{
@@ -59,8 +59,8 @@ nav a:hover{ opacity:.6; }
     font-size: 24px;
 }
 #countdown{ display:flex; justify-content:center; gap:18px; flex-wrap:wrap; margin-top:12px; }
-.count-box{ background:#fff; color:#000; padding:22px 28px; border-radius:16px; min-width:110px; box-shadow:0 6px 18px rgba(0,0,0,0.08); font-weight:300; }
-.count-box span{ display:block; font-size:34px; font-weight:400; margin-bottom:6px; }
+.count-box{ background:#fff; color:#000; padding:22px 28px; border-radius:16px; min-width:110px; box-shadow:0 6px 18px rgba(0,0,0,0.08); font-size: clamp(12px, 1vw, 16px);font-weight:300; }
+.count-box span{ display:block; font-size: clamp(24px, 2vw, 36px); font-weight:400; margin-bottom:6px; }
 section .container{ padding-top:6px; padding-bottom:6px; }
 .mapa{ width:100%; height:360px; border-radius:18px; border:0; }
 .grid-presentes{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:22px; margin-top:18px; }
@@ -112,7 +112,6 @@ section .container{ padding-top:6px; padding-bottom:6px; }
   .galeria img:nth-child(3){
     grid-column: span 1;
   }
-}
 
   /* Ajustes do Countdown para não empilhar */
   .countdown-section {
